@@ -2,6 +2,6 @@ package plugin1;
 
 import backbone.*;
 
-public class Tourney extends Tournament{
+public class Pairings extends Grouping{
 
 }

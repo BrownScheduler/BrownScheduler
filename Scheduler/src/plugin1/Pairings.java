@@ -1,5 +1,7 @@
 package plugin1;
 
-public class Pairings {
+import backbone.*;
+
+public class Pairings implements Grouping{
 
 }
