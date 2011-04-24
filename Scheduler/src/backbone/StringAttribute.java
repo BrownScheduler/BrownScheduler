@@ -1,5 +1,7 @@
 package backbone;
 
-public interface StringAttribute extends Attribute{
+public class StringAttribute extends Attribute{
+	
+	public String value;
 
 }

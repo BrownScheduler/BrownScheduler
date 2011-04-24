@@ -1,5 +1,5 @@
 package backbone;
 
-public interface DoubleAttribute extends Attribute{
+public class DoubleAttribute extends Attribute{
 
 }

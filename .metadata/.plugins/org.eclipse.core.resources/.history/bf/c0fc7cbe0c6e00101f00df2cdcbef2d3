@@ -1,0 +1,16 @@
+package plugin1;
+
+import backbone.*;
+
+/**
+ * Class that holds each pairing,
+ * which is where the actual individual competitions take place.
+ * @author matt
+ *
+ */
+public class Pairings implements Grouping{
+
+	Team _gov;
+	Team _opp;
+	Judge _judge;
+}

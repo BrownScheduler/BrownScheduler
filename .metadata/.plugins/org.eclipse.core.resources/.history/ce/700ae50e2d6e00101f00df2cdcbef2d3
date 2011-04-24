@@ -1,0 +1,15 @@
+package plugin1;
+
+import java.util.LinkedList;
+
+import backbone.Grouping;
+
+public class Round implements Grouping{
+	
+	private LinkedList<Pairing> pairings;
+	
+	public Round(){
+		
+	}
+
+}
