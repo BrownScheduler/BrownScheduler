@@ -17,12 +17,6 @@ public class Pairing implements CompetitiveGrouping{
 	Judge _judge;
 	Team _winner;
 	
-	public Pairing(Team gov, Team opp, Judge judge) {
-		_gov = gov;
-		_opp = opp;
-		_judge = judge;
-	}
-
 	public LinkedList<Attribute> getElements(){
 	
 		LinkedList<Attribute> atts = new LinkedList<Attribute>();

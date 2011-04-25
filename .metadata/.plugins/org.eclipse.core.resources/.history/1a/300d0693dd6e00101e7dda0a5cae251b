@@ -23,9 +23,7 @@ public class Judge extends Unit{
 
 	@Override
 	public List<Attribute> getAttributes() {
-	
-		LinkedList<Attribute> atts = new LinkedList<Attribute>();
-		
+		// TODO Auto-generated method stub
 		return null;
 	}
 	

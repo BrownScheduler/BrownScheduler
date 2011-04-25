@@ -21,9 +21,6 @@ public class Team extends CompetitiveUnit {
 	
 	public LinkedList<Attribute> getAttributes(){
 		
-		StringAttribute name = new StringAttribute("Name", this._name);
-		IntAttribute wins = new IntAttribute("Wins", _wins);
-		
 		return null;
 	}
 

@@ -7,12 +7,6 @@ import java.util.List;
 
 import backbone.Grouping;
 
-/**
- * This class is a Grouping of pairings.
- * 
- * @author matt
- *
- */
 public class Round implements Grouping{
 	
 	private ArrayList<Team> _teams;
