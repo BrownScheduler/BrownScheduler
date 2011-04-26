@@ -3,16 +3,15 @@ package gui;
 import javax.swing.JPanel;
 import javax.swing.JTree;
 import javax.swing.BoxLayout;
-import java.awt.FlowLayout;
 import javax.swing.JScrollPane;
 
 public class InputPanel extends JPanel implements GUIConstants {
 
 	public static final long serialVersionUID = 1L;
-	public AddingPanel addingPanel = null;
-	public AttributeTree attributeTree = null;
-	public JScrollPane attributeScrollPane = null;
-	public JScrollPane addingScrollPane = null;
+	private AddingPanel _addingPanel;
+	private AttributeTree _attributeTree;
+	private JScrollPane _attributeScrollPane;
+	private JScrollPane _addingScrollPane;
 
 	/**
 	 * This is the default constructor
@@ -40,10 +39,10 @@ public class InputPanel extends JPanel implements GUIConstants {
 	 * @return javax.swing.JPanel	
 	 */
 	public JPanel getAddingPanel() {
-		if (addingPanel == null) {
-			addingPanel = new AddingPanel();
+		if (_addingPanel == null) {
+			_addingPanel = new AddingPanel();
 		}
-		return addingPanel;
+		return _addingPanel;
 	}
 
 	/**
@@ -52,10 +51,10 @@ public class InputPanel extends JPanel implements GUIConstants {
 	 * @return javax.swing.JTree	
 	 */
 	public JTree getAttributeTree() {
-		if (attributeTree == null) {
-			attributeTree = new AttributeTree();
+		if (_attributeTree == null) {
+			_attributeTree = new AttributeTree();
 		}
-		return attributeTree;
+		return _attributeTree;
 	}
 
 	/**
@@ -64,12 +63,12 @@ public class InputPanel extends JPanel implements GUIConstants {
 	 * @return javax.swing.JScrollPane	
 	 */
 	public JScrollPane getAttributeScrollPane() {
-		if (attributeScrollPane == null) {
-			attributeScrollPane = new JScrollPane(getAttributeTree());
-			attributeScrollPane.setSize(getAttributeTree().getSize());
-			attributeScrollPane.setMaximumSize(getAttributeTree().getMaximumSize());
+		if (_attributeScrollPane == null) {
+			_attributeScrollPane = new JScrollPane(getAttributeTree());
+			_attributeScrollPane.setSize(getAttributeTree().getSize());
+			_attributeScrollPane.setMaximumSize(getAttributeTree().getMaximumSize());
 		}
-		return attributeScrollPane;
+		return _attributeScrollPane;
 	}
 	
 	/**
@@ -78,11 +77,11 @@ public class InputPanel extends JPanel implements GUIConstants {
 	 * @return javax.swing.JScrollPane	
 	 */
 	public JScrollPane getAddingScrollPane() {
-		if (addingScrollPane == null) {
-			addingScrollPane = new JScrollPane(getAddingPanel());
-			addingScrollPane.setSize(getAddingPanel().getSize());
+		if (_addingScrollPane == null) {
+			_addingScrollPane = new JScrollPane(getAddingPanel());
+			_addingScrollPane.setSize(getAddingPanel().getSize());
 		}
-		return addingScrollPane;
+		return _addingScrollPane;
 	}
 
 }

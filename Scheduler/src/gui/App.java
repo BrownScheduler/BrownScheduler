@@ -10,6 +10,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.KeyStroke;
 import java.awt.Point;
 import javax.swing.BorderFactory;
+import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JMenuItem;
@@ -17,34 +18,35 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JFrame;
 import javax.swing.JDialog;
+import javax.swing.JRadioButtonMenuItem;
 
 public class App implements GUIConstants {
 
-	public JFrame jFrame;
-	public InputPanel inputPane;
-	public ManagementPanel managementPane;
-	public JMenuBar jJMenuBar;
-	public JMenu fileMenu;
-	public JMenuItem pluginOptionsMenuItem;
-	public JMenuItem programOptionsMenuItem;
-	public JMenuItem printMenuItem;
-	public JMenuItem openPluginMenuItem;
-	public JMenuItem openTournamentMenuItem;
-	public JMenuItem saveMenuItem;
-	public JMenuItem exitMenuItem;
-	public JMenu editMenu;
-	public JMenuItem cutMenuItem;
-	public JMenuItem copyMenuItem;
-	public JMenuItem pasteMenuItem;
-	public JMenu addMenu;
-	public JMenu viewMenu;
-	public JMenuItem viewInputMenuItem;
-	public JMenuItem viewManagementMenuItem;
-	public JMenu helpMenu;
-	public JMenuItem aboutMenuItem;
-	public JDialog aboutDialog;
-	public JPanel aboutContentPane;
-	public JLabel aboutVersionLabel;
+	private JFrame _jFrame;
+	private InputPanel _inputPane;
+	private ManagementPanel _managementPane;
+	private JMenuBar _jJMenuBar;
+	private JMenu _fileMenu;
+	private JMenuItem _pluginOptionsMenuItem;
+	private JMenuItem _programOptionsMenuItem;
+	private JMenuItem _printMenuItem;
+	private JMenuItem _openPluginMenuItem;
+	private JMenuItem _openTournamentMenuItem;
+	private JMenuItem _saveMenuItem;
+	private JMenuItem _exitMenuItem;
+	private JMenu _editMenu;
+	private JMenuItem _cutMenuItem;
+	private JMenuItem _copyMenuItem;
+	private JMenuItem _pasteMenuItem;
+	private JMenu _addMenu;
+	private JMenu _viewMenu;
+	private JRadioButtonMenuItem _viewInputMenuItem;
+	private JRadioButtonMenuItem _viewManagementMenuItem;
+	private JMenu _helpMenu;
+	private JMenuItem _aboutMenuItem;
+	private JDialog _aboutDialog;
+	private JPanel _aboutContentPane;
+	private JLabel _aboutVersionLabel;
 	
 	/**
 	 * This method initializes jFrame
@@ -52,16 +54,17 @@ public class App implements GUIConstants {
 	 * @return javax.swing.JFrame
 	 */
 	public JFrame getJFrame() {
-		if (jFrame == null) {
-			jFrame = new JFrame();
-			jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			jFrame.setJMenuBar(getJJMenuBar());
-			jFrame.setSize(new Dimension(600, 400)); //TODO: make constants
-			jFrame.setMinimumSize(new Dimension(400, 300));
-			jFrame.setContentPane(getInputPanel());
-			jFrame.setTitle("Tournament Scheduler v1.0");
+		if (_jFrame == null) {
+			_jFrame = new JFrame();
+			_jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			_jFrame.setJMenuBar(getJJMenuBar());
+			_jFrame.setSize(new Dimension(600, 400)); //TODO: make constants
+			_jFrame.setMinimumSize(new Dimension(400, 300));
+			_jFrame.setContentPane(getInputPanel());
+			getViewInputMenuItem().setSelected(true);
+			_jFrame.setTitle("Tournament Scheduler v1.0");
 		}
-		return jFrame;
+		return _jFrame;
 	}
 	
 	/**
@@ -70,10 +73,10 @@ public class App implements GUIConstants {
 	 * @return InputPanel
 	 */
 	public InputPanel getInputPanel() {
-		if (inputPane == null) {
-			inputPane = new InputPanel();
+		if (_inputPane == null) {
+			_inputPane = new InputPanel();
 		}
-		return inputPane;
+		return _inputPane;
 	}
 	
 	/**
@@ -82,10 +85,10 @@ public class App implements GUIConstants {
 	 * @return MangementPanel
 	 */
 	public ManagementPanel getManagementPanel() {
-		if (managementPane == null) {
-			managementPane = new ManagementPanel();
+		if (_managementPane == null) {
+			_managementPane = new ManagementPanel();
 		}
-		return managementPane;
+		return _managementPane;
 	}
 
 	/**
@@ -94,15 +97,15 @@ public class App implements GUIConstants {
 	 * @return javax.swing.JMenuBar	
 	 */
 	public JMenuBar getJJMenuBar() {
-		if (jJMenuBar == null) {
-			jJMenuBar = new JMenuBar();
-			jJMenuBar.add(getFileMenu());
-			jJMenuBar.add(getEditMenu());
-			jJMenuBar.add(getViewMenu());
-			jJMenuBar.add(getAddMenu());
-			jJMenuBar.add(getHelpMenu());
+		if (_jJMenuBar == null) {
+			_jJMenuBar = new JMenuBar();
+			_jJMenuBar.add(getFileMenu());
+			_jJMenuBar.add(getEditMenu());
+			_jJMenuBar.add(getViewMenu());
+			_jJMenuBar.add(getAddMenu());
+			_jJMenuBar.add(getHelpMenu());
 		}
-		return jJMenuBar;
+		return _jJMenuBar;
 	}
 
 	/**
@@ -111,18 +114,18 @@ public class App implements GUIConstants {
 	 * @return javax.swing.JMenu	
 	 */
 	public JMenu getFileMenu() {
-		if (fileMenu == null) {
-			fileMenu = new JMenu();
-			fileMenu.setText("File");
-			fileMenu.add(getOpenPluginMenuItem());
-			fileMenu.add(getOpenTournamentMenuItem());
-			fileMenu.add(getPluginOptionsMenuItem());
-			fileMenu.add(getProgramOptionsMenuItem());
-			fileMenu.add(getPrintMenuItem());
-			fileMenu.add(getSaveMenuItem());
-			fileMenu.add(getExitMenuItem());
+		if (_fileMenu == null) {
+			_fileMenu = new JMenu();
+			_fileMenu.setText("File");
+			_fileMenu.add(getOpenPluginMenuItem());
+			_fileMenu.add(getOpenTournamentMenuItem());
+			_fileMenu.add(getPluginOptionsMenuItem());
+			_fileMenu.add(getProgramOptionsMenuItem());
+			_fileMenu.add(getPrintMenuItem());
+			_fileMenu.add(getSaveMenuItem());
+			_fileMenu.add(getExitMenuItem());
 		}
-		return fileMenu;
+		return _fileMenu;
 	}
 
 	/**
@@ -131,14 +134,14 @@ public class App implements GUIConstants {
 	 * @return javax.swing.JMenu	
 	 */
 	public JMenu getEditMenu() {
-		if (editMenu == null) {
-			editMenu = new JMenu();
-			editMenu.setText("Edit");
-			editMenu.add(getCutMenuItem());
-			editMenu.add(getCopyMenuItem());
-			editMenu.add(getPasteMenuItem());
+		if (_editMenu == null) {
+			_editMenu = new JMenu();
+			_editMenu.setText("Edit");
+			_editMenu.add(getCutMenuItem());
+			_editMenu.add(getCopyMenuItem());
+			_editMenu.add(getPasteMenuItem());
 		}
-		return editMenu;
+		return _editMenu;
 	}
 	
 	/**
@@ -147,13 +150,16 @@ public class App implements GUIConstants {
 	 * @return javax.swing.JMenu	
 	 */
 	public JMenu getViewMenu() {
-		if (viewMenu == null) {
-			viewMenu = new JMenu();
-			viewMenu.setText("View");
-			viewMenu.add(getViewInputMenuItem());
-			viewMenu.add(getViewManagementMenuItem());
+		if (_viewMenu == null) {
+			_viewMenu = new JMenu();
+			_viewMenu.setText("View");
+			_viewMenu.add(getViewInputMenuItem());
+			_viewMenu.add(getViewManagementMenuItem());
+			ButtonGroup viewgroup = new ButtonGroup();
+			viewgroup.add(getViewInputMenuItem());
+			viewgroup.add(getViewManagementMenuItem());
 		}
-		return viewMenu;
+		return _viewMenu;
 	}
 	
 	/**
@@ -162,11 +168,11 @@ public class App implements GUIConstants {
 	 * @return javax.swing.JMenu	
 	 */
 	public JMenu getAddMenu() {
-		if (addMenu == null) {
-			addMenu = new JMenu();
-			addMenu.setText("Add");
+		if (_addMenu == null) {
+			_addMenu = new JMenu();
+			_addMenu.setText("Add");
 		}
-		return addMenu;
+		return _addMenu;
 	}
 
 	/**
@@ -175,12 +181,12 @@ public class App implements GUIConstants {
 	 * @return javax.swing.JMenu	
 	 */
 	public JMenu getHelpMenu() {
-		if (helpMenu == null) {
-			helpMenu = new JMenu();
-			helpMenu.setText("Help");
-			helpMenu.add(getAboutMenuItem());
+		if (_helpMenu == null) {
+			_helpMenu = new JMenu();
+			_helpMenu.setText("Help");
+			_helpMenu.add(getAboutMenuItem());
 		}
-		return helpMenu;
+		return _helpMenu;
 	}
 	
 	/**
@@ -189,13 +195,13 @@ public class App implements GUIConstants {
 	 * @return javax.swing.JMenuItem	
 	 */
 	public JMenuItem getSaveMenuItem() {
-		if (saveMenuItem == null) {
-			saveMenuItem = new JMenuItem();
-			saveMenuItem.setText("Save");
-			saveMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,
+		if (_saveMenuItem == null) {
+			_saveMenuItem = new JMenuItem();
+			_saveMenuItem.setText("Save");
+			_saveMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,
 					Event.CTRL_MASK, true));
 		}
-		return saveMenuItem;
+		return _saveMenuItem;
 	}
 	
 	/**
@@ -204,11 +210,11 @@ public class App implements GUIConstants {
 	 * @return javax.swing.JMenuItem	
 	 */
 	public JMenuItem getPluginOptionsMenuItem() {
-		if (pluginOptionsMenuItem == null) {
-			pluginOptionsMenuItem = new JMenuItem();
-			pluginOptionsMenuItem.setText("Plugin Options...");
+		if (_pluginOptionsMenuItem == null) {
+			_pluginOptionsMenuItem = new JMenuItem();
+			_pluginOptionsMenuItem.setText("Plugin Options...");
 		}
-		return pluginOptionsMenuItem;
+		return _pluginOptionsMenuItem;
 	}
 	
 	/**
@@ -217,11 +223,11 @@ public class App implements GUIConstants {
 	 * @return javax.swing.JMenuItem	
 	 */
 	public JMenuItem getProgramOptionsMenuItem() {
-		if (programOptionsMenuItem == null) {
-			programOptionsMenuItem = new JMenuItem();
-			programOptionsMenuItem.setText("Program Options...");
+		if (_programOptionsMenuItem == null) {
+			_programOptionsMenuItem = new JMenuItem();
+			_programOptionsMenuItem.setText("Program Options...");
 		}
-		return programOptionsMenuItem;
+		return _programOptionsMenuItem;
 	}
 	
 	/**
@@ -230,13 +236,13 @@ public class App implements GUIConstants {
 	 * @return javax.swing.JMenuItem	
 	 */
 	public JMenuItem getPrintMenuItem() {
-		if (printMenuItem == null) {
-			printMenuItem = new JMenuItem();
-			printMenuItem.setText("Print...");
-			printMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P,
+		if (_printMenuItem == null) {
+			_printMenuItem = new JMenuItem();
+			_printMenuItem.setText("Print...");
+			_printMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P,
 					Event.CTRL_MASK, true));
 		}
-		return printMenuItem;
+		return _printMenuItem;
 	}
 	
 	/**
@@ -245,11 +251,13 @@ public class App implements GUIConstants {
 	 * @return javax.swing.JMenuItem	
 	 */
 	public JMenuItem getOpenPluginMenuItem() {
-		if (openPluginMenuItem == null) {
-			openPluginMenuItem = new JMenuItem();
-			openPluginMenuItem.setText("Open Plugin...");
+		if (_openPluginMenuItem == null) {
+			_openPluginMenuItem = new JMenuItem();
+			_openPluginMenuItem.setText("Open Plugin...");
+			_openPluginMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L,
+					Event.CTRL_MASK, true));
 		}
-		return openPluginMenuItem;
+		return _openPluginMenuItem;
 	}
 	
 	/**
@@ -258,11 +266,13 @@ public class App implements GUIConstants {
 	 * @return javax.swing.JMenuItem	
 	 */
 	public JMenuItem getOpenTournamentMenuItem() {
-		if (openTournamentMenuItem == null) {
-			openTournamentMenuItem = new JMenuItem();
-			openTournamentMenuItem.setText("Open Tournament...");
+		if (_openTournamentMenuItem == null) {
+			_openTournamentMenuItem = new JMenuItem();
+			_openTournamentMenuItem.setText("Open Tournament...");
+			_openTournamentMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,
+					Event.CTRL_MASK, true));
 		}
-		return openTournamentMenuItem;
+		return _openTournamentMenuItem;
 	}
 
 	/**
@@ -271,16 +281,18 @@ public class App implements GUIConstants {
 	 * @return javax.swing.JMenuItem	
 	 */
 	public JMenuItem getExitMenuItem() {
-		if (exitMenuItem == null) {
-			exitMenuItem = new JMenuItem();
-			exitMenuItem.setText("Exit");
-			exitMenuItem.addActionListener(new ActionListener() {
+		if (_exitMenuItem == null) {
+			_exitMenuItem = new JMenuItem();
+			_exitMenuItem.setText("Exit");
+			_exitMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q,
+					Event.CTRL_MASK, true));
+			_exitMenuItem.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					System.exit(0);
 				}
 			});
 		}
-		return exitMenuItem;
+		return _exitMenuItem;
 	}
 
 	/**
@@ -289,13 +301,13 @@ public class App implements GUIConstants {
 	 * @return javax.swing.JMenuItem	
 	 */
 	public JMenuItem getCutMenuItem() {
-		if (cutMenuItem == null) {
-			cutMenuItem = new JMenuItem();
-			cutMenuItem.setText("Cut");
-			cutMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X,
+		if (_cutMenuItem == null) {
+			_cutMenuItem = new JMenuItem();
+			_cutMenuItem.setText("Cut");
+			_cutMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X,
 					Event.CTRL_MASK, true));
 		}
-		return cutMenuItem;
+		return _cutMenuItem;
 	}
 
 	/**
@@ -304,13 +316,13 @@ public class App implements GUIConstants {
 	 * @return javax.swing.JMenuItem	
 	 */
 	public JMenuItem getCopyMenuItem() {
-		if (copyMenuItem == null) {
-			copyMenuItem = new JMenuItem();
-			copyMenuItem.setText("Copy");
-			copyMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C,
+		if (_copyMenuItem == null) {
+			_copyMenuItem = new JMenuItem();
+			_copyMenuItem.setText("Copy");
+			_copyMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C,
 					Event.CTRL_MASK, true));
 		}
-		return copyMenuItem;
+		return _copyMenuItem;
 	}
 
 	/**
@@ -319,13 +331,13 @@ public class App implements GUIConstants {
 	 * @return javax.swing.JMenuItem	
 	 */
 	public JMenuItem getPasteMenuItem() {
-		if (pasteMenuItem == null) {
-			pasteMenuItem = new JMenuItem();
-			pasteMenuItem.setText("Paste");
-			pasteMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V,
+		if (_pasteMenuItem == null) {
+			_pasteMenuItem = new JMenuItem();
+			_pasteMenuItem.setText("Paste");
+			_pasteMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V,
 					Event.CTRL_MASK, true));
 		}
-		return pasteMenuItem;
+		return _pasteMenuItem;
 	}
 
 	/**
@@ -333,17 +345,19 @@ public class App implements GUIConstants {
 	 * 	
 	 * @return javax.swing.JMenuItem	
 	 */
-	public JMenuItem getViewInputMenuItem() {
-		if (viewInputMenuItem == null) {
-			viewInputMenuItem = new JMenuItem();
-			viewInputMenuItem.setText("View Input Panel");
-			viewInputMenuItem.addActionListener(new java.awt.event.ActionListener() {
+	public JRadioButtonMenuItem getViewInputMenuItem() {
+		if (_viewInputMenuItem == null) {
+			_viewInputMenuItem = new JRadioButtonMenuItem();
+			_viewInputMenuItem.setText("View Input Panel");
+			_viewInputMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_I,
+					Event.CTRL_MASK, true));
+			_viewInputMenuItem.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					jFrame.setContentPane(getInputPanel());
+					_jFrame.setContentPane(getInputPanel());
 				}
 			});
 		}
-		return viewInputMenuItem;
+		return _viewInputMenuItem;
 	}
 	
 	/**
@@ -351,17 +365,19 @@ public class App implements GUIConstants {
 	 * 	
 	 * @return javax.swing.JMenuItem	
 	 */
-	public JMenuItem getViewManagementMenuItem() {
-		if (viewManagementMenuItem == null) {
-			viewManagementMenuItem = new JMenuItem();
-			viewManagementMenuItem.setText("View Management Panel");
-			viewManagementMenuItem.addActionListener(new java.awt.event.ActionListener() {
+	public JRadioButtonMenuItem getViewManagementMenuItem() {
+		if (_viewManagementMenuItem == null) {
+			_viewManagementMenuItem = new JRadioButtonMenuItem();
+			_viewManagementMenuItem.setText("View Management Panel");
+			_viewManagementMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_M,
+					Event.CTRL_MASK, true));
+			_viewManagementMenuItem.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					jFrame.setContentPane(getManagementPanel());
+					_jFrame.setContentPane(getManagementPanel());
 				}
 			});
 		}
-		return viewManagementMenuItem;
+		return _viewManagementMenuItem;
 	}
 	
 	/**
@@ -370,10 +386,10 @@ public class App implements GUIConstants {
 	 * @return javax.swing.JMenuItem	
 	 */
 	public JMenuItem getAboutMenuItem() {
-		if (aboutMenuItem == null) {
-			aboutMenuItem = new JMenuItem();
-			aboutMenuItem.setText("About...");
-			aboutMenuItem.addActionListener(new ActionListener() {
+		if (_aboutMenuItem == null) {
+			_aboutMenuItem = new JMenuItem();
+			_aboutMenuItem.setText("About...");
+			_aboutMenuItem.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					JDialog aboutDialog = getAboutDialog();
 					aboutDialog.pack();
@@ -384,7 +400,7 @@ public class App implements GUIConstants {
 				}
 			});
 		}
-		return aboutMenuItem;
+		return _aboutMenuItem;
 	}
 
 	/**
@@ -393,12 +409,12 @@ public class App implements GUIConstants {
 	 * @return javax.swing.JDialog
 	 */
 	public JDialog getAboutDialog() {
-		if (aboutDialog == null) {
-			aboutDialog = new JDialog(getJFrame(), true);
-			aboutDialog.setTitle("About");
-			aboutDialog.setContentPane(getAboutContentPane());
+		if (_aboutDialog == null) {
+			_aboutDialog = new JDialog(getJFrame(), true);
+			_aboutDialog.setTitle("About");
+			_aboutDialog.setContentPane(getAboutContentPane());
 		}
-		return aboutDialog;
+		return _aboutDialog;
 	}
 
 	/**
@@ -407,12 +423,12 @@ public class App implements GUIConstants {
 	 * @return javax.swing.JPanel
 	 */
 	public JPanel getAboutContentPane() {
-		if (aboutContentPane == null) {
-			aboutContentPane = new JPanel();
-			aboutContentPane.setLayout(new BorderLayout());
-			aboutContentPane.add(getAboutVersionLabel(), BorderLayout.CENTER);
+		if (_aboutContentPane == null) {
+			_aboutContentPane = new JPanel();
+			_aboutContentPane.setLayout(new BorderLayout());
+			_aboutContentPane.add(getAboutVersionLabel(), BorderLayout.CENTER);
 		}
-		return aboutContentPane;
+		return _aboutContentPane;
 	}
 
 	/**
@@ -421,13 +437,13 @@ public class App implements GUIConstants {
 	 * @return javax.swing.JLabel	
 	 */
 	public JLabel getAboutVersionLabel() {
-		if (aboutVersionLabel == null) {
-			aboutVersionLabel = new JLabel();
-			aboutVersionLabel.setText("<html><center>Tournament Scheduler - Version 1.0<br>" +
+		if (_aboutVersionLabel == null) {
+			_aboutVersionLabel = new JLabel();
+			_aboutVersionLabel.setText("<html><center>Tournament Scheduler - Version 1.0<br>" +
 					"Created by Patrick Clay, Matthew Mahoney, and Aswin Karumbunathan</center></html>");
-			aboutVersionLabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+			_aboutVersionLabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		}
-		return aboutVersionLabel;
+		return _aboutVersionLabel;
 	}
 	
 	/**

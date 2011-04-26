@@ -11,7 +11,7 @@ public class AttributeTree extends JTree {
 
 	public static final long serialVersionUID = 1L;
 	
-	public TreeModel treeModel;
+	private TreeModel _treeModel;  //  @jve:decl-index=0:
 	
 	public AttributeTree() {
 		initialize();
@@ -35,13 +35,20 @@ public class AttributeTree extends JTree {
 	 * @return
 	 */
 	public TreeModel getTree() {
-		if (treeModel == null) {
+		if (_treeModel == null) {
 			DefaultMutableTreeNode root;
 			root = new DefaultMutableTreeNode("Blahblah");
 			root.add(new DefaultMutableTreeNode("Blahblahblah"));
-			treeModel = new DefaultTreeModel(root);
+			_treeModel = new DefaultTreeModel(root);
 		}
-		return treeModel;
+		return _treeModel;
+	}
+	
+	/**
+	 * Setter for the TreeModel of the tree.
+	 */
+	public void setTree(TreeModel m) {
+		_treeModel = m;
 	}
 	
 }  //  @jve:decl-index=0:visual-constraint="10,10"

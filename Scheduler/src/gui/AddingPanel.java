@@ -22,7 +22,6 @@ public class AddingPanel extends JPanel {
 	 */
 	public void initialize() {
 		this.setSize(400, 400); //TODO: make constants
-		this.setBackground(java.awt.Color.green);
 		this.setLayout(new GridBagLayout());
 	}
 
