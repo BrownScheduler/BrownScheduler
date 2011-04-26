@@ -1,0 +1,6 @@
+package backbone;
+
+public class UnitAttribute extends Attribute {
+
+	public Unit unit;
+}

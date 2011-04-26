@@ -1,0 +1,11 @@
+package backbone;
+
+public abstract class Unit implements Grunit{
+	
+	String _name;
+	
+	public Unit(String name){
+		_name = name;
+	}
+
+}

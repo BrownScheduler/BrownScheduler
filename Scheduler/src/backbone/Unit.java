@@ -1,5 +1,15 @@
 package backbone;
 
-public interface Unit extends Grunit{
+import java.util.List;
+
+public abstract class Unit implements Grunit{
+	
+	protected String _name;
+	
+	public Unit(String name){
+		_name = name;
+	}
+	
+	public abstract List<Attribute> getAttributes();
 
 }

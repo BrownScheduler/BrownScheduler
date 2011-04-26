@@ -1,5 +1,5 @@
 package backbone;
 
-public interface GroupingAttribute extends Attribute{
+public class GroupingAttribute extends Attribute{
 
 }

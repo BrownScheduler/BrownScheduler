@@ -1,5 +1,7 @@
 package plugin1;
 
-public class Tourney {
+import backbone.*;
+
+public class Tourney extends Tournament{
 
 }

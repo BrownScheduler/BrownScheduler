@@ -1,0 +1,8 @@
+package backbone;
+
+public abstract class Attribute implements Gruttribute{
+	
+	public String title;
+	
+
+}

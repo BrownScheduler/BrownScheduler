@@ -1,0 +1,525 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workbench progressCount="19" version="2.0">
+<workbenchAdvisor/>
+<window height="821" width="1357" x="189" y="54">
+<fastViewData fastViewLocation="1024">
+<orientation position="512" view="org.eclipse.ve.internal.java.codegen.editorpart.XMLViewPart"/>
+</fastViewData>
+<perspectiveBar>
+<itemSize x="160"/>
+</perspectiveBar>
+<coolbarLayout locked="0">
+<coolItem id="group.file" itemType="typeGroupMarker"/>
+<coolItem id="org.eclipse.ui.workbench.file" itemType="typeToolBarContribution" x="104" y="30"/>
+<coolItem id="additions" itemType="typeGroupMarker"/>
+<coolItem id="org.eclipse.debug.ui.launchActionSet" itemType="typeToolBarContribution" x="120" y="30"/>
+<coolItem id="org.eclipse.jdt.ui.JavaElementCreationActionSet" itemType="typeToolBarContribution" x="104" y="30"/>
+<coolItem id="org.eclipse.search.searchActionSet" itemType="typeToolBarContribution" x="76" y="30"/>
+<coolItem id="org.eclipse.ui.edit.text.actionSet.presentation" itemType="typeToolBarContribution" x="124" y="30"/>
+<coolItem id="group.nav" itemType="typeGroupMarker"/>
+<coolItem id="org.eclipse.ui.workbench.navigate" itemType="typeToolBarContribution" x="184" y="30"/>
+<coolItem id="group.editor" itemType="typeGroupMarker"/>
+<coolItem id="org.eclipse.jdt.ui.CompilationUnitEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
+<coolItem id="group.help" itemType="typeGroupMarker"/>
+<coolItem id="org.eclipse.ui.workbench.help" itemType="typeToolBarContribution" x="-1" y="-1"/>
+</coolbarLayout>
+<page aggregateWorkingSetId="Aggregate for window 1303597193477" focus="true" label="Workspace - Java">
+<editors>
+<editorArea activeWorkbook="DefaultEditorWorkbook">
+<info part="DefaultEditorWorkbook">
+<folder appearance="1" expanded="2">
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
+<part id="1"/>
+<part id="2"/>
+<part id="3"/>
+<part id="4"/>
+<part id="5"/>
+<part id="6"/>
+<part id="7"/>
+<part id="8"/>
+<part id="9"/>
+<part id="10"/>
+<part id="11"/>
+<part id="12"/>
+<part id="13"/>
+<part id="14"/>
+<part id="15"/>
+<part id="16"/>
+<part id="17"/>
+</presentation>
+</folder>
+</info>
+</editorArea>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="App.java" partName="App.java" path="/home/matt/BrownScheduler/Scheduler/src/scheduler/App.java" title="App.java" tooltip="Scheduler/src/scheduler/App.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Scheduler/src/scheduler/App.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Grouping.java" partName="Grouping.java" path="/home/matt/BrownScheduler/Scheduler/src/backbone/Grouping.java" title="Grouping.java" tooltip="Scheduler/src/backbone/Grouping.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Scheduler/src/backbone/Grouping.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Grunit.java" partName="Grunit.java" path="/home/matt/BrownScheduler/Scheduler/src/backbone/Grunit.java" title="Grunit.java" tooltip="Scheduler/src/backbone/Grunit.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Scheduler/src/backbone/Grunit.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Printable.java" partName="Printable.java" path="/home/matt/BrownScheduler/Scheduler/src/backbone/Printable.java" title="Printable.java" tooltip="Scheduler/src/backbone/Printable.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Scheduler/src/backbone/Printable.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Unit.java" partName="Unit.java" path="/home/matt/BrownScheduler/Scheduler/src/backbone/Unit.java" title="Unit.java" tooltip="Scheduler/src/backbone/Unit.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Scheduler/src/backbone/Unit.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Tournament.java" partName="Tournament.java" path="/home/matt/BrownScheduler/Scheduler/src/backbone/Tournament.java" title="Tournament.java" tooltip="Scheduler/src/backbone/Tournament.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Scheduler/src/backbone/Tournament.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Team.java" partName="Team.java" path="/home/matt/BrownScheduler/Scheduler/src/plugin1/Team.java" title="Team.java" tooltip="Scheduler/src/plugin1/Team.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Scheduler/src/plugin1/Team.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="108" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Tourney.java" partName="Tourney.java" path="/home/matt/BrownScheduler/Scheduler/src/plugin1/Tourney.java" title="Tourney.java" tooltip="Scheduler/src/plugin1/Tourney.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Scheduler/src/plugin1/Tourney.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="35" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Judge.java" partName="Judge.java" path="/home/matt/BrownScheduler/Scheduler/src/plugin1/Judge.java" title="Judge.java" tooltip="Scheduler/src/plugin1/Judge.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Scheduler/src/plugin1/Judge.java"/>
+<editorState selectionHorizontalPixel="13" selectionLength="0" selectionOffset="143" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Pairing.java" partName="Pairing.java" path="/home/matt/BrownScheduler/Scheduler/src/plugin1/Pairing.java" title="Pairing.java" tooltip="Scheduler/src/plugin1/Pairing.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Scheduler/src/plugin1/Pairing.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="301" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="CompetitiveGrouping.java" partName="CompetitiveGrouping.java" path="/home/matt/BrownScheduler/Scheduler/src/backbone/CompetitiveGrouping.java" title="CompetitiveGrouping.java" tooltip="Scheduler/src/backbone/CompetitiveGrouping.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Scheduler/src/backbone/CompetitiveGrouping.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="0"/>
+</editor>
+<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Round.java" partName="Round.java" path="/home/matt/BrownScheduler/Scheduler/src/plugin1/Round.java" title="Round.java" tooltip="Scheduler/src/plugin1/Round.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Scheduler/src/plugin1/Round.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="324" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="StringAttribute.java" partName="StringAttribute.java" path="/home/matt/BrownScheduler/Scheduler/src/backbone/StringAttribute.java" title="StringAttribute.java" tooltip="Scheduler/src/backbone/StringAttribute.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Scheduler/src/backbone/StringAttribute.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="90" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="GroupingAttribute.java" partName="GroupingAttribute.java" path="/home/matt/BrownScheduler/Scheduler/src/backbone/GroupingAttribute.java" title="GroupingAttribute.java" tooltip="Scheduler/src/backbone/GroupingAttribute.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Scheduler/src/backbone/GroupingAttribute.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="57" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="DoubleAttribute.java" partName="DoubleAttribute.java" path="/home/matt/BrownScheduler/Scheduler/src/backbone/DoubleAttribute.java" title="DoubleAttribute.java" tooltip="Scheduler/src/backbone/DoubleAttribute.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Scheduler/src/backbone/DoubleAttribute.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="55" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="IntAttribute.java" partName="IntAttribute.java" path="/home/matt/BrownScheduler/Scheduler/src/backbone/IntAttribute.java" title="IntAttribute.java" tooltip="Scheduler/src/backbone/IntAttribute.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Scheduler/src/backbone/IntAttribute.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="257" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Attribute.java" partName="Attribute.java" path="/home/matt/BrownScheduler/Scheduler/src/backbone/Attribute.java" title="Attribute.java" tooltip="Scheduler/src/backbone/Attribute.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Scheduler/src/backbone/Attribute.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="127" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="UnitAttribute.java" partName="UnitAttribute.java" path="/home/matt/BrownScheduler/Scheduler/src/backbone/UnitAttribute.java" title="UnitAttribute.java" tooltip="Scheduler/src/backbone/UnitAttribute.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Scheduler/src/backbone/UnitAttribute.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="176" selectionTopPixel="0"/>
+</editor>
+</editors>
+<views>
+<view id="org.eclipse.jdt.ui.TypeHierarchy" partName="Hierarchy"/>
+<view id="org.eclipse.ve.internal.java.codegen.editorpart.XMLViewPart" partName="VE Model: XMI View"/>
+<view id="org.eclipse.ui.views.ProblemView" partName="Problems">
+<viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.severityAndDescriptionField" categoryGroup="org.eclipse.ui.ide.severity" markerContentGenerator="org.eclipse.ui.ide.problemsGenerator" partName="Problems">
+<expanded>
+<category IMemento.internal.id="Errors (1 item)"/>
+<category IMemento.internal.id="Errors"/>
+</expanded>
+<columnWidths org.eclipse.ui.ide.locationField="73" org.eclipse.ui.ide.markerType="412" org.eclipse.ui.ide.pathField="143" org.eclipse.ui.ide.resourceField="108" org.eclipse.ui.ide.severityAndDescriptionField="350"/>
+<visible IMemento.internal.id="org.eclipse.ui.ide.severityAndDescriptionField"/>
+<visible IMemento.internal.id="org.eclipse.ui.ide.resourceField"/>
+<visible IMemento.internal.id="org.eclipse.ui.ide.pathField"/>
+<visible IMemento.internal.id="org.eclipse.ui.ide.locationField"/>
+<visible IMemento.internal.id="org.eclipse.ui.ide.markerType"/>
+</viewState>
+</view>
+<view id="org.eclipse.jdt.ui.PackageExplorer" partName="Package Explorer">
+<viewState group_libraries="1" layout="2" linkWithEditor="0" rootMode="1" workingSetName="Aggregate for window 1303597193477">
+<customFilters userDefinedPatternsEnabled="false">
+<xmlDefinedFilters>
+<child filterId="org.eclipse.jdt.ui.PackageExplorer.LibraryFilter" isEnabled="false"/>
+<child filterId="org.eclipse.jdt.ui.PackageExplorer.LocalTypesFilter" isEnabled="false"/>
+<child filterId="org.eclipse.jdt.ui.PackageExplorer.StaticsFilter" isEnabled="false"/>
+<child filterId="org.eclipse.pde.ui.ExternalPluginLibrariesFilter1" isEnabled="true"/>
+<child filterId="org.eclipse.jdt.ui.PackageExplorer.ClosedProjectsFilter" isEnabled="false"/>
+<child filterId="org.eclipse.jdt.ui.PackageExplorer.NonSharedProjectsFilter" isEnabled="false"/>
+<child filterId="org.eclipse.jdt.ui.PackageExplorer.NonJavaElementFilter" isEnabled="false"/>
+<child filterId="org.eclipse.jdt.ui.PackageExplorer.ContainedLibraryFilter" isEnabled="false"/>
+<child filterId="org.eclipse.jdt.ui.PackageExplorer.CuAndClassFileFilter" isEnabled="false"/>
+<child filterId="org.eclipse.jdt.ui.PackageExplorer.NonJavaProjectsFilter" isEnabled="false"/>
+<child filterId="org.eclipse.jdt.internal.ui.PackageExplorer.EmptyInnerPackageFilter" isEnabled="true"/>
+<child filterId="org.eclipse.jdt.ui.PackageExplorer.PackageDeclarationFilter" isEnabled="true"/>
+<child filterId="org.eclipse.jdt.internal.ui.PackageExplorer.EmptyPackageFilter" isEnabled="false"/>
+<child filterId="org.eclipse.jdt.ui.PackageExplorer.ImportDeclarationFilter" isEnabled="true"/>
+<child filterId="org.eclipse.jdt.ui.PackageExplorer.FieldsFilter" isEnabled="false"/>
+<child filterId="org.eclipse.jdt.internal.ui.PackageExplorer.HideInnerClassFilesFilter" isEnabled="true"/>
+<child filterId="org.eclipse.jdt.ui.PackageExplorer.NonPublicFilter" isEnabled="false"/>
+<child filterId="org.eclipse.jdt.ui.PackageExplorer_patternFilterId_.*" isEnabled="true"/>
+<child filterId="org.eclipse.jdt.ui.PackageExplorer.EmptyLibraryContainerFilter" isEnabled="true"/>
+<child filterId="org.eclipse.pde.ui.BinaryProjectFilter1" isEnabled="false"/>
+<child filterId="org.eclipse.jdt.ui.PackageExplorer.SyntheticMembersFilter" isEnabled="true"/>
+</xmlDefinedFilters>
+</customFilters>
+</viewState>
+</view>
+<view id="org.eclipse.ui.views.ContentOutline" partName="Outline">
+<viewState/>
+</view>
+<view id="org.eclipse.jdt.ui.SourceView" partName="Declaration"/>
+<view id="org.eclipse.jdt.ui.JavadocView" partName="Javadoc"/>
+</views>
+<perspectives activePart="org.eclipse.jdt.ui.CompilationUnitEditor" activePerspective="org.eclipse.jdt.ui.JavaPerspective">
+<perspective editorAreaTrimState="2" editorAreaVisible="1" fixed="0" version="0.016">
+<descriptor class="org.eclipse.jdt.internal.ui.JavaPerspectiveFactory" id="org.eclipse.jdt.ui.JavaPerspective" label="Java"/>
+<alwaysOnActionSet id="org.eclipse.ui.cheatsheets.actionSet"/>
+<alwaysOnActionSet id="org.eclipse.search.searchActionSet"/>
+<alwaysOnActionSet id="org.eclipse.ui.edit.text.actionSet.annotationNavigation"/>
+<alwaysOnActionSet id="org.eclipse.ui.edit.text.actionSet.navigation"/>
+<alwaysOnActionSet id="org.eclipse.ui.edit.text.actionSet.convertLineDelimitersTo"/>
+<alwaysOnActionSet id="org.eclipse.ui.externaltools.ExternalToolsSet"/>
+<alwaysOnActionSet id="org.eclipse.ui.actionSet.keyBindings"/>
+<alwaysOnActionSet id="org.eclipse.ui.actionSet.openFiles"/>
+<alwaysOnActionSet id="org.eclipse.debug.ui.launchActionSet"/>
+<alwaysOnActionSet id="org.eclipse.jdt.ui.JavaActionSet"/>
+<alwaysOnActionSet id="org.eclipse.jdt.ui.JavaElementCreationActionSet"/>
+<alwaysOnActionSet id="org.eclipse.ui.NavigateActionSet"/>
+<alwaysOnActionSet id="org.eclipse.debug.ui.breakpointActionSet"/>
+<alwaysOnActionSet id="org.eclipse.jdt.debug.ui.JDTDebugActionSet"/>
+<alwaysOnActionSet id="org.eclipse.jdt.junit.JUnitActionSet"/>
+<show_view_action id="org.eclipse.jdt.ui.PackageExplorer"/>
+<show_view_action id="org.eclipse.jdt.ui.TypeHierarchy"/>
+<show_view_action id="org.eclipse.jdt.ui.SourceView"/>
+<show_view_action id="org.eclipse.jdt.ui.JavadocView"/>
+<show_view_action id="org.eclipse.search.ui.views.SearchView"/>
+<show_view_action id="org.eclipse.ui.console.ConsoleView"/>
+<show_view_action id="org.eclipse.ui.views.ContentOutline"/>
+<show_view_action id="org.eclipse.ui.views.ProblemView"/>
+<show_view_action id="org.eclipse.ui.views.ResourceNavigator"/>
+<show_view_action id="org.eclipse.ui.views.TaskList"/>
+<show_view_action id="org.eclipse.ui.views.ProgressView"/>
+<show_view_action id="org.eclipse.ui.navigator.ProjectExplorer"/>
+<show_view_action id="org.eclipse.ui.texteditor.TemplatesView"/>
+<show_view_action id="org.eclipse.ant.ui.views.AntView"/>
+<show_view_action id="org.eclipse.pde.runtime.LogView"/>
+<show_view_action id="org.eclipse.ui.views.PropertySheet"/>
+<new_wizard_action id="org.eclipse.jdt.ui.wizards.JavaProjectWizard"/>
+<new_wizard_action id="org.eclipse.jdt.ui.wizards.NewPackageCreationWizard"/>
+<new_wizard_action id="org.eclipse.jdt.ui.wizards.NewClassCreationWizard"/>
+<new_wizard_action id="org.eclipse.jdt.ui.wizards.NewInterfaceCreationWizard"/>
+<new_wizard_action id="org.eclipse.jdt.ui.wizards.NewEnumCreationWizard"/>
+<new_wizard_action id="org.eclipse.jdt.ui.wizards.NewAnnotationCreationWizard"/>
+<new_wizard_action id="org.eclipse.jdt.ui.wizards.NewSourceFolderCreationWizard"/>
+<new_wizard_action id="org.eclipse.jdt.ui.wizards.NewSnippetFileCreationWizard"/>
+<new_wizard_action id="org.eclipse.jdt.ui.wizards.NewJavaWorkingSetWizard"/>
+<new_wizard_action id="org.eclipse.ui.wizards.new.folder"/>
+<new_wizard_action id="org.eclipse.ui.wizards.new.file"/>
+<new_wizard_action id="org.eclipse.ui.editors.wizards.UntitledTextFileWizard"/>
+<new_wizard_action id="org.eclipse.jdt.junit.wizards.NewTestCaseCreationWizard"/>
+<new_wizard_action id="org.eclipse.ve.internal.java.codegen.wizards.NewVisualClassCreationWizard"/>
+<perspective_action id="org.eclipse.debug.ui.DebugPerspective"/>
+<perspective_action id="org.eclipse.jdt.ui.JavaBrowsingPerspective"/>
+<hide_toolbar_item_id id="org.eclipse.ui.edit.text.toggleShowSelectedElementOnly"/>
+<view id="org.eclipse.jdt.ui.PackageExplorer"/>
+<view id="org.eclipse.jdt.ui.TypeHierarchy"/>
+<view id="org.eclipse.ui.views.ProblemView"/>
+<view id="org.eclipse.jdt.ui.JavadocView"/>
+<view id="org.eclipse.jdt.ui.SourceView"/>
+<view id="org.eclipse.ui.views.ContentOutline"/>
+<fastViews>
+<view id="org.eclipse.ve.internal.java.codegen.editorpart.XMLViewPart" ratio="0.95"/>
+</fastViews>
+<fastViewBars/>
+<layout>
+<mainWindow>
+<info folder="true" part="left">
+<folder activePageID="org.eclipse.jdt.ui.PackageExplorer" appearance="2" expanded="2">
+<page content="org.eclipse.jdt.ui.PackageExplorer" label="Package Explorer"/>
+<page content="org.eclipse.jdt.ui.TypeHierarchy" label="Hierarchy"/>
+<page content="org.eclipse.ui.views.ResourceNavigator" label="LabelNotFound"/>
+<page content="org.eclipse.ui.navigator.ProjectExplorer" label="LabelNotFound"/>
+<page content="org.eclipse.jdt.junit.ResultView" label="LabelNotFound"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
+<part id="1"/>
+</presentation>
+</folder>
+</info>
+<info folder="true" part="stickyFolderRight" ratio="0.7495049" ratioLeft="757" ratioRight="253" relationship="2" relative="left">
+<folder appearance="2" expanded="2">
+<page content="org.eclipse.help.ui.HelpView" label="LabelNotFound"/>
+<page content="org.eclipse.ui.internal.introview" label="LabelNotFound"/>
+<page content="org.eclipse.ui.cheatsheets.views.CheatSheetView" label="LabelNotFound"/>
+</folder>
+</info>
+<info part="org.eclipse.gef.ui.palette_view" ratio="0.24950495" ratioLeft="252" ratioRight="758" relationship="2" relative="left"/>
+<info folder="true" part="bottom" ratio="0.74960876" ratioLeft="479" ratioRight="160" relationship="4" relative="org.eclipse.gef.ui.palette_view">
+<folder activePageID="org.eclipse.ui.views.ProblemView" appearance="2" expanded="2">
+<page content="org.eclipse.ui.views.ProblemView" label="Problems"/>
+<page content="org.eclipse.jdt.ui.JavadocView" label="Javadoc"/>
+<page content="org.eclipse.jdt.ui.SourceView" label="Declaration"/>
+<page content="org.eclipse.search.ui.views.SearchView" label="LabelNotFound"/>
+<page content="org.eclipse.ui.console.ConsoleView" label="LabelNotFound"/>
+<page content="org.eclipse.ui.views.BookmarkView" label="LabelNotFound"/>
+<page content="org.eclipse.ui.views.ProgressView" label="LabelNotFound"/>
+<page content="org.eclipse.ui.views.PropertySheet" label="LabelNotFound"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
+<part id="1"/>
+<part id="2"/>
+</presentation>
+</folder>
+</info>
+<info folder="true" part="right" ratio="0.74934036" ratioLeft="568" ratioRight="190" relationship="2" relative="org.eclipse.gef.ui.palette_view">
+<folder activePageID="org.eclipse.ui.views.ContentOutline" appearance="2" expanded="2">
+<page content="org.eclipse.ui.views.ContentOutline" label="Outline"/>
+<page content="org.eclipse.ui.texteditor.TemplatesView" label="LabelNotFound"/>
+<page content="org.eclipse.ant.ui.views.AntView" label="LabelNotFound"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
+</presentation>
+</folder>
+</info>
+<info part="org.eclipse.ui.editorss" ratio="0.15845071" ratioLeft="90" ratioRight="478" relationship="2" relative="org.eclipse.gef.ui.palette_view"/>
+<info part="org.eclipse.ve.internal.java.codegen.editorpart.BeansList" ratio="0.49921754" ratioLeft="319" ratioRight="320" relationship="4" relative="left"/>
+</mainWindow>
+</layout>
+</perspective>
+</perspectives>
+<workingSets/>
+<navigationHistory>
+<editors>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Scheduler/src/plugin1/Pairings.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Scheduler/src/plugin1/Judge.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Scheduler/src/plugin1/Team.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Scheduler/src/backbone/IntAttribute.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Scheduler/src/backbone/DoubleAttribute.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Scheduler/src/backbone/GroupingAttribute.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Scheduler/src/backbone/StringAttribute.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Scheduler/src/backbone/ValueAttribute.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Scheduler/src/backbone/Attribute.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Scheduler/src/backbone/UnitAttribute.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Scheduler/src/plugin1/Pairing.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Scheduler/src/plugin1/Round.java"/>
+</editors>
+<item historyLabel="Pairings.java" index="0">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="Judge.java" index="1">
+<position info="not_deleted" x="255" y="0"/>
+</item>
+<item historyLabel="Pairings.java" index="0">
+<position info="not_deleted" x="226" y="0"/>
+</item>
+<item historyLabel="Team.java" index="2">
+<position info="not_deleted" x="99" y="7"/>
+</item>
+<item historyLabel="IntAttribute.java" index="3">
+<position info="not_deleted" x="62" y="0"/>
+</item>
+<item historyLabel="Team.java" index="2">
+<position info="not_deleted" x="99" y="7"/>
+</item>
+<item historyLabel="DoubleAttribute.java" index="4">
+<position info="not_deleted" x="65" y="0"/>
+</item>
+<item historyLabel="GroupingAttribute.java" index="5">
+<position info="not_deleted" x="57" y="0"/>
+</item>
+<item historyLabel="IntAttribute.java" index="3">
+<position info="not_deleted" x="62" y="0"/>
+</item>
+<item historyLabel="StringAttribute.java" index="6">
+<position info="not_deleted" x="65" y="0"/>
+</item>
+<item historyLabel="ValueAttribute.java" index="7">
+<position info="not_deleted" x="68" y="0"/>
+</item>
+<item historyLabel="Judge.java" index="1">
+<position info="not_deleted" x="255" y="0"/>
+</item>
+<item historyLabel="Judge.java" index="1">
+<position info="not_deleted" x="143" y="0"/>
+</item>
+<item historyLabel="Pairings.java" index="0">
+<position info="not_deleted" x="550" y="0"/>
+</item>
+<item historyLabel="StringAttribute.java" index="6">
+<position info="not_deleted" x="90" y="0"/>
+</item>
+<item historyLabel="Attribute.java" index="8">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="Attribute.java" index="8">
+<position info="not_deleted" x="151" y="0"/>
+</item>
+<item historyLabel="DoubleAttribute.java" index="4">
+<position info="not_deleted" x="55" y="0"/>
+</item>
+<item historyLabel="GroupingAttribute.java" index="5">
+<position info="not_deleted" x="57" y="0"/>
+</item>
+<item historyLabel="IntAttribute.java" index="3">
+<position info="not_deleted" x="52" y="0"/>
+</item>
+<item historyLabel="StringAttribute.java" index="6">
+<position info="not_deleted" x="55" y="0"/>
+</item>
+<item historyLabel="ValueAttribute.java" index="7">
+<position info="not_deleted" x="54" y="4"/>
+</item>
+<item historyLabel="StringAttribute.java" index="6">
+<position info="not_deleted" x="55" y="0"/>
+</item>
+<item historyLabel="Attribute.java" index="8">
+<position info="not_deleted" x="151" y="0"/>
+</item>
+<item historyLabel="StringAttribute.java" index="6">
+<position info="not_deleted" x="90" y="0"/>
+</item>
+<item historyLabel="Pairings.java" index="0">
+<position info="not_deleted" x="550" y="0"/>
+</item>
+<item historyLabel="Pairings.java" index="0">
+<position info="not_deleted" x="318" y="0"/>
+</item>
+<item historyLabel="Pairings.java" index="0">
+<position info="not_deleted" x="359" y="0"/>
+</item>
+<item historyLabel="Pairings.java" index="0">
+<position info="not_deleted" x="392" y="0"/>
+</item>
+<item historyLabel="Pairings.java" index="0">
+<position info="not_deleted" x="437" y="0"/>
+</item>
+<item historyLabel="UnitAttribute.java" index="9">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="UnitAttribute.java" index="9">
+<position info="not_deleted" x="177" y="0"/>
+</item>
+<item historyLabel="Attribute.java" index="8">
+<position info="not_deleted" x="151" y="0"/>
+</item>
+<item historyLabel="UnitAttribute.java" index="9">
+<position info="not_deleted" x="176" y="0"/>
+</item>
+<item historyLabel="Pairings.java" index="0">
+<position info="not_deleted" x="437" y="0"/>
+</item>
+<item historyLabel="Pairings.java" index="0">
+<position info="not_deleted" x="481" y="0"/>
+</item>
+<item historyLabel="Pairings.java" index="0">
+<position info="not_deleted" x="529" y="0"/>
+</item>
+<item historyLabel="Pairings.java" index="0">
+<position info="not_deleted" x="532" y="0"/>
+</item>
+<item historyLabel="Pairing.java" index="10">
+<position info="not_deleted" x="321" y="0"/>
+</item>
+<item historyLabel="Pairing.java" index="10">
+<position info="not_deleted" x="320" y="0"/>
+</item>
+<item historyLabel="Pairing.java" index="10">
+<position info="not_deleted" x="593" y="0"/>
+</item>
+<item historyLabel="Pairing.java" index="10">
+<position info="not_deleted" x="546" y="0"/>
+</item>
+<item historyLabel="Attribute.java" index="8">
+<position info="not_deleted" x="151" y="0"/>
+</item>
+<item historyLabel="IntAttribute.java" index="3">
+<position info="not_deleted" x="52" y="0"/>
+</item>
+<item historyLabel="IntAttribute.java" index="3">
+<position info="not_deleted" x="257" y="0"/>
+</item>
+<item historyLabel="Attribute.java" index="8">
+<position info="not_deleted" x="127" y="0"/>
+</item>
+<item historyLabel="Pairing.java" index="10">
+<position info="not_deleted" x="546" y="0"/>
+</item>
+<item historyLabel="Round.java" index="11">
+<position info="not_deleted" x="328" y="0"/>
+</item>
+<item historyLabel="Round.java" index="11">
+<position info="not_deleted" x="327" y="0"/>
+</item>
+<item active="true" historyLabel="Round.java" index="11">
+<position info="not_deleted" x="261" y="0"/>
+</item>
+</navigationHistory>
+<input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
+</page>
+<workbenchWindowAdvisor/>
+<actionBarAdvisor/>
+<trimLayout>
+<trimArea IMemento.internal.id="128">
+<trimItem IMemento.internal.id="org.eclipse.ui.internal.WorkbenchWindow.topBar"/>
+</trimArea>
+<trimArea IMemento.internal.id="1024">
+<trimItem IMemento.internal.id="org.eclise.ui.internal.FastViewBar"/>
+<trimItem IMemento.internal.id="org.eclipse.jface.action.StatusLineManager"/>
+<trimItem IMemento.internal.id="org.eclipse.ui.internal.progress.ProgressRegion"/>
+</trimArea>
+</trimLayout>
+</window>
+<mruList>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="UnitAttribute.java" tooltip="Scheduler/src/backbone/UnitAttribute.java">
+<persistable path="/Scheduler/src/backbone/UnitAttribute.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Attribute.java" tooltip="Scheduler/src/backbone/Attribute.java">
+<persistable path="/Scheduler/src/backbone/Attribute.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="IntAttribute.java" tooltip="Scheduler/src/backbone/IntAttribute.java">
+<persistable path="/Scheduler/src/backbone/IntAttribute.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ValueAttribute.java" tooltip="Scheduler/src/backbone/ValueAttribute.java">
+<persistable path="/Scheduler/src/backbone/ValueAttribute.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="DoubleAttribute.java" tooltip="Scheduler/src/backbone/DoubleAttribute.java">
+<persistable path="/Scheduler/src/backbone/DoubleAttribute.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="GroupingAttribute.java" tooltip="Scheduler/src/backbone/GroupingAttribute.java">
+<persistable path="/Scheduler/src/backbone/GroupingAttribute.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="StringAttribute.java" tooltip="Scheduler/src/backbone/StringAttribute.java">
+<persistable path="/Scheduler/src/backbone/StringAttribute.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Round.java" tooltip="Scheduler/src/plugin1/Round.java">
+<persistable path="/Scheduler/src/plugin1/Round.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="CompetitiveGrouping.java" tooltip="Scheduler/src/backbone/CompetitiveGrouping.java">
+<persistable path="/Scheduler/src/backbone/CompetitiveGrouping.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Pairings.java" tooltip="Scheduler/src/plugin1/Pairings.java">
+<persistable path="/Scheduler/src/plugin1/Pairings.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Judge.java" tooltip="Scheduler/src/plugin1/Judge.java">
+<persistable path="/Scheduler/src/plugin1/Judge.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Tourney.java" tooltip="Scheduler/src/plugin1/Tourney.java">
+<persistable path="/Scheduler/src/plugin1/Tourney.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Team.java" tooltip="Scheduler/src/plugin1/Team.java">
+<persistable path="/Scheduler/src/plugin1/Team.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Tournament.java" tooltip="Scheduler/src/backbone/Tournament.java">
+<persistable path="/Scheduler/src/backbone/Tournament.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Unit.java" tooltip="Scheduler/src/backbone/Unit.java">
+<persistable path="/Scheduler/src/backbone/Unit.java"/>
+</file>
+</mruList>
+</workbench>

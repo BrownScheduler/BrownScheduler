@@ -1,5 +1,9 @@
 package backbone;
 
-public interface CompetitiveUnit extends Unit{
+public abstract class CompetitiveUnit extends Unit{
+
+	public CompetitiveUnit(String name) {
+		super(name);
+	}
 
 }
