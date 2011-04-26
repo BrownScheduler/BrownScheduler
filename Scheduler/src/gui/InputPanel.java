@@ -5,9 +5,12 @@ import javax.swing.JTree;
 import javax.swing.BoxLayout;
 import javax.swing.JScrollPane;
 
+import middleend.MiddleEnd;
+
 public class InputPanel extends JPanel implements GUIConstants {
 
 	public static final long serialVersionUID = 1L;
+	private MiddleEnd _middleEnd;
 	private AddingPanel _addingPanel;
 	private AttributeTree _attributeTree;
 	private JScrollPane _attributeScrollPane;
@@ -16,8 +19,9 @@ public class InputPanel extends JPanel implements GUIConstants {
 	/**
 	 * This is the default constructor
 	 */
-	public InputPanel() {
+	public InputPanel(MiddleEnd m) {
 		super();
+		_middleEnd = m;
 		initialize();
 	}
 
@@ -40,7 +44,7 @@ public class InputPanel extends JPanel implements GUIConstants {
 	 */
 	public JPanel getAddingPanel() {
 		if (_addingPanel == null) {
-			_addingPanel = new AddingPanel();
+			_addingPanel = new AddingPanel(_middleEnd);
 		}
 		return _addingPanel;
 	}
@@ -52,7 +56,7 @@ public class InputPanel extends JPanel implements GUIConstants {
 	 */
 	public JTree getAttributeTree() {
 		if (_attributeTree == null) {
-			_attributeTree = new AttributeTree();
+			_attributeTree = new AttributeTree(_middleEnd);
 		}
 		return _attributeTree;
 	}

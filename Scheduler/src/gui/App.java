@@ -1,5 +1,6 @@
 package gui;
 
+import middleend.*;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.awt.event.ActionListener;
@@ -22,6 +23,7 @@ import javax.swing.JRadioButtonMenuItem;
 
 public class App implements GUIConstants {
 
+	private MiddleEnd _middleEnd;
 	private JFrame _jFrame;
 	private InputPanel _inputPane;
 	private ManagementPanel _managementPane;
@@ -47,6 +49,13 @@ public class App implements GUIConstants {
 	private JDialog _aboutDialog;
 	private JPanel _aboutContentPane;
 	private JLabel _aboutVersionLabel;
+	
+	public MiddleEnd getMiddleEnd() {
+		if (_middleEnd == null) {
+			_middleEnd = new MiddleEnd();
+		}
+		return _middleEnd;
+	}
 	
 	/**
 	 * This method initializes jFrame
@@ -74,7 +83,7 @@ public class App implements GUIConstants {
 	 */
 	public InputPanel getInputPanel() {
 		if (_inputPane == null) {
-			_inputPane = new InputPanel();
+			_inputPane = new InputPanel(_middleEnd);
 		}
 		return _inputPane;
 	}
@@ -86,7 +95,7 @@ public class App implements GUIConstants {
 	 */
 	public ManagementPanel getManagementPanel() {
 		if (_managementPane == null) {
-			_managementPane = new ManagementPanel();
+			_managementPane = new ManagementPanel(_middleEnd);
 		}
 		return _managementPane;
 	}
