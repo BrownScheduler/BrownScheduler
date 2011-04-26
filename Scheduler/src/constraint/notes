@@ -1,0 +1,11 @@
+sudo code:
+
+pre-calc conflict/pairable graph
+
+while unpaired is not empty:
+	grab most conflicted
+	if possible:
+		pair acceptably randomly
+	else pair randomly
+	
+fix
