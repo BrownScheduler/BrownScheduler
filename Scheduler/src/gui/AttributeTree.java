@@ -7,13 +7,18 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeModel;
 
+import middleend.MiddleEnd;
+
 public class AttributeTree extends JTree {
 
 	public static final long serialVersionUID = 1L;
 	
-	private TreeModel _treeModel;  //  @jve:decl-index=0:
+	private TreeModel _treeModel;
+	private MiddleEnd _middleEnd;
 	
-	public AttributeTree() {
+	public AttributeTree(MiddleEnd m) {
+		super();
+		_middleEnd = m;
 		initialize();
 	}
 		

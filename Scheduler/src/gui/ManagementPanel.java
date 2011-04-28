@@ -3,15 +3,19 @@ package gui;
 import java.awt.GridBagLayout;
 import javax.swing.JPanel;
 
+import middleend.MiddleEnd;
+
 public class ManagementPanel extends JPanel implements GUIConstants {
 
 	public static final long serialVersionUID = 1L;
+	private MiddleEnd _middleEnd;
 
 	/**
 	 * This is the default constructor
 	 */
-	public ManagementPanel() {
+	public ManagementPanel(MiddleEnd m) {
 		super();
+		_middleEnd = m;
 		initialize();
 	}
 

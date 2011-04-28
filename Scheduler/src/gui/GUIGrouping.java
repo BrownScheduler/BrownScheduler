@@ -17,11 +17,11 @@ public interface GUIGrouping {
 	 * Returns the value of the Grouping (the actual group in the grouping)
 	 * @return String
 	 */
-	String getValue();
+	GUIGroupingGroup getGroup();
 	
 	/**
 	 * Returns the group attributes of this Grouping
 	 * @return Collection<GUIGruttribute>
 	 */
-	Collection<GUIGruttribute> getGruttibrutes();
+	Collection<GUIAttribute> getAttibrutes();
 }
