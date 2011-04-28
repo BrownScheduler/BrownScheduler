@@ -8,8 +8,14 @@ public abstract class CompetitiveUnit extends Unit{
 		super(name);
 	}
 
-	public float getConflictMagnitude() {
-		return 0;
+	public float getPotentialConflictMagnitude() {
+		float magnitude = 0;
+		for(Attribute attribute : getAttributes()) {
+			if(attribute.isConflict()) {
+				
+			}
+		}
+		return magnitude;
 	}
 
 	public CompetitiveUnit selectOpponent(ArrayList<CompetitiveUnit> competitors) {

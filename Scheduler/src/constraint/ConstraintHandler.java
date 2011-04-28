@@ -1,5 +1,6 @@
 package constraint;
 import java.util.ArrayList;
+import java.util.Collection;
 
 import backbone.*;
 
@@ -9,8 +10,9 @@ public class ConstraintHandler {
 		A, B, C, D, E, F, G, H
 	}
 
-	public void handle(Tournament tournament) {
-		ArrayList<CompetitiveUnit> competitors = (ArrayList<CompetitiveUnit>) tournament.getCompetitors().clone();
+	public void randomized(Tournament tournament) {
+		ArrayList<CompetitiveUnit> competitors = new ArrayList<CompetitiveUnit>();
+		competitors.addAll(tournament.getCompetitors());
 		Round round = tournament.getCurrentRound();
 		while(!competitors.isEmpty()) {
 			CompetitiveUnit mostConflicted = null;
@@ -26,7 +28,30 @@ public class ConstraintHandler {
 			competitors.remove(opponent);
 			competitors.remove(mostConflicted);
 		}
+	}
 
+	public Round exhaustive(ArrayList<CompetitiveUnit> competitors, Round round) {
+		for(CompetitiveUnit competitor : competitors) {
+			for(CompetitiveUnit comp : competitors) {
+				if(!competitor.equals(comp)
+						&& !round.isPaired(competitor)
+						&& !round.isPaired(comp)) {
+					Pairing pairing = new Pairing(competitor, comp);
+					if(pairing.satisfactory()) {
+						ArrayList<CompetitiveUnit> remaining = new ArrayList<CompetitiveUnit>();
+						remaining.addAll(competitors);
+						remaining.remove(competitor);
+						remaining.remove(comp);
+						Round newRound = round.copy();
+						newRound.addPairing(pairing);
+						newRound = exhaustive(remaining, newRound);
+						if(newRound != null)
+							return newRound;
+					}
+				}
+			}
+		}
+		return null;
 	}
 
 	public static void main(String[] args) {

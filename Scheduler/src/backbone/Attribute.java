@@ -3,7 +3,7 @@ package backbone;
 public abstract class Attribute extends Gruttribute{
 	private String title;
 
-	private boolean conflict;
+	private float conflictMagnitude();
 
 	public Attribute(String title) {
 		this.title = title;
