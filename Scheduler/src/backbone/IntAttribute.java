@@ -4,7 +4,7 @@ import backbone.Attribute.Type;
 
 public class IntAttribute extends Attribute{
 	
-	public Integer att = (Integer) super.att;
+	public Integer att;
 	
 	public IntAttribute(String title){
 		super(title);

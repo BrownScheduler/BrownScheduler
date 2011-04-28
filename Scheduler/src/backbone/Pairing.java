@@ -1,10 +1,21 @@
 package backbone;
 
-public class Pairing {
+import java.io.Serializable;
+import java.util.Collection;
 
-	public Pairing(CompetitiveUnit mostConflicted, CompetitiveUnit opponent) {
-		// TODO Auto-generated constructor stub
+public class Pairing extends Grouping {
+	
+	private int id;
+
+	public Pairing(CompetitiveUnit mostConflicted, CompetitiveUnit opponent, int id) {
+		super("Pairing", Integer.toString(id));
 	}
 
+	@Override
+	public Collection<Attribute> getAttributes() {
+		return null;
+	}
+	
+	
 
 }

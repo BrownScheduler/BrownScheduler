@@ -1,7 +1,5 @@
 package backbone;
 
-import backbone.Attribute.Type;
-
 public class GroupingAttribute extends Attribute{
 
 	

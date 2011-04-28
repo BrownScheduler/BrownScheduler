@@ -1,9 +1,9 @@
 package backbone;
 
 public abstract class Attribute extends Gruttribute{
+	private String title;
 
-	//attributes holding null need to be handled well
-	public Object att;
+	private boolean conflict;
 
 	public Attribute(String title) {
 		this.title = title;
@@ -20,6 +20,10 @@ public abstract class Attribute extends Gruttribute{
 	public abstract Type getType();
 
 	public boolean isConflict() {
-		return false;
+		return conflict;
+	}
+
+	public String getTitle() {
+		return title;
 	}
 }
