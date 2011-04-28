@@ -32,4 +32,8 @@ public abstract class Grouping<T extends Unit> extends Grunit{
 		atts.add(name);
 		return atts;
 	}
+
+	public int size() {
+		return members.size();
+	}
 }
