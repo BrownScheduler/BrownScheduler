@@ -5,17 +5,19 @@ import java.util.Collection;
 
 public class Pairing extends Grouping {
 	
-	private int id;
+	//private int id;
 
-	public Pairing(CompetitiveUnit mostConflicted, CompetitiveUnit opponent, int id) {
-		super("Pairing", Integer.toString(id));
+	public Pairing(CompetitiveUnit mostConflicted, CompetitiveUnit opponent) {
+		super("Pairing");
 	}
 
+	//this should already be done correctly in Grouping
+	/*
 	@Override
 	public Collection<Attribute> getAttributes() {
 		return null;
 	}
-	
+	*/
 	
 
 }

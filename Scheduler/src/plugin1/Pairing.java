@@ -10,7 +10,7 @@ import backbone.*;
  * @author matt
  *
  */
-public class Pairing implements CompetitiveGrouping{
+public class Pairing extends backbone.Pairing{
 
 	Team _gov;
 	Team _opp;
@@ -18,19 +18,14 @@ public class Pairing implements CompetitiveGrouping{
 	Team _winner;
 	
 	public Pairing(Team gov, Team opp, Judge judge) {
+		super(gov, opp);
 		_gov = gov;
 		_opp = opp;
 		_judge = judge;
+		members.add(_gov);
+		members.add(_opp);
+		members.add(_judge);
+		members.add(_winner);
 	}
 
-	public LinkedList<Attribute> getElements(){
-	
-		LinkedList<Attribute> atts = new LinkedList<Attribute>();
-		atts.add(new UnitAttribute("Gov", _gov));
-		atts.add(new UnitAttribute("Opp", _opp));
-		atts.add(new UnitAttribute("Judge", _judge));
-		atts.add(new UnitAttribute("Winner", _winner));
-		
-		return atts;
-	}
 }

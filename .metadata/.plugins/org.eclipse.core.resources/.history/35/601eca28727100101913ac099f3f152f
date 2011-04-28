@@ -1,0 +1,28 @@
+package backbone;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+public abstract class Grouping<T extends Unit> extends Grunit{
+	
+	//type is the over-name, or what the field is called
+	public String type;
+	//name is what the individual thingummy is called
+	public String name;
+	protected Collection<T> members;
+	
+	public Grouping(String type, String name) {
+		this.name = name;
+		this.type = type;
+		members = new ArrayList<T>();
+	}
+
+	public Collection<T> getMembers() {
+		return members;
+	}
+	
+	public void addMember(T member) {
+		members.add(member);
+	}
+}

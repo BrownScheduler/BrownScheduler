@@ -23,8 +23,11 @@ public class Team extends CompetitiveUnit {
 		
 		StringAttribute name = new StringAttribute("Name", this._name);
 		IntAttribute wins = new IntAttribute("Wins", _wins);
+		LinkedList<Attribute> atts = new LinkedList<Attribute>();
+		atts.add(name);
+		atts.add(wins);
 		
-		return null;
+		return atts;
 	}
 
 }

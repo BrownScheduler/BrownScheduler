@@ -25,8 +25,11 @@ public class Judge extends Unit{
 	public List<Attribute> getAttributes() {
 	
 		LinkedList<Attribute> atts = new LinkedList<Attribute>();
-		
-		return null;
+		StringAttribute name = new StringAttribute("Name", this._name);
+		GroupingAttribute conflicts = new GroupingAttribute("Conflicted Teams");
+		atts.add(name);
+		atts.add(conflicts);
+		return atts;
 	}
 	
 }

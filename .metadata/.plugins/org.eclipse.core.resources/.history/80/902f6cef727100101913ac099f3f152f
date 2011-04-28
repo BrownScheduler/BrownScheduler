@@ -1,0 +1,15 @@
+package backbone;
+
+public class GroupingAttribute extends Attribute{
+
+	private Grouping group;
+	
+	public GroupingAttribute(String title) {
+		super(title);
+	}
+
+	@Override
+	public Type getType() {
+		return Attribute.Type.GROUPING;
+	}
+}
