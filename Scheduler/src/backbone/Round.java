@@ -1,9 +1,13 @@
 package backbone;
 
-public class Round extends Grouping<Pairing> {
+import java.io.Serializable;
+import java.util.Collection;
 
+public class Round implements Serializable {
+
+	Collection<Pairing> pairings;
+	
 	Round(int i) {
-		super("Round", Integer.toString(i));
 	}
 
 	public boolean isFilled() {
