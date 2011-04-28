@@ -8,8 +8,27 @@ public class ConstraintHandler {
 	public enum Player {
 		A, B, C, D, E, F, G, H
 	}
-	
-	
+
+	public void handle(Tournament tournament) {
+		ArrayList<CompetitiveUnit> competitors = (ArrayList<CompetitiveUnit>) tournament.getCompetitors().clone();
+		Round round = tournament.getCurrentRound();
+		while(!competitors.isEmpty()) {
+			CompetitiveUnit mostConflicted = null;
+			float conflict = - Float.MAX_VALUE;
+			for(CompetitiveUnit competitor : competitors) {
+				if(competitor.getConflictMagnitude() > conflict) {
+					conflict = competitor.getConflictMagnitude();
+					mostConflicted = competitor;
+				}
+			}
+			CompetitiveUnit opponent = mostConflicted.selectOpponent(competitors);
+			round.addPairing(new Pairing(mostConflicted, opponent));
+			competitors.remove(opponent);
+			competitors.remove(mostConflicted);
+		}
+
+	}
+
 	public static void main(String[] args) {
 		ArrayList<Player> team1 =  new ArrayList<Player>();
 		team1.add(Player.A);

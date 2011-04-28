@@ -2,7 +2,7 @@ package backbone;
 
 import java.util.List;
 
-public abstract class Unit implements Grunit{
+public abstract class Unit extends Grunit{
 	
 	protected String _name;
 	
