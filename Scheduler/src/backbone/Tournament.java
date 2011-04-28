@@ -2,11 +2,12 @@ package backbone;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public abstract class Tournament implements Serializable {
 
-	public List<CompetitiveUnit> getCompetitors() {
+	public Collection<CompetitiveUnit> getCompetitors() {
 		return null;
 	}
 	
@@ -14,15 +15,11 @@ public abstract class Tournament implements Serializable {
 		return null;
 	}
 
-	public List<RootGrouping> getRootGroupings() {
+	public Collection<Category> getCategories() {
 		return null;
 	}
 	
-	public List<Round> getRounds() {
-		return null;
-	}
-
-	public List<Attribute> getProperties() {
+	public Collection<Round> getRounds() {
 		return null;
 	}
 	
