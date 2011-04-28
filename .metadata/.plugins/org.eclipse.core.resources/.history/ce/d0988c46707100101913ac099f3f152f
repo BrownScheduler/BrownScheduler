@@ -1,0 +1,21 @@
+package plugin1;
+
+import java.util.Collection;
+
+import backbone.Attribute;
+import backbone.Grouping;
+
+public class ConflictedTeams<Team> extends Grouping {
+
+	ConflictedTeams(String type, String name) {
+		super(type, name);
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public Collection<Attribute> getAttributes() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

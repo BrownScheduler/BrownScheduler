@@ -1,0 +1,12 @@
+package plugin1;
+
+import backbone.Grouping;
+
+public class ConflictedTeams extends Grouping<T> {
+
+	ConflictedTeams(String type, String name) {
+		super(type, name);
+		// TODO Auto-generated constructor stub
+	}
+
+}

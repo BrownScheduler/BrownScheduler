@@ -2,12 +2,14 @@ package backbone;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.LinkedList;
 
 public class Round implements Serializable, Cloneable {
 
-	Collection<Pairing> pairings;
+	protected Collection<Pairing> pairings;
 	
-	Round(int i) {
+	public Round(int i) {
+		pairings = new LinkedList<Pairing>();
 	}
 	
 	public boolean isFilled() {

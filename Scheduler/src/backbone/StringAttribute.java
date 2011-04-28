@@ -4,6 +4,7 @@ public class StringAttribute extends Attribute{
 	
 	public String value;
 
+	//
 	public StringAttribute(String title, String val) {
 		super(title);
 		this.value = val;

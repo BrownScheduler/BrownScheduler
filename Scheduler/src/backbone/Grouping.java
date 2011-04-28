@@ -2,17 +2,18 @@ package backbone;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 
 public abstract class Grouping<T extends Unit> extends Grunit{
 	
-	public String type;
+
+	//name is what the individual thingummy is called
 	public String name;
 	protected Collection<T> members;
 	
-	Grouping(String type, String name) {
+	public Grouping(String name) {
 		this.name = name;
-		this.type = type;
 		members = new ArrayList<T>();
 	}
 
@@ -22,5 +23,13 @@ public abstract class Grouping<T extends Unit> extends Grunit{
 	
 	public void addMember(T member) {
 		members.add(member);
+	}
+	
+	@Override
+	public Collection<Attribute> getAttributes(){
+		StringAttribute name = new StringAttribute("Name", this.name);
+		LinkedList<Attribute> atts = new LinkedList<Attribute>();
+		atts.add(name);
+		return atts;
 	}
 }

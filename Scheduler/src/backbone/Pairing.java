@@ -5,9 +5,10 @@ import java.util.Collection;
 
 public class Pairing {
 	
-	private int id;
+	//private int id;
 
 	public Pairing(CompetitiveUnit mostConflicted, CompetitiveUnit opponent) {
+<<<<<<< HEAD
 	}
 
 
@@ -21,6 +22,18 @@ public class Pairing {
 		return false;
 	}
 	
+=======
+		super("Pairing");
+	}
+
+	//this should already be done correctly in Grouping
+	/*
+	@Override
+	public Collection<Attribute> getAttributes() {
+		return null;
+	}
+	*/
+>>>>>>> f8c6cb74cf4bfced42edb81aac35185e782b289e
 	
 
 }
