@@ -12,7 +12,9 @@ import javax.swing.KeyStroke;
 import java.awt.Point;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JMenuItem;
 import javax.swing.JMenuBar;
@@ -20,12 +22,15 @@ import javax.swing.JMenu;
 import javax.swing.JFrame;
 import javax.swing.JDialog;
 import javax.swing.JRadioButtonMenuItem;
+import javax.swing.JScrollPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class App implements GUIConstants {
 
 	private MiddleEnd _middleEnd;
 	private JFrame _jFrame;
 	private InputPanel _inputPane;
+	private JScrollPane _managementScrollPane;
 	private ManagementPanel _managementPane;
 	private JMenuBar _jJMenuBar;
 	private JMenu _fileMenu;
@@ -49,6 +54,12 @@ public class App implements GUIConstants {
 	private JDialog _aboutDialog;
 	private JPanel _aboutContentPane;
 	private JLabel _aboutVersionLabel;
+	private JDialog _programOptionsDialog;
+	private JPanel _programOptionsContentPane;
+	private JDialog _pluginOptionsDialog;
+	private JPanel _pluginOptionsContentPane;
+	private JDialog _printDialog;
+	private JPanel _printContentPane;
 	
 	public MiddleEnd getMiddleEnd() {
 		if (_middleEnd == null) {
@@ -83,9 +94,21 @@ public class App implements GUIConstants {
 	 */
 	public InputPanel getInputPanel() {
 		if (_inputPane == null) {
-			_inputPane = new InputPanel(_middleEnd);
+			_inputPane = new InputPanel(getMiddleEnd());
 		}
 		return _inputPane;
+	}
+	
+	/**
+	 * This method initializes JScrollPanel
+	 * 
+	 * @return JScrollPanel
+	 */
+	public JScrollPane getManagementScrollPanel() {
+		if (_managementScrollPane == null) {
+			_managementScrollPane = new JScrollPane(getManagementPanel());
+		}
+		return _managementScrollPane;
 	}
 	
 	/**
@@ -95,7 +118,7 @@ public class App implements GUIConstants {
 	 */
 	public ManagementPanel getManagementPanel() {
 		if (_managementPane == null) {
-			_managementPane = new ManagementPanel(_middleEnd);
+			_managementPane = new ManagementPanel(getMiddleEnd());
 		}
 		return _managementPane;
 	}
@@ -209,6 +232,19 @@ public class App implements GUIConstants {
 			_saveMenuItem.setText("Save");
 			_saveMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,
 					Event.CTRL_MASK, true));
+			//TODO file extension?
+			_saveMenuItem.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					JFileChooser chooser = new JFileChooser();
+					int returnval = chooser.showSaveDialog(getJFrame());
+					if (returnval == JFileChooser.APPROVE_OPTION) {
+						getMiddleEnd().saveFile(chooser.getSelectedFile());
+						if (!getMiddleEnd().saveFile(chooser.getSelectedFile())) {
+							JOptionPane.showMessageDialog(_jFrame, "The name specified for the file was invalid.", "Error", JOptionPane.ERROR_MESSAGE);
+						}
+					}
+				}
+			});
 		}
 		return _saveMenuItem;
 	}
@@ -222,8 +258,45 @@ public class App implements GUIConstants {
 		if (_pluginOptionsMenuItem == null) {
 			_pluginOptionsMenuItem = new JMenuItem();
 			_pluginOptionsMenuItem.setText("Plugin Options...");
+			_pluginOptionsMenuItem.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					JDialog pluginOptionsDialog = getPluginOptionsDialog();
+					pluginOptionsDialog.pack();
+					Point loc = getJFrame().getLocation();
+					loc.translate(20, 20);
+					pluginOptionsDialog.setLocation(loc);
+					pluginOptionsDialog.setVisible(true);
+				}
+			});
 		}
 		return _pluginOptionsMenuItem;
+	}
+	
+	/**
+	 * This method initializes _pluginOptionsPane	
+	 * 	
+	 * @return javax.swing.JDialog	
+	 */
+	private JDialog getPluginOptionsDialog() {
+		if (_pluginOptionsDialog == null) {
+			_pluginOptionsDialog = new JDialog(getJFrame());
+			_pluginOptionsDialog.setTitle("Plugin Options");
+			_pluginOptionsDialog.setContentPane(getPluginOptionsContentPane());
+		}
+		return _pluginOptionsDialog;
+	}
+
+	/**
+	 * This method initializes _pluginOptionsContentPane	
+	 * 	
+	 * @return javax.swing.JPanel	
+	 */
+	private JPanel getPluginOptionsContentPane() {
+		if (_pluginOptionsContentPane == null) {
+			_pluginOptionsContentPane = new JPanel();
+			_pluginOptionsContentPane.setLayout(new BorderLayout());
+		}
+		return _pluginOptionsContentPane;
 	}
 	
 	/**
@@ -235,8 +308,45 @@ public class App implements GUIConstants {
 		if (_programOptionsMenuItem == null) {
 			_programOptionsMenuItem = new JMenuItem();
 			_programOptionsMenuItem.setText("Program Options...");
+			_programOptionsMenuItem.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					JDialog programOptionsDialog = getProgramOptionsDialog();
+					programOptionsDialog.pack();
+					Point loc = getJFrame().getLocation();
+					loc.translate(20, 20);
+					programOptionsDialog.setLocation(loc);
+					programOptionsDialog.setVisible(true);
+				}
+			});
 		}
 		return _programOptionsMenuItem;
+	}
+	
+	/**
+	 * This method initializes _optionsDialog	
+	 * 	
+	 * @return javax.swing.JDialog	
+	 */
+	private JDialog getProgramOptionsDialog() {
+		if (_programOptionsDialog == null) {
+			_programOptionsDialog = new JDialog(getJFrame());
+			_programOptionsDialog.setTitle("Program Options");
+			_programOptionsDialog.setContentPane(getProgramOptionsContentPane());
+		}
+		return _programOptionsDialog;
+	}
+
+	/**
+	 * This method initializes _optionsContentPane	
+	 * 	
+	 * @return javax.swing.JPanel	
+	 */
+	private JPanel getProgramOptionsContentPane() {
+		if (_programOptionsContentPane == null) {
+			_programOptionsContentPane = new JPanel();
+			_programOptionsContentPane.setLayout(new BorderLayout());
+		}
+		return _programOptionsContentPane;
 	}
 	
 	/**
@@ -250,8 +360,46 @@ public class App implements GUIConstants {
 			_printMenuItem.setText("Print...");
 			_printMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P,
 					Event.CTRL_MASK, true));
+			_printMenuItem.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					JDialog printDialog = getPrintDialog();
+					printDialog.pack();
+					Point loc = getJFrame().getLocation();
+					loc.translate(20, 20);
+					printDialog.setLocation(loc);
+					printDialog.setVisible(true);
+				}
+			});
 		}
 		return _printMenuItem;
+	}
+	
+
+	/**
+	 * This method initializes _printDialog	
+	 * 	
+	 * @return javax.swing.JDialog	
+	 */
+	private JDialog getPrintDialog() {
+		if (_printDialog == null) {
+			_printDialog = new JDialog(getJFrame());
+			_printDialog.setTitle("Print");
+			_printDialog.setContentPane(getPrintContentPane());
+		}
+		return _printDialog;
+	}
+
+	/**
+	 * This method initializes _printContentPane	
+	 * 	
+	 * @return javax.swing.JPanel	
+	 */
+	private JPanel getPrintContentPane() {
+		if (_printContentPane == null) {
+			_printContentPane = new JPanel();
+			_printContentPane.setLayout(new BorderLayout());
+		}
+		return _printContentPane;
 	}
 	
 	/**
@@ -265,6 +413,18 @@ public class App implements GUIConstants {
 			_openPluginMenuItem.setText("Open Plugin...");
 			_openPluginMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L,
 					Event.CTRL_MASK, true));
+			_openPluginMenuItem.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					JFileChooser chooser = new JFileChooser();
+					chooser.setFileFilter(new FileNameExtensionFilter("Plugin File", "plug")); //TODO make constants
+					int returnval = chooser.showOpenDialog(getJFrame());
+					if (returnval == JFileChooser.APPROVE_OPTION) {
+						if (!getMiddleEnd().openPlugin(chooser.getSelectedFile())) {
+							JOptionPane.showMessageDialog(_jFrame, "The selected file was not a valid plugin file.", "Error", JOptionPane.ERROR_MESSAGE);
+						}
+					}
+				}
+			});
 		}
 		return _openPluginMenuItem;
 	}
@@ -280,6 +440,18 @@ public class App implements GUIConstants {
 			_openTournamentMenuItem.setText("Open Tournament...");
 			_openTournamentMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,
 					Event.CTRL_MASK, true));
+			_openTournamentMenuItem.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					JFileChooser chooser = new JFileChooser();
+					chooser.setFileFilter(new FileNameExtensionFilter("Tournament File", ".xml", ".csv", ".tmnt")); //TODO make constants
+					int returnval = chooser.showOpenDialog(getJFrame());
+					if (returnval == JFileChooser.APPROVE_OPTION) {
+						if (!getMiddleEnd().openTournament(chooser.getSelectedFile())) {
+							JOptionPane.showMessageDialog(_jFrame, "The selected file was not a valid tournament file.", "Error", JOptionPane.ERROR_MESSAGE);
+						}
+					}
+				}
+			});
 		}
 		return _openTournamentMenuItem;
 	}
@@ -362,6 +534,7 @@ public class App implements GUIConstants {
 					Event.CTRL_MASK, true));
 			_viewInputMenuItem.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
+					getInputPanel().setSize(_jFrame.getContentPane().getSize());
 					_jFrame.setContentPane(getInputPanel());
 				}
 			});
@@ -382,7 +555,8 @@ public class App implements GUIConstants {
 					Event.CTRL_MASK, true));
 			_viewManagementMenuItem.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					_jFrame.setContentPane(getManagementPanel());
+					getManagementScrollPanel().setSize(_jFrame.getContentPane().getSize());
+					_jFrame.setContentPane(getManagementScrollPanel());
 				}
 			});
 		}
@@ -454,7 +628,7 @@ public class App implements GUIConstants {
 		}
 		return _aboutVersionLabel;
 	}
-	
+
 	/**
 	 * Launches this application
 	 */
