@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -10,11 +11,13 @@ import javax.swing.BorderFactory;
 import javax.swing.JCheckBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 import javax.swing.SwingConstants;
 import middleend.MiddleEnd;
 import javax.swing.JLabel;
+import javax.swing.table.DefaultTableModel;
 
 public class AddingPanel extends JPanel {
 
@@ -47,6 +50,7 @@ public class AddingPanel extends JPanel {
 		this.setLayout(new GridBagLayout());
 		this.add(initLabel, gridBagConstraints);
 		**/
+		/**
 		this.setSize(400, 400);
 		this.removeAll();
 		this.setLayout(new SpringLayout());
@@ -70,6 +74,20 @@ public class AddingPanel extends JPanel {
 		}
 		
 		SpringUtilities.makeCompactGrid(this, rows, cols, xspacing, yspacing, xspacing, yspacing);
+		**/
+		this.setSize(400, 400);
+		this.removeAll();
+		this.setLayout(new BorderLayout());
+		
+		DefaultTableModel model = new DefaultTableModel();
+		model.setColumnIdentifiers(new String[] {"1", "2"});
+		model.setRowCount(20);
+		
+		JTable table = new JTable(model);
+		table.setSize(this.getSize());
+		table.setFillsViewportHeight(true);
+		this.add(table.getTableHeader(), BorderLayout.NORTH);
+		this.add(table, BorderLayout.CENTER);
 	}
 	
 	public void setPanel(GUIAttribute attribute) {
@@ -163,11 +181,13 @@ public class AddingPanel extends JPanel {
 	private JCheckBox getBooleanField(final boolean val, boolean editable) {
 		final JCheckBox field = new JCheckBox();
 		field.setSelected(val);
-		field.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				field.setSelected(val);
-			}
-		});
+		if (!editable) {
+			field.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					field.setSelected(val);
+				}
+			});
+		}
 		return field;
 	}
 

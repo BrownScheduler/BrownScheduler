@@ -42,7 +42,7 @@ public class InputPanel extends JPanel implements GUIConstants {
 	 * 	
 	 * @return javax.swing.JPanel	
 	 */
-	public JPanel getAddingPanel() {
+	public AddingPanel getAddingPanel() {
 		if (_addingPanel == null) {
 			_addingPanel = new AddingPanel(_middleEnd);
 		}
