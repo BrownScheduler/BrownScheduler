@@ -1,0 +1,36 @@
+package plugin1;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedList;
+
+import backbone.*;
+import backbone.Round;
+
+public class Tourney extends backbone.Tournament{
+	
+	private ArrayList<Round> rounds;
+	private LinkedList<Team> competitors;
+	private LinkedList<Team> judges;
+	private int totalRounds;
+
+	public Collection<CompetitiveUnit> getCompetitors() {
+		LinkedList<CompetitiveUnit> t = new LinkedList<CompetitiveUnit>();
+		t.addAll(competitors);
+		return t;
+	}
+	
+	public Round getCurrentRound() {
+		int r = rounds.size() - 1;
+		if(rounds.get(r))
+		return null;
+	}
+
+	public Collection<Category> getCategories() {
+		return null;
+	}
+	
+	public Collection<Round> getRounds() {
+		return null;
+	}
+}

@@ -1,0 +1,52 @@
+package plugin1;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedList;
+
+
+public class Tourney extends backbone.Tournament{
+	
+	private ArrayList<plugin1.MyRound> rounds;
+	private LinkedList<Team> competitors;
+	private LinkedList<Team> judges;
+	private int totalRounds;
+
+	public Collection<backbone.CompetitiveUnit> getCompetitors() {
+		LinkedList<backbone.CompetitiveUnit> t = new LinkedList<backbone.CompetitiveUnit>();
+		t.addAll(competitors);
+		return t;
+	}
+	
+	@Override
+	public MyRound getCurrentRound() {
+		if(rounds == null){
+			rounds = new ArrayList<MyRound>();
+			rounds.add(new MyRound(1));
+		}
+		int r = rounds.size() - 1;
+		plugin1.MyRound currRound = rounds.get(r);
+		if(currRound != null){
+			if(!currRound.isFinished() || currRound.getRoundNum() >= totalRounds){
+				return currRound;
+			}
+			else{
+				MyRound nextRound = new MyRound(r + 1);
+				rounds.add(nextRound);
+				return nextRound;
+			}
+		}
+		return null;
+	}
+
+	
+	public Collection<backbone.Category> getCategories() {
+		return null;
+	}
+	
+	public Collection<backbone.Round> getRounds() {
+		LinkedList<backbone.Round> rs = new LinkedList<backbone.Round>();
+		rs.addAll(rounds);
+		return rs;
+	}
+}
