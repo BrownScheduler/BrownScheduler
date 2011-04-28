@@ -3,10 +3,11 @@ package backbone;
 public abstract class Attribute extends Gruttribute{
 	private String title;
 
-	private float conflictMagnitude();
+	protected float conflictMagnitude;
 
 	public Attribute(String title) {
 		this.title = title;
+		conflictMagnitude = 0;
 	}
 
 	public boolean isEditable() {
@@ -19,11 +20,11 @@ public abstract class Attribute extends Gruttribute{
 
 	public abstract Type getType();
 
-	public boolean isConflict() {
-		return conflict;
-	}
-
 	public String getTitle() {
 		return title;
+	}
+
+	public float getConflictMagnitude() {
+		return conflictMagnitude;
 	}
 }

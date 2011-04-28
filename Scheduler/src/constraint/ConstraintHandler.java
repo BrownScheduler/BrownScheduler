@@ -18,7 +18,7 @@ public class ConstraintHandler {
 			CompetitiveUnit mostConflicted = null;
 			float conflict = - Float.MAX_VALUE;
 			for(CompetitiveUnit competitor : competitors) {
-				if(competitor.getConflictMagnitude() > conflict) {
+				if(competitor.getPotentialConflictMagnitude() > conflict) {
 					conflict = competitor.getConflictMagnitude();
 					mostConflicted = competitor;
 				}
