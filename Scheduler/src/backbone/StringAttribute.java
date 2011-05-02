@@ -15,6 +15,12 @@ public class StringAttribute extends Attribute{
 		return Attribute.Type.STRING;
 	}
 
+	public String getAttribute() {
+		return value;
+	}
 	
+	public void setAttribute(String a) {
+		value = a;
+	}
 
 }

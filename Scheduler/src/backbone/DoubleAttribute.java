@@ -14,9 +14,16 @@ public class DoubleAttribute extends Attribute {
 		this.att = att;
 	}
 	
-	@Override
 	public Type getType() {
 		return Attribute.Type.DOUBLE;
+	}
+	
+	public double getAttribute() {
+		return att;
+	}
+	
+	public void setAttribute(double a) {
+		att = a;
 	}
 
 }

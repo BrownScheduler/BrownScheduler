@@ -19,4 +19,12 @@ public class IntAttribute extends Attribute{
 	public Type getType() {
 		return Attribute.Type.INT;
 	}
+	
+	public int getAttribute() {
+		return att;
+	}
+	
+	public void setAttribute(int a) {
+		att = a;
+	}
 }

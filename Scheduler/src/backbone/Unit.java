@@ -9,5 +9,9 @@ public abstract class Unit extends Grunit{
 	public Unit(String name){
 		_name = name;
 	}
+	
+	public String getName() {
+		return _name;
+	}
 
 }

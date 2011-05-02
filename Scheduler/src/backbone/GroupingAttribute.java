@@ -24,6 +24,10 @@ public class GroupingAttribute extends Attribute{
 		return group;
 	}
 	
+	public void setGrouping(Grouping g) {
+		group = g;
+	}
+	
 	@Override
 	public float getConflictMagnitude() {
 		return conflictMagnitude * getGrouping().size();
