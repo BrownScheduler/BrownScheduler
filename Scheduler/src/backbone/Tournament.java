@@ -19,6 +19,8 @@ public abstract class Tournament implements Serializable {
 		return null;
 	}
 	
+	public abstract Round createNextRound();
+	
 	public Collection<Round> getRounds() {
 		return null;
 	}
