@@ -22,6 +22,10 @@ public class MyPairing implements backbone.Pairing{
 		_gov = gov;
 		_opp = opp;
 		_judge = judge;
+		members.add(_gov);
+		members.add(_opp);
+		members.add(_judge);
+		members.add(_winner);
 	}
 	
 	public void setWinner(Team t){
