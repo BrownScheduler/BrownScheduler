@@ -25,7 +25,6 @@ public abstract class Grouping<T extends Unit> extends Grunit{
 		members.add(member);
 	}
 	
-	@Override
 	public Collection<Attribute> getAttributes(){
 		StringAttribute name = new StringAttribute("Name", this.name);
 		LinkedList<Attribute> atts = new LinkedList<Attribute>();

@@ -31,7 +31,7 @@ import javax.swing.JLabel;
 import javax.swing.event.MouseInputAdapter;
 import javax.swing.table.DefaultTableModel;
 
-public class AddingPanel extends JPanel {
+public class AddingPanel extends JPanel implements GUIConstants {
 
 	public static final long serialVersionUID = 1L;
 	private MiddleEnd _middleEnd;
@@ -51,18 +51,15 @@ public class AddingPanel extends JPanel {
 	 * 
 	 * @return void
 	 */
-	public void initialize() {
-		/**
-		GridBagConstraints gridBagConstraints = new GridBagConstraints();
-		gridBagConstraints.gridx = 0;
-		gridBagConstraints.gridy = 0;
+	private void initialize() {
 		initLabel = new JLabel();
 		initLabel.setText("Choose a category on the side to begin editing!");
-		this.setSize(400, 400); //TODO: make constants
-		this.setLayout(new GridBagLayout());
-		this.add(initLabel, gridBagConstraints);
-		**/
+		initLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		this.setSize(ADDINGPANEL_SIZE); //TODO: make constants
+		this.setLayout(new BorderLayout());
+		this.add(initLabel, BorderLayout.CENTER);
 		
+		/**
 		this.setSize(400, 400);
 		this.removeAll();
 		this.setLayout(new SpringLayout());
@@ -82,7 +79,7 @@ public class AddingPanel extends JPanel {
 			JLabel category = this.getHeader4Label("Name of Category " + (i-1) + ":", true);
 			category.addMouseListener(new MouseInputAdapter() {
 				public void mouseClicked(MouseEvent arg0) {
-					// TODO Link to category
+					//TODO link to category
 				}
 			});
 			this.add(category);
@@ -91,15 +88,16 @@ public class AddingPanel extends JPanel {
 				this.setLink(unit);
 				unit.addMouseListener(new MouseInputAdapter() {
 					public void mouseClicked(MouseEvent arg0) {
-						// TODO Link to unit
+						//TODO link to unit
 					}
 				});
 				this.add(unit);
 			}
+			
 		}
 		
 		SpringUtilities.makeCompactGrid(this, rows, cols, xspacing, yspacing, xspacing, yspacing);
-		
+		**/
 		/** //TODO: Table?
 		this.setSize(400, 400);
 		this.removeAll();
@@ -163,6 +161,7 @@ public class AddingPanel extends JPanel {
 	
 	public void setAddPanel(Grouping<Unit> grouping) {
 		this.removeAll();
+		//TODO
 	}
 	
 	private JLabel getHeader1Label(String s, boolean border) {

@@ -3,28 +3,13 @@ package middleend;
 import gui.*;
 import backbone.*;
 import java.io.File;
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MiddleEnd {
 
-	public Collection<GUIGrouping> getAllGroupings() {
-		return null;
-	}
-	
-	public Collection<GUICompetitiveUnit> getAllCompetitiveUnits() {
-		return null;
-	}
-	
-	public Collection<GUIAttribute> getAllAttributes() {
-		return null;
-	}
-	
-	public Collection<GUIGroupingAttribute> getAllGroupingAttributes() {
-		return null;
-	}
-	
-	public Collection<GUICompetitiveUnit> getCompunitsInGrouping(GUIGrouping g) {
-		return null;
+	public List<Grouping> getAllGroupings() {
+		return new ArrayList<Grouping>();
 	}
 	
 	public int getNumAttributeCategories() {
