@@ -1,18 +1,6 @@
 package backbone;    
 
-public class Pairing extends Grouping{
+import java.util.ArrayList;
 
-	//private int id;
-
-	public Pairing(CompetitiveUnit mostConflicted, CompetitiveUnit opponent) {
-		super("Pairing");
-	}
-
-
-	public boolean satisfactory() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-
+public interface Pairing {
 }

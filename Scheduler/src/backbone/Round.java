@@ -1,15 +1,17 @@
 package backbone;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 
-public class Round implements Serializable, Cloneable {
+public class Round implements Serializable {
 
-	protected Collection<Pairing> pairings;
+	protected ArrayList<Pairing> pairings;
 	
 	public Round(int i) {
-		pairings = new LinkedList<Pairing>();
+		pairings = new ArrayList<Pairing>();
 	}
 	
 	public boolean isFilled() {
@@ -27,16 +29,6 @@ public class Round implements Serializable, Cloneable {
 
 	public void removePairing(Pairing pairing) {
 		pairings.remove(pairing);
-	}
-	
-	public Round copy() {
-		try {
-			return (Round) clone();
-		} catch (CloneNotSupportedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
 	}
 
 }

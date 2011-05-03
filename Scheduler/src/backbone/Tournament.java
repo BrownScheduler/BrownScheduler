@@ -5,21 +5,15 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public abstract class Tournament implements Serializable {
+public interface Tournament extends Serializable {
 	
-	public Round getCurrentRound() {
-		return null;
-	}
+	public Round getCurrentRound();
 
-	public List<Category> getCategories() {
-		return null;
-	}
+	public Collection<Category> getCategories();
 	
-	public abstract Round createNextRound();
+	public Round createNextRound();
 	
-	public Collection<Round> getRounds() {
-		return null;
-	}
+	public Collection<Round> getRounds();
 	
 	
 }
