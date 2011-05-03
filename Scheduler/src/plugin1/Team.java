@@ -1,7 +1,8 @@
 package plugin1;
 import java.util.LinkedList;
 
-import backbone.*;
+import old_backbone.*;
+
 
 public class Team extends CompetitiveUnit {
 	
@@ -17,6 +18,10 @@ public class Team extends CompetitiveUnit {
 	
 	public void setWins(int i){
 		_wins = i;
+	}
+	
+	public String getName(){
+		return this._name;
 	}
 	
 	public LinkedList<Attribute> getAttributes(){

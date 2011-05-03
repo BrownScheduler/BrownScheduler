@@ -1,29 +1,32 @@
 package backbone;
 
-public abstract class Attribute extends Gruttribute{
+import java.io.Serializable;
+
+public abstract class Attribute implements Serializable {
 	private String title;
 
-	private float conflictMagnitude();
+	protected float conflictMagnitude;
 
 	public Attribute(String title) {
 		this.title = title;
+		conflictMagnitude = 0;
 	}
 
 	public boolean isEditable() {
-		return !(this instanceof NotEditable);
+		return true;
 	}
 
 	public enum Type {
-		INT, STRING, BOOLEAN, DOUBLE, MEMBER, GROUPING
+		INT, STRING, BOOLEAN, DOUBLE, MEMBER, GROUPING, UNIT
 	}
 
 	public abstract Type getType();
 
-	public boolean isConflict() {
-		return conflict;
-	}
-
 	public String getTitle() {
 		return title;
+	}
+
+	public float getConflictMagnitude() {
+		return conflictMagnitude;
 	}
 }

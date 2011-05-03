@@ -1,6 +1,6 @@
 package backbone;
 
-import backbone.Attribute.Type;
+import old_backbone.Attribute.Type;
 
 public class IntAttribute extends Attribute{
 	
@@ -18,5 +18,13 @@ public class IntAttribute extends Attribute{
 	@Override
 	public Type getType() {
 		return Attribute.Type.INT;
+	}
+	
+	public int getAttribute() {
+		return att;
+	}
+	
+	public void setAttribute(int a) {
+		att = a;
 	}
 }

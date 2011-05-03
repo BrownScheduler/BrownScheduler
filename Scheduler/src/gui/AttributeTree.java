@@ -9,7 +9,7 @@ import javax.swing.tree.TreeModel;
 
 import middleend.MiddleEnd;
 
-public class AttributeTree extends JTree {
+public class AttributeTree extends JTree implements GUIConstants {
 
 	public static final long serialVersionUID = 1L;
 	
@@ -28,7 +28,7 @@ public class AttributeTree extends JTree {
 	 * @return void
 	 */
 	public void initialize() {
-			this.setSize(200, 300); //TODO: make constants
+			this.setSize(TREE_SIZE); //TODO: make constants
 			this.setMaximumSize(new Dimension(getWidth(), Integer.MAX_VALUE));
 			this.setPreferredSize(getSize());
 			this.setModel(getTree());

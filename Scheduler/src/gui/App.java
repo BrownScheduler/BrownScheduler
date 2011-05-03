@@ -1,6 +1,8 @@
 package gui;
 
 import middleend.*;
+import backbone.*;
+
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.awt.event.ActionListener;
@@ -10,6 +12,7 @@ import java.awt.BorderLayout;
 import javax.swing.SwingUtilities;
 import javax.swing.KeyStroke;
 import java.awt.Point;
+import java.util.Collection;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JFileChooser;
@@ -78,8 +81,8 @@ public class App implements GUIConstants {
 			_jFrame = new JFrame();
 			_jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			_jFrame.setJMenuBar(getJJMenuBar());
-			_jFrame.setSize(new Dimension(600, 400)); //TODO: make constants
-			_jFrame.setMinimumSize(new Dimension(400, 300));
+			_jFrame.setSize(DEFAULT_SIZE);
+			_jFrame.setMinimumSize(MIN_SIZE);
 			_jFrame.setContentPane(getInputPanel());
 			getViewInputMenuItem().setSelected(true);
 			_jFrame.setTitle("Tournament Scheduler v1.0");
@@ -203,8 +206,28 @@ public class App implements GUIConstants {
 		if (_addMenu == null) {
 			_addMenu = new JMenu();
 			_addMenu.setText("Add");
+			Collection<Grouping> groupings = getMiddleEnd().getAllGroupings();
+			for (Grouping<Unit> g : groupings) {
+				_addMenu.add(createAddMenuItem(g));
+			}
 		}
 		return _addMenu;
+	}
+	
+	/**
+	 * This method initializes jMenuItem	
+	 * 	
+	 * @return javax.swing.JMenuItem	
+	 */
+	public JMenuItem createAddMenuItem(final Grouping<Unit> g) {
+		JMenuItem item = new JMenuItem();
+		item.setText("New " + g.name + "...");
+		item.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				getInputPanel().getAddingPanel().setAddPanel(g);
+			}
+		});
+		return item;
 	}
 
 	/**

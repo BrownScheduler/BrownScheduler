@@ -3,7 +3,8 @@ package plugin1;
 import java.util.LinkedList;
 import java.util.List;
 
-import backbone.*;
+import old_backbone.*;
+
 
 /**
  * Just a judge. 
@@ -30,6 +31,10 @@ public class Judge extends Unit{
 		atts.add(name);
 		atts.add(conflicts);
 		return atts;
+	}
+	
+	public String getName(){
+		return this._name;
 	}
 	
 }

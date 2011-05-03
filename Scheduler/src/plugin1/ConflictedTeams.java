@@ -2,8 +2,9 @@ package plugin1;
 
 import java.util.Collection;
 
-import backbone.Attribute;
-import backbone.Grouping;
+import old_backbone.Attribute;
+import old_backbone.Grouping;
+
 
 public class ConflictedTeams extends Grouping<Team> {
 

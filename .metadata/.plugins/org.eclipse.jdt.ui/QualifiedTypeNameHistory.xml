@@ -2,9 +2,10 @@
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="backbone.Tournament"/>
 <fullyQualifiedTypeName name="backbone.Grouping"/>
-<fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="java.util.Collections"/>
 <fullyQualifiedTypeName name="java.util.Collection"/>
 <fullyQualifiedTypeName name="backbone.Round"/>
 <fullyQualifiedTypeName name="java.util.LinkedList"/>
+<fullyQualifiedTypeName name="backbone.Category"/>
+<fullyQualifiedTypeName name="java.util.List"/>
 </qualifiedTypeNameHistroy>

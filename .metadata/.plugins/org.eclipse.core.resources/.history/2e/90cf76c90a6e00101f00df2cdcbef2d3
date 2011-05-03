@@ -1,8 +1,0 @@
-package backbone;
-
-public interface Attribute extends Gruttribute{
-	
-	public String title;
-	
-
-}

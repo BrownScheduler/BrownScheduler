@@ -1,5 +1,0 @@
-package backbone;
-
-public class DoubleAttribute implements Attribute{
-
-}
