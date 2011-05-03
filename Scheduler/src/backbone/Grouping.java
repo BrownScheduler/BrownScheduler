@@ -6,6 +6,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 public interface Grouping<T extends Unit> {
+	
+	public String getName();
 
 	public List<T> getMembers();
 	
