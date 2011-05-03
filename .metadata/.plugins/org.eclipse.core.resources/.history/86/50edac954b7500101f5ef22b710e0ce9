@@ -1,0 +1,7 @@
+package plugin1;
+
+import backbone.Category;
+
+public class MyCategory implements Category<T> {
+
+}

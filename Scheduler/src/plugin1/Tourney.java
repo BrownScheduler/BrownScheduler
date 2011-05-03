@@ -9,32 +9,29 @@ import java.util.List;
 
 import backbone.Category;
 import backbone.CompetitiveUnit;
+import backbone.Grouping;
 
 
 public class Tourney implements backbone.Tournament{
 	
 	private ArrayList<plugin1.MyRound> rounds;
-	private Category<Team> competitors;
-	private Category<Judge> judges;
+	private MyCategory<Team> competitors;
+	private MyCategory<Judge> judges;
 	private int totalRounds;
 	
 	public Tourney(){
 		rounds = new ArrayList<MyRound>();
-		competitors = new Category<Team>("Competitors");
-		judges = new Category<Judge>("Judges");
+		competitors = new MyCategory<Team>("Competitors");
+		judges = new MyCategory<Judge>("Judges");
 		totalRounds = 2;
 	}
 
-	@Override
-	public Collection<Team> getCompetitors() {
-		return competitors.getMembers();
-	}
 	
 	@Override
 	public MyRound getCurrentRound() {
 		if(rounds == null){
 			rounds = new ArrayList<MyRound>();
-			rounds.add(new MyRound());
+			rounds.add(new MyRound(0));
 		}
 		int r = rounds.size() - 1;
 		plugin1.MyRound currRound = rounds.get(r);
@@ -43,7 +40,7 @@ public class Tourney implements backbone.Tournament{
 				return currRound;
 			}
 			else{
-				MyRound nextRound = new MyRound();
+				MyRound nextRound = new MyRound(0);
 				rounds.add(nextRound);
 				return nextRound;
 			}
@@ -76,35 +73,15 @@ public class Tourney implements backbone.Tournament{
 	}
 
 	
-<<<<<<< HEAD
-<<<<<<< HEAD
-	public Collection<old_backbone.Category> getCategories() {
-		LinkedList<Category> cats = new LinkedList<Category>();
-		Category<Team> compets = new Category<Team>("Teams");
-		Category<Judge> judgs = new Category<Judge>("Judges");
-		cats.add(compets);
-		cats.add(judgs);
-=======
-=======
->>>>>>> a000f12bcde518994143eb0d8852f1066cd087a2
-	public ArrayList<backbone.Category> getCategories() {
-		ArrayList<Category> cats = new ArrayList<Category>();
+	public ArrayList<backbone.Grouping> getCategories() {
+		ArrayList<Grouping> cats = new ArrayList<Grouping>();
 		cats.add(this.competitors);
 		cats.add(this.judges);
-<<<<<<< HEAD
->>>>>>> a000f12bcde518994143eb0d8852f1066cd087a2
-		return cats;
-	}
-	
-	public Collection<old_backbone.Round> getRounds() {
-		LinkedList<old_backbone.Round> rs = new LinkedList<old_backbone.Round>();
-=======
 		return cats;
 	}
 	
 	public Collection<backbone.Round> getRounds() {
 		LinkedList<backbone.Round> rs = new LinkedList<backbone.Round>();
->>>>>>> a000f12bcde518994143eb0d8852f1066cd087a2
 		rs.addAll(rounds);
 		return rs;
 	}
