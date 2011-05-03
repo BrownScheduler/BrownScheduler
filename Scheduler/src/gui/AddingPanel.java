@@ -117,10 +117,17 @@ public class AddingPanel extends JPanel implements GUIConstants {
 	
 	public void setViewPanel(Unit unit) {
 		this.removeAll();
+		this.add(new UnitPanel(_middleEnd, unit));
 	}
 	
 	public void setViewPanel(Grouping<Unit> grouping) {
 		this.removeAll();
+		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+		for (Unit u : grouping.getMembers()) {
+			this.add(new UnitPanel(_middleEnd, u));
+			this.add(Box.createRigidArea(new Dimension(10, 10)));
+		}
+		/**
 		this.setLayout(new SpringLayout());
 		
 		int spacing = 10;
@@ -154,6 +161,7 @@ public class AddingPanel extends JPanel implements GUIConstants {
 //					}
 //				});
 			}
+			**/
 		}
 		
 		SpringUtilities.makeCompactGrid(this, rows, cols, spacing, spacing, spacing, spacing);
