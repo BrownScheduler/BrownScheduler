@@ -1,0 +1,23 @@
+package backbone;
+
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.LinkedList;
+
+public class Round<P extends Pairing> implements Serializable {
+
+	protected Collection<P> pairings;
+	
+	public Round(int i) {
+		pairings = new LinkedList<P>();
+	}
+
+	public boolean isFilled() {
+		return false;
+	}
+
+	public void addPairing(P pairing) {
+		pairings.add(pairing);
+	}
+
+}
