@@ -7,11 +7,13 @@ import java.util.List;
 
 public interface Grouping<T extends Unit> {
 	
+	public T getBlank();
+	
 	public String getName();
 
 	public List<T> getMembers();
 	
 	public void addMember(T member);
 
-	public void deleteMember(T member);
+	public boolean deleteMember(T member);
 }
