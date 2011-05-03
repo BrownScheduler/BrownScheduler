@@ -19,6 +19,10 @@ public class Team extends CompetitiveUnit {
 		_wins = i;
 	}
 	
+	public String getName(){
+		return this._name;
+	}
+	
 	public LinkedList<Attribute> getAttributes(){
 		
 		StringAttribute name = new StringAttribute("Name", this._name);

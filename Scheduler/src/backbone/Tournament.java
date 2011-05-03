@@ -6,16 +6,12 @@ import java.util.Collection;
 import java.util.List;
 
 public abstract class Tournament implements Serializable {
-
-	public Collection<CompetitiveUnit> getCompetitors() {
-		return null;
-	}
 	
 	public Round getCurrentRound() {
 		return null;
 	}
 
-	public Collection<Category> getCategories() {
+	public List<Category> getCategories() {
 		return null;
 	}
 	

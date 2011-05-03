@@ -1,5 +1,0 @@
-package backbone;
-
-public abstract class CompetitiveUnit extends Unit{
-
-}

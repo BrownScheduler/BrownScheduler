@@ -9,5 +9,4 @@ public class Category<T extends Unit> extends Grouping<T> {
 		super(name);
 	}
 
-
 }
