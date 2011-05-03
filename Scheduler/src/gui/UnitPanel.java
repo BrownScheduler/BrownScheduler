@@ -34,8 +34,7 @@ public class UnitPanel extends JPanel {
 		for (final Attribute a : u.getAttributes()) {
 			if (a instanceof GroupingAttribute) {
 				GroupingAttribute g = (GroupingAttribute) a;
-				tables.put(a, new InputTable(_middleEnd, new ArrayList<Attribute>(), new ArrayList<Unit>()));
-				//TODO: create InputTable properly
+				tables.put(a, new InputTable(_middleEnd, _middleEnd.getAttrsOfGroupingAttrMembers(g.getMembers()), g.getMembers()));
 			}
 			JComponent c = _util.getField(a);
 			if (c instanceof JButton) {

@@ -7,6 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MiddleEnd {
+	
+	public List<Attribute> getAttrsOfGroupingAttrMembers(List<Unit> units) {
+		return null;
+	}
 
 	public List<Grouping> getAllGroupings() {
 		return new ArrayList<Grouping>();

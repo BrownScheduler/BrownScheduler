@@ -39,7 +39,6 @@ public class InputTable extends JScrollPane implements GUIConstants {
 	private class InputTableModel extends AbstractTableModel {
 		private List<Attribute> headers;
 		private List<List<Attribute>> data;
-		
 		public InputTableModel(List<Attribute> headers2, List<List<Attribute>> d) {
 			headers = headers2;
 			data = d;
