@@ -7,4 +7,6 @@ public interface Unit {
 	public void setAttribute(Attribute attribute);
 	
 	public List<Attribute> getAttributes();
+	
+	public String getName();
 }
