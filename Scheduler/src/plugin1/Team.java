@@ -1,14 +1,15 @@
 package plugin1;
 import java.util.LinkedList;
 
-import old_backbone.*;
+import backbone.*;
 
 
-public class Team extends CompetitiveUnit {
+public class Team implements CompetitiveUnit {
 	
+	private String _name;
 	private int _wins;
 	public Team(String name){
-		super(name);
+		this.
 		_wins = 0;
 	}
 	
@@ -33,6 +34,12 @@ public class Team extends CompetitiveUnit {
 		atts.add(wins);
 		
 		return atts;
+	}
+
+	@Override
+	public void setAttribute(Attribute attribute) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

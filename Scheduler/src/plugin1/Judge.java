@@ -2,8 +2,7 @@ package plugin1;
 
 import java.util.LinkedList;
 import java.util.List;
-
-import old_backbone.*;
+import backbone.*;
 
 
 /**
@@ -13,13 +12,15 @@ import old_backbone.*;
  * @author matt
  *
  */
-public class Judge extends Unit{
+public class Judge implements Unit{
 	
 	
 	LinkedList<Team> conflictedTeams;
+	private String _name;
 	
 	public Judge(String name) {
-		super(name);
+		this._name = name;
+		conflictedTeams = new LinkedList<Team>();
 	}
 
 	@Override
@@ -35,6 +36,12 @@ public class Judge extends Unit{
 	
 	public String getName(){
 		return this._name;
+	}
+
+	@Override
+	public void setAttribute(Attribute attribute) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

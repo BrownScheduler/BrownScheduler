@@ -1,13 +1,9 @@
 package plugin1;
 
 import java.util.LinkedList;
+import java.util.List;
 
-<<<<<<< HEAD
-import old_backbone.*;
-
-=======
 import backbone.*;
->>>>>>> a000f12bcde518994143eb0d8852f1066cd087a2
 
 /**
  * Class that holds each pairing,
@@ -15,11 +11,7 @@ import backbone.*;
  * @author matt
  *
  */
-<<<<<<< HEAD
-public class MyPairing extends old_backbone.Pairing{
-=======
-public class MyPairing extends backbone.Pairing{
->>>>>>> a000f12bcde518994143eb0d8852f1066cd087a2
+public class MyPairing implements backbone.Pairing{
 
 	Team _gov;
 	Team _opp;
@@ -27,14 +19,9 @@ public class MyPairing extends backbone.Pairing{
 	Team _winner;
 	
 	public MyPairing(Team gov, Team opp, Judge judge) {
-		super(gov, opp);
 		_gov = gov;
 		_opp = opp;
 		_judge = judge;
-		members.add(_gov);
-		members.add(_opp);
-		members.add(_judge);
-		members.add(_winner);
 	}
 	
 	public void setWinner(Team t){
@@ -64,6 +51,18 @@ public class MyPairing extends backbone.Pairing{
 			r += _winner.getName();
 		}
 		return r +"\n";
+	}
+
+	@Override
+	public List<Attribute> getAttributes() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setAttribute(Attribute attribute) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
