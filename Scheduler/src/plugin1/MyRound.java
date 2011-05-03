@@ -35,5 +35,19 @@ public class MyRound extends backbone.Round{
 	public int getRoundNum(){
 		return _roundNum;
 	}
+	
+	public void addPairing(MyPairing p){
+		this.pairings.add(p);
+	}
+	
+	public String toString(){
+		
+		String r = "";
+		for(Pairing p : this.pairings){
+			r = r + ((MyPairing) p).toString();
+			r = r + "\n";
+		}
+		return r;
+	}
 
 }

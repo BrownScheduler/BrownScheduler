@@ -32,4 +32,8 @@ public class Judge extends Unit{
 		return atts;
 	}
 	
+	public String getName(){
+		return this._name;
+	}
+	
 }

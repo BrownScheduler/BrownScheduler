@@ -35,5 +35,26 @@ public class MyPairing extends backbone.Pairing{
 	public boolean isFinished(){
 		return _winner != null;
 	}
+	
+	public String toString(){
+		String r = "";
+		r += "Gov: ";
+		if(_gov != null){
+			r += _gov.getName();
+		}
+		r += "\nOpp: ";
+		if(_opp != null){
+			r += _opp.getName();
+		}
+		r+= "\nJudge: ";
+		if(_judge != null){
+			r += _judge.getName();
+		}
+		r += "\nWinner: ";
+		if(_winner != null){
+			r += _winner.getName();
+		}
+		return r +"\n";
+	}
 
 }

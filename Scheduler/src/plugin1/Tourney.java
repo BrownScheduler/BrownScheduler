@@ -4,21 +4,28 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
+import java.util.List;
 
 import backbone.Category;
+import backbone.CompetitiveUnit;
 
 
 public class Tourney extends backbone.Tournament{
 	
 	private ArrayList<plugin1.MyRound> rounds;
-	private LinkedList<Team> competitors;
-	private LinkedList<Judge> judges;
+	private Category<Team> competitors;
+	private Category<Judge> judges;
 	private int totalRounds;
+	
+	public Tourney(){
+		rounds = new ArrayList<MyRound>();
+		competitors = new Category<Team>("Competitors");
+		judges = new Category<Judge>("Judges");
+		totalRounds = 2;
+	}
 
-	public Collection<backbone.CompetitiveUnit> getCompetitors() {
-		LinkedList<backbone.CompetitiveUnit> t = new LinkedList<backbone.CompetitiveUnit>();
-		t.addAll(competitors);
-		return t;
+	public Collection<Team> getCompetitors() {
+		return competitors.getMembers();
 	}
 	
 	@Override
@@ -46,10 +53,10 @@ public class Tourney extends backbone.Tournament{
 	public MyRound createNextRound(){
 		int num = rounds.size();
 		LinkedList<Team> teams = new LinkedList<Team>();
-		teams.addAll(this.competitors);
+		teams.addAll(competitors.getMembers());
 		Collections.shuffle(teams);
 		LinkedList<Judge> judges = new LinkedList<Judge>();
-		judges.addAll(this.judges);
+		judges.addAll(this.judges.getMembers());
 		Collections.shuffle(judges);
 		MyRound round = new MyRound(num);
 		
@@ -62,16 +69,15 @@ public class Tourney extends backbone.Tournament{
 			MyPairing pair = new MyPairing(gov, opp, j);
 			round.addPairing(pair);
 		}
+		this.rounds.add(round);
 		return round;
 	}
 
 	
-	public Collection<backbone.Category> getCategories() {
-		LinkedList<Category> cats = new LinkedList<Category>();
-		Category<Team> compets = new Category<Team>("Teams");
-		Category<Judge> judgs = new Category<Judge>("Judges");
-		cats.add(compets);
-		cats.add(judgs);
+	public ArrayList<backbone.Category> getCategories() {
+		ArrayList<Category> cats = new ArrayList<Category>();
+		cats.add(this.competitors);
+		cats.add(this.judges);
 		return cats;
 	}
 	
