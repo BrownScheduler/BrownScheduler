@@ -2,8 +2,12 @@ package plugin1;
 
 import java.util.LinkedList;
 
+<<<<<<< HEAD
 import old_backbone.*;
 
+=======
+import backbone.*;
+>>>>>>> a000f12bcde518994143eb0d8852f1066cd087a2
 
 /**
  * Class that holds each pairing,
@@ -11,7 +15,11 @@ import old_backbone.*;
  * @author matt
  *
  */
+<<<<<<< HEAD
 public class MyPairing extends old_backbone.Pairing{
+=======
+public class MyPairing extends backbone.Pairing{
+>>>>>>> a000f12bcde518994143eb0d8852f1066cd087a2
 
 	Team _gov;
 	Team _opp;

@@ -5,6 +5,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 
-public interface Category<T extends Unit> extends Grouping<T> {
 
+public interface Category<T extends Unit> extends Grouping<T> {
 }
