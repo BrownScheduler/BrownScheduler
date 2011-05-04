@@ -4,19 +4,15 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
-import java.util.List;
-
-
-import backbone.Category;
-import backbone.CompetitiveUnit;
 import backbone.Grouping;
 
 
+@SuppressWarnings("serial")
 public class Tourney implements backbone.Tournament{
 	
 	private ArrayList<plugin1.MyRound> rounds;
-	private MyCategory<Team> competitors;
-	private MyCategory<Judge> judges;
+	private TeamGrouping competitors;
+	private JudgeGrouping judges;
 	private int totalRounds;
 	
 	public Tourney(){
@@ -73,7 +69,8 @@ public class Tourney implements backbone.Tournament{
 	}
 
 	
-	public ArrayList<backbone.Grouping> getCategories() {
+	@SuppressWarnings("unchecked")
+	public ArrayList<Grouping> getCategories() {
 		ArrayList<Grouping> cats = new ArrayList<Grouping>();
 		cats.add(this.competitors);
 		cats.add(this.judges);
