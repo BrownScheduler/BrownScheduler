@@ -6,6 +6,8 @@
 <fullyQualifiedTypeName name="java.util.Collection"/>
 <fullyQualifiedTypeName name="backbone.Round"/>
 <fullyQualifiedTypeName name="java.util.LinkedList"/>
-<fullyQualifiedTypeName name="backbone.Category"/>
 <fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="backbone.Category"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="backbone.Unit"/>
 </qualifiedTypeNameHistroy>
