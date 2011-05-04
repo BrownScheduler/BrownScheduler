@@ -1,5 +1,6 @@
 package plugin1;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -19,12 +20,12 @@ import backbone.Unit;
 public class Judge implements Unit{
 	
 	
-	LinkedList<Team> _conflictedTeams;
+	HashSet<Team> _conflictedTeams;
 	private String _name;
 	
 	public Judge(String name) {
 		this._name = name;
-		_conflictedTeams = new LinkedList<Team>();
+		_conflictedTeams = new HashSet<Team>();
 	}
 
 	@Override
@@ -33,7 +34,7 @@ public class Judge implements Unit{
 		LinkedList<Attribute> atts = new LinkedList<Attribute>();
 		StringAttribute name = new StringAttribute("Name", this._name);
 		GroupingAttribute<Team> conflicts = new GroupingAttribute<Team>("Conflicted Teams", 
-				new TeamGrouping("Conflicted Teams", _conflictedTeams));
+				new TeamGrouping("Conflicted Teams", new LinkedList<Team>(_conflictedTeams)));
 		atts.add(name);
 		atts.add(conflicts);
 		return atts;
@@ -41,6 +42,10 @@ public class Judge implements Unit{
 	
 	public String getName(){
 		return this._name;
+	}
+	
+	public boolean hasConflict(Team t){
+		return _conflictedTeams.contains(t);
 	}
 
 	@Override
@@ -50,9 +55,28 @@ public class Judge implements Unit{
 			this._name = att.getAttribute();
 		}
 		else if(attribute.getType() == Attribute.Type.GROUPING){
-			this._conflictedTeams = new LinkedList<Team>(((GroupingAttribute<Team>)attribute).getMembers());
+			this._conflictedTeams = new HashSet<Team>(((GroupingAttribute<Team>)attribute).getMembers());
 		}
 		
+	}
+	
+	public void addConflictedTeam(Team t){
+		this._conflictedTeams.add(t);
+	}
+
+	public String toString(){
+		String r = "Name: " + this._name;
+		r += "\nConflicts: ";
+		for(Team t : this._conflictedTeams){
+			r += t.getName() + "; ";
+		}
+		
+		return r;
+	}
+	@Override
+	public Unit getBlank() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

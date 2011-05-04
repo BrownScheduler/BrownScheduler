@@ -17,6 +17,10 @@ public class Team implements CompetitiveUnit {
 		_wins++;
 	}
 	
+	public int getWins(){
+		return _wins;
+	}
+	
 	public void setWins(int i){
 		_wins = i;
 	}
@@ -55,5 +59,18 @@ public class Team implements CompetitiveUnit {
 		else if(t == Attribute.Type.STRING)
 			setStringAttribute((StringAttribute)attribute);
 	}
+	
+	public String toString(){
+		String r = "Name: " + this._name;
+		r += "\nWins: " + String.valueOf(this._wins);
+		return r;
+	}
+
+	@Override
+	public Unit getBlank() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

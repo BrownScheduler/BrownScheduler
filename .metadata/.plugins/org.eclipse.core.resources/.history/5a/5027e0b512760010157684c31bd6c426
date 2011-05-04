@@ -1,0 +1,67 @@
+package plugin1;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.PriorityQueue;
+import java.util.Random;
+
+public class ConstraintHandler {
+
+	private ArrayList<Team> _teams;
+	private ArrayList<Judge> _judges;
+	private boolean _hasIssue;
+	
+	private class TeamComparer implements Comparator<Team>{
+
+		@Override
+		public int compare(Team arg0, Team arg1) {
+			return arg0.getWins() - arg1.getWins();
+		}
+	}
+	public ConstraintHandler(ArrayList<Team> teams, ArrayList<Judge> judges){
+		this._teams = new ArrayList<Team>(teams);
+		this._judges = new ArrayList<Judge>(judges);
+	}
+	
+	private LinkedList<Team> sortTeamsByWins(){
+		PriorityQueue<Team> q = new PriorityQueue<Team>(this._teams.size(), new TeamComparer());
+		q.addAll(this._teams);		
+		LinkedList<Team> l = new ArrayList<Team>();
+		while(!q.isEmpty())
+			l.add(q.remove());
+		return l;
+	}
+	
+	private ArrayList<MyPairing> judgeLessPairings(){
+		Random r = new Random();
+		ArrayList<MyPairing> pairs = new ArrayList<MyPairing>();
+		LinkedList<Team> ts = sortTeamsByWins();
+		while(!ts.isEmpty()){
+			Team t1 = ts.pop();
+			Team t2;
+			if(!ts.isEmpty()) t2 = ts.pop();
+			else t2 = null;
+			MyPairing toAdd = new MyPairing();
+			if(r.nextBoolean()){
+				toAdd._gov = t1;
+				toAdd._opp = t2;
+			}else{
+				toAdd._gov = t2;
+				toAdd._opp = t1;
+			}
+			pairs.add(toAdd);
+		}
+		
+		
+		return null;
+	}
+	
+	public MyRound createNewRound(){
+		return null;
+	}
+	
+	public boolean enoughJudges(){
+		return _judges.size() >= _teams.size() / 2;
+	}
+}

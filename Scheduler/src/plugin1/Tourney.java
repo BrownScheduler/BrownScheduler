@@ -46,26 +46,11 @@ public class Tourney implements backbone.Tournament{
 	
 	@Override
 	public MyRound createNextRound(){
-		int num = rounds.size();
-		LinkedList<Team> teams = new LinkedList<Team>();
-		teams.addAll(competitors.getMembers());
-		Collections.shuffle(teams);
-		LinkedList<Judge> judges = new LinkedList<Judge>();
-		judges.addAll(this.judges.getMembers());
-		Collections.shuffle(judges);
-		MyRound round = new MyRound(num);
-		
-		while(!teams.isEmpty()){
-			Team gov = teams.remove();
-			Team opp = null;
-			if(!teams.isEmpty()) opp = teams.remove();
-			Judge j = null;
-			if(!judges.isEmpty()) j = judges.remove();
-			MyPairing pair = new MyPairing(gov, opp, j);
-			round.addPairing(pair);
-		}
-		this.rounds.add(round);
-		return round;
+		ConstraintHandler handle = new ConstraintHandler(this.competitors.getMembers(), 
+				this.judges.getMembers());
+		MyRound r = handle.createNewRound();
+		rounds.add(r);
+		return r;
 	}
 
 	
