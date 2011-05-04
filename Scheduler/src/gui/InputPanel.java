@@ -56,7 +56,7 @@ public class InputPanel extends JPanel implements GUIConstants {
 	 */
 	public JTree getAttributeTree() {
 		if (_attributeTree == null) {
-			_attributeTree = new AttributeTree(_middleEnd);
+			_attributeTree = new AttributeTree(_middleEnd, getAddingPanel());
 		}
 		return _attributeTree;
 	}

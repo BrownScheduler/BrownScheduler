@@ -206,7 +206,7 @@ public class App implements GUIConstants {
 		if (_addMenu == null) {
 			_addMenu = new JMenu();
 			_addMenu.setText("Add");
-			Collection<Grouping> groupings = getMiddleEnd().getAllGroupings();
+			Collection<Category> groupings = _middleEnd.getTournament().getCategories();
 			for (Grouping<Unit> g : groupings) {
 				_addMenu.add(createAddMenuItem(g));
 			}
@@ -221,7 +221,7 @@ public class App implements GUIConstants {
 	 */
 	public JMenuItem createAddMenuItem(final Grouping<Unit> g) {
 		JMenuItem item = new JMenuItem();
-		item.setText("New " + g.name + "...");
+		item.setText("New " + g.getName() + "...");
 		item.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				getInputPanel().getAddingPanel().setAddPanel(g);

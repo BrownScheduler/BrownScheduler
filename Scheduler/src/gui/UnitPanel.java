@@ -33,8 +33,8 @@ public class UnitPanel extends JPanel {
 		final HashMap<Attribute, InputTable> tables = new HashMap<Attribute, InputTable>();
 		for (final Attribute a : u.getAttributes()) {
 			if (a instanceof GroupingAttribute) {
-				GroupingAttribute g = (GroupingAttribute) a;
-				tables.put(a, new InputTable(_middleEnd, _middleEnd.getAttrsOfGroupingAttrMembers(g.getMembers()), g.getMembers()));
+				GroupingAttribute<Unit> g = (GroupingAttribute<Unit>) a;
+				tables.put(a, new InputTable(_middleEnd, g.getMembers().get(0).getAttributes(), g.getMembers()));
 			}
 			JComponent c = _util.getField(a);
 			if (c instanceof JButton) {
@@ -55,7 +55,7 @@ public class UnitPanel extends JPanel {
 		this.add(_mainPanel);
 		JButton savebutton = new JButton();
 		savebutton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
 				//TODO
 			}
 		});

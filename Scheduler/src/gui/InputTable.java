@@ -9,7 +9,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
-import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableModel;
 
 public class InputTable extends JScrollPane implements GUIConstants {
 
@@ -25,10 +25,10 @@ public class InputTable extends JScrollPane implements GUIConstants {
 		this.setSize(INPUTTABLE_SIZE);
 		_table = new JTable();
 		_table.setFillsViewportHeight(true);
-		_table.setAutoCreateRowSorter(true);
+		//TODO take care of this: _table.setAutoCreateRowSorter(true);
 		List<List<Attribute>> data = (List<List<Attribute>>) new ArrayList<List<Attribute>>();
 		for (Unit u : units) {
-			
+			data.add(u.getAttributes());
 		}
 		_table.setModel(new InputTableModel(headers, data));
 		ExcelAdapter exceladapt = new ExcelAdapter(_table);
@@ -36,25 +36,24 @@ public class InputTable extends JScrollPane implements GUIConstants {
 		this.add(_table);
 	}
 	
-	private class InputTableModel extends AbstractTableModel {
-		private List<Attribute> headers;
-		private List<List<Attribute>> data;
-		public InputTableModel(List<Attribute> headers2, List<List<Attribute>> d) {
-			headers = headers2;
-			data = d;
-			this.addTableModelListener(new TableModelListener() {
-				public void tableChanged(TableModelEvent arg0) {
-					// TODO Auto-generated method stub
-				}
-			});
+	private class InputTableModel extends DefaultTableModel {
+		private Attribute[] _headers;
+		private Attribute[][] _data;
+		
+		public InputTableModel(List<Attribute> headers, List<List<Attribute>> data) {
+			_headers = (Attribute[]) headers.toArray();
+			List<Attribute[]> d = new ArrayList<Attribute[]>();
+			for (List<Attribute> l : data) {
+				d.add((Attribute[]) l.toArray());
+			}
 		}
 		
 		public String getColumnName(int i) {
-			return headers.get(i).getTitle();
+			return _headers[i].getTitle();
 		}
 		
 		public Class getColumnClass(int i) {
-			Attribute a = headers.get(i);
+			Attribute a = _headers[i];
 			if (a.getType() == Attribute.Type.BOOLEAN) {
 				return boolean.class;
 			}
@@ -68,50 +67,7 @@ public class InputTable extends JScrollPane implements GUIConstants {
 		}
 
 		public int getColumnCount() {
-			return headers.size();
+			return _headers.length;
 		}
-
-		public int getRowCount() {
-			return data.size();
-		}
-		
-		public boolean isCellEditable(int x, int y) {
-			Attribute a = data.get(x).get(y);
-			return a.isEditable();
-		}
-
-		public Object getValueAt(int x, int y) {
-			Attribute a = data.get(x).get(y);
-			if (a.getType() == Attribute.Type.BOOLEAN) {
-				return ((BooleanAttribute) a).getAttribute();
-			}
-			else if (a.getType() == Attribute.Type.DOUBLE) {
-				return ((DoubleAttribute) a).getAttribute();
-			}
-			else if (a.getType() == Attribute.Type.INT) {
-				return ((IntAttribute) a).getAttribute();
-			}
-			else if (a.getType() == Attribute.Type.STRING) {
-				return ((StringAttribute) a).getAttribute();
-			}
-			return null;
-		}
-		
-		public void setValueAt(Object value, int x, int y) {
-			Attribute a = data.get(x).get(y);
-			if ((a.getType() == Attribute.Type.BOOLEAN) && (value instanceof Boolean)) {
-				((BooleanAttribute) a).setAttribute((Boolean) value);
-			}
-			else if ((a.getType() == Attribute.Type.DOUBLE) && (value instanceof Double)) {
-				((DoubleAttribute) a).setAttribute((Double) value);
-			}
-			else if ((a.getType() == Attribute.Type.INT) && (value instanceof Integer)) {
-				((IntAttribute) a).setAttribute((Integer) value);
-			}
-			else if ((a.getType() == Attribute.Type.STRING) && (value instanceof String)) {
-				((StringAttribute) a).setAttribute((String) value);
-			}
-		}
-		
 	}
 }
