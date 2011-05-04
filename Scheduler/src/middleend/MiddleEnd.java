@@ -8,16 +8,16 @@ import java.util.List;
 
 public class MiddleEnd {
 	
-	public List<Attribute> getAttrsOfGroupingAttrMembers(List<Unit> units) {
+	public Tournament getTournament() {
 		return null;
 	}
-
-	public List<Grouping> getAllGroupings() {
-		return new ArrayList<Grouping>();
+	
+	public Unit getBlankUnit(Grouping<Unit> grouping) {
+		return null;
 	}
 	
-	public int getNumAttributeCategories() {
-		return 0;
+	public List<Grouping> getAllGroupings() {
+		return new ArrayList<Grouping>();
 	}
 	
 	public boolean openPlugin(File file) {

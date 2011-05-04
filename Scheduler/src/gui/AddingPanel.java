@@ -170,6 +170,6 @@ public class AddingPanel extends JPanel implements GUIConstants {
 	
 	public void setAddPanel(Grouping<Unit> grouping) {
 		this.removeAll();
-		//TODO
+		this.add(new UnitPanel(_middleEnd, grouping.getBlankUnit()));
 	}
 }
