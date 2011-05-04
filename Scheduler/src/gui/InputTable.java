@@ -46,6 +46,8 @@ public class InputTable extends JScrollPane implements GUIConstants {
 			for (List<Attribute> l : data) {
 				d.add((Attribute[]) l.toArray());
 			}
+			_data = (Attribute[][]) d.toArray();
+			this.setDataVector(_data, _headers);
 		}
 		
 		public String getColumnName(int i) {

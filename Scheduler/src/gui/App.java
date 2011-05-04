@@ -13,6 +13,8 @@ import javax.swing.SwingUtilities;
 import javax.swing.KeyStroke;
 import java.awt.Point;
 import java.util.Collection;
+import java.util.List;
+
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JFileChooser;
@@ -206,7 +208,7 @@ public class App implements GUIConstants {
 		if (_addMenu == null) {
 			_addMenu = new JMenu();
 			_addMenu.setText("Add");
-			Collection<Category> groupings = _middleEnd.getTournament().getCategories();
+			List<Grouping> groupings = _middleEnd.getTournament().getCategories();
 			for (Grouping<Unit> g : groupings) {
 				_addMenu.add(createAddMenuItem(g));
 			}
