@@ -66,10 +66,11 @@ public class App implements GUIConstants {
 	private JDialog _printDialog;
 	private JPanel _printContentPane;
 	
+	public App(MiddleEnd me) {
+		_middleEnd = me;
+	}
+	
 	public MiddleEnd getMiddleEnd() {
-		if (_middleEnd == null) {
-			_middleEnd = new MiddleEnd();
-		}
 		return _middleEnd;
 	}
 	
@@ -225,8 +226,9 @@ public class App implements GUIConstants {
 		JMenuItem item = new JMenuItem();
 		item.setText("New " + g.getName() + "...");
 		item.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
 				getInputPanel().getAddingPanel().setAddPanel(g);
+				_middleEnd.repaintAll();
 			}
 		});
 		return item;
@@ -653,17 +655,25 @@ public class App implements GUIConstants {
 		}
 		return _aboutVersionLabel;
 	}
+	
+	/**
+	 * Repaints all the important components.
+	 */
+	public void repaintAll() {
+		getInputPanel().repaintAll();
+		getManagementPanel().repaintAll();
+	}
 
 	/**
 	 * Launches this application
-	 */
+	 *
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				App application = new App();
+				App application = new App(new MiddleEnd());
 				application.getJFrame().setVisible(true);
 			}
 		});
-	}
+	}*/
 
 }

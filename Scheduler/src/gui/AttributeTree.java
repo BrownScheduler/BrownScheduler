@@ -15,7 +15,7 @@ public class AttributeTree extends JTree implements GUIConstants {
 
 	public static final long serialVersionUID = 1L;
 	
-	private TreeModel _treeModel;
+	private TreeModel _treeModel;  //  @jve:decl-index=0:
 	private MiddleEnd _middleEnd;
 	private AddingPanel _addingPanel;
 	
@@ -36,6 +36,7 @@ public class AttributeTree extends JTree implements GUIConstants {
 			this.setMaximumSize(new Dimension(getWidth(), Integer.MAX_VALUE));
 			this.setPreferredSize(getSize());
 			this.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
+			this.setScrollsOnExpand(true);
 			this.resetTreeModel();
 	}
 	
@@ -45,40 +46,59 @@ public class AttributeTree extends JTree implements GUIConstants {
 	 * @return
 	 */
 	public void resetTreeModel() {
-		if (_treeModel == null) {
-			DefaultMutableTreeNode root;
-			root = new DefaultMutableTreeNode("Categories");
-			for (Grouping<Unit> g : _middleEnd.getTournament().getCategories()) {
-				DefaultMutableTreeNode groupingroot = new DefaultMutableTreeNode(g);
-				for (Unit u : g.getMembers()) {
-					DefaultMutableTreeNode unitroot = new DefaultMutableTreeNode(u);
-					groupingroot.add(unitroot);
-				}
-				root.add(groupingroot);
+		DefaultMutableTreeNode root;
+		root = new DefaultMutableTreeNode("Categories");
+		for (Grouping<Unit> g : _middleEnd.getTournament().getCategories()) {
+			DefaultMutableTreeNode groupingroot = new DefaultMutableTreeNode(new GroupingNodeObject(g));
+			for (Unit u : g.getMembers()) {
+				DefaultMutableTreeNode unitroot = new DefaultMutableTreeNode(new UnitNodeObject(u));
+				groupingroot.add(unitroot);
 			}
-			_treeModel = new DefaultTreeModel(root);
+			root.add(groupingroot);
 		}
+		_treeModel = new DefaultTreeModel(root);
 		this.setModel(_treeModel);
 		this.addTreeSelectionListener(new TreeSelectionListener() {
 			public void valueChanged(TreeSelectionEvent e) {
 				DefaultMutableTreeNode node = (DefaultMutableTreeNode) getLastSelectedPathComponent();
 				if (node == null)
 					return;
-				if (node.getUserObject() instanceof Grouping<?>) {
-					_addingPanel.setViewPanel((Grouping<Unit>) node.getUserObject());
+				if (node.getUserObject() instanceof GroupingNodeObject) {
+					_addingPanel.setViewPanel(((GroupingNodeObject) node.getUserObject()).group);
 				}
-				else if (node.getUserObject() instanceof Unit) {
-					_addingPanel.setViewPanel((Unit) node.getUserObject());
+				else if (node.getUserObject() instanceof UnitNodeObject) {
+					_addingPanel.setViewPanel(((UnitNodeObject) node.getUserObject()).unit);
 				}
+				_middleEnd.repaintAll();
 			}
 		});
+		for (int i = 0; i < this.getRowCount(); i++)
+			this.expandRow(i);
+		this.repaint();
 	}
 	
-	/**
-	 * Setter for the TreeModel of the tree.
-	 */
-	public void setTree(TreeModel m) {
-		_treeModel = m;
+	private class GroupingNodeObject {
+		public Grouping<Unit> group;
+		
+		public GroupingNodeObject(Grouping<Unit> g) {
+			group = g;
+		}
+		
+		public String toString() {
+			return group.getName();
+		}
+	}
+	
+	private class UnitNodeObject {
+		public Unit unit;
+		
+		public UnitNodeObject(Unit u) {
+			unit = u;
+		}
+		
+		public String toString() {
+			return unit.getName();
+		}
 	}
 	
 }

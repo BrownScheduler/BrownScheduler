@@ -27,7 +27,7 @@ import backbone.GroupingAttribute;
 import backbone.IntAttribute;
 import backbone.StringAttribute;
 
-public class Utility {
+public class Utility implements GUIConstants {
 
 	public JLabel getHeader1Label(String s, boolean border) {
 		JLabel label = new JLabel(s);
@@ -94,19 +94,26 @@ public class Utility {
 	
 	public JTextField getStringField(StringAttribute attribute) {
 		JTextField field = new JTextField(attribute.getAttribute());
+		field.setMaximumSize(TEXTFIELD_SIZE);
 		field.setEditable(attribute.isEditable());
 		return field;
 	}
 	
 	public JFormattedTextField getIntegerField(IntAttribute attribute) {
-		JFormattedTextField field = new JFormattedTextField(NumberFormat.getIntegerInstance());
+		NumberFormat nf = NumberFormat.getIntegerInstance();
+		nf.setGroupingUsed(false);
+		JFormattedTextField field = new JFormattedTextField(nf);
 		field.setValue(attribute.getAttribute());
+		field.setMaximumSize(TEXTFIELD_SIZE);
 		field.setEditable(attribute.isEditable());
 		return field;
 	}
 	
 	public JFormattedTextField getDoubleField(DoubleAttribute attribute) {
-		JFormattedTextField field = new JFormattedTextField(new DecimalFormat());
+		DecimalFormat df = new DecimalFormat();
+		df.setGroupingUsed(false);
+		JFormattedTextField field = new JFormattedTextField(df);
+		field.setMaximumSize(TEXTFIELD_SIZE);
 		field.setValue(attribute.getAttribute());
 		field.setEditable(attribute.isEditable());
 		field.setMaximumSize(new Dimension(100, 20));

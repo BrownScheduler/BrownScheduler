@@ -5,27 +5,37 @@ import backbone.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
+
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 
-public class InputTable extends JScrollPane implements GUIConstants {
+public class InputTablePane extends JScrollPane implements GUIConstants {
 
 	private MiddleEnd _middleEnd;
 	private JTable _table;
+	private List<Unit> _unitsInRows;
 	
-	public InputTable(MiddleEnd middleEnd, List<Attribute> headers, List<Unit> units) {
+	public InputTablePane(MiddleEnd middleEnd, List<Attribute> headers, List<Unit> units) {
 		_middleEnd = middleEnd;
+		_unitsInRows = units;
 		this.initialize(headers, units);
+	}
+	
+	public JTable getTable() {
+		return _table;
 	}
 	
 	private void initialize(List<Attribute> headers, List<Unit> units) {
 		this.setSize(INPUTTABLE_SIZE);
 		_table = new JTable();
+		_table.setSize(INPUTTABLE_SIZE);
 		_table.setFillsViewportHeight(true);
-		//TODO take care of this: _table.setAutoCreateRowSorter(true);
+		_table.setAutoCreateColumnsFromModel(true);
+		_table.setAutoCreateRowSorter(true);
 		List<List<Attribute>> data = (List<List<Attribute>>) new ArrayList<List<Attribute>>();
 		for (Unit u : units) {
 			data.add(u.getAttributes());
@@ -36,18 +46,23 @@ public class InputTable extends JScrollPane implements GUIConstants {
 		this.add(_table);
 	}
 	
+	public List<Unit> getUnitsInRowsList() {
+		return _unitsInRows;
+	}
+	
 	private class InputTableModel extends DefaultTableModel {
 		private Attribute[] _headers;
 		private Attribute[][] _data;
 		
 		public InputTableModel(List<Attribute> headers, List<List<Attribute>> data) {
-			_headers = (Attribute[]) headers.toArray();
+			_headers = headers.toArray(new Attribute[0]);
 			List<Attribute[]> d = new ArrayList<Attribute[]>();
 			for (List<Attribute> l : data) {
-				d.add((Attribute[]) l.toArray());
+				d.add(l.toArray(new Attribute[0]));
 			}
-			_data = (Attribute[][]) d.toArray();
+			_data = d.toArray(new Attribute[0][0]);
 			this.setDataVector(_data, _headers);
+			//TODO: Figure out how to insert blank rows
 		}
 		
 		public String getColumnName(int i) {

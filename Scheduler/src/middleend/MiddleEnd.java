@@ -8,12 +8,22 @@ import java.util.List;
 
 public class MiddleEnd {
 	
-	public List<Attribute> getAttrsOfUnitsInGroupingAttr(GroupingAttribute<Unit> g) {
-		return new ArrayList<Attribute>();
+	Tournament _tmnt;
+	App _app;
+	
+	public MiddleEnd(Tournament t) {
+		_tmnt = t;
+		
+		_app = new App(this);
+		_app.getJFrame().setVisible(true);
+	}
+	
+	public void repaintAll() {
+		_app.repaintAll();
 	}
 	
 	public Tournament getTournament() {
-		return null;
+		return _tmnt;
 	}
 	
 	public boolean openPlugin(File file) {
@@ -27,4 +37,5 @@ public class MiddleEnd {
 	public boolean saveFile(File file) {
 		return false;
 	}
+	
 }

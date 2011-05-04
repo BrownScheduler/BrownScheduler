@@ -23,8 +23,13 @@ public class ManagementPanel extends JPanel implements GUIConstants {
 	 * @return void
 	 */
 	public void initialize() {
-		this.setSize(DEFAULT_SIZE); //TODO: make constants
+		this.setSize(DEFAULT_SIZE);
+		//TODO: EVERYTHING
 		//this.setLayout(new SpringLayout());
 	}
 
+	public void repaintAll() {
+		this.repaint();
+	}
+	
 }

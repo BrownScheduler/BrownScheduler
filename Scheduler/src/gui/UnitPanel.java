@@ -2,21 +2,24 @@ package gui;
 
 import backbone.*;
 import middleend.*;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class UnitPanel extends JPanel {
 
 	private MiddleEnd _middleEnd;
 	private Utility _util;
 	private JPanel _mainPanel, _buttonPanel, _tablePanel;
+	private Grouping _grouping;
 	
 	public UnitPanel(MiddleEnd m, Unit u) {
 		_middleEnd = m;
@@ -27,43 +30,117 @@ public class UnitPanel extends JPanel {
 		initialize(u);
 	}
 	
-	public void initialize(Unit u) {
-		this.setLayout(new GridLayout(0,1));
+	public UnitPanel(MiddleEnd m, Unit u, Grouping g) {
+		_middleEnd = m;
+		_grouping = g;
+		_util = new Utility();
+		_mainPanel = new JPanel();
+		_buttonPanel = new JPanel();
+		_tablePanel = new JPanel();
+		initialize(u);
+	}
+	
+	public void initialize(final Unit unit) {
+		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		_mainPanel.setLayout(new BoxLayout(_mainPanel, BoxLayout.X_AXIS));
-		final HashMap<Attribute, JComponent> tables = new HashMap<Attribute, JComponent>();
-		for (final Attribute a : u.getAttributes()) {
-			if (a instanceof GroupingAttribute) {
-				GroupingAttribute<Unit> g = (GroupingAttribute<Unit>) a;
-				tables.put(a, new InputTable(_middleEnd, g.getBlankUnit().getAttributes(), g.getMembers()));
+		final HashMap<Attribute, JComponent> components = new HashMap<Attribute, JComponent>();
+		for (final Attribute attr : unit.getAttributes()) {
+			if (attr instanceof GroupingAttribute) {
+				GroupingAttribute<Unit> g = (GroupingAttribute<Unit>) attr;
+				components.put(attr, new InputTablePane(_middleEnd, g.getBlankUnit().getAttributes(), g.getMembers()));
 			}
-			else {
-				JComponent c = _util.getField(a);
-				if (c instanceof JButton) {
-					((JButton) c).addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent e) {
-							if (_tablePanel.getComponent(0) == tables.get(a)) {
-								_tablePanel.removeAll();
-							}
-							else {
-								_tablePanel.removeAll();
-								_tablePanel.add(tables.get(a));
-							}
+			JComponent comp = _util.getField(attr);
+			if (comp instanceof JButton) {
+				((JButton) comp).addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						if (_tablePanel.getComponentCount() == 0) {
+							_tablePanel.removeAll();
+							_tablePanel.add(components.get(attr));
+							_tablePanel.repaint();
 						}
-					});
-				}
-				tables.put(a, c);
-				_mainPanel.add(c);
+						else if (_tablePanel.getComponent(0) == components.get(attr)) {
+							_tablePanel.removeAll();
+							_tablePanel.repaint();
+						}
+						else {
+							_tablePanel.removeAll();
+							_tablePanel.add(components.get(attr));
+							_tablePanel.repaint();
+						}
+					}
+				});
 			}
+			if (!components.containsKey(attr))
+				components.put(attr, comp);
+			_mainPanel.add(comp);
 		}
 		this.add(_mainPanel);
-		JButton savebutton = new JButton();
+		JButton savebutton = new JButton("Save Changes");
 		savebutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//TODO
+				Collection<Attribute> attributes = components.keySet();
+				for (Attribute attr : attributes) {
+					if (attr.getType() == Attribute.Type.BOOLEAN) {
+						boolean value = ((JCheckBox) components.get(attr)).isSelected();
+						unit.setAttribute(new BooleanAttribute(attr.getTitle(), value));
+					}
+					else if (attr.getType() == Attribute.Type.DOUBLE) {
+						double value = Double.parseDouble(((JTextField) components.get(attr)).getText());
+						unit.setAttribute(new DoubleAttribute(attr.getTitle(), value));
+					}
+					else if (attr.getType() == Attribute.Type.GROUPING) {
+						InputTablePane table = (InputTablePane) components.get(attr);
+						GroupingAttribute groupattr = (GroupingAttribute) attr;
+						for (int i = 0; i < table.getTable().getRowCount(); i++) {
+							Unit rowunit;
+							if (i < table.getUnitsInRowsList().size()) {
+								rowunit = table.getUnitsInRowsList().get(i);
+								groupattr.addMember(rowunit);
+							}
+							else {
+								rowunit = groupattr.getBlankUnit();
+							}
+							int j = 0;
+							for (Attribute rowattr : rowunit.getAttributes()) {
+								if (rowattr.getType() == Attribute.Type.BOOLEAN) {
+									boolean value = (Boolean) table.getTable().getValueAt(i, j);
+									rowunit.setAttribute(new BooleanAttribute(rowattr.getTitle(), value));
+								}
+								else if (attr.getType() == Attribute.Type.DOUBLE) {
+									double value = (Double) table.getTable().getValueAt(i, j);
+									rowunit.setAttribute(new DoubleAttribute(rowattr.getTitle(), value));
+								}
+								else if (attr.getType() == Attribute.Type.INT) {
+									int value = (Integer) table.getTable().getValueAt(i, j);
+									rowunit.setAttribute(new IntAttribute(rowattr.getTitle(), value));
+								}
+								else if (attr.getType() == Attribute.Type.STRING) {
+									String value = (String) table.getTable().getValueAt(i, j);
+									rowunit.setAttribute(new StringAttribute(rowattr.getTitle(), value));
+								}
+								j++;
+							}
+						}
+					}
+					else if (attr.getType() == Attribute.Type.INT) {
+						int value = Integer.parseInt(((JTextField) components.get(attr)).getText());
+						unit.setAttribute(new IntAttribute(attr.getTitle(), value));
+					}
+					else if (attr.getType() == Attribute.Type.STRING) {
+						String value = ((JTextField) components.get(attr)).getText();
+						unit.setAttribute(new StringAttribute(attr.getTitle(), value));
+					}
+				}
+				if (_grouping != null) {
+					_grouping.addMember(unit);
+					_grouping = null;
+				}
+				_middleEnd.repaintAll();
 			}
 		});
 		_buttonPanel.add(savebutton);
 		this.add(_buttonPanel);
 		this.add(_tablePanel);
+		this.repaint();
 	}
 }
