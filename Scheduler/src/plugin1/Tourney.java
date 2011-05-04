@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
+
+import middleend.MiddleEnd;
 import backbone.Grouping;
 
 
@@ -81,5 +83,10 @@ public class Tourney implements backbone.Tournament{
 		LinkedList<backbone.Round> rs = new LinkedList<backbone.Round>();
 		rs.addAll(rounds);
 		return rs;
+	}
+	
+	public static void main(String[] args) {
+		Tourney t = new Tourney();
+		new MiddleEnd(t);
 	}
 }

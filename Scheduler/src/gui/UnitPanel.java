@@ -2,7 +2,6 @@ package gui;
 
 import backbone.*;
 import middleend.*;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -20,6 +19,7 @@ public class UnitPanel extends JPanel {
 	private MiddleEnd _middleEnd;
 	private Utility _util;
 	private JPanel _mainPanel, _buttonPanel, _tablePanel;
+	private Grouping _grouping;
 	
 	public UnitPanel(MiddleEnd m, Unit u) {
 		_middleEnd = m;
@@ -30,8 +30,18 @@ public class UnitPanel extends JPanel {
 		initialize(u);
 	}
 	
+	public UnitPanel(MiddleEnd m, Unit u, Grouping g) {
+		_middleEnd = m;
+		_grouping = g;
+		_util = new Utility();
+		_mainPanel = new JPanel();
+		_buttonPanel = new JPanel();
+		_tablePanel = new JPanel();
+		initialize(u);
+	}
+	
 	public void initialize(final Unit unit) {
-		this.setLayout(new GridLayout(0,1));
+		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		_mainPanel.setLayout(new BoxLayout(_mainPanel, BoxLayout.X_AXIS));
 		final HashMap<Attribute, JComponent> components = new HashMap<Attribute, JComponent>();
 		for (final Attribute attr : unit.getAttributes()) {
@@ -43,12 +53,19 @@ public class UnitPanel extends JPanel {
 			if (comp instanceof JButton) {
 				((JButton) comp).addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						if (_tablePanel.getComponent(0) == components.get(attr)) {
+						if (_tablePanel.getComponentCount() == 0) {
 							_tablePanel.removeAll();
+							_tablePanel.add(components.get(attr));
+							_tablePanel.repaint();
+						}
+						else if (_tablePanel.getComponent(0) == components.get(attr)) {
+							_tablePanel.removeAll();
+							_tablePanel.repaint();
 						}
 						else {
 							_tablePanel.removeAll();
 							_tablePanel.add(components.get(attr));
+							_tablePanel.repaint();
 						}
 					}
 				});
@@ -58,7 +75,7 @@ public class UnitPanel extends JPanel {
 			_mainPanel.add(comp);
 		}
 		this.add(_mainPanel);
-		JButton savebutton = new JButton();
+		JButton savebutton = new JButton("Save Changes");
 		savebutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Collection<Attribute> attributes = components.keySet();
@@ -75,7 +92,14 @@ public class UnitPanel extends JPanel {
 						InputTablePane table = (InputTablePane) components.get(attr);
 						GroupingAttribute groupattr = (GroupingAttribute) attr;
 						for (int i = 0; i < table.getTable().getRowCount(); i++) {
-							Unit rowunit = groupattr.getBlankUnit();
+							Unit rowunit;
+							if (i < table.getUnitsInRowsList().size()) {
+								rowunit = table.getUnitsInRowsList().get(i);
+								groupattr.addMember(rowunit);
+							}
+							else {
+								rowunit = groupattr.getBlankUnit();
+							}
 							int j = 0;
 							for (Attribute rowattr : rowunit.getAttributes()) {
 								if (rowattr.getType() == Attribute.Type.BOOLEAN) {
@@ -97,7 +121,6 @@ public class UnitPanel extends JPanel {
 								j++;
 							}
 						}
-						unit.setAttribute(new GroupingAttribute(groupattr.getTitle()));
 					}
 					else if (attr.getType() == Attribute.Type.INT) {
 						int value = Integer.parseInt(((JTextField) components.get(attr)).getText());
@@ -108,10 +131,16 @@ public class UnitPanel extends JPanel {
 						unit.setAttribute(new StringAttribute(attr.getTitle(), value));
 					}
 				}
+				if (_grouping != null) {
+					_grouping.addMember(unit);
+					_grouping = null;
+				}
+				_middleEnd.repaintAll();
 			}
 		});
 		_buttonPanel.add(savebutton);
 		this.add(_buttonPanel);
 		this.add(_tablePanel);
+		this.repaint();
 	}
 }

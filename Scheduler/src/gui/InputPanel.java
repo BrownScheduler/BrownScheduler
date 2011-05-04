@@ -54,7 +54,7 @@ public class InputPanel extends JPanel implements GUIConstants {
 	 * 	
 	 * @return javax.swing.JTree	
 	 */
-	public JTree getAttributeTree() {
+	public AttributeTree getAttributeTree() {
 		if (_attributeTree == null) {
 			_attributeTree = new AttributeTree(_middleEnd, getAddingPanel());
 		}
@@ -86,6 +86,13 @@ public class InputPanel extends JPanel implements GUIConstants {
 			_addingScrollPane.setSize(getAddingPanel().getSize());
 		}
 		return _addingScrollPane;
+	}
+	
+	public void repaintAll() {
+		getAttributeScrollPane().repaint();
+		getAttributeTree().resetTreeModel();
+		getAddingScrollPane().repaint();
+		getAddingPanel().repaintAll();
 	}
 
 }

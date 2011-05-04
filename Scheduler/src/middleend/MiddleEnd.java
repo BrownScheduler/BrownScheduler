@@ -9,12 +9,17 @@ import java.util.List;
 public class MiddleEnd {
 	
 	Tournament _tmnt;
+	App _app;
 	
 	public MiddleEnd(Tournament t) {
 		_tmnt = t;
 		
-		App application = new App(this);
-		application.getJFrame().setVisible(true);
+		_app = new App(this);
+		_app.getJFrame().setVisible(true);
+	}
+	
+	public void repaintAll() {
+		_app.repaintAll();
 	}
 	
 	public Tournament getTournament() {
@@ -32,4 +37,5 @@ public class MiddleEnd {
 	public boolean saveFile(File file) {
 		return false;
 	}
+	
 }

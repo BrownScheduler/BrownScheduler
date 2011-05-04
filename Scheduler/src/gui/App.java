@@ -226,8 +226,9 @@ public class App implements GUIConstants {
 		JMenuItem item = new JMenuItem();
 		item.setText("New " + g.getName() + "...");
 		item.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
 				getInputPanel().getAddingPanel().setAddPanel(g);
+				_middleEnd.repaintAll();
 			}
 		});
 		return item;
@@ -653,6 +654,14 @@ public class App implements GUIConstants {
 			_aboutVersionLabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		}
 		return _aboutVersionLabel;
+	}
+	
+	/**
+	 * Repaints all the important components.
+	 */
+	public void repaintAll() {
+		getInputPanel().repaintAll();
+		getManagementPanel().repaintAll();
 	}
 
 	/**
