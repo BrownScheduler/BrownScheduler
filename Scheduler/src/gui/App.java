@@ -71,9 +71,6 @@ public class App implements GUIConstants {
 	}
 	
 	public MiddleEnd getMiddleEnd() {
-		if (_middleEnd == null) {
-			_middleEnd = new MiddleEnd();
-		}
 		return _middleEnd;
 	}
 	
@@ -660,7 +657,7 @@ public class App implements GUIConstants {
 
 	/**
 	 * Launches this application
-	 */
+	 *
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
@@ -668,6 +665,6 @@ public class App implements GUIConstants {
 				application.getJFrame().setVisible(true);
 			}
 		});
-	}
+	}*/
 
 }
