@@ -46,8 +46,7 @@ public class Judge implements Unit{
 	@Override
 	public void setAttribute(Attribute attribute) {
 		if(attribute.getType() == Attribute.Type.STRING){
-			StringAttribute att = (StringAttribute)attribute;
-			this._name = att.getAttribute();
+			this._name = ((StringAttribute)attribute).getAttribute();
 		}
 		else if(attribute.getType() == Attribute.Type.GROUPING){
 			this._conflictedTeams = new LinkedList<Team>(((GroupingAttribute<Team>)attribute).getMembers());
