@@ -17,19 +17,19 @@ public class InputTablePane extends JScrollPane implements GUIConstants {
 
 	private MiddleEnd _middleEnd;
 	private JTable _table;
-	private List<Unit> _unitsInRows;
+	private GroupingAttribute<Unit> _unitsInRows;
 	
-	public InputTablePane(MiddleEnd middleEnd, List<Attribute> headers, List<Unit> units) {
+	public InputTablePane(MiddleEnd middleEnd, List<Attribute> headers, GroupingAttribute<Unit> group) {
 		_middleEnd = middleEnd;
-		_unitsInRows = units;
-		this.initialize(headers, units);
+		_unitsInRows = group;
+		this.initialize(headers, group);
 	}
 	
 	public JTable getTable() {
 		return _table;
 	}
 	
-	private void initialize(List<Attribute> headers, List<Unit> units) {
+	private void initialize(List<Attribute> headers, GroupingAttribute<Unit> group) {
 		this.setSize(INPUTTABLE_SIZE);
 		_table = new JTable();
 		_table.setSize(INPUTTABLE_SIZE);
@@ -37,8 +37,11 @@ public class InputTablePane extends JScrollPane implements GUIConstants {
 		_table.setAutoCreateColumnsFromModel(true);
 		_table.setAutoCreateRowSorter(true);
 		List<List<Attribute>> data = (List<List<Attribute>>) new ArrayList<List<Attribute>>();
-		for (Unit u : units) {
+		for (Unit u : group.getMembers()) {
 			data.add(u.getAttributes());
+		}
+		for (int i = 0; i < DEFAULT_NUM_BLANK_ROWS; i++) {
+			data.add(group.getBlankUnit().getAttributes());
 		}
 		_table.setModel(new InputTableModel(headers, data));
 		ExcelAdapter exceladapt = new ExcelAdapter(_table);
@@ -47,22 +50,35 @@ public class InputTablePane extends JScrollPane implements GUIConstants {
 	}
 	
 	public List<Unit> getUnitsInRowsList() {
-		return _unitsInRows;
+		return _unitsInRows.getMembers();
 	}
 	
 	private class InputTableModel extends DefaultTableModel {
 		private Attribute[] _headers;
-		private Attribute[][] _data;
 		
 		public InputTableModel(List<Attribute> headers, List<List<Attribute>> data) {
 			_headers = headers.toArray(new Attribute[0]);
-			List<Attribute[]> d = new ArrayList<Attribute[]>();
-			for (List<Attribute> l : data) {
-				d.add(l.toArray(new Attribute[0]));
+			List<Object[]> d = new ArrayList<Object[]>();
+			for (List<Attribute> list : data) {
+				ArrayList<Object> row = new ArrayList<Object>();
+				for (Attribute attr : list) {
+					if (attr.getType() == Attribute.Type.BOOLEAN) {
+						row.add(((BooleanAttribute) attr).getAttribute());
+					}
+					else if (attr.getType() == Attribute.Type.DOUBLE) {
+						row.add(((DoubleAttribute) attr).getAttribute());
+					}
+					else if (attr.getType() == Attribute.Type.INT) {
+						row.add(((IntAttribute) attr).getAttribute());
+					}
+					else if (attr.getType() == Attribute.Type.STRING) {
+						row.add(((StringAttribute) attr).getAttribute());
+					}
+				}
+				d.add(row.toArray(new Object[0]));
 			}
-			_data = d.toArray(new Attribute[0][0]);
-			this.setDataVector(_data, _headers);
-			//TODO: Figure out how to insert blank rows
+			Object[][] dataarray = d.toArray(new Object[0][0]);
+			this.setDataVector(dataarray, _headers);
 		}
 		
 		public String getColumnName(int i) {

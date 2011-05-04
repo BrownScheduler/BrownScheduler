@@ -27,7 +27,7 @@ public class UnitPanel extends JPanel {
 		_mainPanel = new JPanel();
 		_buttonPanel = new JPanel();
 		_tablePanel = new JPanel();
-		initialize(u);
+		initialize(u, "Save Changes");
 	}
 	
 	public UnitPanel(MiddleEnd m, Unit u, Grouping g) {
@@ -37,17 +37,17 @@ public class UnitPanel extends JPanel {
 		_mainPanel = new JPanel();
 		_buttonPanel = new JPanel();
 		_tablePanel = new JPanel();
-		initialize(u);
+		initialize(u, "Save Changes to New Unit");
 	}
 	
-	public void initialize(final Unit unit) {
+	public void initialize(final Unit unit, String buttonstring) {
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		_mainPanel.setLayout(new BoxLayout(_mainPanel, BoxLayout.X_AXIS));
 		final HashMap<Attribute, JComponent> components = new HashMap<Attribute, JComponent>();
 		for (final Attribute attr : unit.getAttributes()) {
 			if (attr instanceof GroupingAttribute) {
 				GroupingAttribute<Unit> g = (GroupingAttribute<Unit>) attr;
-				components.put(attr, new InputTablePane(_middleEnd, g.getBlankUnit().getAttributes(), g.getMembers()));
+				components.put(attr, new InputTablePane(_middleEnd, g.getBlankUnit().getAttributes(), g));
 			}
 			JComponent comp = _util.getField(attr);
 			if (comp instanceof JButton) {
@@ -75,7 +75,7 @@ public class UnitPanel extends JPanel {
 			_mainPanel.add(comp);
 		}
 		this.add(_mainPanel);
-		JButton savebutton = new JButton("Save Changes");
+		JButton savebutton = new JButton(buttonstring);
 		savebutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Collection<Attribute> attributes = components.keySet();
@@ -121,6 +121,7 @@ public class UnitPanel extends JPanel {
 								j++;
 							}
 						}
+						table = new InputTablePane(_middleEnd, groupattr.getBlankUnit().getAttributes(), groupattr);
 					}
 					else if (attr.getType() == Attribute.Type.INT) {
 						int value = Integer.parseInt(((JTextField) components.get(attr)).getText());
