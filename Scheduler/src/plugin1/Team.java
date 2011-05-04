@@ -36,10 +36,24 @@ public class Team implements CompetitiveUnit {
 		return atts;
 	}
 
+	private void setStringAttribute(StringAttribute att){
+		if(att.getTitle().equals("Name")){
+			this._name = att.getAttribute();
+		}
+	}
+	
+	private void setIntAttribute(IntAttribute att){
+		if(att.getTitle().endsWith("Wins")){
+			this._wins = att.getAttribute();
+		}
+	}
 	@Override
 	public void setAttribute(Attribute attribute) {
-		// TODO Auto-generated method stub
-		
+		Attribute.Type t = attribute.getType();
+		if(t == Attribute.Type.INT)
+			setIntAttribute((IntAttribute)attribute);
+		else if(t == Attribute.Type.STRING)
+			setStringAttribute((StringAttribute)attribute);
 	}
 
 }

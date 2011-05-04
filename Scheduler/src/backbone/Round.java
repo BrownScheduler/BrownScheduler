@@ -30,5 +30,9 @@ public class Round implements Serializable {
 	public void removePairing(Pairing pairing) {
 		pairings.remove(pairing);
 	}
+	
+	public ArrayList<Pairing> getPairings(){
+		return pairings;
+	}
 
 }
