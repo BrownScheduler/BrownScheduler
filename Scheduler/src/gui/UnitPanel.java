@@ -30,30 +30,29 @@ public class UnitPanel extends JPanel {
 	public void initialize(Unit u) {
 		this.setLayout(new GridLayout(0,1));
 		_mainPanel.setLayout(new BoxLayout(_mainPanel, BoxLayout.X_AXIS));
-		final HashMap<Attribute, JComponent> tables = new HashMap<Attribute, JComponent>();
+		final HashMap<Attribute, JComponent> components = new HashMap<Attribute, JComponent>();
 		for (final Attribute a : u.getAttributes()) {
 			if (a instanceof GroupingAttribute) {
 				GroupingAttribute<Unit> g = (GroupingAttribute<Unit>) a;
-				tables.put(a, new InputTable(_middleEnd, g.getBlankUnit().getAttributes(), g.getMembers()));
+				components.put(a, new InputTable(_middleEnd, g.getBlankUnit().getAttributes(), g.getMembers()));
 			}
-			else {
-				JComponent c = _util.getField(a);
-				if (c instanceof JButton) {
-					((JButton) c).addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent e) {
-							if (_tablePanel.getComponent(0) == tables.get(a)) {
-								_tablePanel.removeAll();
-							}
-							else {
-								_tablePanel.removeAll();
-								_tablePanel.add(tables.get(a));
-							}
+			JComponent c = _util.getField(a);
+			if (c instanceof JButton) {
+				((JButton) c).addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						if (_tablePanel.getComponent(0) == components.get(a)) {
+							_tablePanel.removeAll();
 						}
-					});
-				}
-				tables.put(a, c);
-				_mainPanel.add(c);
+						else {
+							_tablePanel.removeAll();
+							_tablePanel.add(components.get(a));
+						}
+					}
+				});
 			}
+			if (!components.containsKey(a))
+				components.put(a, c);
+			_mainPanel.add(c);
 		}
 		this.add(_mainPanel);
 		JButton savebutton = new JButton();

@@ -66,6 +66,10 @@ public class App implements GUIConstants {
 	private JDialog _printDialog;
 	private JPanel _printContentPane;
 	
+	public App(MiddleEnd me) {
+		_middleEnd = me;
+	}
+	
 	public MiddleEnd getMiddleEnd() {
 		if (_middleEnd == null) {
 			_middleEnd = new MiddleEnd();
@@ -660,7 +664,7 @@ public class App implements GUIConstants {
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				App application = new App();
+				App application = new App(new MiddleEnd());
 				application.getJFrame().setVisible(true);
 			}
 		});
