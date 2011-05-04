@@ -16,6 +16,10 @@ public class GroupingAttribute<T extends Unit> extends Attribute{
 		super(title);
 		this.group = group;
 	}
+	
+	public T getBlankUnit() {
+		return group.getBlank();
+	}
 
 	@Override
 	public Type getType() {
