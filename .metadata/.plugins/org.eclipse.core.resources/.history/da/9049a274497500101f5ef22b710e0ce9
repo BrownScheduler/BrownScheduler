@@ -16,11 +16,9 @@ public class Judge implements Unit{
 	
 	
 	LinkedList<Team> conflictedTeams;
-	private String _name;
 	
 	public Judge(String name) {
-		this._name = name;
-		conflictedTeams = new LinkedList<Team>();
+		super(name);
 	}
 
 	@Override

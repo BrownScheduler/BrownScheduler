@@ -12,15 +12,13 @@ import backbone.*;
  * @author matt
  *
  */
-public class Judge implements Unit{
+public class Judge extends Unit{
 	
 	
 	LinkedList<Team> conflictedTeams;
-	private String _name;
 	
 	public Judge(String name) {
-		this._name = name;
-		conflictedTeams = new LinkedList<Team>();
+		super(name);
 	}
 
 	@Override
@@ -36,12 +34,6 @@ public class Judge implements Unit{
 	
 	public String getName(){
 		return this._name;
-	}
-
-	@Override
-	public void setAttribute(Attribute attribute) {
-		// TODO Auto-generated method stub
-		
 	}
 	
 }

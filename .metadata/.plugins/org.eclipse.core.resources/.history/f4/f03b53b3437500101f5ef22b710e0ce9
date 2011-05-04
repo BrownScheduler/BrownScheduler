@@ -6,10 +6,9 @@ import backbone.*;
 
 public class Team implements CompetitiveUnit {
 	
-	private String _name;
 	private int _wins;
 	public Team(String name){
-		this.
+		super(name);
 		_wins = 0;
 	}
 	

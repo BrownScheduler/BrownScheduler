@@ -9,7 +9,7 @@ public interface Tournament extends Serializable {
 	
 	public Round getCurrentRound();
 
-	public Collection<Category> getCategories();
+	public List<Grouping> getCategories();
 	
 	public Round createNextRound();
 	
