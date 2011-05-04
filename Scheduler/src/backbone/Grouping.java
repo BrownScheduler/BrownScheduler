@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface Grouping<T extends Unit> {
 	
+	public T getBlank();
+	
 	public String getName();
 
 	public List<T> getMembers();

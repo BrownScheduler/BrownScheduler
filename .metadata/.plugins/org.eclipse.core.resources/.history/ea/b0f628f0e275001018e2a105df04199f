@@ -19,12 +19,12 @@ import backbone.Unit;
 public class Judge implements Unit{
 	
 	
-	LinkedList<Team> _conflictedTeams;
+	LinkedList<Team> conflictedTeams;
 	private String _name;
 	
 	public Judge(String name) {
 		this._name = name;
-		_conflictedTeams = new LinkedList<Team>();
+		conflictedTeams = new LinkedList<Team>();
 	}
 
 	@Override
@@ -32,8 +32,7 @@ public class Judge implements Unit{
 	
 		LinkedList<Attribute> atts = new LinkedList<Attribute>();
 		StringAttribute name = new StringAttribute("Name", this._name);
-		GroupingAttribute<Team> conflicts = new GroupingAttribute<Team>("Conflicted Teams", 
-				new TeamGrouping("Conflicted Teams", _conflictedTeams));
+		GroupingAttribute<Team> conflicts = new GroupingAttribute<Team>("Conflicted Teams");
 		atts.add(name);
 		atts.add(conflicts);
 		return atts;
@@ -45,12 +44,7 @@ public class Judge implements Unit{
 
 	@Override
 	public void setAttribute(Attribute attribute) {
-		if(attribute.getType() == Attribute.Type.STRING){
-			this._name = ((StringAttribute)attribute).getAttribute();
-		}
-		else if(attribute.getType() == Attribute.Type.GROUPING){
-			this._conflictedTeams = new LinkedList<Team>(((GroupingAttribute<Team>)attribute).getMembers());
-		}
+		// TODO Auto-generated method stub
 		
 	}
 	

@@ -1,0 +1,15 @@
+package plugin1;
+
+public class JudgeGrouping extends MyCategory<T> {
+
+	public JudgeGrouping(String name) {
+		super(name);
+	}
+
+	@Override
+	public Judge getBlank() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

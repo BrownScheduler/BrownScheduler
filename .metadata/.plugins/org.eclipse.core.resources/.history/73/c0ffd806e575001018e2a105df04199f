@@ -49,7 +49,7 @@ public class Judge implements Unit{
 			this._name = ((StringAttribute)attribute).getAttribute();
 		}
 		else if(attribute.getType() == Attribute.Type.GROUPING){
-			this._conflictedTeams = new LinkedList<Team>(((GroupingAttribute<Team>)attribute).getMembers());
+			this._
 		}
 		
 	}
