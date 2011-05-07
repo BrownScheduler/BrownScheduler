@@ -18,9 +18,11 @@ import backbone.Pairing;
 
 public class MyRound extends backbone.Round{
 	
+	private int _roundNum;
 	
-	public MyRound(String i) {
+	public MyRound(int i) {
 		super(i);
+		_roundNum = i;
 	}
 	
 	public boolean isFinished(){
@@ -34,7 +36,7 @@ public class MyRound extends backbone.Round{
 	}
 	
 	public int getRoundNum(){
-		return 0;
+		return _roundNum;
 	}
 	
 	public void addPairing(MyPairing p){

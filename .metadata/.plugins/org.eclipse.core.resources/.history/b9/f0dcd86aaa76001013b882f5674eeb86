@@ -33,7 +33,6 @@ public class MyPairing implements backbone.Pairing{
 	
 	public void setWinner(Team t){
 		_winner = t;
-		_winner.setWins(_winner.getWins() + 1);
 	}
 	
 	public boolean isFinished(){

@@ -33,7 +33,6 @@ public class MyPairing implements backbone.Pairing{
 	
 	public void setWinner(Team t){
 		_winner = t;
-		_winner.setWins(_winner.getWins() + 1);
 	}
 	
 	public boolean isFinished(){
@@ -76,23 +75,7 @@ public class MyPairing implements backbone.Pairing{
 		if(title.equals("Gov")) _gov = (Team)att.att;
 		else if(title.equals("Opp")) _opp = (Team)att.att;
 		else if(title.equals("Judge")) _judge = (Judge)att.att;
-		else if(title.equals("Winner")){
-			Team newWinner = (Team)att.att;
-			if(_winner == null){
-				_winner = newWinner;
-				_winner.setWins(_winner.getWins() + 1);
-				_judge._conflictedTeams.add(_gov);
-				_judge._conflictedTeams.add(_opp);
-			}else if(_winner == newWinner){}
-			else{
-				_winner.setWins(_winner.getWins() - 1);
-				_winner = newWinner;
-				_winner.setWins(_winner.getWins() + 1);
-				_judge._conflictedTeams.add(_gov);
-				_judge._conflictedTeams.add(_opp);
-			}
-			
-		}
+		else if(title.equals("Winner")) _winner = (Team)att.att;
 	}
 	@SuppressWarnings("unchecked")
 	@Override

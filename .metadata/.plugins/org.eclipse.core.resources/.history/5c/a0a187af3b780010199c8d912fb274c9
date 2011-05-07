@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
-import java.util.List;
 
 import middleend.MiddleEnd;
 import backbone.Grouping;
@@ -30,7 +29,7 @@ public class Tourney implements backbone.Tournament{
 	public MyRound getCurrentRound() {
 		if(rounds == null){
 			rounds = new ArrayList<MyRound>();
-			rounds.add(new MyRound("first round"));
+			rounds.add(new MyRound(0));
 		}
 		int r = rounds.size() - 1;
 		plugin1.MyRound currRound = rounds.get(r);
@@ -39,7 +38,7 @@ public class Tourney implements backbone.Tournament{
 				return currRound;
 			}
 			else{
-				MyRound nextRound = new MyRound("another round");
+				MyRound nextRound = new MyRound(0);
 				rounds.add(nextRound);
 				return nextRound;
 			}
@@ -65,7 +64,7 @@ public class Tourney implements backbone.Tournament{
 		return cats;
 	}
 	
-	public List<backbone.Round> getRounds() {
+	public Collection<backbone.Round> getRounds() {
 		LinkedList<backbone.Round> rs = new LinkedList<backbone.Round>();
 		rs.addAll(rounds);
 		return rs;

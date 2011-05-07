@@ -9,11 +9,9 @@ import java.util.List;
 public class Round implements Serializable {
 
 	protected ArrayList<Pairing> pairings;
-	protected String name;
 	
-	public Round(String name) {
+	public Round(int i) {
 		pairings = new ArrayList<Pairing>();
-		this.name = name;
 	}
 	
 	public boolean isFilled() {

@@ -34,7 +34,7 @@ public class MyRound extends backbone.Round{
 	}
 	
 	public int getRoundNum(){
-		return 0;
+		return _roundNum;
 	}
 	
 	public void addPairing(MyPairing p){
