@@ -16,6 +16,10 @@ public class Round implements Serializable {
 		this.name = name;
 	}
 	
+	public String getName() {
+		return this.name;
+	}
+	
 	public boolean isFilled() {
 		return false;
 	}

@@ -24,7 +24,7 @@ import backbone.StringAttribute;
 
 public class Utility implements GUIConstants {
 
-	public JLabel getHeader1Label(String s, boolean border) {
+	public static JLabel getHeader1Label(String s, boolean border) {
 		JLabel label = new JLabel(s);
 		label.setFont(new Font("Dialog", Font.BOLD, 17));
 		if (border) {
@@ -34,7 +34,7 @@ public class Utility implements GUIConstants {
 		return label;
 	}
 	
-	public JLabel getHeader2Label(String s, boolean border) {
+	public static JLabel getHeader2Label(String s, boolean border) {
 		JLabel label = new JLabel(s);
 		label.setFont(new Font("Dialog", Font.PLAIN, 15));
 		if (border) {
@@ -43,7 +43,7 @@ public class Utility implements GUIConstants {
 		return label;
 	}
 	
-	public JLabel getHeader3Label(String s, boolean border) {
+	public static JLabel getHeader3Label(String s, boolean border) {
 		JLabel label = new JLabel(s);
 		label.setFont(new Font("Dialog", Font.BOLD, 14));
 		if (border) {
@@ -53,7 +53,7 @@ public class Utility implements GUIConstants {
 		return label;
 	}
 	
-	public JLabel getHeader4Label(String s, boolean border) {
+	public static JLabel getHeader4Label(String s, boolean border) {
 		JLabel label = new JLabel(s);
 		label.setFont(new Font("Dialog", Font.BOLD, 13));
 		if (border) {
@@ -63,62 +63,66 @@ public class Utility implements GUIConstants {
 		return label;
 	}
 	
-	public void setLink(JLabel j) {
+	public static void setLink(JLabel j) {
 		j.setForeground(Color.BLUE);
 		j.setText("<html><u>" + j.getText() + "</u></html>");
 	}
 	
-	public JComponent getField(Attribute attribute) {
+	public static JComponent getField(Attribute attribute) {
+		return getField(attribute, attribute.isEditable());
+	}
+	
+	public static JComponent getField(Attribute attribute, boolean isEditable) {
 		if (attribute.getType() == Attribute.Type.BOOLEAN) {
-			return getBooleanField((BooleanAttribute) attribute);
+			return getBooleanField((BooleanAttribute) attribute, isEditable);
 		}
 		else if (attribute.getType() == Attribute.Type.DOUBLE) {
-			return getDoubleField((DoubleAttribute) attribute);
+			return getDoubleField((DoubleAttribute) attribute, isEditable);
 		}
 		else if (attribute.getType() == Attribute.Type.GROUPING) {
-			return getGroupingField((GroupingAttribute) attribute);
+			return getGroupingField((GroupingAttribute) attribute, isEditable);
 		}
 		else if (attribute.getType() == Attribute.Type.INT) {
-			return getIntegerField((IntAttribute) attribute);
+			return getIntegerField((IntAttribute) attribute, isEditable);
 		}
 		else if (attribute.getType() == Attribute.Type.STRING) {
-			return getStringField((StringAttribute) attribute);
+			return getStringField((StringAttribute) attribute, isEditable);
 		}
 		return null;
 	}
 	
-	public JTextField getStringField(StringAttribute attribute) {
+	public static JTextField getStringField(StringAttribute attribute, boolean isEditable) {
 		JTextField field = new JTextField(attribute.getAttribute());
 		field.setMaximumSize(TEXTFIELD_SIZE);
-		field.setEditable(attribute.isEditable());
+		field.setEditable(isEditable);
 		return field;
 	}
 	
-	public JFormattedTextField getIntegerField(IntAttribute attribute) {
+	public static JFormattedTextField getIntegerField(IntAttribute attribute, boolean isEditable) {
 		NumberFormat nf = NumberFormat.getIntegerInstance();
 		nf.setGroupingUsed(false);
 		JFormattedTextField field = new JFormattedTextField(nf);
 		field.setValue(attribute.getAttribute());
 		field.setMaximumSize(TEXTFIELD_SIZE);
-		field.setEditable(attribute.isEditable());
+		field.setEditable(isEditable);
 		return field;
 	}
 	
-	public JFormattedTextField getDoubleField(DoubleAttribute attribute) {
+	public static JFormattedTextField getDoubleField(DoubleAttribute attribute, boolean isEditable) {
 		DecimalFormat df = new DecimalFormat();
 		df.setGroupingUsed(false);
 		JFormattedTextField field = new JFormattedTextField(df);
 		field.setMaximumSize(TEXTFIELD_SIZE);
 		field.setValue(attribute.getAttribute());
-		field.setEditable(attribute.isEditable());
+		field.setEditable(isEditable);
 		field.setMaximumSize(new Dimension(100, 20));
 		return field;
 	}
 	
-	public JCheckBox getBooleanField(BooleanAttribute attribute) {
+	public static JCheckBox getBooleanField(BooleanAttribute attribute, boolean isEditable) {
 		final JCheckBox field = new JCheckBox();
 		field.setSelected(attribute.getAttribute());
-		if (!attribute.isEditable()) {
+		if (!isEditable) {
 			final boolean val = attribute.getAttribute();
 			field.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
@@ -129,9 +133,32 @@ public class Utility implements GUIConstants {
 		return field;
 	}
 	
-	public JButton getGroupingField(GroupingAttribute attribute) {
+	public static JButton getGroupingField(GroupingAttribute attribute, boolean isEditable) { //TODO uneditability?
 		JButton button = new JButton("Edit " + attribute.getTitle() + "...");
 		return button;
+	}
+	
+	public static JLabel getTitleLabel(Attribute attribute) {
+		return new JLabel(attribute.getTitle());
+	}
+	
+	public static JLabel getValueLabel(Attribute attribute) {
+		if (attribute.getType() == Attribute.Type.BOOLEAN) {
+			return new JLabel(new Boolean(((BooleanAttribute) attribute).getAttribute()).toString());
+		}
+		else if (attribute.getType() == Attribute.Type.DOUBLE) {
+			return new JLabel(new Double(((DoubleAttribute) attribute).getAttribute()).toString());
+		}
+		else if (attribute.getType() == Attribute.Type.GROUPING) {
+			return new JLabel(((GroupingAttribute) attribute).getTitle() + " grouping");
+		}
+		else if (attribute.getType() == Attribute.Type.INT) {
+			return new JLabel(new Integer(((IntAttribute) attribute).getAttribute()).toString());
+		}
+		else if (attribute.getType() == Attribute.Type.STRING) {
+			return new JLabel(((StringAttribute) attribute).getAttribute());
+		}
+		return null;
 	}
 	
 }

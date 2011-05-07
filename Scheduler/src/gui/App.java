@@ -184,12 +184,30 @@ public class App implements GUIConstants {
 		if (_addMenu == null) {
 			_addMenu = new JMenu();
 			_addMenu.setText("Add");
+//			_addMenu.add(arg0);
 			List<Grouping> groupings = _middleEnd.getTournament().getCategories();
 			for (Grouping<Unit> g : groupings) {
 				_addMenu.add(createAddMenuItem(g));
 			}
 		}
 		return _addMenu;
+	}
+	
+	/**
+	 * This method initializes jMenuItem	
+	 * 	
+	 * @return javax.swing.JMenuItem	
+	 */
+	public JMenuItem getCreateRoundMenuItem() {
+		JMenuItem item = new JMenuItem();
+		item.setText("Create new round from existing units...");
+		item.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				_middleEnd.getTournament().createNextRound();
+				getViewManagementMenuItem().doClick();
+			}
+		});
+		return item;
 	}
 	
 	/**

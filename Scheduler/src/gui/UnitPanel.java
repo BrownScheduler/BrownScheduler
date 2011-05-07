@@ -22,13 +22,11 @@ import javax.swing.JTextField;
 public class UnitPanel extends JPanel implements GUIConstants {
 
 	private MiddleEnd _middleEnd;
-	private Utility _util;
 	private JPanel _mainPanel, _buttonPanel, _tablePanel;
 	private Grouping _grouping;
 	
 	public UnitPanel(MiddleEnd m, Unit u) {
 		_middleEnd = m;
-		_util = new Utility();
 		_mainPanel = new JPanel();
 		_buttonPanel = new JPanel();
 		_tablePanel = new JPanel();
@@ -38,7 +36,6 @@ public class UnitPanel extends JPanel implements GUIConstants {
 	public UnitPanel(MiddleEnd m, Unit u, Grouping g) {
 		_middleEnd = m;
 		_grouping = g;
-		_util = new Utility();
 		_mainPanel = new JPanel();
 		_buttonPanel = new JPanel();
 		_tablePanel = new JPanel();
@@ -56,7 +53,7 @@ public class UnitPanel extends JPanel implements GUIConstants {
 				GroupingAttribute<Unit> g = (GroupingAttribute<Unit>) attr;
 				components.put(attr, new InputTablePane(_middleEnd, g.getBlankUnit().getAttributes(), g));
 			}
-			JComponent comp = _util.getField(attr);
+			JComponent comp = Utility.getField(attr);
 			if (comp instanceof JButton) {
 				((JButton) comp).addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -149,7 +146,7 @@ public class UnitPanel extends JPanel implements GUIConstants {
 		});
 		_buttonPanel.add(savebutton);
 		this.add(_buttonPanel);
-		this.add(Box.createRigidArea(new Dimension(10, 10)));
+		this.add(Box.createRigidArea(SPACING_SIZE));
 		this.add(_tablePanel);
 		this.repaint();
 	}
