@@ -1,9 +1,11 @@
 package gui;
 
+import backbone.*;
+import middleend.*;
 import javax.swing.JPanel;
-import middleend.MiddleEnd;
+import javax.swing.JTabbedPane;
 
-public class ManagementPanel extends JPanel implements GUIConstants {
+public class ManagementPanel extends JTabbedPane implements GUIConstants {
 
 	public static final long serialVersionUID = 1L;
 	private MiddleEnd _middleEnd;
@@ -12,7 +14,7 @@ public class ManagementPanel extends JPanel implements GUIConstants {
 	 * This is the default constructor
 	 */
 	public ManagementPanel(MiddleEnd m) {
-		super();
+		super(JTabbedPane.TOP);
 		_middleEnd = m;
 		initialize();
 	}
@@ -24,8 +26,9 @@ public class ManagementPanel extends JPanel implements GUIConstants {
 	 */
 	public void initialize() {
 		this.setSize(DEFAULT_SIZE);
-		//TODO: EVERYTHING
-		//this.setLayout(new SpringLayout());
+		for (Round round : _middleEnd.getTournament().getRounds()) {
+			
+		}
 	}
 
 	public void repaintAll() {

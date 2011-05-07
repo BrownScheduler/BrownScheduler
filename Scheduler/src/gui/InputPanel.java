@@ -1,7 +1,6 @@
 package gui;
 
 import javax.swing.JPanel;
-import javax.swing.JTree;
 import javax.swing.BoxLayout;
 import javax.swing.JScrollPane;
 

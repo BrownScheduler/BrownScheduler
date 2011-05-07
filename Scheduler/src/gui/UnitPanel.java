@@ -2,11 +2,16 @@ package gui;
 
 import backbone.*;
 import middleend.*;
+
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -14,7 +19,7 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class UnitPanel extends JPanel {
+public class UnitPanel extends JPanel implements GUIConstants {
 
 	private MiddleEnd _middleEnd;
 	private Utility _util;
@@ -43,6 +48,8 @@ public class UnitPanel extends JPanel {
 	public void initialize(final Unit unit, String buttonstring) {
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		_mainPanel.setLayout(new BoxLayout(_mainPanel, BoxLayout.X_AXIS));
+		_tablePanel.setLayout(new BorderLayout());
+//		_tablePanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, INPUTTABLE_HEIGHT));
 		final HashMap<Attribute, JComponent> components = new HashMap<Attribute, JComponent>();
 		for (final Attribute attr : unit.getAttributes()) {
 			if (attr instanceof GroupingAttribute) {
@@ -55,18 +62,18 @@ public class UnitPanel extends JPanel {
 					public void actionPerformed(ActionEvent e) {
 						if (_tablePanel.getComponentCount() == 0) {
 							_tablePanel.removeAll();
-							_tablePanel.add(components.get(attr));
-							_tablePanel.repaint();
+							_tablePanel.add(((InputTablePane) components.get(attr)).getTable().getTableHeader(), BorderLayout.PAGE_START);
+							_tablePanel.add(components.get(attr), BorderLayout.CENTER);
 						}
 						else if (_tablePanel.getComponent(0) == components.get(attr)) {
 							_tablePanel.removeAll();
-							_tablePanel.repaint();
 						}
 						else {
 							_tablePanel.removeAll();
-							_tablePanel.add(components.get(attr));
-							_tablePanel.repaint();
+							_tablePanel.add(((InputTablePane) components.get(attr)).getTable().getTableHeader(), BorderLayout.PAGE_START);
+							_tablePanel.add(components.get(attr), BorderLayout.CENTER);
 						}
+						_tablePanel.repaint();
 					}
 				});
 			}
@@ -75,6 +82,7 @@ public class UnitPanel extends JPanel {
 			_mainPanel.add(comp);
 		}
 		this.add(_mainPanel);
+		this.add(Box.createRigidArea(new Dimension(10, 10)));
 		JButton savebutton = new JButton(buttonstring);
 		savebutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -141,6 +149,7 @@ public class UnitPanel extends JPanel {
 		});
 		_buttonPanel.add(savebutton);
 		this.add(_buttonPanel);
+		this.add(Box.createRigidArea(new Dimension(10, 10)));
 		this.add(_tablePanel);
 		this.repaint();
 	}

@@ -2,19 +2,14 @@ package gui;
 
 import middleend.*;
 import backbone.*;
-
-import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Event;
 import java.awt.BorderLayout;
-import javax.swing.SwingUtilities;
 import javax.swing.KeyStroke;
 import java.awt.Point;
-import java.util.Collection;
 import java.util.List;
-
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JFileChooser;
@@ -46,10 +41,6 @@ public class App implements GUIConstants {
 	private JMenuItem _openTournamentMenuItem;
 	private JMenuItem _saveMenuItem;
 	private JMenuItem _exitMenuItem;
-	private JMenu _editMenu;
-	private JMenuItem _cutMenuItem;
-	private JMenuItem _copyMenuItem;
-	private JMenuItem _pasteMenuItem;
 	private JMenu _addMenu;
 	private JMenu _viewMenu;
 	private JRadioButtonMenuItem _viewInputMenuItem;
@@ -68,6 +59,7 @@ public class App implements GUIConstants {
 	
 	public App(MiddleEnd me) {
 		_middleEnd = me;
+		this.getJFrame().setVisible(true);
 	}
 	
 	public MiddleEnd getMiddleEnd() {
@@ -138,7 +130,6 @@ public class App implements GUIConstants {
 		if (_jJMenuBar == null) {
 			_jJMenuBar = new JMenuBar();
 			_jJMenuBar.add(getFileMenu());
-			_jJMenuBar.add(getEditMenu());
 			_jJMenuBar.add(getViewMenu());
 			_jJMenuBar.add(getAddMenu());
 			_jJMenuBar.add(getHelpMenu());
@@ -164,22 +155,6 @@ public class App implements GUIConstants {
 			_fileMenu.add(getExitMenuItem());
 		}
 		return _fileMenu;
-	}
-
-	/**
-	 * This method initializes jMenu	
-	 * 	
-	 * @return javax.swing.JMenu	
-	 */
-	public JMenu getEditMenu() {
-		if (_editMenu == null) {
-			_editMenu = new JMenu();
-			_editMenu.setText("Edit");
-			_editMenu.add(getCutMenuItem());
-			_editMenu.add(getCopyMenuItem());
-			_editMenu.add(getPasteMenuItem());
-		}
-		return _editMenu;
 	}
 	
 	/**
@@ -501,51 +476,6 @@ public class App implements GUIConstants {
 			});
 		}
 		return _exitMenuItem;
-	}
-
-	/**
-	 * This method initializes jMenuItem	
-	 * 	
-	 * @return javax.swing.JMenuItem	
-	 */
-	public JMenuItem getCutMenuItem() {
-		if (_cutMenuItem == null) {
-			_cutMenuItem = new JMenuItem();
-			_cutMenuItem.setText("Cut");
-			_cutMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X,
-					Event.CTRL_MASK, true));
-		}
-		return _cutMenuItem;
-	}
-
-	/**
-	 * This method initializes jMenuItem	
-	 * 	
-	 * @return javax.swing.JMenuItem	
-	 */
-	public JMenuItem getCopyMenuItem() {
-		if (_copyMenuItem == null) {
-			_copyMenuItem = new JMenuItem();
-			_copyMenuItem.setText("Copy");
-			_copyMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C,
-					Event.CTRL_MASK, true));
-		}
-		return _copyMenuItem;
-	}
-
-	/**
-	 * This method initializes jMenuItem	
-	 * 	
-	 * @return javax.swing.JMenuItem	
-	 */
-	public JMenuItem getPasteMenuItem() {
-		if (_pasteMenuItem == null) {
-			_pasteMenuItem = new JMenuItem();
-			_pasteMenuItem.setText("Paste");
-			_pasteMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V,
-					Event.CTRL_MASK, true));
-		}
-		return _pasteMenuItem;
 	}
 
 	/**

@@ -15,7 +15,6 @@ public class MiddleEnd {
 		_tmnt = t;
 		
 		_app = new App(this);
-		_app.getJFrame().setVisible(true);
 	}
 	
 	public void repaintAll() {

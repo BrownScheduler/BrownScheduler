@@ -16,6 +16,6 @@ public class TeamGrouping extends MyCategory<Team>{
 
 	@Override
 	public Team getBlank() {
-		return new Team(null);
+		return new Team("");
 	}
 }
