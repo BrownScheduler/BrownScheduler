@@ -30,17 +30,17 @@ public class App implements GUIConstants {
 	private MiddleEnd _middleEnd;
 	private JFrame _jFrame;
 	private InputPanel _inputPane;
-	private JScrollPane _managementScrollPane;
 	private ManagementPanel _managementPane;
 	private JMenuBar _jJMenuBar;
 	private JMenu _fileMenu;
-	private JMenuItem _pluginOptionsMenuItem;
-	private JMenuItem _programOptionsMenuItem;
 	private JMenuItem _printMenuItem;
 	private JMenuItem _openPluginMenuItem;
 	private JMenuItem _openTournamentMenuItem;
 	private JMenuItem _saveMenuItem;
 	private JMenuItem _exitMenuItem;
+	private JMenu _optionsMenu;
+	private JMenuItem _programOptionsMenuItem;
+	private JMenuItem _pluginOptionsMenuItem;
 	private JMenu _addMenu;
 	private JMenu _viewMenu;
 	private JRadioButtonMenuItem _viewInputMenuItem;
@@ -98,18 +98,6 @@ public class App implements GUIConstants {
 	}
 	
 	/**
-	 * This method initializes JScrollPanel
-	 * 
-	 * @return JScrollPanel
-	 */
-	public JScrollPane getManagementScrollPanel() {
-		if (_managementScrollPane == null) {
-			_managementScrollPane = new JScrollPane(getManagementPanel());
-		}
-		return _managementScrollPane;
-	}
-	
-	/**
 	 * This method initializes ManagementPanel
 	 * 
 	 * @return MangementPanel
@@ -130,6 +118,7 @@ public class App implements GUIConstants {
 		if (_jJMenuBar == null) {
 			_jJMenuBar = new JMenuBar();
 			_jJMenuBar.add(getFileMenu());
+			_jJMenuBar.add(getOptionsMenu());
 			_jJMenuBar.add(getViewMenu());
 			_jJMenuBar.add(getAddMenu());
 			_jJMenuBar.add(getHelpMenu());
@@ -148,13 +137,26 @@ public class App implements GUIConstants {
 			_fileMenu.setText("File");
 			_fileMenu.add(getOpenPluginMenuItem());
 			_fileMenu.add(getOpenTournamentMenuItem());
-			_fileMenu.add(getPluginOptionsMenuItem());
-			_fileMenu.add(getProgramOptionsMenuItem());
 			_fileMenu.add(getPrintMenuItem());
 			_fileMenu.add(getSaveMenuItem());
 			_fileMenu.add(getExitMenuItem());
 		}
 		return _fileMenu;
+	}
+	
+	/**
+	 * This method initializes jMenu	
+	 * 	
+	 * @return javax.swing.JMenu	
+	 */
+	public JMenu getOptionsMenu() {
+		if (_optionsMenu == null) {
+			_optionsMenu = new JMenu();
+			_optionsMenu.setText("Options");
+			_optionsMenu.add(getProgramOptionsMenuItem());
+			_optionsMenu.add(getPluginOptionsMenuItem());
+		}
+		return _optionsMenu;
 	}
 	
 	/**
@@ -184,47 +186,13 @@ public class App implements GUIConstants {
 		if (_addMenu == null) {
 			_addMenu = new JMenu();
 			_addMenu.setText("Add");
-//			_addMenu.add(arg0);
+			_addMenu.add(getCreateRoundMenuItem());
 			List<Grouping> groupings = _middleEnd.getTournament().getCategories();
 			for (Grouping<Unit> g : groupings) {
 				_addMenu.add(createAddMenuItem(g));
 			}
 		}
 		return _addMenu;
-	}
-	
-	/**
-	 * This method initializes jMenuItem	
-	 * 	
-	 * @return javax.swing.JMenuItem	
-	 */
-	public JMenuItem getCreateRoundMenuItem() {
-		JMenuItem item = new JMenuItem();
-		item.setText("Create new round from existing units...");
-		item.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				_middleEnd.getTournament().createNextRound();
-				getViewManagementMenuItem().doClick();
-			}
-		});
-		return item;
-	}
-	
-	/**
-	 * This method initializes jMenuItem	
-	 * 	
-	 * @return javax.swing.JMenuItem	
-	 */
-	public JMenuItem createAddMenuItem(final Grouping<Unit> g) {
-		JMenuItem item = new JMenuItem();
-		item.setText("New " + g.getName() + "...");
-		item.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				getInputPanel().getAddingPanel().setAddPanel(g);
-				_middleEnd.repaintAll();
-			}
-		});
-		return item;
 	}
 
 	/**
@@ -267,106 +235,6 @@ public class App implements GUIConstants {
 			});
 		}
 		return _saveMenuItem;
-	}
-	
-	/**
-	 * This method initializes jMenuItem	
-	 * 	
-	 * @return javax.swing.JMenuItem	
-	 */
-	public JMenuItem getPluginOptionsMenuItem() {
-		if (_pluginOptionsMenuItem == null) {
-			_pluginOptionsMenuItem = new JMenuItem();
-			_pluginOptionsMenuItem.setText("Plugin Options...");
-			_pluginOptionsMenuItem.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					JDialog pluginOptionsDialog = getPluginOptionsDialog();
-					pluginOptionsDialog.pack();
-					Point loc = getJFrame().getLocation();
-					loc.translate(20, 20);
-					pluginOptionsDialog.setLocation(loc);
-					pluginOptionsDialog.setVisible(true);
-				}
-			});
-		}
-		return _pluginOptionsMenuItem;
-	}
-	
-	/**
-	 * This method initializes _pluginOptionsPane	
-	 * 	
-	 * @return javax.swing.JDialog	
-	 */
-	private JDialog getPluginOptionsDialog() {
-		if (_pluginOptionsDialog == null) {
-			_pluginOptionsDialog = new JDialog(getJFrame());
-			_pluginOptionsDialog.setTitle("Plugin Options");
-			_pluginOptionsDialog.setContentPane(getPluginOptionsContentPane());
-		}
-		return _pluginOptionsDialog;
-	}
-
-	/**
-	 * This method initializes _pluginOptionsContentPane	
-	 * 	
-	 * @return javax.swing.JPanel	
-	 */
-	private JPanel getPluginOptionsContentPane() {
-		if (_pluginOptionsContentPane == null) {
-			_pluginOptionsContentPane = new JPanel();
-			_pluginOptionsContentPane.setLayout(new BorderLayout());
-		}
-		return _pluginOptionsContentPane;
-	}
-	
-	/**
-	 * This method initializes jMenuItem	
-	 * 	
-	 * @return javax.swing.JMenuItem	
-	 */
-	public JMenuItem getProgramOptionsMenuItem() {
-		if (_programOptionsMenuItem == null) {
-			_programOptionsMenuItem = new JMenuItem();
-			_programOptionsMenuItem.setText("Program Options...");
-			_programOptionsMenuItem.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					JDialog programOptionsDialog = getProgramOptionsDialog();
-					programOptionsDialog.pack();
-					Point loc = getJFrame().getLocation();
-					loc.translate(20, 20);
-					programOptionsDialog.setLocation(loc);
-					programOptionsDialog.setVisible(true);
-				}
-			});
-		}
-		return _programOptionsMenuItem;
-	}
-	
-	/**
-	 * This method initializes _optionsDialog	
-	 * 	
-	 * @return javax.swing.JDialog	
-	 */
-	private JDialog getProgramOptionsDialog() {
-		if (_programOptionsDialog == null) {
-			_programOptionsDialog = new JDialog(getJFrame());
-			_programOptionsDialog.setTitle("Program Options");
-			_programOptionsDialog.setContentPane(getProgramOptionsContentPane());
-		}
-		return _programOptionsDialog;
-	}
-
-	/**
-	 * This method initializes _optionsContentPane	
-	 * 	
-	 * @return javax.swing.JPanel	
-	 */
-	private JPanel getProgramOptionsContentPane() {
-		if (_programOptionsContentPane == null) {
-			_programOptionsContentPane = new JPanel();
-			_programOptionsContentPane.setLayout(new BorderLayout());
-		}
-		return _programOptionsContentPane;
 	}
 	
 	/**
@@ -495,6 +363,106 @@ public class App implements GUIConstants {
 		}
 		return _exitMenuItem;
 	}
+	
+	/**
+	 * This method initializes jMenuItem	
+	 * 	
+	 * @return javax.swing.JMenuItem	
+	 */
+	public JMenuItem getPluginOptionsMenuItem() {
+		if (_pluginOptionsMenuItem == null) {
+			_pluginOptionsMenuItem = new JMenuItem();
+			_pluginOptionsMenuItem.setText("Plugin Options...");
+			_pluginOptionsMenuItem.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					JDialog pluginOptionsDialog = getPluginOptionsDialog();
+					pluginOptionsDialog.pack();
+					Point loc = getJFrame().getLocation();
+					loc.translate(20, 20);
+					pluginOptionsDialog.setLocation(loc);
+					pluginOptionsDialog.setVisible(true);
+				}
+			});
+		}
+		return _pluginOptionsMenuItem;
+	}
+	
+	/**
+	 * This method initializes _pluginOptionsPane	
+	 * 	
+	 * @return javax.swing.JDialog	
+	 */
+	private JDialog getPluginOptionsDialog() {
+		if (_pluginOptionsDialog == null) {
+			_pluginOptionsDialog = new JDialog(getJFrame());
+			_pluginOptionsDialog.setTitle("Plugin Options");
+			_pluginOptionsDialog.setContentPane(getPluginOptionsContentPane());
+		}
+		return _pluginOptionsDialog;
+	}
+
+	/**
+	 * This method initializes _pluginOptionsContentPane	
+	 * 	
+	 * @return javax.swing.JPanel	
+	 */
+	private JPanel getPluginOptionsContentPane() {
+		if (_pluginOptionsContentPane == null) {
+			_pluginOptionsContentPane = new JPanel();
+			_pluginOptionsContentPane.setLayout(new BorderLayout());
+		}
+		return _pluginOptionsContentPane;
+	}
+	
+	/**
+	 * This method initializes jMenuItem	
+	 * 	
+	 * @return javax.swing.JMenuItem	
+	 */
+	public JMenuItem getProgramOptionsMenuItem() {
+		if (_programOptionsMenuItem == null) {
+			_programOptionsMenuItem = new JMenuItem();
+			_programOptionsMenuItem.setText("Program Options...");
+			_programOptionsMenuItem.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					JDialog programOptionsDialog = getProgramOptionsDialog();
+					programOptionsDialog.pack();
+					Point loc = getJFrame().getLocation();
+					loc.translate(20, 20);
+					programOptionsDialog.setLocation(loc);
+					programOptionsDialog.setVisible(true);
+				}
+			});
+		}
+		return _programOptionsMenuItem;
+	}
+	
+	/**
+	 * This method initializes _optionsDialog	
+	 * 	
+	 * @return javax.swing.JDialog	
+	 */
+	private JDialog getProgramOptionsDialog() {
+		if (_programOptionsDialog == null) {
+			_programOptionsDialog = new JDialog(getJFrame());
+			_programOptionsDialog.setTitle("Program Options");
+			_programOptionsDialog.setContentPane(getProgramOptionsContentPane());
+		}
+		return _programOptionsDialog;
+	}
+
+	/**
+	 * This method initializes _optionsContentPane	
+	 * 	
+	 * @return javax.swing.JPanel	
+	 */
+	private JPanel getProgramOptionsContentPane() {
+		if (_programOptionsContentPane == null) {
+			_programOptionsContentPane = new JPanel();
+			_programOptionsContentPane.setLayout(new BorderLayout());
+		}
+		return _programOptionsContentPane;
+	}
 
 	/**
 	 * This method initializes jMenuItem	
@@ -511,6 +479,7 @@ public class App implements GUIConstants {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					getInputPanel().setSize(_jFrame.getContentPane().getSize());
 					_jFrame.setContentPane(getInputPanel());
+					getInputPanel().repaintAll();
 				}
 			});
 		}
@@ -530,12 +499,47 @@ public class App implements GUIConstants {
 					Event.CTRL_MASK, true));
 			_viewManagementMenuItem.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					getManagementScrollPanel().setSize(_jFrame.getContentPane().getSize());
-					_jFrame.setContentPane(getManagementScrollPanel());
+					getManagementPanel().setSize(_jFrame.getSize());
+					_jFrame.setContentPane(getManagementPanel());
+					getManagementPanel().repaintAll();
 				}
 			});
 		}
 		return _viewManagementMenuItem;
+	}
+	
+	/**
+	 * This method initializes jMenuItem	
+	 * 	
+	 * @return javax.swing.JMenuItem	
+	 */
+	public JMenuItem getCreateRoundMenuItem() {
+		JMenuItem item = new JMenuItem();
+		item.setText("Create new round from existing units...");
+		item.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				_middleEnd.getTournament().createNextRound();
+				getViewManagementMenuItem().doClick();
+			}
+		});
+		return item;
+	}
+	
+	/**
+	 * This method initializes jMenuItem	
+	 * 	
+	 * @return javax.swing.JMenuItem	
+	 */
+	public JMenuItem createAddMenuItem(final Grouping<Unit> g) {
+		JMenuItem item = new JMenuItem();
+		item.setText("New " + g.getName() + "...");
+		item.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				getInputPanel().getAddingPanel().setAddPanel(g);
+				_middleEnd.repaintAll();
+			}
+		});
+		return item;
 	}
 	
 	/**
