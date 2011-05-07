@@ -5,7 +5,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import backbone.Attribute;
-import backbone.Grouping;
 import backbone.GroupingAttribute;
 import backbone.StringAttribute;
 import backbone.Unit;
@@ -22,7 +21,6 @@ public class Judge implements Unit{
 	
 	
 	HashSet<Team> _conflictedTeams;
-	private Grouping<Unit> _category;
 	private String _name;
 	
 	public Judge(String name) {
@@ -79,18 +77,6 @@ public class Judge implements Unit{
 	public Unit getBlank() {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	@Override
-	public Grouping<Unit> getMemberOf() {
-		// TODO Auto-generated method stub
-		return this._category;
-	}
-
-	@Override
-	public void setMemberOf(Grouping<Unit> g) {
-		this._category = g;
-		
 	}
 	
 }

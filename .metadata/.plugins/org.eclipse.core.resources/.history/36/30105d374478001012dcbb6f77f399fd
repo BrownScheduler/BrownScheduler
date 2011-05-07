@@ -80,7 +80,7 @@ public class Team implements CompetitiveUnit {
 
 	@Override
 	public void setMemberOf(Grouping<Unit> g) {
-		this._category = g;
+		// TODO Auto-generated method stub
 		
 	}
 

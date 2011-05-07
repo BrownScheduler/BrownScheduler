@@ -22,7 +22,7 @@ public class Judge implements Unit{
 	
 	
 	HashSet<Team> _conflictedTeams;
-	private Grouping<Unit> _category;
+	private Grouping<Judge> _category;
 	private String _name;
 	
 	public Judge(String name) {

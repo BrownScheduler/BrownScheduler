@@ -22,7 +22,7 @@ public class Judge implements Unit{
 	
 	
 	HashSet<Team> _conflictedTeams;
-	private Grouping<Unit> _category;
+	private Grouping<Judge> _category;
 	private String _name;
 	
 	public Judge(String name) {
@@ -84,12 +84,12 @@ public class Judge implements Unit{
 	@Override
 	public Grouping<Unit> getMemberOf() {
 		// TODO Auto-generated method stub
-		return this._category;
+		return null;
 	}
 
 	@Override
 	public void setMemberOf(Grouping<Unit> g) {
-		this._category = g;
+		// TODO Auto-generated method stub
 		
 	}
 	

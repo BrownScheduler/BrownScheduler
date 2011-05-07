@@ -4,9 +4,9 @@ import java.util.List;
 
 public interface Unit {
 	
-	public Grouping<Unit> getMemberOf();
+	public Grouping getMemberOf();
 	
-	public void setMemberOf(Grouping<Unit> g);
+	public void setMemberOf(Grouping g);
 	
 	public Unit getBlank();
 
