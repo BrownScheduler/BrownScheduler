@@ -6,7 +6,6 @@ import backbone.*;
 
 public class Team implements CompetitiveUnit {
 	
-	private Grouping<Unit> _category;
 	private String _name;
 	private int _wins;
 	public Team(String name){
@@ -71,17 +70,6 @@ public class Team implements CompetitiveUnit {
 	public Unit getBlank() {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	@Override
-	public Grouping<Unit> getMemberOf() {
-		return _category;
-	}
-
-	@Override
-	public void setMemberOf(Grouping<Unit> g) {
-		this._category = g;
-		
 	}
 
 

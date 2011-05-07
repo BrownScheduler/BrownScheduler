@@ -114,13 +114,13 @@ public class MyPairing implements backbone.Pairing{
 	}
 
 	@Override
-	public Grouping getMemberOf() {
+	public Grouping<Unit> getMemberOf() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void setMemberOf(Grouping g) {
+	public void setMemberOf(Grouping<Unit> g) {
 		// TODO Auto-generated method stub
 		
 	}
