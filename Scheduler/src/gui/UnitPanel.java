@@ -2,11 +2,16 @@ package gui;
 
 import backbone.*;
 import middleend.*;
+
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -14,7 +19,7 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class UnitPanel extends JPanel {
+public class UnitPanel extends JPanel implements GUIConstants {
 
 	private MiddleEnd _middleEnd;
 	private Utility _util;
@@ -27,7 +32,7 @@ public class UnitPanel extends JPanel {
 		_mainPanel = new JPanel();
 		_buttonPanel = new JPanel();
 		_tablePanel = new JPanel();
-		initialize(u);
+		initialize(u, "Save Changes");
 	}
 	
 	public UnitPanel(MiddleEnd m, Unit u, Grouping g) {
@@ -37,17 +42,19 @@ public class UnitPanel extends JPanel {
 		_mainPanel = new JPanel();
 		_buttonPanel = new JPanel();
 		_tablePanel = new JPanel();
-		initialize(u);
+		initialize(u, "Save Changes to New Unit");
 	}
 	
-	public void initialize(final Unit unit) {
+	public void initialize(final Unit unit, String buttonstring) {
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		_mainPanel.setLayout(new BoxLayout(_mainPanel, BoxLayout.X_AXIS));
+		_tablePanel.setLayout(new BorderLayout());
+//		_tablePanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, INPUTTABLE_HEIGHT));
 		final HashMap<Attribute, JComponent> components = new HashMap<Attribute, JComponent>();
 		for (final Attribute attr : unit.getAttributes()) {
 			if (attr instanceof GroupingAttribute) {
 				GroupingAttribute<Unit> g = (GroupingAttribute<Unit>) attr;
-				components.put(attr, new InputTablePane(_middleEnd, g.getBlankUnit().getAttributes(), g.getMembers()));
+				components.put(attr, new InputTablePane(_middleEnd, g.getBlankUnit().getAttributes(), g));
 			}
 			JComponent comp = _util.getField(attr);
 			if (comp instanceof JButton) {
@@ -55,18 +62,18 @@ public class UnitPanel extends JPanel {
 					public void actionPerformed(ActionEvent e) {
 						if (_tablePanel.getComponentCount() == 0) {
 							_tablePanel.removeAll();
-							_tablePanel.add(components.get(attr));
-							_tablePanel.repaint();
+							_tablePanel.add(((InputTablePane) components.get(attr)).getTable().getTableHeader(), BorderLayout.PAGE_START);
+							_tablePanel.add(components.get(attr), BorderLayout.CENTER);
 						}
 						else if (_tablePanel.getComponent(0) == components.get(attr)) {
 							_tablePanel.removeAll();
-							_tablePanel.repaint();
 						}
 						else {
 							_tablePanel.removeAll();
-							_tablePanel.add(components.get(attr));
-							_tablePanel.repaint();
+							_tablePanel.add(((InputTablePane) components.get(attr)).getTable().getTableHeader(), BorderLayout.PAGE_START);
+							_tablePanel.add(components.get(attr), BorderLayout.CENTER);
 						}
+						_tablePanel.repaint();
 					}
 				});
 			}
@@ -75,7 +82,8 @@ public class UnitPanel extends JPanel {
 			_mainPanel.add(comp);
 		}
 		this.add(_mainPanel);
-		JButton savebutton = new JButton("Save Changes");
+		this.add(Box.createRigidArea(new Dimension(10, 10)));
+		JButton savebutton = new JButton(buttonstring);
 		savebutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Collection<Attribute> attributes = components.keySet();
@@ -121,6 +129,7 @@ public class UnitPanel extends JPanel {
 								j++;
 							}
 						}
+						table = new InputTablePane(_middleEnd, groupattr.getBlankUnit().getAttributes(), groupattr);
 					}
 					else if (attr.getType() == Attribute.Type.INT) {
 						int value = Integer.parseInt(((JTextField) components.get(attr)).getText());
@@ -140,6 +149,7 @@ public class UnitPanel extends JPanel {
 		});
 		_buttonPanel.add(savebutton);
 		this.add(_buttonPanel);
+		this.add(Box.createRigidArea(new Dimension(10, 10)));
 		this.add(_tablePanel);
 		this.repaint();
 	}

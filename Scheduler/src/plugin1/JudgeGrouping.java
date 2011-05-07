@@ -13,7 +13,7 @@ public class JudgeGrouping extends MyCategory<Judge> {
 
 	@Override
 	public Judge getBlank() {
-		return new Judge(null);
+		return new Judge("");
 	}
 
 }
