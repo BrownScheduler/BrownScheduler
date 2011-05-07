@@ -46,7 +46,6 @@ public class UnitAttribute<T extends Unit> extends Attribute {
 		s += "memberOf: ";
 		if(memberOf == null) s += null;
 		else s += memberOf.getName();
-		return s;
 	}
 
 }

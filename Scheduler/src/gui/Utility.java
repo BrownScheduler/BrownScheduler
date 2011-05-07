@@ -150,7 +150,7 @@ public class Utility implements GUIConstants {
 			return new JLabel(new Double(((DoubleAttribute) attribute).getAttribute()).toString());
 		}
 		else if (attribute.getType() == Attribute.Type.GROUPING) {
-			return new JLabel(((GroupingAttribute) attribute).getTitle() + " grouping");
+			return new JLabel(((GroupingAttribute) attribute).getTitle());
 		}
 		else if (attribute.getType() == Attribute.Type.INT) {
 			return new JLabel(new Integer(((IntAttribute) attribute).getAttribute()).toString());

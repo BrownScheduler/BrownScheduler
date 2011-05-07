@@ -17,10 +17,12 @@ public class RoundPanel extends JPanel implements GUIConstants {
 	public RoundPanel(Round r) {
 		_round = r;
 		_pairingpanels = new ArrayList<PairingPanel>();
-		initialize();
+		resetPanel();
 	}
 	
-	public void initialize() {
+	public void resetPanel() {
+		this.removeAll();
+		_pairingpanels.clear();
 		this.setSize(DEFAULT_SIZE);
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		for (Pairing pairing : _round.getPairings()) {
@@ -29,9 +31,11 @@ public class RoundPanel extends JPanel implements GUIConstants {
 			this.add(pp);
 			this.add(Box.createRigidArea(SPACING_SIZE));
 		}
+		this.add(Box.createVerticalGlue());
 	}
 	
 	public void repaintAll() {
+		this.resetPanel();
 		for (PairingPanel pairingpanel : _pairingpanels)
 			pairingpanel.repaintAll();
 		this.repaint();

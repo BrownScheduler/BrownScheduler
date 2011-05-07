@@ -24,7 +24,6 @@ public abstract class MyCategory<T extends Unit> implements Grouping<T> {
 	@Override
 	public void addMember(T member) {
 		_members.add(member);
-		member.setMemberOf((Grouping<Unit>) this);
 		
 	}
 
