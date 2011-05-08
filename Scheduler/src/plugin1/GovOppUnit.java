@@ -34,11 +34,6 @@ public class GovOppUnit implements Unit{
 	}
 
 	@Override
-	public Unit getBlank() {
-		return new GovOppUnit(null);
-	}
-
-	@Override
 	public Grouping<Unit> getMemberOf() {
 		// TODO Auto-generated method stub
 		return memOf;

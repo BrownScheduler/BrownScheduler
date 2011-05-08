@@ -6,8 +6,6 @@ import java.util.Collection;
 import java.util.List;
 
 public interface Tournament extends Serializable {
-	
-	public Round getCurrentRound();
 
 	public List<Grouping> getCategories();
 	

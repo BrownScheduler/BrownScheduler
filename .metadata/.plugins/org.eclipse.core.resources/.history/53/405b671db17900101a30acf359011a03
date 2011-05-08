@@ -1,0 +1,7 @@
+package roundrobin;
+
+import plugin1.MyCategory;
+
+public class PlayerGrouping extends MyCategory<Player> {
+
+}

@@ -1,0 +1,7 @@
+package roundrobin;
+
+import MyCategory;
+
+public class FieldGrouping extends MyCategory<Field> {
+
+}

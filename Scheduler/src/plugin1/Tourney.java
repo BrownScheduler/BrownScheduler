@@ -25,30 +25,8 @@ public class Tourney implements backbone.Tournament{
 	public Tourney(){
 		rounds = new ArrayList<MyRound>();
 		competitors = new TeamGrouping("Competitors");
-		judges = new JudgeGrouping("Judges");
+		judges = new JudgeGrouping(this, "Judges");
 		totalRounds = 2;
-	}
-
-	
-	@Override
-	public MyRound getCurrentRound() {
-		if(rounds == null){
-			rounds = new ArrayList<MyRound>();
-			rounds.add(new MyRound("first round"));
-		}
-		int r = rounds.size() - 1;
-		plugin1.MyRound currRound = rounds.get(r);
-		if(currRound != null){
-			if(!currRound.isFinished() || currRound.getRoundNum() >= totalRounds){
-				return currRound;
-			}
-			else{
-				MyRound nextRound = new MyRound("another round");
-				rounds.add(nextRound);
-				return nextRound;
-			}
-		}
-		return null;
 	}
 	
 	@Override

@@ -150,12 +150,6 @@ public class MyPairing implements backbone.Pairing{
 	}
 
 	@Override
-	public Unit getBlank() {
-		// TODO Auto-generated method stub
-		return new MyPairing(_t);
-	}
-
-	@Override
 	public Grouping getMemberOf() {
 		// TODO Auto-generated method stub
 		return _roundIn;

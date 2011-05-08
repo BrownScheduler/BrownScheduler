@@ -68,12 +68,6 @@ public class Team implements CompetitiveUnit {
 	}
 
 	@Override
-	public Unit getBlank() {
-		// TODO Auto-generated method stub
-		return new Team("");
-	}
-
-	@Override
 	public Grouping<Unit> getMemberOf() {
 		return _category;
 	}

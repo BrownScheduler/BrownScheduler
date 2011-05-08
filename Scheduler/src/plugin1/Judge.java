@@ -24,10 +24,12 @@ public class Judge implements Unit{
 	HashSet<Team> _conflictedTeams;
 	private Grouping<Unit> _category;
 	private String _name;
+	private Tourney _t;
 	
-	public Judge(String name) {
+	public Judge(Tourney t, String name) {
 		this._name = name;
 		_conflictedTeams = new HashSet<Team>();
+		_t = t;
 	}
 
 	@Override
@@ -74,11 +76,6 @@ public class Judge implements Unit{
 		}
 		
 		return r;
-	}
-	
-	@Override
-	public Unit getBlank() {
-		return new Judge("");
 	}
 
 	@Override
