@@ -65,13 +65,5 @@ public class GovOppUnit implements Unit{
 		this.memOf = g;
 		
 	}
-	
-	public String toString(){
-		String r = "Gov? ";
-		r += isGov;
-		r += "Opp? ";
-		r += isOpp;
-		return r;
-	}
 
 }

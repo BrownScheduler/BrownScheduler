@@ -94,8 +94,8 @@ public class PairingPanel extends JPanel implements GUIConstants {
 			
 			final Unit[] units = (Unit[]) _unitattribute.getListOfUnits().toArray(new Unit[0]);
 			String[] unitnames = new String[units.length];
-			//units[0] = null;
-			//unitnames[0] = "";
+			units[0] = null;
+			unitnames[0] = "";
 			int toSelect = 0;
 			for (int i = 1; i < units.length; i++) {
 				unitnames[i] = units[i].getName();
@@ -106,8 +106,7 @@ public class PairingPanel extends JPanel implements GUIConstants {
 			this.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					UnitAttributeComboBox cb = (UnitAttributeComboBox) e.getSource();
-					//getSelectedIndex is initially -1. What?
-					if (cb.getSelectedIndex() < 0) {
+					if (cb.getSelectedIndex() == 0) {
 						_pairing.setAttribute(new UnitAttribute(_unitattribute.getTitle(), _unitattribute.getMemberOf()));
 					}
 					else {

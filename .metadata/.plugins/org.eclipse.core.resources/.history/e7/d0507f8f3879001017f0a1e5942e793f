@@ -106,8 +106,7 @@ public class PairingPanel extends JPanel implements GUIConstants {
 			this.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					UnitAttributeComboBox cb = (UnitAttributeComboBox) e.getSource();
-					//getSelectedIndex is initially -1. What?
-					if (cb.getSelectedIndex() < 0) {
+					if (cb.getSelectedIndex() <= 0) {
 						_pairing.setAttribute(new UnitAttribute(_unitattribute.getTitle(), _unitattribute.getMemberOf()));
 					}
 					else {
