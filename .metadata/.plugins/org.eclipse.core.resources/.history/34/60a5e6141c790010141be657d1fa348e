@@ -85,7 +85,7 @@ public class UnitPanel extends JPanel implements GUIConstants {
 			toAdd.setLayout(new BoxLayout(toAdd, BoxLayout.Y_AXIS));
 			toAdd.add(titLabel);
 			toAdd.add(comp);
-			_mainPanel.add(toAdd);
+			_mainPanel.add(comp);
 		}
 		this.add(_mainPanel);
 		this.add(Box.createRigidArea(new Dimension(10, 10)));
