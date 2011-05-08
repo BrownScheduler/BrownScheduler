@@ -13,7 +13,6 @@ import java.awt.Point;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
-import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -27,7 +26,6 @@ import javax.swing.JMenu;
 import javax.swing.JFrame;
 import javax.swing.JDialog;
 import javax.swing.JRadioButtonMenuItem;
-import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -50,7 +48,7 @@ public class App implements GUIConstants {
 	private JMenu _optionsMenu;
 	private JMenuItem _programOptionsMenuItem;
 	private JMenuItem _pluginOptionsMenuItem;
-	private JMenu _addMenu;
+	private JMenu _editMenu;
 	private JMenu _viewMenu;
 	private JRadioButtonMenuItem _viewInputMenuItem;
 	private JRadioButtonMenuItem _viewManagementMenuItem;
@@ -106,8 +104,8 @@ public class App implements GUIConstants {
 			_toolbar.setSize(TOOLBAR_SIZE);
 			_toolbar.setMinimumSize(TOOLBAR_SIZE);
 			_toolbar.setMaximumSize(TOOLBAR_SIZE);
-			for (int i = 0; i < getAddMenu().getMenuComponentCount(); i++) {
-				Component comp = getAddMenu().getMenuComponent(i);
+			for (int i = 0; i < getEditMenu().getMenuComponentCount(); i++) {
+				Component comp = getEditMenu().getMenuComponent(i);
 				if (comp instanceof JMenuItem) {
 					final JMenuItem menuitem = (JMenuItem) comp;
 					JButton button = new JButton(menuitem.getText());
@@ -183,7 +181,7 @@ public class App implements GUIConstants {
 			_jJMenuBar.add(getFileMenu());
 			_jJMenuBar.add(getOptionsMenu());
 			_jJMenuBar.add(getViewMenu());
-			_jJMenuBar.add(getAddMenu());
+			_jJMenuBar.add(getEditMenu());
 			_jJMenuBar.add(getHelpMenu());
 		}
 		return _jJMenuBar;
@@ -245,31 +243,17 @@ public class App implements GUIConstants {
 	 * 	
 	 * @return javax.swing.JMenu	
 	 */
-	public JMenu getAddMenu() {
-		if (_addMenu == null) {
-			_addMenu = new JMenu();
-			_addMenu.setText("Add");
-			_addMenu.add(getCreateRoundMenuItem());
+	public JMenu getEditMenu() {
+		if (_editMenu == null) {
+			_editMenu = new JMenu();
+			_editMenu.setText("Edit");
+			_editMenu.add(getCreateRoundMenuItem());
 			List<Grouping> groupings = _middleEnd.getTournament().getCategories();
 			for (Grouping<Unit> g : groupings) {
-				_addMenu.add(createAddMenuItem(g));
+				_editMenu.add(createEditMenuItem(g));
 			}
 		}
-		return _addMenu;
-	}
-
-	/**
-	 * This method initializes jMenu	
-	 * 	
-	 * @return javax.swing.JMenu	
-	 */
-	public JMenu getHelpMenu() {
-		if (_helpMenu == null) {
-			_helpMenu = new JMenu();
-			_helpMenu.setText("Help");
-			_helpMenu.add(getAboutMenuItem());
-		}
-		return _helpMenu;
+		return _editMenu;
 	}
 	
 	/**
@@ -593,7 +577,7 @@ public class App implements GUIConstants {
 	 * 	
 	 * @return javax.swing.JMenuItem	
 	 */
-	public JMenuItem createAddMenuItem(final Grouping<Unit> g) {
+	public JMenuItem createEditMenuItem(final Grouping<Unit> g) {
 		JMenuItem item = new JMenuItem();
 		item.setText("New " + g.getName() + "...");
 		item.addActionListener(new ActionListener() {
@@ -603,6 +587,20 @@ public class App implements GUIConstants {
 			}
 		});
 		return item;
+	}
+	
+	/**
+	 * This method initializes jMenu	
+	 * 	
+	 * @return javax.swing.JMenu	
+	 */
+	public JMenu getHelpMenu() {
+		if (_helpMenu == null) {
+			_helpMenu = new JMenu();
+			_helpMenu.setText("Help");
+			_helpMenu.add(getAboutMenuItem());
+		}
+		return _helpMenu;
 	}
 	
 	/**

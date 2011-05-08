@@ -1,13 +1,11 @@
 package gui;
 
-import java.awt.Dimension;
-import java.util.ArrayList;
-
 import middleend.*;
 import backbone.*;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
+import java.util.ArrayList;
 
 public class RoundPanel extends JPanel implements GUIConstants {
 

@@ -80,7 +80,7 @@ public class Utility implements GUIConstants {
 			return getDoubleField((DoubleAttribute) attribute, isEditable);
 		}
 		else if (attribute.getType() == Attribute.Type.GROUPING) {
-			return getGroupingField((GroupingAttribute) attribute, isEditable);
+			return getGroupingField((GroupingAttribute<?>) attribute, isEditable);
 		}
 		else if (attribute.getType() == Attribute.Type.INT) {
 			return getIntegerField((IntAttribute) attribute, isEditable);
@@ -133,7 +133,7 @@ public class Utility implements GUIConstants {
 		return field;
 	}
 	
-	public static JButton getGroupingField(GroupingAttribute attribute, boolean isEditable) { //TODO uneditability?
+	public static JButton getGroupingField(GroupingAttribute<?> attribute, boolean isEditable) { //TODO uneditability?
 		JButton button = new JButton("Edit " + attribute.getTitle() + "...");
 		return button;
 	}
@@ -150,7 +150,7 @@ public class Utility implements GUIConstants {
 			return new JLabel(new Double(((DoubleAttribute) attribute).getAttribute()).toString());
 		}
 		else if (attribute.getType() == Attribute.Type.GROUPING) {
-			return new JLabel(((GroupingAttribute) attribute).getTitle());
+			return new JLabel(((GroupingAttribute<?>) attribute).getTitle());
 		}
 		else if (attribute.getType() == Attribute.Type.INT) {
 			return new JLabel(new Integer(((IntAttribute) attribute).getAttribute()).toString());
@@ -159,6 +159,45 @@ public class Utility implements GUIConstants {
 			return new JLabel(((StringAttribute) attribute).getAttribute());
 		}
 		return null;
+	}
+	
+	public static JTextField getBlankStringField(boolean isEditable) {
+		JTextField field = new JTextField();
+		field.setMaximumSize(TEXTFIELD_SIZE);
+		field.setEditable(isEditable);
+		return field;
+	}
+	
+	public static JFormattedTextField getBlankIntegerField(boolean isEditable) {
+		NumberFormat nf = NumberFormat.getIntegerInstance();
+		nf.setGroupingUsed(false);
+		JFormattedTextField field = new JFormattedTextField(nf);
+		field.setMaximumSize(TEXTFIELD_SIZE);
+		field.setEditable(isEditable);
+		return field;
+	}
+	
+	public static JFormattedTextField getBlankDoubleField(boolean isEditable) {
+		DecimalFormat df = new DecimalFormat();
+		df.setGroupingUsed(false);
+		JFormattedTextField field = new JFormattedTextField(df);
+		field.setMaximumSize(TEXTFIELD_SIZE);
+		field.setEditable(isEditable);
+		field.setMaximumSize(new Dimension(100, 20));
+		return field;
+	}
+	
+	public static JCheckBox getBlankBooleanField(boolean isEditable) {
+		final JCheckBox field = new JCheckBox();
+		if (!isEditable) {
+			final boolean val = field.isSelected();
+			field.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					field.setSelected(val);
+				}
+			});
+		}
+		return field;
 	}
 	
 }

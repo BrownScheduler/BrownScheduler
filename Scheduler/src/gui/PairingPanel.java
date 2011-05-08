@@ -3,6 +3,7 @@ package gui;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import middleend.*;
 import backbone.*;
@@ -92,17 +93,18 @@ public class PairingPanel extends JPanel implements GUIConstants {
 			
 			this.setMaximumSize(JCOMBOBOX_SIZE);
 			
-			final Unit[] units = (Unit[]) _unitattribute.getListOfUnits().toArray(new Unit[0]);
-			String[] unitnames = new String[units.length];
-			units[0] = null;
-			unitnames[0] = "";
+			final ArrayList<Unit> units = new ArrayList<Unit>();
+			units.add(null);
+			units.addAll(_unitattribute.getListOfUnits());
+			ArrayList<String> unitnames = new ArrayList<String>();
+			unitnames.add("");
 			int toSelect = 0;
-			for (int i = 1; i < units.length; i++) {
-				unitnames[i] = units[i].getName();
-				if (units[i] == _unitattribute.att)
+			for (int i = 1; i < units.size(); i++) {
+				unitnames.add(units.get(i).getName());
+				if (units.get(i) == _unitattribute.att)
 					toSelect = i;
 			}
-			this.setModel(new DefaultComboBoxModel(unitnames));
+			this.setModel(new DefaultComboBoxModel(unitnames.toArray(new String[0])));
 			this.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					UnitAttributeComboBox cb = (UnitAttributeComboBox) e.getSource();
@@ -110,7 +112,7 @@ public class PairingPanel extends JPanel implements GUIConstants {
 						_pairing.setAttribute(new UnitAttribute(_unitattribute.getTitle(), _unitattribute.getMemberOf()));
 					}
 					else {
-						_pairing.setAttribute(new UnitAttribute(_unitattribute.getTitle(), units[cb.getSelectedIndex()]));
+						_pairing.setAttribute(new UnitAttribute(_unitattribute.getTitle(), units.get(cb.getSelectedIndex())));
 					}
 				}
 			});

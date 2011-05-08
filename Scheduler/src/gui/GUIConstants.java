@@ -47,5 +47,5 @@ public interface GUIConstants {
 	int SPACING_Y = 10;
 	Dimension SPACING_SIZE = new Dimension(SPACING_X, SPACING_Y);
 	
-	int DEFAULT_NUM_BLANK_ROWS = 50;
+	int DEFAULT_NUM_BLANK_ROWS = 10;
 }

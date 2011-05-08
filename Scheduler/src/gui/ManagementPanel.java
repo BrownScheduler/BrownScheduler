@@ -1,9 +1,8 @@
 package gui;
 
-import java.awt.Color;
-import java.util.ArrayList;
 import backbone.*;
 import middleend.*;
+import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;

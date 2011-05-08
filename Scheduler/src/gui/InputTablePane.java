@@ -42,7 +42,7 @@ public class InputTablePane extends JScrollPane implements GUIConstants {
 	private void initialize(List<Attribute> headers, GroupingAttribute<Unit> group) {
 		this.setSize(INPUTTABLE_SIZE);
 		this.setMinimumSize(this.getSize());
-//		this.setMaximumSize(new Dimension(Integer.MAX_VALUE, this.getHeight()));
+		this.setMaximumSize(new Dimension(Integer.MAX_VALUE, this.getHeight()));
 		_table = new JTable();
 		_table.setSize(INPUTTABLE_SIZE);
 		_table.getTableHeader().setReorderingAllowed(false);
@@ -55,6 +55,17 @@ public class InputTablePane extends JScrollPane implements GUIConstants {
 			data.add(group.getBlankUnit().getAttributes());
 		}
 		_table.setModel(new InputTableModel(headers, data, group.isEditable()));
+//		for (int i = 0; i < _table.getColumnCount(); i++) {
+//		TableColumn col = _table.getColumnModel().getColumn(i);
+//		if (_table.getModel().getColumnClass(i) == boolean.class)
+//			col.setCellEditor(new DefaultCellEditor(Utility.getBlankBooleanField(true)));
+//		if (_table.getModel().getColumnClass(i) == int.class)
+//			col.setCellEditor(new DefaultCellEditor(Utility.getBlankIntegerField(true)));
+//		if (_table.getModel().getColumnClass(i) == double.class)
+//			col.setCellEditor(new DefaultCellEditor(Utility.getBlankDoubleField(true)));
+//		if (_table.getModel().getColumnClass(i) == String.class)
+//			col.setCellEditor(new DefaultCellEditor(Utility.getBlankStringField(true)));
+//		}
 		ExcelAdapter exceladapt = new ExcelAdapter(_table);
 		this.add(_table.getTableHeader());
 		this.add(_table);
