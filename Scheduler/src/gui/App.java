@@ -126,21 +126,24 @@ public class App implements GUIConstants {
 	
 	public JPanel getMainContentAndToolbarPane() {
 		if (_mainContentAndToolbarPane == null) {
-			JPanel contentpane = new JPanel();
-			contentpane.setLayout(new BorderLayout());
-			contentpane.add(getToolbar(), BorderLayout.NORTH);
-			contentpane.add(getMainContentPane(), BorderLayout.CENTER);
+			_mainContentAndToolbarPane = new JPanel();
+			_mainContentAndToolbarPane.setLayout(new BorderLayout());
+			_mainContentAndToolbarPane.add(getToolbar(), BorderLayout.NORTH);
+			_mainContentAndToolbarPane.add(getMainContentPane(), BorderLayout.CENTER);
 		}
 		return _mainContentAndToolbarPane;
 	}
 	
 	public void setMainContentPane(JComponent pane) {
-		_mainContentPane = pane;
+		getMainContentPane().removeAll();
+		getMainContentPane().add(pane, BorderLayout.CENTER);
 	}
 	
 	public JComponent getMainContentPane() {
 		if (_mainContentPane == null) {
 			_mainContentPane = new JPanel();
+			_mainContentPane.setLayout(new BorderLayout());
+			_mainContentPane.add(getInputPanel(), BorderLayout.CENTER);
 		}
 		return _mainContentPane;
 	}
@@ -538,6 +541,7 @@ public class App implements GUIConstants {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					getInputPanel().setSize(_jFrame.getContentPane().getSize());
 					setMainContentPane(getInputPanel());
+					getMainContentAndToolbarPane().repaint();
 					getInputPanel().repaintAll();
 				}
 			});
@@ -559,6 +563,7 @@ public class App implements GUIConstants {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					getManagementPanel().setSize(_jFrame.getSize());
 					setMainContentPane(getManagementPanel());
+					getMainContentAndToolbarPane().repaint();
 					getManagementPanel().repaintAll();
 				}
 			});

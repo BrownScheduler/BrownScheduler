@@ -39,6 +39,10 @@ public interface GUIConstants {
 	int TEXTFIELD_HEIGHT = 25;
 	Dimension TEXTFIELD_SIZE = new Dimension(TEXTFIELD_WIDTH, TEXTFIELD_HEIGHT);
 	
+	int JCOMBOBOX_WIDTH = 100;
+	int JCOMBOBOX_HEIGHT = 25;
+	Dimension JCOMBOBOX_SIZE = new Dimension(JCOMBOBOX_WIDTH, JCOMBOBOX_HEIGHT);
+	
 	int SPACING_X = 10;
 	int SPACING_Y = 10;
 	Dimension SPACING_SIZE = new Dimension(SPACING_X, SPACING_Y);

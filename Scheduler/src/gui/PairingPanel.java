@@ -90,13 +90,18 @@ public class PairingPanel extends JPanel implements GUIConstants {
 			_pairingpanel = pp;
 			_pairing = p;
 			
-			//TODO: how to get Grouping<Unit> from UnitAttribute if UnitAttribute.att == null?
+			this.setMaximumSize(JCOMBOBOX_SIZE);
+			
 			final Unit[] units = (Unit[]) _unitattribute.getListOfUnits().toArray(new Unit[0]);
 			String[] unitnames = new String[units.length];
 			units[0] = null;
 			unitnames[0] = "";
-			for (int i = 1; i < units.length; i++)
+			int toSelect = 0;
+			for (int i = 1; i < units.length; i++) {
 				unitnames[i] = units[i].getName();
+				if (units[i] == _unitattribute.att)
+					toSelect = i;
+			}
 			this.setModel(new DefaultComboBoxModel(unitnames));
 			this.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -109,6 +114,7 @@ public class PairingPanel extends JPanel implements GUIConstants {
 					}
 				}
 			});
+			this.setSelectedIndex(toSelect);
 		}
 	}
 	
