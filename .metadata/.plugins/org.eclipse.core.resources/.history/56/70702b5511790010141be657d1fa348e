@@ -1,0 +1,19 @@
+package roundrobin;
+
+import backbone.Grouping;
+import backbone.Unit;
+
+public class FieldGrouping extends MyCategory<Field> implements Grouping<Unit> {
+
+	public FieldGrouping(String name) {
+		super(name);
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public Field getBlank() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

@@ -70,7 +70,7 @@ public class Team implements CompetitiveUnit {
 	@Override
 	public Unit getBlank() {
 		// TODO Auto-generated method stub
-		return null;
+		return new Team("");
 	}
 
 	@Override

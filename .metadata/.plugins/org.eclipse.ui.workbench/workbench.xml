@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="20" version="2.0">
+<workbench progressCount="17" version="2.0">
 <workbenchAdvisor/>
-<window height="825" width="1329" x="117" y="24">
+<window height="825" maximized="true" width="1329" x="117" y="24">
 <fastViewData fastViewLocation="1024">
 <orientation position="512" view="org.eclipse.ve.internal.java.codegen.editorpart.XMLViewPart"/>
 </fastViewData>
@@ -25,7 +25,7 @@
 <coolItem id="group.help" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.help" itemType="typeToolBarContribution" x="-1" y="-1"/>
 </coolbarLayout>
-<page aggregateWorkingSetId="Aggregate for window 1303597193477" focus="true" label="Workspace - Java">
+<page aggregateWorkingSetId="Aggregate for window 1303597193477" focus="true" label="Workspace - Debug">
 <editors>
 <editorArea activeWorkbook="DefaultEditorWorkbook">
 <info part="DefaultEditorWorkbook">
@@ -140,9 +140,9 @@
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Scheduler/src/backbone/Tournament.java"/>
 <editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="305" selectionTopPixel="0"/>
 </editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MyPairing.java" partName="MyPairing.java" path="/home/matt/BrownScheduler/Scheduler/src/plugin1/MyPairing.java" title="MyPairing.java" tooltip="Scheduler/src/plugin1/MyPairing.java" workbook="DefaultEditorWorkbook">
+<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MyPairing.java" partName="MyPairing.java" path="/home/matt/BrownScheduler/Scheduler/src/plugin1/MyPairing.java" title="MyPairing.java" tooltip="Scheduler/src/plugin1/MyPairing.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Scheduler/src/plugin1/MyPairing.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1071" selectionTopPixel="919"/>
+<editorState selectionHorizontalPixel="0" selectionLength="49" selectionOffset="1131" selectionTopPixel="919"/>
 </editor>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MyRound.java" partName="MyRound.java" path="/home/matt/BrownScheduler/Scheduler/src/plugin1/MyRound.java" title="MyRound.java" tooltip="Scheduler/src/plugin1/MyRound.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Scheduler/src/plugin1/MyRound.java"/>
@@ -160,7 +160,7 @@
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Scheduler/src/gui/UnitPanel.java"/>
 <editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="5848" selectionTopPixel="2018"/>
 </editor>
-<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MyCategory.java" partName="MyCategory.java" path="/home/matt/BrownScheduler/Scheduler/src/plugin1/MyCategory.java" title="MyCategory.java" tooltip="Scheduler/src/plugin1/MyCategory.java" workbook="DefaultEditorWorkbook">
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MyCategory.java" partName="MyCategory.java" path="/home/matt/BrownScheduler/Scheduler/src/plugin1/MyCategory.java" title="MyCategory.java" tooltip="Scheduler/src/plugin1/MyCategory.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Scheduler/src/plugin1/MyCategory.java"/>
 <editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="555" selectionTopPixel="138"/>
 </editor>
@@ -182,7 +182,7 @@
 </editor>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="UnitAttribute.java" partName="UnitAttribute.java" path="/home/matt/BrownScheduler/Scheduler/src/backbone/UnitAttribute.java" title="UnitAttribute.java" tooltip="Scheduler/src/backbone/UnitAttribute.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Scheduler/src/backbone/UnitAttribute.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1100" selectionTopPixel="437"/>
+<editorState selectionHorizontalPixel="0" selectionLength="50" selectionOffset="625" selectionTopPixel="306"/>
 </editor>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="BooleanAttribute.java" partName="BooleanAttribute.java" path="/home/matt/BrownScheduler/Scheduler/src/backbone/BooleanAttribute.java" title="BooleanAttribute.java" tooltip="Scheduler/src/backbone/BooleanAttribute.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Scheduler/src/backbone/BooleanAttribute.java"/>
@@ -212,10 +212,6 @@
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Scheduler/src/gui/SpringUtilities.java"/>
 <editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="3" selectionTopPixel="1975"/>
 </editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="PairingPanel.java" partName="PairingPanel.java" path="/home/matt/BrownScheduler/Scheduler/src/gui/PairingPanel.java" title="PairingPanel.java" tooltip="Scheduler/src/gui/PairingPanel.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Scheduler/src/gui/PairingPanel.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="910" selectionTopPixel="183"/>
-</editor>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ConstraintHandler.java" partName="ConstraintHandler.java" path="/home/matt/BrownScheduler/Scheduler/src/plugin1/ConstraintHandler.java" title="ConstraintHandler.java" tooltip="Scheduler/src/plugin1/ConstraintHandler.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Scheduler/src/plugin1/ConstraintHandler.java"/>
 <editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1503" selectionTopPixel="901"/>
@@ -231,8 +227,7 @@
 </view>
 <view id="org.eclipse.ui.views.ProblemView" partName="Problems">
 <viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.severityAndDescriptionField" categoryGroup="org.eclipse.ui.ide.severity" markerContentGenerator="org.eclipse.ui.ide.problemsGenerator" partName="Problems">
-<expanded>
-<category IMemento.internal.id="Warnings"/>
+<expanded>&#x0A;<category IMemento.internal.id="Warnings"/>
 <category IMemento.internal.id="Errors"/>
 </expanded>
 <columnWidths org.eclipse.ui.ide.locationField="0" org.eclipse.ui.ide.markerType="0" org.eclipse.ui.ide.pathField="0" org.eclipse.ui.ide.resourceField="0" org.eclipse.ui.ide.severityAndDescriptionField="0"/>
@@ -290,7 +285,7 @@
 <view id="org.eclipse.jdt.ui.SourceView" partName="Declaration"/>
 <view id="org.eclipse.jdt.ui.JavadocView" partName="Javadoc"/>
 </views>
-<perspectives activePart="org.eclipse.jdt.ui.CompilationUnitEditor" activePerspective="org.eclipse.jdt.ui.JavaPerspective">
+<perspectives activePart="org.eclipse.jdt.ui.CompilationUnitEditor" activePerspective="org.eclipse.debug.ui.DebugPerspective">
 <perspective editorAreaTrimState="2" editorAreaVisible="1" fixed="0" version="0.016">
 <descriptor class="org.eclipse.jdt.internal.ui.JavaPerspectiveFactory" id="org.eclipse.jdt.ui.JavaPerspective" label="Java"/>
 <alwaysOnActionSet id="org.eclipse.ui.cheatsheets.actionSet"/>
@@ -512,110 +507,59 @@
 <workingSets/>
 <navigationHistory>
 <editors>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Scheduler/src/backbone/UnitAttribute.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Scheduler/src/plugin1/MyPairing.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Scheduler/src/gui/PairingPanel.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Scheduler/src/plugin1/JudgeGrouping.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Scheduler/src/plugin1/ConstraintHandler.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Scheduler/src/plugin1/Tourney.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Scheduler/src/plugin1/TeamGrouping.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Scheduler/src/plugin1/MyCategory.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Scheduler/src/gui/PairingPanel.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Scheduler/src/plugin1/MyPairing.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Scheduler/src/backbone/UnitAttribute.java"/>
 </editors>
-<item historyLabel="JudgeGrouping.java" index="3">
-<position info="not_deleted" x="246" y="0"/>
-</item>
-<item historyLabel="MyPairing.java" index="1">
-<position info="not_deleted" x="1340" y="0"/>
-</item>
-<item historyLabel="ConstraintHandler.java" index="4">
-<position info="not_deleted" x="2017" y="0"/>
-</item>
-<item historyLabel="ConstraintHandler.java" index="4">
-<position info="not_deleted" x="1503" y="0"/>
-</item>
-<item historyLabel="ConstraintHandler.java" index="4">
-<position info="not_deleted" x="1574" y="0"/>
-</item>
-<item historyLabel="ConstraintHandler.java" index="4">
-<position info="not_deleted" x="1626" y="0"/>
-</item>
-<item historyLabel="ConstraintHandler.java" index="4">
-<position info="not_deleted" x="1721" y="0"/>
-</item>
-<item historyLabel="ConstraintHandler.java" index="4">
-<position info="not_deleted" x="1749" y="0"/>
-</item>
-<item historyLabel="ConstraintHandler.java" index="4">
-<position info="not_deleted" x="1776" y="0"/>
-</item>
-<item historyLabel="ConstraintHandler.java" index="4">
-<position info="not_deleted" x="1861" y="0"/>
-</item>
-<item historyLabel="ConstraintHandler.java" index="4">
-<position info="not_deleted" x="1880" y="0"/>
-</item>
-<item historyLabel="ConstraintHandler.java" index="4">
-<position info="not_deleted" x="1721" y="0"/>
-</item>
-<item historyLabel="ConstraintHandler.java" index="4">
-<position info="not_deleted" x="1983" y="0"/>
-</item>
-<item historyLabel="ConstraintHandler.java" index="4">
-<position info="not_deleted" x="2021" y="0"/>
-</item>
-<item historyLabel="ConstraintHandler.java" index="4">
-<position info="not_deleted" x="2049" y="0"/>
-</item>
-<item historyLabel="ConstraintHandler.java" index="4">
-<position info="not_deleted" x="2194" y="0"/>
-</item>
-<item historyLabel="ConstraintHandler.java" index="4">
-<position info="not_deleted" x="2021" y="0"/>
-</item>
-<item historyLabel="ConstraintHandler.java" index="4">
-<position info="not_deleted" x="2218" y="0"/>
-</item>
-<item historyLabel="Tourney.java" index="5">
-<position info="not_deleted" x="1389" y="0"/>
-</item>
-<item historyLabel="Tourney.java" index="5">
-<position info="not_deleted" x="1428" y="0"/>
-</item>
-<item historyLabel="Tourney.java" index="5">
-<position info="not_deleted" x="1445" y="0"/>
-</item>
-<item historyLabel="Tourney.java" index="5">
+<item historyLabel="TeamGrouping.java" index="0">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="MyPairing.java" index="1">
+<item historyLabel="MyCategory.java" index="1">
+<position info="not_deleted" x="435" y="0"/>
+</item>
+<item historyLabel="MyCategory.java" index="1">
+<position info="not_deleted" x="555" y="0"/>
+</item>
+<item historyLabel="PairingPanel.java" index="2">
+<position/>
+</item>
+<item historyLabel="PairingPanel.java" index="2">
+<position/>
+</item>
+<item historyLabel="MyPairing.java" index="3">
 <position info="not_deleted" x="1071" y="0"/>
 </item>
-<item historyLabel="MyPairing.java" index="1">
+<item historyLabel="MyPairing.java" index="3">
 <position info="not_deleted" x="1131" y="0"/>
 </item>
-<item historyLabel="MyPairing.java" index="1">
+<item historyLabel="MyPairing.java" index="3">
 <position info="not_deleted" x="1181" y="0"/>
 </item>
-<item historyLabel="MyPairing.java" index="1">
+<item historyLabel="MyPairing.java" index="3">
 <position info="not_deleted" x="1231" y="0"/>
 </item>
-<item historyLabel="MyPairing.java" index="1">
+<item historyLabel="MyPairing.java" index="3">
 <position info="not_deleted" x="1289" y="0"/>
 </item>
-<item historyLabel="MyPairing.java" index="1">
+<item historyLabel="MyPairing.java" index="3">
 <position info="not_deleted" x="1344" y="0"/>
 </item>
-<item historyLabel="MyPairing.java" index="1">
+<item historyLabel="MyPairing.java" index="3">
 <position info="not_deleted" x="1398" y="0"/>
 </item>
-<item historyLabel="MyPairing.java" index="1">
+<item historyLabel="MyPairing.java" index="3">
 <position info="not_deleted" x="1444" y="0"/>
 </item>
-<item historyLabel="MyPairing.java" index="1">
+<item historyLabel="MyPairing.java" index="3">
 <position info="not_deleted" x="1490" y="0"/>
 </item>
-<item historyLabel="MyPairing.java" index="1">
+<item historyLabel="MyPairing.java" index="3">
 <position info="not_deleted" x="1557" y="0"/>
+</item>
+<item historyLabel="MyPairing.java" index="3">
+<position info="not_deleted" x="1071" y="0"/>
 </item>
 <item historyLabel="PairingPanel.java" index="2">
 <position info="not_deleted" x="853" y="0"/>
@@ -633,25 +577,52 @@
 <position info="not_deleted" x="1069" y="0"/>
 </item>
 <item historyLabel="PairingPanel.java" index="2">
-<position info="not_deleted" x="1069" y="0"/>
-</item>
-<item historyLabel="UnitAttribute.java" index="0">
-<position info="not_deleted" x="781" y="36"/>
-</item>
-<item historyLabel="UnitAttribute.java" index="0">
-<position info="not_deleted" x="918" y="0"/>
-</item>
-<item historyLabel="UnitAttribute.java" index="0">
-<position info="not_deleted" x="1100" y="0"/>
-</item>
-<item historyLabel="ConstraintHandler.java" index="4">
-<position info="not_deleted" x="1503" y="0"/>
+<position info="not_deleted" x="1192" y="0"/>
 </item>
 <item historyLabel="PairingPanel.java" index="2">
-<position info="not_deleted" x="853" y="0"/>
+<position info="not_deleted" x="1243" y="0"/>
 </item>
-<item historyLabel="MyPairing.java" index="1">
-<position info="not_deleted" x="1071" y="0"/>
+<item historyLabel="PairingPanel.java" index="2">
+<position info="not_deleted" x="1321" y="0"/>
+</item>
+<item historyLabel="PairingPanel.java" index="2">
+<position info="not_deleted" x="1372" y="0"/>
+</item>
+<item historyLabel="PairingPanel.java" index="2">
+<position info="not_deleted" x="1499" y="0"/>
+</item>
+<item historyLabel="PairingPanel.java" index="2">
+<position info="not_deleted" x="1550" y="0"/>
+</item>
+<item historyLabel="PairingPanel.java" index="2">
+<position info="not_deleted" x="1601" y="0"/>
+</item>
+<item historyLabel="PairingPanel.java" index="2">
+<position info="not_deleted" x="1243" y="0"/>
+</item>
+<item historyLabel="PairingPanel.java" index="2">
+<position info="not_deleted" x="1321" y="0"/>
+</item>
+<item historyLabel="PairingPanel.java" index="2">
+<position info="not_deleted" x="1372" y="0"/>
+</item>
+<item historyLabel="PairingPanel.java" index="2">
+<position info="not_deleted" x="1499" y="0"/>
+</item>
+<item historyLabel="PairingPanel.java" index="2">
+<position info="not_deleted" x="1550" y="0"/>
+</item>
+<item historyLabel="PairingPanel.java" index="2">
+<position info="not_deleted" x="1601" y="0"/>
+</item>
+<item historyLabel="PairingPanel.java" index="2">
+<position info="not_deleted" x="1243" y="0"/>
+</item>
+<item historyLabel="PairingPanel.java" index="2">
+<position info="not_deleted" x="1893" y="0"/>
+</item>
+<item historyLabel="PairingPanel.java" index="2">
+<position info="not_deleted" x="2096" y="0"/>
 </item>
 <item historyLabel="PairingPanel.java" index="2">
 <position info="not_deleted" x="853" y="0"/>
@@ -659,14 +630,35 @@
 <item historyLabel="PairingPanel.java" index="2">
 <position info="not_deleted" x="910" y="0"/>
 </item>
-<item historyLabel="TeamGrouping.java" index="6">
-<position info="not_deleted" x="0" y="0"/>
+<item historyLabel="PairingPanel.java" index="2">
+<position info="not_deleted" x="963" y="0"/>
 </item>
-<item historyLabel="MyCategory.java" index="7">
-<position info="not_deleted" x="435" y="0"/>
+<item historyLabel="PairingPanel.java" index="2">
+<position info="not_deleted" x="853" y="0"/>
 </item>
-<item active="true" historyLabel="MyCategory.java" index="7">
-<position info="not_deleted" x="555" y="0"/>
+<item historyLabel="MyPairing.java" index="3">
+<position info="not_deleted" x="1071" y="0"/>
+</item>
+<item historyLabel="PairingPanel.java" index="2">
+<position info="not_deleted" x="853" y="0"/>
+</item>
+<item historyLabel="MyPairing.java" index="3">
+<position info="not_deleted" x="1071" y="0"/>
+</item>
+<item historyLabel="PairingPanel.java" index="2">
+<position info="not_deleted" x="853" y="0"/>
+</item>
+<item historyLabel="MyPairing.java" index="3">
+<position info="not_deleted" x="1071" y="0"/>
+</item>
+<item historyLabel="UnitAttribute.java" index="4">
+<position info="not_deleted" x="1100" y="0"/>
+</item>
+<item historyLabel="UnitAttribute.java" index="4">
+<position info="not_deleted" x="625" y="50"/>
+</item>
+<item active="true" historyLabel="MyPairing.java" index="3">
+<position info="not_deleted" x="1131" y="49"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>

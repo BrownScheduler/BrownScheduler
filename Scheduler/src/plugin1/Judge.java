@@ -78,7 +78,7 @@ public class Judge implements Unit{
 	@Override
 	public Unit getBlank() {
 		// TODO Auto-generated method stub
-		return null;
+		return new Judge("");
 	}
 
 	@Override
