@@ -49,8 +49,9 @@ public class AddingPanel extends JPanel implements GUIConstants {
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		for (Unit u : grouping.getMembers()) {
 			this.add(new UnitPanel(_middleEnd, u));
-			this.add(Box.createRigidArea(new Dimension(10, 20)));
+			//this.add(Box.createRigidArea(new Dimension(10, 20)));
 		}
+		this.add(Box.createVerticalGlue());
 	}
 	
 	public void setAddPanel(Grouping<Unit> grouping) {

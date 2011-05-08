@@ -1,0 +1,19 @@
+package roundrobin;
+
+import java.util.List;
+
+public class JudgeGrouping extends MyCategory<Referee> {
+
+	public JudgeGrouping(String name) {
+		super(name);
+	}
+	public JudgeGrouping(String name, List<Referee> referees){
+		super(name, referees);
+	}
+
+	@Override
+	public Referee getBlank() {
+		return new Referee("");
+	}
+
+}

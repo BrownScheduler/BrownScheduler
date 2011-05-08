@@ -1,5 +1,4 @@
-#Fri May 06 20:27:47 EDT 2011
-presentationFactoryId=org.eclipse.ui.presentations.r30
+#Fri May 06 21:56:20 EDT 2011
+presentationFactoryId=org.eclipse.ui.presentations.default
 eclipse.preferences.version=1
 showIntro=false
-ENABLE_MIN_MAX=false

@@ -16,17 +16,20 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class UnitPanel extends JPanel implements GUIConstants {
 
 	private MiddleEnd _middleEnd;
+	private Utility _util;
 	private JPanel _mainPanel, _buttonPanel, _tablePanel;
 	private Grouping _grouping;
 	
 	public UnitPanel(MiddleEnd m, Unit u) {
 		_middleEnd = m;
+		_util = new Utility();
 		_mainPanel = new JPanel();
 		_buttonPanel = new JPanel();
 		_tablePanel = new JPanel();
@@ -36,6 +39,7 @@ public class UnitPanel extends JPanel implements GUIConstants {
 	public UnitPanel(MiddleEnd m, Unit u, Grouping g) {
 		_middleEnd = m;
 		_grouping = g;
+		_util = new Utility();
 		_mainPanel = new JPanel();
 		_buttonPanel = new JPanel();
 		_tablePanel = new JPanel();
@@ -49,11 +53,12 @@ public class UnitPanel extends JPanel implements GUIConstants {
 //		_tablePanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, INPUTTABLE_HEIGHT));
 		final HashMap<Attribute, JComponent> components = new HashMap<Attribute, JComponent>();
 		for (final Attribute attr : unit.getAttributes()) {
+			JLabel titLabel = Utility.getTitleLabel(attr);
 			if (attr instanceof GroupingAttribute) {
 				GroupingAttribute<Unit> g = (GroupingAttribute<Unit>) attr;
 				components.put(attr, new InputTablePane(_middleEnd, g.getBlankUnit().getAttributes(), g));
 			}
-			JComponent comp = Utility.getField(attr);
+			JComponent comp = _util.getField(attr);
 			if (comp instanceof JButton) {
 				((JButton) comp).addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -81,6 +86,10 @@ public class UnitPanel extends JPanel implements GUIConstants {
 			}
 			if (!components.containsKey(attr))
 				components.put(attr, comp);
+			JPanel toAdd = new JPanel();
+			toAdd.setLayout(new BoxLayout(toAdd, BoxLayout.Y_AXIS));
+			toAdd.add(titLabel);
+			toAdd.add(comp);
 			_mainPanel.add(comp);
 		}
 		this.add(_mainPanel);
@@ -151,8 +160,9 @@ public class UnitPanel extends JPanel implements GUIConstants {
 		});
 		_buttonPanel.add(savebutton);
 		this.add(_buttonPanel);
-		this.add(Box.createRigidArea(SPACING_SIZE));
-		this.add(_tablePanel);
+		this.add(Box.createRigidArea(new Dimension(10, 10)));
+		//this.add(_tablePanel);
+		this.setPreferredSize(new Dimension(0,0));
 		this.repaint();
 	}
 }

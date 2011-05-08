@@ -1,0 +1,16 @@
+package roundrobin;
+
+public class FieldGrouping extends MyCategory<Field> {
+
+	public FieldGrouping(String name) {
+		super(name);
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public Field getBlank() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

@@ -15,6 +15,11 @@ public class UnitAttribute<T extends Unit> extends Attribute {
 		this.att = null;
 		this.memberOf = grouping;
 	}
+	public UnitAttribute(String title, T att, Grouping<T> grouping){
+		super(title);
+		this.att = att;
+		this.memberOf = grouping;
+	}
 	public UnitAttribute(String title, T att){
 		super(title);
 		this.att = att;
@@ -32,6 +37,16 @@ public class UnitAttribute<T extends Unit> extends Attribute {
 	@Override
 	public Type getType() {
 		return Attribute.Type.UNIT;
+	}
+	
+	public String toString(){
+		String s = "Att: ";
+		if(att == null) s += "null";
+		else s += att.toString();
+		s += "memberOf: ";
+		if(memberOf == null) s += null;
+		else s += memberOf.getName();
+		return s;
 	}
 
 }
