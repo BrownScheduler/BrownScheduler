@@ -5,13 +5,18 @@ import backbone.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Component;
 import java.awt.Event;
 import java.awt.BorderLayout;
 import javax.swing.KeyStroke;
 import java.awt.Point;
 import java.util.List;
 import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -23,12 +28,16 @@ import javax.swing.JFrame;
 import javax.swing.JDialog;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JScrollPane;
+import javax.swing.JToolBar;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class App implements GUIConstants {
 
 	private MiddleEnd _middleEnd;
 	private JFrame _jFrame;
+	private JToolBar _toolbar;
+	private JPanel _mainContentAndToolbarPane;
+	private JComponent _mainContentPane;
 	private InputPanel _inputPane;
 	private ManagementPanel _managementPane;
 	private JMenuBar _jJMenuBar;
@@ -78,11 +87,62 @@ public class App implements GUIConstants {
 			_jFrame.setJMenuBar(getJJMenuBar());
 			_jFrame.setSize(DEFAULT_SIZE);
 			_jFrame.setMinimumSize(MIN_SIZE);
-			_jFrame.setContentPane(getInputPanel());
+			getViewInputMenuItem().doClick();
+			_jFrame.setContentPane(getMainContentAndToolbarPane());
 			getViewInputMenuItem().setSelected(true);
 			_jFrame.setTitle("Tournament Scheduler v1.0");
 		}
 		return _jFrame;
+	}
+	
+	/**
+	 * This method initializes JToolBar
+	 * 
+	 * @return JToolBar
+	 */
+	public JToolBar getToolbar() {
+		if (_toolbar == null) {
+			_toolbar = new JToolBar();
+			_toolbar.setSize(TOOLBAR_SIZE);
+			_toolbar.setMinimumSize(TOOLBAR_SIZE);
+			_toolbar.setMaximumSize(TOOLBAR_SIZE);
+			for (int i = 0; i < getAddMenu().getMenuComponentCount(); i++) {
+				Component comp = getAddMenu().getMenuComponent(i);
+				if (comp instanceof JMenuItem) {
+					final JMenuItem menuitem = (JMenuItem) comp;
+					JButton button = new JButton(menuitem.getText());
+					button.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							menuitem.doClick();
+						}
+					});
+					_toolbar.add(button);
+					_toolbar.add(Box.createRigidArea(SPACING_SIZE));
+				}
+			}
+		}
+		return _toolbar;
+	}
+	
+	public JPanel getMainContentAndToolbarPane() {
+		if (_mainContentAndToolbarPane == null) {
+			JPanel contentpane = new JPanel();
+			contentpane.setLayout(new BorderLayout());
+			contentpane.add(getToolbar(), BorderLayout.NORTH);
+			contentpane.add(getMainContentPane(), BorderLayout.CENTER);
+		}
+		return _mainContentAndToolbarPane;
+	}
+	
+	public void setMainContentPane(JComponent pane) {
+		_mainContentPane = pane;
+	}
+	
+	public JComponent getMainContentPane() {
+		if (_mainContentPane == null) {
+			_mainContentPane = new JPanel();
+		}
+		return _mainContentPane;
 	}
 	
 	/**
@@ -473,12 +533,11 @@ public class App implements GUIConstants {
 		if (_viewInputMenuItem == null) {
 			_viewInputMenuItem = new JRadioButtonMenuItem();
 			_viewInputMenuItem.setText("View Input Panel");
-			_viewInputMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_I,
-					Event.CTRL_MASK, true));
+			_viewInputMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_I,	Event.CTRL_MASK, true));
 			_viewInputMenuItem.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					getInputPanel().setSize(_jFrame.getContentPane().getSize());
-					_jFrame.setContentPane(getInputPanel());
+					setMainContentPane(getInputPanel());
 					getInputPanel().repaintAll();
 				}
 			});
@@ -495,12 +554,11 @@ public class App implements GUIConstants {
 		if (_viewManagementMenuItem == null) {
 			_viewManagementMenuItem = new JRadioButtonMenuItem();
 			_viewManagementMenuItem.setText("View Management Panel");
-			_viewManagementMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_M,
-					Event.CTRL_MASK, true));
+			_viewManagementMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_M, Event.CTRL_MASK, true));
 			_viewManagementMenuItem.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					getManagementPanel().setSize(_jFrame.getSize());
-					_jFrame.setContentPane(getManagementPanel());
+					setMainContentPane(getManagementPanel());
 					getManagementPanel().repaintAll();
 				}
 			});
@@ -614,6 +672,7 @@ public class App implements GUIConstants {
 	public void repaintAll() {
 		getInputPanel().repaintAll();
 		getManagementPanel().repaintAll();
+		getMainContentAndToolbarPane().repaint();
 	}
 
 	/**

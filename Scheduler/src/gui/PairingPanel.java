@@ -41,12 +41,16 @@ public class PairingPanel extends JPanel implements GUIConstants {
 					for (Attribute attr : ((UnitAttribute) attribute).att.getAttributes()) {
 						this.add(Box.createRigidArea(SPACING_SIZE));
 						if (attr.getType() == Attribute.Type.GROUPING) {
-							attrpanel.add(Utility.getTitleLabel(attr));
+							JLabel label = Utility.getTitleLabel(attr);
+							label.setToolTipText("Go to the input panel to edit/view this attribute of this unit.");
+							attrpanel.add(label);
 						}
 						else {
 							JLabel title = Utility.getTitleLabel(attr);
 							JLabel value = Utility.getValueLabel(attr);
-							attrpanel.add(new JLabel(title.getText() + ": " + value.getText()));
+							JLabel label = new JLabel(title.getText() + ": " + value.getText());
+							label.setToolTipText("Go to the input panel to edit/view this attribute of this unit.");
+							attrpanel.add(label);
 						}
 					}
 				}
@@ -59,7 +63,9 @@ public class PairingPanel extends JPanel implements GUIConstants {
 				this.add(attrpanel);
 			}
 			else if (attribute.getType() == Attribute.Type.GROUPING) {
-				this.add(Utility.getTitleLabel(attribute));
+				JLabel label = Utility.getTitleLabel(attribute);
+				label.setToolTipText("Go to the input panel to edit/view this attribute of this unit.");
+				this.add(label);
 			}
 			else {
 				this.add(Utility.getField(attribute));
