@@ -53,7 +53,7 @@ public class Tourney implements backbone.Tournament{
 	
 	@Override
 	public MyRound createNextRound(){
-		ConstraintHandler handle = new ConstraintHandler(this.competitors.getMembers(), 
+		ConstraintHandler handle = new ConstraintHandler(this, this.competitors.getMembers(), 
 				this.judges.getMembers());
 		MyRound r = handle.createNewRound();
 		rounds.add(r);

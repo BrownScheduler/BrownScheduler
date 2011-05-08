@@ -13,6 +13,7 @@ public class ConstraintHandler {
 
 	private ArrayList<Team> _teams;
 	private ArrayList<Judge> _judges;
+	private Tourney _t;
 	
 	private class TeamComparer implements Comparator<Team>{
 
@@ -21,7 +22,8 @@ public class ConstraintHandler {
 			return arg0.getWins() - arg1.getWins();
 		}
 	}
-	public ConstraintHandler(List<Team> teams, List<Judge> judges){
+	public ConstraintHandler(Tourney t, List<Team> teams, List<Judge> judges){
+		_t = t;
 		this._teams = new ArrayList<Team>(teams);
 		this._judges = new ArrayList<Judge>(judges);
 	}
@@ -44,7 +46,7 @@ public class ConstraintHandler {
 			Team t2;
 			if(!ts.isEmpty()) t2 = ts.pop();
 			else t2 = null;
-			MyPairing toAdd = new MyPairing();
+			MyPairing toAdd = new MyPairing(_t);
 			if(r.nextBoolean()){
 				toAdd._gov = t1;
 				toAdd._opp = t2;

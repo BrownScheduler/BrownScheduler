@@ -8,8 +8,6 @@ public class UnitAttribute<T extends Unit> extends Attribute {
 	public T att; //TODO: getter
 	private Grouping<T> memberOf;
 	
-	//TODO: Constructor now need either non-null attribute, or grouping to work properly
-	
 	public UnitAttribute(String title, Grouping<T> grouping){
 		super(title);
 		this.att = null;

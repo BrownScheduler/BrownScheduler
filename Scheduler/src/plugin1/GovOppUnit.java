@@ -35,7 +35,6 @@ public class GovOppUnit implements Unit{
 
 	@Override
 	public Unit getBlank() {
-		// TODO Auto-generated method stub
 		return new GovOppUnit(null);
 	}
 

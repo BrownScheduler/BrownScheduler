@@ -15,5 +15,4 @@ public interface Tournament extends Serializable {
 	
 	public List<Round> getRounds();
 	
-	
 }

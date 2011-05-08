@@ -17,18 +17,21 @@ public class MyPairing implements backbone.Pairing{
 	Team _opp;
 	Judge _judge;
 	Team _winner;
+	Tourney _t;
 	
-	public MyPairing(){
+	public MyPairing(Tourney t){
 		_gov = null;
 		_opp = null;
 		_judge = null;
 		_winner = null;
+		_t = t;
 	}
 	
-	public MyPairing(Team gov, Team opp, Judge judge) {
+	public MyPairing(Tourney t, Team gov, Team opp, Judge judge) {
 		_gov = gov;
 		_opp = opp;
 		_judge = judge;
+		_t = t;
 	}
 	
 	public void setWinner(Team t){
@@ -64,9 +67,9 @@ public class MyPairing implements backbone.Pairing{
 	@Override
 	public List<Attribute> getAttributes() {
 		LinkedList<Attribute> atts = new LinkedList<Attribute>();
-		atts.add(new UnitAttribute<Team>("Gov", _gov));
-		atts.add(new UnitAttribute<Team>("Opp", _opp));
-		atts.add(new UnitAttribute<Judge>("Judge", _judge));
+		atts.add(new UnitAttribute<Team>("Gov", _gov, _t.getCategories().get(0)));
+		atts.add(new UnitAttribute<Team>("Opp", _opp, _t.getCategories().get(0)));
+		atts.add(new UnitAttribute<Judge>("Judge", _judge, _t.getCategories().get(1)));
 		GovOppGrouping teamGroup = new GovOppGrouping("Teams");
 		GovOppUnit n = new GovOppUnit();
 		GovOppUnit g = new GovOppUnit(true);
@@ -92,8 +95,10 @@ public class MyPairing implements backbone.Pairing{
 				if(_winner != null){
 					_winner.setWins(_winner.getWins() - 1);
 					_winner = null;
-					_judge._conflictedTeams.remove(_gov);
-					_judge._conflictedTeams.remove(_opp);
+					if(_judge != null) {
+						_judge._conflictedTeams.remove(_gov);
+						_judge._conflictedTeams.remove(_opp);
+					}
 					
 				}
 			}
@@ -101,29 +106,31 @@ public class MyPairing implements backbone.Pairing{
 				if(_winner != null){
 					_winner.setWins(_winner.getWins() - 1);
 					_winner = null;
-					_judge._conflictedTeams.remove(_gov);
-					_judge._conflictedTeams.remove(_opp);
+					if(_judge != null) {
+						_judge._conflictedTeams.remove(_gov);
+						_judge._conflictedTeams.remove(_opp);
+					}
 					
 				}
 			}
 			else if(newWinner.isGov){
 				if(_winner == null){
 					_winner = _gov;
-					_winner.setWins(_winner.getWins() + 1);
+					if(_winner != null) _winner.setWins(_winner.getWins() + 1);
 				}else if(_winner == _opp){
-					_winner.setWins(_winner.getWins() - 1);
+					if(_winner != null) _winner.setWins(_winner.getWins() - 1);
 					_winner = _gov;
-					_winner.setWins(_winner.getWins() + 1);
+					if(_winner != null) _winner.setWins(_winner.getWins() + 1);
 				}
 				
 			}else if(newWinner.isOpp){
 				if(_winner == null){
 					_winner = _opp;
-					_winner.setWins(_winner.getWins() + 1);
+					if(_winner != null) _winner.setWins(_winner.getWins() + 1);
 				}else if(_winner == _gov){
-					_winner.setWins(_winner.getWins() - 1);
+					if(_winner != null) _winner.setWins(_winner.getWins() - 1);
 					_winner = _opp;
-					_winner.setWins(_winner.getWins() + 1);
+					if(_winner != null) _winner.setWins(_winner.getWins() + 1);
 				}
 			}			
 		}
@@ -144,7 +151,7 @@ public class MyPairing implements backbone.Pairing{
 	@Override
 	public Unit getBlank() {
 		// TODO Auto-generated method stub
-		return new MyPairing();
+		return new MyPairing(_t);
 	}
 
 	@Override

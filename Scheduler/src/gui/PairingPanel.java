@@ -1,22 +1,18 @@
 package gui;
 
+import middleend.*;
+import backbone.*;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-
-import middleend.*;
-import backbone.*;
-
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
-import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SpringLayout;
 
 public class PairingPanel extends JPanel implements GUIConstants {
 
@@ -37,6 +33,7 @@ public class PairingPanel extends JPanel implements GUIConstants {
 			if (attribute.getType() == Attribute.Type.UNIT) {
 				JPanel attrpanel = new JPanel();
 				attrpanel.setLayout(new BoxLayout(attrpanel, BoxLayout.Y_AXIS));
+				attrpanel.add(Utility.getTitleLabel(attribute));
 				attrpanel.add(new UnitAttributeComboBox((UnitAttribute) attribute, _pairing, this));//Not header, needs to be editable
 				if (((UnitAttribute) attribute).att != null) {
 					for (Attribute attr : ((UnitAttribute) attribute).att.getAttributes()) {
@@ -105,19 +102,20 @@ public class PairingPanel extends JPanel implements GUIConstants {
 					toSelect = i;
 			}
 			this.setModel(new DefaultComboBoxModel(unitnames.toArray(new String[0])));
+			this.setSelectedIndex(toSelect);
 			this.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					UnitAttributeComboBox cb = (UnitAttributeComboBox) e.getSource();
-					//getSelectedIndex is initially -1. What?
-					if (cb.getSelectedIndex() < 0) {
+					if (cb.getSelectedIndex() <= 0) {
 						_pairing.setAttribute(new UnitAttribute(_unitattribute.getTitle(), _unitattribute.getMemberOf()));
+						_pairingpanel.repaintAll();
 					}
 					else {
 						_pairing.setAttribute(new UnitAttribute(_unitattribute.getTitle(), units.get(cb.getSelectedIndex())));
+						_pairingpanel.repaintAll();
 					}
 				}
 			});
-			this.setSelectedIndex(toSelect);
 		}
 	}
 	

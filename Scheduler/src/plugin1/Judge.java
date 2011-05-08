@@ -75,15 +75,14 @@ public class Judge implements Unit{
 		
 		return r;
 	}
+	
 	@Override
 	public Unit getBlank() {
-		// TODO Auto-generated method stub
 		return new Judge("");
 	}
 
 	@Override
 	public Grouping<Unit> getMemberOf() {
-		// TODO Auto-generated method stub
 		return this._category;
 	}
 
