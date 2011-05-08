@@ -49,7 +49,7 @@ public class UnitPanel extends JPanel implements GUIConstants {
 	public void initialize(final Unit unit, String buttonstring) {
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		_mainPanel.setLayout(new BoxLayout(_mainPanel, BoxLayout.X_AXIS));
-		_tablePanel.setLayout(new BorderLayout());
+		_tablePanel.setLayout(new BoxLayout(_tablePanel, BoxLayout.Y_AXIS));
 //		_tablePanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, INPUTTABLE_HEIGHT));
 		final HashMap<Attribute, JComponent> components = new HashMap<Attribute, JComponent>();
 		for (final Attribute attr : unit.getAttributes()) {
@@ -161,7 +161,7 @@ public class UnitPanel extends JPanel implements GUIConstants {
 		_buttonPanel.add(savebutton);
 		this.add(_buttonPanel);
 		this.add(Box.createRigidArea(new Dimension(10, 10)));
-		//this.add(_tablePanel);
+		this.add(_tablePanel);
 		this.setPreferredSize(new Dimension(0,0));
 		this.repaint();
 	}
