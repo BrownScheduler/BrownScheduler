@@ -91,5 +91,11 @@ public class Judge implements Unit{
 		this._category = g;
 		
 	}
+
+	@Override
+	public boolean deleteFromGrouping() {
+		return _category.deleteMember(this);
+		
+	}
 	
 }

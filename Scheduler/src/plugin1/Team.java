@@ -84,5 +84,10 @@ public class Team implements CompetitiveUnit {
 		
 	}
 
+	@Override
+	public boolean deleteFromGrouping() {
+		return _category.deleteMember(this);
+	}
+
 
 }

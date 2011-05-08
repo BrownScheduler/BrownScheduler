@@ -15,4 +15,6 @@ public interface Unit {
 	public String getName();
 	
 	public Unit getBlank();
+	
+	public boolean deleteFromGrouping();
 }

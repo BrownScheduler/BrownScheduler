@@ -16,4 +16,6 @@ public interface Grouping<T extends Unit> {
 	public void addMember(T member);
 
 	public boolean deleteMember(T member);
+	
+	public void clear();
 }

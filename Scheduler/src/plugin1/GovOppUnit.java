@@ -72,5 +72,10 @@ public class GovOppUnit implements Unit{
 		r += isOpp;
 		return r;
 	}
+	@Override
+	public boolean deleteFromGrouping() {
+		return memOf.deleteMember(this);
+		
+	}
 
 }

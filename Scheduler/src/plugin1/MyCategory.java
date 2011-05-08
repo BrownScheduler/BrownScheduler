@@ -49,5 +49,10 @@ public abstract class MyCategory<T extends Unit> implements Grouping<T> {
 		return _members.remove(member);
 		
 	}
+	
+	@Override
+	public void clear(){
+		this._members.clear();
+	}
 
 }

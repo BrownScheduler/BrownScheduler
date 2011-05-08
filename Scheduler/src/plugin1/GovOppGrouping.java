@@ -12,4 +12,9 @@ public class GovOppGrouping extends MyCategory<GovOppUnit>{
 		return new GovOppUnit(null);
 	}
 
+	@Override
+	public void clear() {
+		
+	}
+
 }
