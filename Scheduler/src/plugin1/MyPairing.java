@@ -18,6 +18,7 @@ public class MyPairing implements backbone.Pairing{
 	Judge _judge;
 	Team _winner;
 	Tourney _t;
+	Grouping _roundIn;
 	
 	public MyPairing(Tourney t){
 		_gov = null;
@@ -149,20 +150,21 @@ public class MyPairing implements backbone.Pairing{
 	}
 
 	@Override
-	public Unit getBlank() {
-		// TODO Auto-generated method stub
-		return new MyPairing(_t);
-	}
-
-	@Override
 	public Grouping getMemberOf() {
 		// TODO Auto-generated method stub
-		return null;
+		return _roundIn;
 	}
 
 	@Override
 	public void setMemberOf(Grouping g) {
-		// TODO Auto-generated method stub
+		_roundIn = g;
+		
+	}
+
+	@Override
+	public boolean deleteFromGrouping() {
+		if(_roundIn == null) return false;
+		return _roundIn.deleteMember(this);
 		
 	}
 

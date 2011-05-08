@@ -6,7 +6,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Round implements Serializable {
+public class Round implements Serializable, Grouping<Pairing> {
 
 	protected ArrayList<Pairing> pairings;
 	protected String name;
@@ -39,6 +39,34 @@ public class Round implements Serializable {
 	
 	public ArrayList<Pairing> getPairings(){
 		return pairings;
+	}
+
+	@Override
+	public void addMember(Pairing member) {
+		pairings.add(member);
+		
+	}
+
+	@Override
+	public boolean deleteMember(Pairing member) {
+		return pairings.remove(member);
+	}
+
+	@Override
+	public Pairing getBlank() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Pairing> getMembers() {
+		return pairings;
+	}
+
+	@Override
+	public void clear() {
+		pairings.clear();
+		
 	}
 
 }

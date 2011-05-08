@@ -7,16 +7,16 @@ import backbone.Grouping;
 import backbone.Pairing;
 import backbone.Unit;
 
-public class Game implements Pairing{
+public class Game implements Pairing {
 
 	@Override
-	public List<Attribute> getAttributes() {
+	public boolean deleteFromGrouping() {
 		// TODO Auto-generated method stub
-		return null;
+		return false;
 	}
 
 	@Override
-	public Unit getBlank() {
+	public List<Attribute> getAttributes() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -36,13 +36,13 @@ public class Game implements Pairing{
 	@Override
 	public void setAttribute(Attribute attribute) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void setMemberOf(Grouping<Unit> g) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

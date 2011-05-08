@@ -1,19 +1,18 @@
 package roundrobin;
 
-import java.util.List;
+import plugin1.MyCategory;
 
 public class RefereeGrouping extends MyCategory<Referee> {
 
 	public RefereeGrouping(String name) {
 		super(name);
-	}
-	public RefereeGrouping(String name, List<Referee> referees){
-		super(name, referees);
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public Referee getBlank() {
-		return new Referee("");
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -9,8 +9,6 @@
 <fullyQualifiedTypeName name="backbone.Unit"/>
 <fullyQualifiedTypeName name="backbone.Attribute"/>
 <fullyQualifiedTypeName name="backbone.Pairing"/>
-<fullyQualifiedTypeName name="backbone.UnitAttribute"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="java.util.PriorityQueue"/>
 <fullyQualifiedTypeName name="java.util.Comparator"/>
 <fullyQualifiedTypeName name="java.util.LinkedList"/>
@@ -22,4 +20,8 @@
 <fullyQualifiedTypeName name="javax.swing.UIManager"/>
 <fullyQualifiedTypeName name="javax.swing.UnsupportedLookAndFeelException"/>
 <fullyQualifiedTypeName name="javax.swing.JLabel"/>
+<fullyQualifiedTypeName name="backbone.UnitAttribute"/>
+<fullyQualifiedTypeName name="backbone.StringAttribute"/>
+<fullyQualifiedTypeName name="backbone.GroupingAttribute"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
 </qualifiedTypeNameHistroy>

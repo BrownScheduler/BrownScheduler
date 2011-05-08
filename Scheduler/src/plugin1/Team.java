@@ -68,12 +68,6 @@ public class Team implements CompetitiveUnit {
 	}
 
 	@Override
-	public Unit getBlank() {
-		// TODO Auto-generated method stub
-		return new Team("");
-	}
-
-	@Override
 	public Grouping<Unit> getMemberOf() {
 		return _category;
 	}
@@ -82,6 +76,11 @@ public class Team implements CompetitiveUnit {
 	public void setMemberOf(Grouping<Unit> g) {
 		this._category = g;
 		
+	}
+
+	@Override
+	public boolean deleteFromGrouping() {
+		return _category.deleteMember(this);
 	}
 
 

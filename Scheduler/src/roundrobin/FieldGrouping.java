@@ -1,20 +1,18 @@
 package roundrobin;
 
-import backbone.Grouping;
-import backbone.Unit;
+import plugin1.MyCategory;
 
-public class FieldGrouping extends MyCategory<Field> implements Grouping<Field> {
+public class FieldGrouping extends MyCategory<Field> {
 
-	private Tourney t; 
-	public FieldGrouping(String name, Tourney t) {
+	public FieldGrouping(String name) {
 		super(name);
-		this.t = t;
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public Field getBlank() {
 		// TODO Auto-generated method stub
-		return new Field("", t);
+		return null;
 	}
 
 }

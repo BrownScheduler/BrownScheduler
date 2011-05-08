@@ -29,7 +29,7 @@ public class ConstraintHandler {
 	}
 	
 	private LinkedList<Team> sortTeamsByWins(){
-		PriorityQueue<Team> q = new PriorityQueue<Team>(this._teams.size(), new TeamComparer());
+		PriorityQueue<Team> q = new PriorityQueue<Team>(this._teams.size() + 1, new TeamComparer());
 		q.addAll(this._teams);		
 		LinkedList<Team> l = new LinkedList<Team>();
 		while(!q.isEmpty())

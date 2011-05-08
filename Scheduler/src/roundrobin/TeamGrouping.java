@@ -1,21 +1,18 @@
 package roundrobin;
 
-import java.util.List;
+import plugin1.MyCategory;
 
-import backbone.Grouping;
-
-public class TeamGrouping extends MyCategory<Team>{
+public class TeamGrouping extends MyCategory<Team> {
 
 	public TeamGrouping(String name) {
 		super(name);
-	}
-	
-	public TeamGrouping(String name, List<Team> teams){
-		super(name, teams);
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public Team getBlank() {
-		return new Team("");
+		// TODO Auto-generated method stub
+		return null;
 	}
+
 }
