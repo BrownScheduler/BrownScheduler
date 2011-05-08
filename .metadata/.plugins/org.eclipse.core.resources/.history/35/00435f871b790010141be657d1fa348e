@@ -57,7 +57,6 @@ public class Tourney implements backbone.Tournament{
 				this.judges.getMembers());
 		MyRound r = handle.createNewRound();
 		rounds.add(r);
-		System.out.println(r);
 		return r;
 	}
 

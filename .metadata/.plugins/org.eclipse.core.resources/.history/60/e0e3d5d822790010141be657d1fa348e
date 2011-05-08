@@ -66,9 +66,10 @@ public class MyPairing implements backbone.Pairing{
 		LinkedList<Attribute> atts = new LinkedList<Attribute>();
 		atts.add(new UnitAttribute<Team>("Gov", _gov));
 		atts.add(new UnitAttribute<Team>("Opp", _opp));
+		JudgeGrouping judgeGroup = new JudgeGrouping("Judges");
 		atts.add(new UnitAttribute<Judge>("Judge", _judge));
 		GovOppGrouping teamGroup = new GovOppGrouping("Teams");
-		GovOppUnit n = new GovOppUnit();
+		GovOppUnit n = new GovOppUnit(null);
 		GovOppUnit g = new GovOppUnit(true);
 		GovOppUnit o = new GovOppUnit(false);
 		teamGroup.addMember(n);
@@ -87,36 +88,21 @@ public class MyPairing implements backbone.Pairing{
 		else if(title.equals("Opp")) _opp = (Team)att.att;
 		else if(title.equals("Judge")) _judge = (Judge)att.att;
 		else if(title.equals("Winner")){
-			GovOppUnit newWinner = (GovOppUnit)att.att;
-			if(!newWinner.isGov && !newWinner.isOpp){
-				if(_winner != null){
-					_winner.setWins(_winner.getWins() - 1);
-					_winner = null;
-					_judge._conflictedTeams.remove(_gov);
-					_judge._conflictedTeams.remove(_opp);
-					
-				}
+			Team newWinner = (Team)att.att;
+			if(_winner == null){
+				_winner = newWinner;
+				_winner.setWins(_winner.getWins() + 1);
+				_judge._conflictedTeams.add(_gov);
+				_judge._conflictedTeams.add(_opp);
+			}else if(_winner == newWinner){}
+			else{
+				_winner.setWins(_winner.getWins() - 1);
+				_winner = newWinner;
+				_winner.setWins(_winner.getWins() + 1);
+				_judge._conflictedTeams.add(_gov);
+				_judge._conflictedTeams.add(_opp);
 			}
-			else if(newWinner.isGov){
-				if(_winner == null){
-					_winner = _gov;
-					_winner.setWins(_winner.getWins() + 1);
-				}else if(_winner == _opp){
-					_winner.setWins(_winner.getWins() - 1);
-					_winner = _gov;
-					_winner.setWins(_winner.getWins() + 1);
-				}
-				
-			}else if(newWinner.isOpp){
-				if(_winner == null){
-					_winner = _opp;
-					_winner.setWins(_winner.getWins() + 1);
-				}else if(_winner == _gov){
-					_winner.setWins(_winner.getWins() - 1);
-					_winner = _opp;
-					_winner.setWins(_winner.getWins() + 1);
-				}
-			}			
+			
 		}
 	}
 	@SuppressWarnings("unchecked")
