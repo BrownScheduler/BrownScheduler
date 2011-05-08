@@ -27,7 +27,7 @@ public class RoundPanel extends JPanel implements GUIConstants {
 			PairingPanel pp = new PairingPanel(pairing);
 			_pairingpanels.add(pp);
 			this.add(pp);
-			this.add(Box.createRigidArea(SPACING_SIZE));
+			this.add(Box.createRigidArea(SMALLSPACING_SIZE));
 		}
 		this.add(Box.createVerticalGlue());
 	}

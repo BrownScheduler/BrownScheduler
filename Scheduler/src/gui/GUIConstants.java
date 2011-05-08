@@ -43,9 +43,13 @@ public interface GUIConstants {
 	int JCOMBOBOX_HEIGHT = 25;
 	Dimension JCOMBOBOX_SIZE = new Dimension(JCOMBOBOX_WIDTH, JCOMBOBOX_HEIGHT);
 	
-	int SPACING_X = 10;
-	int SPACING_Y = 10;
-	Dimension SPACING_SIZE = new Dimension(SPACING_X, SPACING_Y);
+	int SMALLSPACING_X = 10;
+	int SMALLSPACING_Y = 10;
+	Dimension SMALLSPACING_SIZE = new Dimension(SMALLSPACING_X, SMALLSPACING_Y);
 	
-	int DEFAULT_NUM_BLANK_ROWS = 10;
+	int BIGSPACING_X = 100;
+	int BIGSPACING_Y = 100;
+	Dimension BIGSPACING_SIZE = new Dimension(BIGSPACING_X, BIGSPACING_Y);
+	
+	int DEFAULT_NUM_BLANK_ROWS = 1;
 }

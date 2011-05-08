@@ -2,16 +2,11 @@ package gui;
 
 import middleend.*;
 import backbone.*;
-
-import java.awt.Color;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
-
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.ScrollPaneConstants;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
@@ -55,17 +50,6 @@ public class InputTablePane extends JScrollPane implements GUIConstants {
 			data.add(group.getBlankUnit().getAttributes());
 		}
 		_table.setModel(new InputTableModel(headers, data, group.isEditable()));
-//		for (int i = 0; i < _table.getColumnCount(); i++) {
-//		TableColumn col = _table.getColumnModel().getColumn(i);
-//		if (_table.getModel().getColumnClass(i) == boolean.class)
-//			col.setCellEditor(new DefaultCellEditor(Utility.getBlankBooleanField(true)));
-//		if (_table.getModel().getColumnClass(i) == int.class)
-//			col.setCellEditor(new DefaultCellEditor(Utility.getBlankIntegerField(true)));
-//		if (_table.getModel().getColumnClass(i) == double.class)
-//			col.setCellEditor(new DefaultCellEditor(Utility.getBlankDoubleField(true)));
-//		if (_table.getModel().getColumnClass(i) == String.class)
-//			col.setCellEditor(new DefaultCellEditor(Utility.getBlankStringField(true)));
-//		}
 		ExcelAdapter exceladapt = new ExcelAdapter(_table);
 		this.add(_table.getTableHeader());
 		this.add(_table);
@@ -87,13 +71,13 @@ public class InputTablePane extends JScrollPane implements GUIConstants {
 				ArrayList<Object> row = new ArrayList<Object>();
 				for (Attribute attr : list) {
 					if (attr.getType() == Attribute.Type.BOOLEAN) {
-						row.add(((BooleanAttribute) attr).getAttribute());
+						row.add(new Boolean(((BooleanAttribute) attr).getAttribute()));
 					}
 					else if (attr.getType() == Attribute.Type.DOUBLE) {
-						row.add(((DoubleAttribute) attr).getAttribute());
+						row.add(new Double(((DoubleAttribute) attr).getAttribute()));
 					}
 					else if (attr.getType() == Attribute.Type.INT) {
-						row.add(((IntAttribute) attr).getAttribute());
+						row.add(new Integer(((IntAttribute) attr).getAttribute()));
 					}
 					else if (attr.getType() == Attribute.Type.STRING) {
 						row.add(((StringAttribute) attr).getAttribute());
@@ -103,6 +87,13 @@ public class InputTablePane extends JScrollPane implements GUIConstants {
 			}
 			Object[][] dataarray = d.toArray(new Object[0][0]);
 			this.setDataVector(dataarray, _headers);
+			this.addTableModelListener(new TableModelListener() {
+				public void tableChanged(TableModelEvent e) {
+					if ((e.getLastRow() == (getRowCount()-1)) && (e.getType() == e.UPDATE)) {
+						insertRow(getRowCount(), new Object[0]);
+					}
+				}
+			});
 		}
 		
 		public boolean isCellEditable(int row, int column) {
@@ -113,19 +104,19 @@ public class InputTablePane extends JScrollPane implements GUIConstants {
 			return _headers[i].getTitle();
 		}
 		
-//		public Class<?> getColumnClass(int i) {
-//			Attribute a = _headers[i];
-//			if (a.getType() == Attribute.Type.BOOLEAN) {
-//				return boolean.class;
-//			}
-//			else if (a.getType() == Attribute.Type.DOUBLE) {
-//				return double.class;
-//			}
-//			else if (a.getType() == Attribute.Type.INT) {
-//				return int.class;
-//			}
-//			return String.class;
-//		}
+		public Class getColumnClass(int i) {
+			Attribute a = _headers[i];
+			if (a.getType() == Attribute.Type.BOOLEAN) {
+				return Boolean.class;
+			}
+			else if (a.getType() == Attribute.Type.DOUBLE) {
+				return Double.class;
+			}
+			else if (a.getType() == Attribute.Type.INT) {
+				return Integer.class;
+			}
+			return String.class;
+		}
 
 		public int getColumnCount() {
 			return _headers.length;

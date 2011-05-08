@@ -115,7 +115,7 @@ public class App implements GUIConstants {
 						}
 					});
 					_toolbar.add(button);
-					_toolbar.add(Box.createRigidArea(SPACING_SIZE));
+					_toolbar.add(Box.createRigidArea(SMALLSPACING_SIZE));
 				}
 			}
 		}
