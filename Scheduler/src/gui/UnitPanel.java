@@ -62,12 +62,17 @@ public class UnitPanel extends JPanel implements GUIConstants {
 			if (comp instanceof JButton) {
 				((JButton) comp).addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						boolean hasPanel = false;
+						for (int i = 0; i < _tablePanel.getComponentCount(); i++) {
+							if (_tablePanel.getComponent(i) == components.get(attr))
+								hasPanel = true;
+						}
 						if (_tablePanel.getComponentCount() == 0) {
 							_tablePanel.removeAll();
 							_tablePanel.add(((InputTablePane) components.get(attr)).getTable().getTableHeader(), BorderLayout.PAGE_START);
 							_tablePanel.add(components.get(attr), BorderLayout.CENTER);
 						}
-						else if (_tablePanel.getComponent(0) == components.get(attr)) {
+						else if (hasPanel) {
 							_tablePanel.removeAll();
 						}
 						else {
