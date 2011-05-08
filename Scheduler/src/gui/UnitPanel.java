@@ -20,13 +20,11 @@ import javax.swing.JTextField;
 public class UnitPanel extends JPanel implements GUIConstants {
 
 	private MiddleEnd _middleEnd;
-	private Utility _util;
 	private JPanel _mainPanel, _buttonPanel, _tablePanel;
 	private Grouping _grouping;
 	
 	public UnitPanel(MiddleEnd m, Unit u) {
 		_middleEnd = m;
-		_util = new Utility();
 		_mainPanel = new JPanel();
 		_buttonPanel = new JPanel();
 		_tablePanel = new JPanel();
@@ -36,7 +34,6 @@ public class UnitPanel extends JPanel implements GUIConstants {
 	public UnitPanel(MiddleEnd m, Unit u, Grouping g) {
 		_middleEnd = m;
 		_grouping = g;
-		_util = new Utility();
 		_mainPanel = new JPanel();
 		_buttonPanel = new JPanel();
 		_tablePanel = new JPanel();
@@ -55,7 +52,7 @@ public class UnitPanel extends JPanel implements GUIConstants {
 				GroupingAttribute<Unit> g = (GroupingAttribute<Unit>) attr;
 				components.put(attr, new InputTablePane(_middleEnd, g.getBlankUnit().getAttributes(), g));
 			}
-			JComponent comp = _util.getField(attr);
+			JComponent comp = Utility.getField(attr);
 			if (comp instanceof JButton) {
 				((JButton) comp).addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -106,15 +103,15 @@ public class UnitPanel extends JPanel implements GUIConstants {
 					}
 					else if (attr.getType() == Attribute.Type.GROUPING) {
 						InputTablePane table = (InputTablePane) components.get(attr);
-						GroupingAttribute groupattr = (GroupingAttribute) attr;
+						GroupingAttribute<Unit> groupattr = (GroupingAttribute) attr;
 						for (int i = 0; i < table.getTable().getRowCount(); i++) {
 							Unit rowunit;
 							if (i < table.getUnitsInRowsList().size()) {
 								rowunit = table.getUnitsInRowsList().get(i);
-								groupattr.addMember(rowunit);
 							}
 							else {
 								rowunit = groupattr.getBlankUnit();
+								groupattr.addMember(rowunit);
 							}
 							int j = 0;
 							for (Attribute rowattr : rowunit.getAttributes()) {
@@ -138,6 +135,7 @@ public class UnitPanel extends JPanel implements GUIConstants {
 							}
 						}
 						table = new InputTablePane(_middleEnd, groupattr.getBlankUnit().getAttributes(), groupattr);
+						components.put(attr, table);
 					}
 					else if (attr.getType() == Attribute.Type.INT) {
 						int value = Integer.parseInt(((JTextField) components.get(attr)).getText());

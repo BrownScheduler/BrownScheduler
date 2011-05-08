@@ -37,7 +37,7 @@ public class PairingPanel extends JPanel implements GUIConstants {
 				attrpanel.add(new UnitAttributeComboBox((UnitAttribute) attribute, _pairing, this));//Not header, needs to be editable
 				if (((UnitAttribute) attribute).att != null) {
 					for (Attribute attr : ((UnitAttribute) attribute).att.getAttributes()) {
-						this.add(Box.createRigidArea(SPACING_SIZE));
+						this.add(Box.createRigidArea(SMALLSPACING_SIZE));
 						if (attr.getType() == Attribute.Type.GROUPING) {
 							JLabel label = Utility.getTitleLabel(attr);
 							label.setToolTipText("Go to the input panel to edit/view this attribute of this unit.");
@@ -53,7 +53,7 @@ public class PairingPanel extends JPanel implements GUIConstants {
 					}
 				}
 				else {
-					this.add(Box.createRigidArea(SPACING_SIZE));
+					this.add(Box.createRigidArea(SMALLSPACING_SIZE));
 					JLabel title = Utility.getTitleLabel(attribute);
 					title.setText(title.getText() + ": N/A");
 					attrpanel.add(title);
