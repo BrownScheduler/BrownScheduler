@@ -68,7 +68,7 @@ public class Judge implements Unit{
 
 	public String toString(){
 		String r = "Name: " + this._name;
-		r += " Conflicts: ";
+		r += "\nConflicts: ";
 		for(Team t : this._conflictedTeams){
 			r += t.getName() + "; ";
 		}

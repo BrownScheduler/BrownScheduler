@@ -97,7 +97,7 @@ public class MyPairing implements backbone.Pairing{
 					
 				}
 			}
-			else if(!newWinner.isGov && !newWinner.isOpp){
+			if(!newWinner.isGov && !newWinner.isOpp){
 				if(_winner != null){
 					_winner.setWins(_winner.getWins() - 1);
 					_winner = null;

@@ -9,7 +9,7 @@ public class Team implements CompetitiveUnit {
 	private Grouping<Unit> _category;
 	private String _name;
 	private int _wins;
-	public Team(String name){
+	public Team(String name, Tourney t){
 		this._name = name;
 		_wins = 0;
 	}
@@ -63,7 +63,7 @@ public class Team implements CompetitiveUnit {
 	
 	public String toString(){
 		String r = "Name: " + this._name;
-		r += " Wins: " + String.valueOf(this._wins);
+		r += "\nWins: " + String.valueOf(this._wins);
 		return r;
 	}
 

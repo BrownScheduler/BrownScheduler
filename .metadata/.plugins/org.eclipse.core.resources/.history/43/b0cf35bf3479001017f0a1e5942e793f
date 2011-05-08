@@ -63,7 +63,7 @@ public class Team implements CompetitiveUnit {
 	
 	public String toString(){
 		String r = "Name: " + this._name;
-		r += " Wins: " + String.valueOf(this._wins);
+		r += "\nWins: " + String.valueOf(this._wins);
 		return r;
 	}
 
