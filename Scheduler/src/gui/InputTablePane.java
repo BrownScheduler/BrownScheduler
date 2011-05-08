@@ -42,7 +42,7 @@ public class InputTablePane extends JScrollPane implements GUIConstants {
 	private void initialize(List<Attribute> headers, GroupingAttribute<Unit> group) {
 		this.setSize(INPUTTABLE_SIZE);
 		this.setMinimumSize(this.getSize());
-		this.setMaximumSize(new Dimension(Integer.MAX_VALUE, this.getHeight()));
+//		this.setMaximumSize(new Dimension(Integer.MAX_VALUE, this.getHeight()));
 		_table = new JTable();
 		_table.setSize(INPUTTABLE_SIZE);
 		_table.getTableHeader().setReorderingAllowed(false);
