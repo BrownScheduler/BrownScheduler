@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="19" version="2.0">
+<workbench progressCount="17" version="2.0">
 <workbenchAdvisor/>
 <window height="825" maximized="true" width="1329" x="117" y="24">
 <fastViewData fastViewLocation="1024">
@@ -141,7 +141,7 @@
 </editor>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Tourney.java" partName="Tourney.java" path="/home/matt/BrownScheduler/Scheduler/src/plugin1/Tourney.java" title="Tourney.java" tooltip="Scheduler/src/plugin1/Tourney.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Scheduler/src/plugin1/Tourney.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="730" selectionTopPixel="256"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="704" selectionTopPixel="0"/>
 </editor>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="App.java" partName="App.java" path="/home/matt/BrownScheduler/Scheduler/src/gui/App.java" title="App.java" tooltip="Scheduler/src/gui/App.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Scheduler/src/gui/App.java"/>
@@ -179,13 +179,13 @@
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Scheduler/src/plugin1/MyCategory.java"/>
 <editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="910" selectionTopPixel="0"/>
 </editor>
-<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Judge.java" partName="Judge.java" path="/home/matt/BrownScheduler/Scheduler/src/plugin1/Judge.java" title="Judge.java" tooltip="Scheduler/src/plugin1/Judge.java" workbook="DefaultEditorWorkbook">
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Judge.java" partName="Judge.java" path="/home/matt/BrownScheduler/Scheduler/src/plugin1/Judge.java" title="Judge.java" tooltip="Scheduler/src/plugin1/Judge.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Scheduler/src/plugin1/Judge.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1737" selectionTopPixel="384"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1657" selectionTopPixel="704"/>
 </editor>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="JudgeGrouping.java" partName="JudgeGrouping.java" path="/home/matt/BrownScheduler/Scheduler/src/plugin1/JudgeGrouping.java" title="JudgeGrouping.java" tooltip="Scheduler/src/plugin1/JudgeGrouping.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Scheduler/src/plugin1/JudgeGrouping.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="300" selectionTopPixel="0"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="339" selectionTopPixel="0"/>
 </editor>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="TeamGrouping.java" partName="TeamGrouping.java" path="/home/matt/BrownScheduler/Scheduler/src/plugin1/TeamGrouping.java" title="TeamGrouping.java" tooltip="Scheduler/src/plugin1/TeamGrouping.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Scheduler/src/plugin1/TeamGrouping.java"/>
@@ -275,7 +275,7 @@
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Scheduler/src/roundrobin/Field.java"/>
 <editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="784" selectionTopPixel="64"/>
 </editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="FieldGrouping.java" partName="FieldGrouping.java" path="/home/matt/BrownScheduler/Scheduler/src/roundrobin/FieldGrouping.java" title="FieldGrouping.java" tooltip="Scheduler/src/roundrobin/FieldGrouping.java" workbook="DefaultEditorWorkbook">
+<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="FieldGrouping.java" partName="FieldGrouping.java" path="/home/matt/BrownScheduler/Scheduler/src/roundrobin/FieldGrouping.java" title="FieldGrouping.java" tooltip="Scheduler/src/roundrobin/FieldGrouping.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Scheduler/src/roundrobin/FieldGrouping.java"/>
 <editorState selectionHorizontalPixel="0" selectionLength="6" selectionOffset="127" selectionTopPixel="0"/>
 </editor>
@@ -567,11 +567,8 @@
 <workingSets/>
 <navigationHistory>
 <editors>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Scheduler/src/plugin1/Tourney.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Scheduler/src/roundrobin/Field.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Scheduler/src/roundrobin/Tournament.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Scheduler/src/roundrobin/ConstraintHandler.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Scheduler/src/plugin1/Main.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Scheduler/src/plugin1/ConstraintHandler.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Scheduler/src/plugin1/GovOppUnit.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Scheduler/src/plugin1/Judge.java"/>
@@ -585,156 +582,160 @@
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Scheduler/src/roundrobin/Referee.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Scheduler/src/roundrobin/Team.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Scheduler/src/plugin1/JudgeGrouping.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Scheduler/src/plugin1/Tourney.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Scheduler/src/plugin1/JudgeGrouping.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Scheduler/src/roundrobin/Field.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Scheduler/src/roundrobin/FieldGrouping.java"/>
 </editors>
-<item historyLabel="Tournament.java" index="2">
-<position info="not_deleted" x="956" y="0"/>
-</item>
-<item historyLabel="Tourney.java" index="0">
-<position info="not_deleted" x="899" y="38"/>
-</item>
-<item historyLabel="Main.java" index="4">
-<position info="not_deleted" x="1704" y="0"/>
-</item>
-<item historyLabel="Tournament.java" index="2">
-<position info="not_deleted" x="956" y="0"/>
-</item>
-<item historyLabel="Tournament.java" index="2">
+<item historyLabel="Tournament.java" index="1">
 <position info="not_deleted" x="718" y="0"/>
 </item>
-<item historyLabel="ConstraintHandler.java" index="3">
-<position info="not_deleted" x="80" y="6"/>
-</item>
-<item historyLabel="Tournament.java" index="2">
-<position info="not_deleted" x="718" y="0"/>
-</item>
-<item historyLabel="ConstraintHandler.java" index="3">
-<position info="not_deleted" x="175" y="0"/>
-</item>
-<item historyLabel="Tournament.java" index="2">
-<position info="not_deleted" x="718" y="0"/>
-</item>
-<item historyLabel="Field.java" index="1">
+<item historyLabel="Field.java" index="0">
 <position info="not_deleted" x="541" y="0"/>
 </item>
-<item historyLabel="Tournament.java" index="2">
+<item historyLabel="Tournament.java" index="1">
 <position info="not_deleted" x="718" y="0"/>
 </item>
-<item historyLabel="Tournament.java" index="2">
+<item historyLabel="Tournament.java" index="1">
 <position info="not_deleted" x="1058" y="0"/>
 </item>
-<item historyLabel="Tournament.java" index="2">
+<item historyLabel="Tournament.java" index="1">
 <position info="not_deleted" x="1115" y="0"/>
 </item>
-<item historyLabel="Tournament.java" index="2">
+<item historyLabel="Tournament.java" index="1">
 <position info="not_deleted" x="1177" y="0"/>
 </item>
-<item historyLabel="Tournament.java" index="2">
+<item historyLabel="Tournament.java" index="1">
 <position info="not_deleted" x="1239" y="0"/>
 </item>
-<item historyLabel="Tournament.java" index="2">
+<item historyLabel="Tournament.java" index="1">
 <position info="not_deleted" x="596" y="0"/>
 </item>
-<item historyLabel="Tournament.java" index="2">
+<item historyLabel="Tournament.java" index="1">
 <position info="not_deleted" x="593" y="0"/>
 </item>
-<item historyLabel="Tournament.java" index="2">
+<item historyLabel="Tournament.java" index="1">
 <position info="not_deleted" x="413" y="0"/>
 </item>
-<item historyLabel="Tournament.java" index="2">
+<item historyLabel="Tournament.java" index="1">
 <position info="not_deleted" x="593" y="0"/>
 </item>
-<item historyLabel="Field.java" index="1">
+<item historyLabel="Field.java" index="0">
 <position info="not_deleted" x="541" y="0"/>
 </item>
-<item historyLabel="Field.java" index="1">
+<item historyLabel="Field.java" index="0">
 <position info="not_deleted" x="796" y="0"/>
 </item>
-<item historyLabel="ConstraintHandler.java" index="5">
+<item historyLabel="ConstraintHandler.java" index="2">
 <position info="not_deleted" x="830" y="0"/>
 </item>
-<item historyLabel="GovOppUnit.java" index="6">
+<item historyLabel="GovOppUnit.java" index="3">
 <position info="not_deleted" x="1470" y="0"/>
 </item>
-<item historyLabel="Field.java" index="1">
+<item historyLabel="Field.java" index="0">
 <position info="not_deleted" x="766" y="0"/>
 </item>
-<item historyLabel="Judge.java" index="7">
+<item historyLabel="Judge.java" index="4">
 <position info="not_deleted" x="1962" y="0"/>
 </item>
-<item historyLabel="Player.java" index="8">
+<item historyLabel="Player.java" index="5">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="Tournament.java" index="9">
+<item historyLabel="Tournament.java" index="6">
 <position info="not_deleted" x="357" y="0"/>
 </item>
-<item historyLabel="Judge.java" index="7">
+<item historyLabel="Judge.java" index="4">
 <position info="not_deleted" x="382" y="31"/>
 </item>
-<item historyLabel="Team.java" index="10">
+<item historyLabel="Team.java" index="7">
 <position info="not_deleted" x="1548" y="0"/>
 </item>
-<item historyLabel="MyPairing.java" index="11">
+<item historyLabel="MyPairing.java" index="8">
 <position info="not_deleted" x="3986" y="0"/>
 </item>
-<item historyLabel="ConstraintHandler.java" index="12">
+<item historyLabel="ConstraintHandler.java" index="9">
 <position info="not_deleted" x="175" y="0"/>
 </item>
-<item historyLabel="Field.java" index="1">
+<item historyLabel="Field.java" index="0">
 <position info="not_deleted" x="829" y="0"/>
 </item>
-<item historyLabel="Tournament.java" index="9">
+<item historyLabel="Tournament.java" index="6">
 <position info="not_deleted" x="1034" y="15"/>
 </item>
-<item historyLabel="Field.java" index="1">
+<item historyLabel="Field.java" index="0">
 <position info="not_deleted" x="829" y="0"/>
 </item>
-<item historyLabel="Field.java" index="1">
+<item historyLabel="Field.java" index="0">
 <position/>
 </item>
-<item historyLabel="Field.java" index="1">
+<item historyLabel="Field.java" index="0">
 <position/>
 </item>
-<item historyLabel="Field.java" index="1">
+<item historyLabel="Field.java" index="0">
 <position/>
 </item>
-<item historyLabel="Unit.java" index="13">
+<item historyLabel="Unit.java" index="10">
 <position info="not_deleted" x="272" y="0"/>
 </item>
-<item historyLabel="GovOppUnit.java" index="6">
+<item historyLabel="GovOppUnit.java" index="3">
 <position info="not_deleted" x="736" y="0"/>
 </item>
-<item historyLabel="Judge.java" index="7">
+<item historyLabel="Judge.java" index="4">
 <position info="not_deleted" x="1737" y="0"/>
 </item>
-<item historyLabel="MyPairing.java" index="11">
+<item historyLabel="MyPairing.java" index="8">
 <position info="not_deleted" x="3683" y="0"/>
 </item>
-<item historyLabel="Team.java" index="10">
+<item historyLabel="Team.java" index="7">
 <position info="not_deleted" x="1395" y="0"/>
 </item>
-<item historyLabel="Field.java" index="1">
+<item historyLabel="Field.java" index="0">
 <position/>
 </item>
-<item historyLabel="Game.java" index="14">
+<item historyLabel="Game.java" index="11">
 <position info="not_deleted" x="400" y="0"/>
 </item>
-<item historyLabel="Player.java" index="8">
+<item historyLabel="Player.java" index="5">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="Referee.java" index="15">
+<item historyLabel="Referee.java" index="12">
 <position info="not_deleted" x="286" y="0"/>
 </item>
-<item historyLabel="Team.java" index="16">
+<item historyLabel="Team.java" index="13">
 <position info="not_deleted" x="416" y="0"/>
 </item>
-<item historyLabel="Judge.java" index="7">
+<item historyLabel="Judge.java" index="4">
 <position info="not_deleted" x="1737" y="0"/>
 </item>
-<item historyLabel="JudgeGrouping.java" index="17">
+<item historyLabel="JudgeGrouping.java" index="14">
 <position info="not_deleted" x="300" y="0"/>
 </item>
-<item active="true" historyLabel="Judge.java" index="7">
+<item historyLabel="Judge.java" index="4">
 <position info="not_deleted" x="1737" y="0"/>
+</item>
+<item historyLabel="Judge.java" index="4">
+<position info="not_deleted" x="1610" y="0"/>
+</item>
+<item historyLabel="Judge.java" index="4">
+<position info="not_deleted" x="1663" y="0"/>
+</item>
+<item historyLabel="Judge.java" index="4">
+<position info="not_deleted" x="1657" y="0"/>
+</item>
+<item historyLabel="Tourney.java" index="15">
+<position info="not_deleted" x="736" y="0"/>
+</item>
+<item historyLabel="JudgeGrouping.java" index="16">
+<position info="not_deleted" x="339" y="0"/>
+</item>
+<item historyLabel="Tourney.java" index="15">
+<position info="not_deleted" x="736" y="0"/>
+</item>
+<item historyLabel="Field.java" index="17">
+<position info="not_deleted" x="784" y="0"/>
+</item>
+<item active="true" historyLabel="FieldGrouping.java" index="18">
+<position info="not_deleted" x="127" y="6"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>

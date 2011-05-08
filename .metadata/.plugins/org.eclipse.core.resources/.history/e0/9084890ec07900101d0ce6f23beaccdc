@@ -60,11 +60,6 @@ public class Judge implements Unit{
 		}
 		else if(attribute.getType() == Attribute.Type.GROUPING){
 			this._conflictedTeams = new HashSet<Team>(((GroupingAttribute<Team>)attribute).getMembers());
-			for(Team t : _conflictedTeams){
-				if(!_t.getCategories().get(0).getMembers().contains(t)){
-					_t.getCategories().get(0).addMember(t);
-				}
-			}
 		}
 		
 	}
