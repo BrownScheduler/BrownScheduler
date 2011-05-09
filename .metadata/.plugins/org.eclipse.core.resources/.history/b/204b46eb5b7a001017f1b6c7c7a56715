@@ -60,8 +60,9 @@ public class Player implements Unit {
 			if(t == null){
 				if(_team.att != null){
 					_team.att.removePlayer(this);
+					_team = (UnitAttribute<Team>)attribute;
 				}
-				_team = (UnitAttribute<Team>)attribute;
+				return;
 			}
 			else{
 				if(_team.att != null){

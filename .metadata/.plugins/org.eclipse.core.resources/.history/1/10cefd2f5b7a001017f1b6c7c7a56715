@@ -42,7 +42,13 @@ public class UnitAttribute<T extends Unit> extends Attribute {
 	}
 	
 	public String toString(){
-		return "";
+		String s = "Att: ";
+		if(att == null) s += "null";
+		else s += att.toString();
+		s += "memberOf: ";
+		if(memberOf == null) s += null;
+		else s += memberOf.getName();
+		return s;
 	}
 
 }

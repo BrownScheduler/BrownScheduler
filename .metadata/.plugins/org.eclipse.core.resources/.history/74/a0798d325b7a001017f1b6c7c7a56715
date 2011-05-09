@@ -42,7 +42,6 @@ public class UnitAttribute<T extends Unit> extends Attribute {
 	}
 	
 	public String toString(){
-		return "";
 	}
 
 }
