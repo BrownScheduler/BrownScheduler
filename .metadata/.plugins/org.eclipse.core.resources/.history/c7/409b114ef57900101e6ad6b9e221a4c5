@@ -16,20 +16,23 @@ public class Field implements Unit {
 	private Tournament _t;
 	
 	public Field(Tournament t, StringAttribute name){
-		_t = t;
 		_name = name;
 		_associatedRefs = new GroupingAttribute<Referee>("Referees", new RefereeGrouping(_t, "Associated Refs"));
+		_t = t;
 	}
 	
 	public Field(Tournament t, String name){
-		_t = t;
 		_name = new StringAttribute("Name", name);
 		_associatedRefs = new GroupingAttribute<Referee>("Referees", new RefereeGrouping(_t, "Associated Refs"));
-		
+		_t = t;
 	}
 	
 	public RefereeGrouping ref(){
 		return (RefereeGrouping)_associatedRefs.getGrouping();
+	}
+	
+	public void addRef(Referee ref){
+		
 	}
 
 	@Override

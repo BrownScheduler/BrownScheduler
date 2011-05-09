@@ -16,10 +16,9 @@ public class Player implements Unit {
 	private Tournament _t;
 	
 	public Player(Tournament t, String name){
-		_t = t;
 		_name = new StringAttribute("Name", name);
 		_team = new UnitAttribute<Team>("Team", null, t.getTeams());
-		
+		_t = t;
 	}
 	
 	public void setTeam(Team t){
