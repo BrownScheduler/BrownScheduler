@@ -2,7 +2,7 @@ package gui;
 
 import middleend.*;
 import backbone.*;
-import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.awt.Dimension;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -35,11 +35,11 @@ public class AddingPanel extends JPanel implements GUIConstants {
 	 */
 	private void initialize() {
 		JLabel initLabel = new JLabel();
+		this.setMinimumSize(ADDINGPANEL_SIZE);
 		initLabel.setText("Choose a category on the side to begin editing!");
 		initLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		this.setSize(ADDINGPANEL_SIZE);
-		this.setLayout(new BorderLayout());
-		this.add(initLabel, BorderLayout.CENTER);
+		this.setLayout(new GridLayout(0, 1));
+		this.add(initLabel);
 	}
 	
 	public void setViewPanel(Unit unit) {
@@ -51,7 +51,6 @@ public class AddingPanel extends JPanel implements GUIConstants {
 	
 	public void setViewPanel(Grouping<Unit> grouping) {
 		this.removeAll();
-		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		for (Unit u : grouping.getMembers()) {
 			this.add(new UnitPanel(_middleEnd, u));
 			this.add(Box.createRigidArea(SMALLSPACING_SIZE));

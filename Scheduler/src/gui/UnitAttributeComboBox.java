@@ -10,26 +10,32 @@ import java.util.ArrayList;
 public class UnitAttributeComboBox extends JComboBox implements GUIConstants {
 	
 	private Unit _selectedunit;
+	private Grouping<Unit> _grouping;
 	private ArrayList<Unit> _units;
 	
 	public UnitAttributeComboBox(final UnitAttribute<Unit> attribute) {
 		this.setSize(JCOMBOBOX_SIZE);
 		this.setMaximumSize(this.getSize());
+		this.setToolTipText("Create a new team by typing a name instead of selecting one from the drop-down box");
+		_grouping = attribute.getMemberOf();
 		_units = new ArrayList<Unit>(attribute.getListOfUnits());
 		ArrayList<String> unitnames = new ArrayList<String>();
-		for (Unit unit : _units) {
-			unitnames.add(unit.getName());
+		this.addItem("");
+		int toSelect = 0;
+		for (int i = 0; i < _units.size(); i++) {
+			unitnames.add(_units.get(i).getName());
+			this.addItem(_units.get(i).getName());
+			if (_units.get(i) == attribute.att)
+				toSelect = i+1;
 		}
 		_units.add(0, null);
-		unitnames.add(0, "");
+		this.setSelectedIndex(toSelect);
 		this.setEditable(true);
 		this.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if ((getSelectedIndex() < 0) && (getSelectedItem() != null)) {
 					Unit toadd = attribute.getMemberOf().getBlank();
 					toadd.setName((String) getSelectedItem());
-					_units.add(toadd);
-					addItem(getSelectedItem());
 					_selectedunit = toadd;
 				}
 				else {
@@ -41,5 +47,9 @@ public class UnitAttributeComboBox extends JComboBox implements GUIConstants {
 	
 	public Unit getSelectedUnit() {
 		return _selectedunit;
+	}
+	
+	public Grouping<Unit> getGrouping() {
+		return _grouping;
 	}
 }
