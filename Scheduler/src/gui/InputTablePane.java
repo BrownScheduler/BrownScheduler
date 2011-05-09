@@ -5,11 +5,14 @@ import backbone.*;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.DefaultCellEditor;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 public class InputTablePane extends JScrollPane implements GUIConstants {
 
@@ -41,12 +44,11 @@ public class InputTablePane extends JScrollPane implements GUIConstants {
 		_table = new JTable();
 		_table.setSize(INPUTTABLE_SIZE);
 		_table.getTableHeader().setReorderingAllowed(false);
-//		_table.setAutoCreateRowSorter(true);
 		List<List<Attribute>> data = (List<List<Attribute>>) new ArrayList<List<Attribute>>();
 		for (Unit u : group.getMembers()) {
 			data.add(u.getAttributes());
 		}
-		for (int i = 0; i < DEFAULT_NUM_BLANK_ROWS; i++) {
+		for (int i = 0; i < DEFAULT_TABLE_BLANK_ROWS; i++) {
 			data.add(group.getBlankUnit().getAttributes());
 		}
 		_table.setModel(new InputTableModel(headers, data, group.isEditable()));
@@ -66,6 +68,15 @@ public class InputTablePane extends JScrollPane implements GUIConstants {
 		public InputTableModel(List<Attribute> headers, List<List<Attribute>> data, boolean editable) {
 			_editable = editable;
 			_headers = headers.toArray(new Attribute[0]);
+			for (int i = 0; i < _table.getColumnCount(); i++) {
+				if (_headers[i].getType() == Attribute.Type.UNIT) {
+					TableColumn unitcolumn = _table.getColumnModel().getColumn(i);
+					UnitAttribute<Unit> header = (UnitAttribute) _headers[i];
+					UnitAttribute<Unit> uatt = new UnitAttribute<Unit>(header.getTitle(), header.getMemberOf());
+					UnitAttributeComboBox combobox = new UnitAttributeComboBox(uatt);
+					unitcolumn.setCellEditor(new DefaultCellEditor(combobox));
+				}
+			}
 			List<Object[]> d = new ArrayList<Object[]>();
 			for (List<Attribute> list : data) {
 				ArrayList<Object> row = new ArrayList<Object>();
@@ -82,6 +93,9 @@ public class InputTablePane extends JScrollPane implements GUIConstants {
 					else if (attr.getType() == Attribute.Type.STRING) {
 						row.add(((StringAttribute) attr).getAttribute());
 					}
+					else if (attr.getType() == Attribute.Type.UNIT) {
+						row.add(((UnitAttribute) attr).att.getName());
+					}
 				}
 				d.add(row.toArray(new Object[0]));
 			}
@@ -89,8 +103,10 @@ public class InputTablePane extends JScrollPane implements GUIConstants {
 			this.setDataVector(dataarray, _headers);
 			this.addTableModelListener(new TableModelListener() {
 				public void tableChanged(TableModelEvent e) {
-					if ((e.getLastRow() == (getRowCount()-1)) && (e.getType() == e.UPDATE)) {
-						insertRow(getRowCount(), new Object[0]);
+					if ((e.getLastRow() == (getRowCount()-1)) && (e.getType() == TableModelEvent.UPDATE)) {
+						for (int i = 0; i < DEFAULT_TABLE_BLANK_ROWS; i++) {
+							insertRow(getRowCount(), new Object[0]);
+						}
 					}
 				}
 			});
@@ -104,7 +120,7 @@ public class InputTablePane extends JScrollPane implements GUIConstants {
 			return _headers[i].getTitle();
 		}
 		
-		public Class getColumnClass(int i) {
+		public Class<?> getColumnClass(int i) {
 			Attribute a = _headers[i];
 			if (a.getType() == Attribute.Type.BOOLEAN) {
 				return Boolean.class;

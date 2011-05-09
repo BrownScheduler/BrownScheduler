@@ -10,6 +10,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
@@ -106,32 +107,63 @@ public class UnitPanel extends JPanel implements GUIConstants {
 						GroupingAttribute<Unit> groupattr = (GroupingAttribute) attr;
 						for (int i = 0; i < table.getTable().getRowCount(); i++) {
 							Unit rowunit;
+							boolean rowunitisnull = true;
+							boolean alreadyadded = false;
 							if (i < table.getUnitsInRowsList().size()) {
 								rowunit = table.getUnitsInRowsList().get(i);
+								alreadyadded = true;
 							}
 							else {
 								rowunit = groupattr.getBlankUnit();
-								groupattr.addMember(rowunit);
 							}
 							int j = 0;
 							for (Attribute rowattr : rowunit.getAttributes()) {
 								if (rowattr.getType() == Attribute.Type.BOOLEAN) {
-									boolean value = (Boolean) table.getTable().getValueAt(i, j);
+									boolean value = false;
+									if (table.getTable().getValueAt(i, j) != null) {
+										value = (Boolean) table.getTable().getValueAt(i, j);
+										rowunitisnull = false;
+									}
 									rowunit.setAttribute(new BooleanAttribute(rowattr.getTitle(), value));
 								}
-								else if (attr.getType() == Attribute.Type.DOUBLE) {
-									double value = (Double) table.getTable().getValueAt(i, j);
+								else if (rowattr.getType() == Attribute.Type.DOUBLE) {
+									double value = 0;
+									if (table.getTable().getValueAt(i, j) != null) {
+										value = (Double) table.getTable().getValueAt(i, j);
+										rowunitisnull = false;
+									}
 									rowunit.setAttribute(new DoubleAttribute(rowattr.getTitle(), value));
 								}
-								else if (attr.getType() == Attribute.Type.INT) {
-									int value = (Integer) table.getTable().getValueAt(i, j);
+								else if (rowattr.getType() == Attribute.Type.INT) {
+									int value = 0;
+									if (table.getTable().getValueAt(i, j) != null) {
+										value = (Integer) table.getTable().getValueAt(i, j);
+										rowunitisnull = false;
+									}
 									rowunit.setAttribute(new IntAttribute(rowattr.getTitle(), value));
 								}
-								else if (attr.getType() == Attribute.Type.STRING) {
-									String value = (String) table.getTable().getValueAt(i, j);
+								else if (rowattr.getType() == Attribute.Type.STRING) {
+									String value = "";
+									if (table.getTable().getValueAt(i, j) != null) {
+										value = (String) table.getTable().getValueAt(i, j);
+										rowunitisnull = false;
+									}
 									rowunit.setAttribute(new StringAttribute(rowattr.getTitle(), value));
 								}
+								else if (rowattr.getType() == Attribute.Type.UNIT) {
+									Unit value = null;
+									if (table.getTable().getValueAt(i, j) != null) {
+										DefaultCellEditor editor = (DefaultCellEditor) table.getTable().getCellEditor(i, j);
+										UnitAttributeComboBox combobox = (UnitAttributeComboBox) editor.getComponent();
+										value = combobox.getSelectedUnit();
+										rowunitisnull = false;//TODO:Does this work?
+									}
+									rowunit.setAttribute(new UnitAttribute(rowattr.getTitle(), value));
+								}
 								j++;
+							}
+							if (!rowunitisnull && !alreadyadded) {
+								groupattr.addMember(rowunit);
 							}
 						}
 						table = new InputTablePane(_middleEnd, groupattr.getBlankUnit().getAttributes(), groupattr);
@@ -144,6 +176,10 @@ public class UnitPanel extends JPanel implements GUIConstants {
 					else if (attr.getType() == Attribute.Type.STRING) {
 						String value = ((JTextField) components.get(attr)).getText();
 						unit.setAttribute(new StringAttribute(attr.getTitle(), value));
+					}
+					else if (attr.getType() == Attribute.Type.UNIT) {
+						Unit value = ((UnitAttributeComboBox) components.get(attr)).getSelectedUnit();
+						unit.setAttribute(new UnitAttribute(attr.getTitle(), value));
 					}
 				}
 				if (_grouping != null) {

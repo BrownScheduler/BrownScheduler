@@ -107,19 +107,28 @@ public class App implements GUIConstants {
 			for (int i = 0; i < getEditMenu().getMenuComponentCount(); i++) {
 				Component comp = getEditMenu().getMenuComponent(i);
 				if (comp instanceof JMenuItem) {
-					final JMenuItem menuitem = (JMenuItem) comp;
-					JButton button = new JButton(menuitem.getText());
-					button.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent e) {
-							menuitem.doClick();
-						}
-					});
-					_toolbar.add(button);
+					_toolbar.add(createButtonFromMenuItem((JMenuItem) comp));
 					_toolbar.add(Box.createRigidArea(SMALLSPACING_SIZE));
 				}
 			}
 		}
 		return _toolbar;
+	}
+	
+	/**
+	 * Creates a JButton from a JMenuItem
+	 * 
+	 * @param JMenuItem
+	 * @return JButton
+	 */
+	public JButton createButtonFromMenuItem(final JMenuItem item) {
+		JButton button = new JButton(item.getText());
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				item.doClick();
+			}
+		});
+		return button;
 	}
 	
 	public JPanel getMainContentAndToolbarPane() {
@@ -196,7 +205,7 @@ public class App implements GUIConstants {
 		if (_fileMenu == null) {
 			_fileMenu = new JMenu();
 			_fileMenu.setText("File");
-			_fileMenu.add(getOpenPluginMenuItem());
+//			_fileMenu.add(getOpenPluginMenuItem()); //TODO:Open plugin menu, or not?
 			_fileMenu.add(getOpenTournamentMenuItem());
 			_fileMenu.add(getPrintMenuItem());
 			_fileMenu.add(getSaveMenuItem());

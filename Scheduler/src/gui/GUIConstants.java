@@ -51,5 +51,5 @@ public interface GUIConstants {
 	int BIGSPACING_Y = 100;
 	Dimension BIGSPACING_SIZE = new Dimension(BIGSPACING_X, BIGSPACING_Y);
 	
-	int DEFAULT_NUM_BLANK_ROWS = 1;
+	int DEFAULT_TABLE_BLANK_ROWS = 1;
 }
