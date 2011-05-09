@@ -16,9 +16,10 @@ public class Player implements Unit {
 	private Tournament _t;
 	
 	public Player(Tournament t, String name){
+		_t = t;
 		_name = new StringAttribute("Name", name);
 		_team = new UnitAttribute<Team>("Team", null, t.getTeams());
-		_t = t;
+		
 	}
 	
 	public void setTeam(Team t){
@@ -44,7 +45,7 @@ public class Player implements Unit {
 
 	@Override
 	public String getName() {
-		return _name.toString();
+		return _name.getAttribute();
 	}
 
 	/**
@@ -56,7 +57,19 @@ public class Player implements Unit {
 			_name = (StringAttribute)attribute;
 		else if(attribute.getType() == Attribute.Type.UNIT){
 			Team t = (Team)((UnitAttribute<Team>)attribute).att;
-			t.addPlayer(this);
+			if(t == null){
+				if(_team.att != null){
+					_team.att.removePlayer(this);
+				}
+				_team = (UnitAttribute<Team>)attribute;
+			}
+			else{
+				if(_team.att != null){
+					_team.att.removePlayer(this);
+				}
+				t.addPlayer(this);
+				_team = (UnitAttribute<Team>)attribute;
+			}
 		}
 
 	}

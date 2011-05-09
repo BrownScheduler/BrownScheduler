@@ -35,7 +35,9 @@ public class Tournament implements backbone.Tournament {
 	@Override
 	public Round createNextRound() {
 		ConstraintHandler c = new ConstraintHandler(this, getNextRoundInt());
-		return c.createRound(_allFields._members);
+		Round r = c.createRound(_allFields._members);
+		_rounds.add(r);
+		return r;
 	}
 
 	@Override

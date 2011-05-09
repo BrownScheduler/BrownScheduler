@@ -76,7 +76,7 @@ public class ConstraintHandler {
 			}
 		}
 		//these are all the pairings that could not be created without a conflict
-		MyRound r = new MyRound("a round");
+		MyRound r = new MyRound(_t, "a round");
 		for(MyPairing p : pairs){
 			if(p._judge == null && !_judges.isEmpty()){
 				for(Judge j : _judges){

@@ -28,7 +28,7 @@ public class Team implements CompetitiveUnit {
 		_name = new StringAttribute("Name", name);
 		_gamesWon = new IntAttribute("Wins", 0);
 		_gamesLost = new IntAttribute("Losses", 0);
-		_players = new GroupingAttribute<Player>("Players", _t.getPlayers());
+		_players = new GroupingAttribute<Player>("Players", new PlayerGrouping(_t, "Players"));
 		_teamsFaced = new HashMap<Team, Integer>();
 	}
 	
@@ -106,6 +106,10 @@ public class Team implements CompetitiveUnit {
 			this._players.getMembers().add(player);
 			player.setTeam(this);
 		}
+	}
+	
+	public void removePlayer(Player player){
+		if(hasPlayer(player)) this._players.getMembers().remove(player);
 	}
 
 	public boolean hasPlayer(Player player) {

@@ -205,7 +205,7 @@ public class CSVIO {
 
 				for(String unitName : groupsToSet.get(gAtt)) {
 					Unit unit = null;
-					System.out.println(((Unit) gAtt.getGrouping().getBlank()).toString());
+					System.out.println(((Unit) gAtt.getGrouping().getBlank()));
 					for(Unit u : ((Unit) gAtt.getGrouping().getBlank()).getMemberOf().getMembers()) {
 						if(u.getName().equals(unitName)) {
 							unit = u;

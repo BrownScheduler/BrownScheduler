@@ -19,8 +19,10 @@ import backbone.Pairing;
 public class MyRound extends backbone.Round{
 	
 	
-	public MyRound(String i) {
+	private Tourney _t;
+	public MyRound(Tourney t, String i) {
 		super(i);
+		_t = t;
 	}
 	
 	public boolean isFinished(){
@@ -50,6 +52,12 @@ public class MyRound extends backbone.Round{
 			r = r + "\n";
 		}
 		return r;
+	}
+	
+	@Override
+	public Pairing getBlank(){
+		return new MyPairing(_t);
+		
 	}
 
 }

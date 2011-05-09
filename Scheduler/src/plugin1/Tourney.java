@@ -24,7 +24,7 @@ public class Tourney implements backbone.Tournament{
 	
 	public Tourney(){
 		rounds = new ArrayList<MyRound>();
-		competitors = new TeamGrouping("Competitors");
+		competitors = new TeamGrouping(this, "Competitors");
 		judges = new JudgeGrouping(this, "Judges");
 		totalRounds = 2;
 	}

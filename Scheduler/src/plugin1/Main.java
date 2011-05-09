@@ -22,10 +22,10 @@ public class Main {
 		
 		Tourney t = new Tourney();
 		
-		Team t1 = new Team("Team 1");
-		Team t2 = new Team("Team 2");
-		Team t3 = new Team("Team 3");
-		Team t4 = new Team("Team 4");
+		Team t1 = new Team(t, "Team 1");
+		Team t2 = new Team(t, "Team 2");
+		Team t3 = new Team(t, "Team 3");
+		Team t4 = new Team(t, "Team 4");
 		Judge j1 = new Judge(t, "Judge 1");
 		Judge j2 = new Judge(t, "Judge 2");
 		
