@@ -47,26 +47,12 @@ public abstract class Attribute implements Serializable {
 		INT, STRING, BOOLEAN, DOUBLE, MEMBER, GROUPING, UNIT
 	}
 
-	/**
-	 * Returns what type the Attribute is
-	 * 
-	 * Required by all Attributes
-	 * @return a Type, what type the Attribute is
-	 */
 	public abstract Type getType();
 
-	/**
-	 * Used for GUI and file i/o
-	 * 
-	 * @return the title
-	 */
 	public String getTitle() {
 		return title;
 	}
 
-	/**
-	 * @deprecated
-	 */
 	public float getConflictMagnitude() {
 		return conflictMagnitude;
 	}
