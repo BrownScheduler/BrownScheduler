@@ -39,6 +39,7 @@ public class InputTablePane extends JScrollPane implements GUIConstants {
 	
 	private void initialize(List<Attribute> headers, GroupingAttribute<Unit> group) {
 		this.setSize(INPUTTABLE_SIZE);
+		this.setPreferredSize(INPUTTABLE_SIZE);
 		this.setMinimumSize(this.getSize());
 		this.setMaximumSize(new Dimension(Integer.MAX_VALUE, this.getHeight()));
 		_table = new JTable();
@@ -62,7 +63,7 @@ public class InputTablePane extends JScrollPane implements GUIConstants {
 			}
 		}
 		ExcelAdapter exceladapt = new ExcelAdapter(_table);
-		this.add(_table.getTableHeader());
+//		this.add(_table.getTableHeader());
 		this.add(_table);
 	}
 	

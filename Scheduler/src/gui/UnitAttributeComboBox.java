@@ -21,7 +21,7 @@ public class UnitAttributeComboBox extends JComboBox implements GUIConstants {
 		_units = new ArrayList<Unit>(attribute.getListOfUnits());
 		ArrayList<String> unitnames = new ArrayList<String>();
 		this.addItem("");
-		int toSelect = 0;
+		int toSelect = -1;
 		for (int i = 0; i < _units.size(); i++) {
 			unitnames.add(_units.get(i).getName());
 			this.addItem(_units.get(i).getName());
@@ -29,6 +29,8 @@ public class UnitAttributeComboBox extends JComboBox implements GUIConstants {
 				toSelect = i+1;
 		}
 		_units.add(0, null);
+		if (attribute.att == null)
+			toSelect = 0;
 		this.setSelectedIndex(toSelect);
 		this.setEditable(true);
 		this.addActionListener(new ActionListener() {
