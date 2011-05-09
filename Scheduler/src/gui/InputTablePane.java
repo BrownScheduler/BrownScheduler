@@ -48,10 +48,10 @@ public class InputTablePane extends JScrollPane implements GUIConstants {
 		for (Unit u : group.getMembers()) {
 			data.add(u.getAttributes());
 		}
-		for (int i = 0; i < DEFAULT_TABLE_BLANK_ROWS; i++) {
-			data.add(group.getBlankUnit().getAttributes());
-		}
 		_table.setModel(new InputTableModel(headers, data, group.isEditable()));
+		for (int i = 0; i < DEFAULT_TABLE_BLANK_ROWS; i++) {
+			((DefaultTableModel) _table.getModel()).insertRow(_table.getRowCount(), new Object[0]);
+		}
 		for (int i = 0; i < _table.getColumnModel().getColumnCount(); i++) {
 			if (headers.get(i).getType() == Attribute.Type.UNIT) {
 				TableColumn unitcolumn = _table.getColumnModel().getColumn(i);

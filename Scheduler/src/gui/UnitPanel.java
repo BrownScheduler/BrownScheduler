@@ -169,10 +169,11 @@ public class UnitPanel extends JPanel implements GUIConstants {
 								j++;
 							}
 							if (!rowunitisnull && !alreadyadded) {
-								System.out.println(rowunit.toString());
 								groupattr.addMember(rowunit);
-								groupattr.getGrouping().addMember(rowunit);
+								if (!groupattr.getBlankUnit().getMemberOf().getMembers().contains(rowunit))
+									groupattr.getBlankUnit().getMemberOf().addMember(rowunit);
 							}
+							unit.setAttribute(groupattr);
 						}
 						table = new InputTablePane(_middleEnd, groupattr.getBlankUnit().getAttributes(), groupattr);
 						components.put(attr, table);
