@@ -7,12 +7,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class UnitAttributeComboBox extends JComboBox {
+public class UnitAttributeComboBox extends JComboBox implements GUIConstants {
 	
 	private Unit _selectedunit;
 	private ArrayList<Unit> _units;
 	
 	public UnitAttributeComboBox(final UnitAttribute<Unit> attribute) {
+		this.setSize(JCOMBOBOX_SIZE);
+		this.setMaximumSize(this.getSize());
 		_units = new ArrayList<Unit>(attribute.getListOfUnits());
 		ArrayList<String> unitnames = new ArrayList<String>();
 		for (Unit unit : _units) {
