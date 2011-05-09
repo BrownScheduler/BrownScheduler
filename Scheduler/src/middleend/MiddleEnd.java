@@ -25,16 +25,23 @@ public class MiddleEnd {
 		return _tmnt;
 	}
 	
-	public boolean openPlugin(File file) {
-		return false;
+	public void setTournament(Tournament t) {
+		_tmnt = t;
 	}
 	
 	public boolean openTournament(File file) {
 		return false;
 	}
 	
-	public boolean saveFile(File file) {
+	public boolean saveTournament(File file) {
 		return false;
 	}
 	
+	public boolean importCategory(File file) {
+		return false;
+	}
+	
+	public boolean exportCategory(File file) {
+		return false;
+	}
 }
