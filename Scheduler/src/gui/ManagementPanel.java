@@ -16,9 +16,9 @@ public class ManagementPanel extends JTabbedPane implements GUIConstants {
 	/**
 	 * This is the default constructor
 	 */
-	public ManagementPanel(MiddleEnd m) {
+	public ManagementPanel(MiddleEnd me) {
 		super(JTabbedPane.TOP);
-		_middleEnd = m;
+		_middleEnd = me;
 		_roundpanels = new ArrayList<RoundPanel>();
 		this.setSize(DEFAULT_SIZE);
 		resetPanel();
@@ -34,7 +34,7 @@ public class ManagementPanel extends JTabbedPane implements GUIConstants {
 		_roundpanels.clear();
 		this.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 		for (Round round : _middleEnd.getTournament().getRounds()) {
-			RoundPanel rp = new RoundPanel(round);
+			RoundPanel rp = new RoundPanel(_middleEnd, round);
 			_roundpanels.add(rp);
 			JPanel rpcontainer = new JPanel();
 			rpcontainer.setLayout(new java.awt.BorderLayout());

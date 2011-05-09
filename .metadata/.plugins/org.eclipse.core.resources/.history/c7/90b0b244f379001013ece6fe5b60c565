@@ -60,11 +60,7 @@ public class Field implements Unit {
 
 	@Override
 	public void setAttribute(Attribute attribute) {
-		if(attribute.getType() == Attribute.Type.STRING)
-			_name = (StringAttribute)attribute;
-		else if(attribute.getType() == Attribute.Type.GROUPING){
-			_associatedRefs = (GroupingAttribute<Referee>)attribute;
-		}
+		// TODO Auto-generated method stub
 
 	}
 

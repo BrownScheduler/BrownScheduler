@@ -1,5 +1,6 @@
 package gui;
 
+import backbone.*;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -7,20 +8,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.ArrayList;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import backbone.Attribute;
-import backbone.BooleanAttribute;
-import backbone.DoubleAttribute;
-import backbone.GroupingAttribute;
-import backbone.IntAttribute;
-import backbone.StringAttribute;
 
 public class Utility implements GUIConstants {
 
@@ -88,6 +86,9 @@ public class Utility implements GUIConstants {
 		else if (attribute.getType() == Attribute.Type.STRING) {
 			return getStringField((StringAttribute) attribute, isEditable);
 		}
+		else if (attribute.getType() == Attribute.Type.UNIT) {
+			return getUnitField((UnitAttribute) attribute, isEditable);
+		}
 		return null;
 	}
 	
@@ -133,9 +134,14 @@ public class Utility implements GUIConstants {
 		return field;
 	}
 	
-	public static JButton getGroupingField(GroupingAttribute<?> attribute, boolean isEditable) { //TODO uneditability?
+	public static JButton getGroupingField(GroupingAttribute<?> attribute, boolean isEditable) {
 		JButton button = new JButton("Edit " + attribute.getTitle() + "...");
 		return button;
+	}
+	
+	public static UnitAttributeComboBox getUnitField(UnitAttribute<Unit> attribute, boolean isEditable) {
+		final UnitAttributeComboBox combobox = new UnitAttributeComboBox(attribute);
+		return combobox;
 	}
 	
 	public static JLabel getTitleLabel(Attribute attribute) {
@@ -158,46 +164,10 @@ public class Utility implements GUIConstants {
 		else if (attribute.getType() == Attribute.Type.STRING) {
 			return new JLabel(((StringAttribute) attribute).getAttribute());
 		}
-		return null;
-	}
-	
-	public static JTextField getBlankStringField(boolean isEditable) {
-		JTextField field = new JTextField();
-		field.setMaximumSize(TEXTFIELD_SIZE);
-		field.setEditable(isEditable);
-		return field;
-	}
-	
-	public static JFormattedTextField getBlankIntegerField(boolean isEditable) {
-		NumberFormat nf = NumberFormat.getIntegerInstance();
-		nf.setGroupingUsed(false);
-		JFormattedTextField field = new JFormattedTextField(nf);
-		field.setMaximumSize(TEXTFIELD_SIZE);
-		field.setEditable(isEditable);
-		return field;
-	}
-	
-	public static JFormattedTextField getBlankDoubleField(boolean isEditable) {
-		DecimalFormat df = new DecimalFormat();
-		df.setGroupingUsed(false);
-		JFormattedTextField field = new JFormattedTextField(df);
-		field.setMaximumSize(TEXTFIELD_SIZE);
-		field.setEditable(isEditable);
-		field.setMaximumSize(new Dimension(100, 20));
-		return field;
-	}
-	
-	public static JCheckBox getBlankBooleanField(boolean isEditable) {
-		final JCheckBox field = new JCheckBox();
-		if (!isEditable) {
-			final boolean val = field.isSelected();
-			field.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
-					field.setSelected(val);
-				}
-			});
+		else if (attribute.getType() == Attribute.Type.UNIT) {
+			return new JLabel(((UnitAttribute) attribute).att.getName());
 		}
-		return field;
+		return null;
 	}
 	
 }

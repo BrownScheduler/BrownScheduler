@@ -54,10 +54,5 @@ public class Referee implements Unit {
 	public void setMemberOf(Grouping<Unit> g) {
 		//does nothing, as is always a member of the Referee category
 	}
-	@Override
-	public void setName(String name) {
-		this._name = new StringAttribute("Name", name);
-		
-	}
 
 }

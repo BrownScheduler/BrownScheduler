@@ -112,10 +112,4 @@ public class Team implements CompetitiveUnit {
 		return this._players.getMembers().contains(player);
 	}
 
-	@Override
-	public void setName(String name) {
-		this._name = new StringAttribute("Name", name);
-		
-	}
-
 }

@@ -65,4 +65,10 @@ public class Player implements Unit {
 	public void setMemberOf(Grouping<Unit> g) {
 	}
 
+	@Override
+	public void setName(String name) {
+		this._name = new StringAttribute("Name", name);
+		
+	}
+
 }

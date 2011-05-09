@@ -14,6 +14,8 @@ public class AddingPanel extends JPanel implements GUIConstants {
 
 	public static final long serialVersionUID = 1L;
 	private MiddleEnd _middleEnd;
+	private int _currView;
+	private Object _currViewObject;
 
 	/**
 	 * This is the default constructor
@@ -21,6 +23,8 @@ public class AddingPanel extends JPanel implements GUIConstants {
 	public AddingPanel(MiddleEnd m) {
 		super();
 		_middleEnd = m;
+		_currView = 0;
+		_currViewObject = null;
 		initialize();
 	}
 	
@@ -41,6 +45,8 @@ public class AddingPanel extends JPanel implements GUIConstants {
 	public void setViewPanel(Unit unit) {
 		this.removeAll();
 		this.add(new UnitPanel(_middleEnd, unit));
+		_currView = 1;
+		_currViewObject = unit;
 	}
 	
 	public void setViewPanel(Grouping<Unit> grouping) {
@@ -48,19 +54,35 @@ public class AddingPanel extends JPanel implements GUIConstants {
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		for (Unit u : grouping.getMembers()) {
 			this.add(new UnitPanel(_middleEnd, u));
-			//this.add(Box.createRigidArea(new Dimension(10, 20)));
+			this.add(Box.createRigidArea(SMALLSPACING_SIZE));
 		}
 		this.add(Box.createVerticalGlue());
+		_currView = 2;
+		_currViewObject = grouping;
 	}
 	
 	public void setAddPanel(Grouping<Unit> grouping) {
 		this.removeAll();
 		this.add(new UnitPanel(_middleEnd, grouping.getBlank(), grouping));
+		_currView = 3;
+		_currViewObject = grouping;
 	}
 	
 	public void repaintAll() {
 		for (int i = 0; i < this.getComponentCount(); i++) {
 			this.getComponent(i).repaint();
+		}
+		switch (_currView) {
+		case 1:
+//			this.setViewPanel((Unit) _currViewObject);
+			break;
+		case 2:
+			this.setViewPanel((Grouping<Unit>) _currViewObject);
+			break;
+		case 3:
+			this.setAddPanel((Grouping<Unit>) _currViewObject);
+			break;
+		default:
 		}
 		this.repaint();
 		this.setSize(new Dimension(this.getWidth() + 1, this.getHeight() + 1));

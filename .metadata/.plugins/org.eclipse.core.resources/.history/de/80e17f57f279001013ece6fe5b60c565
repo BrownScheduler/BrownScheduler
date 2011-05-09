@@ -99,11 +99,5 @@ public class Judge implements Unit{
 		return _category.deleteMember(this);
 		
 	}
-
-	@Override
-	public void setName(String name) {
-		this._name = name;
-		
-	}
 	
 }

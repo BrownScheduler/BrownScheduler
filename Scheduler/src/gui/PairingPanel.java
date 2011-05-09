@@ -10,15 +10,20 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class PairingPanel extends JPanel implements GUIConstants {
 
+	private MiddleEnd _middleEnd;
+	private Round _round;
 	private Pairing _pairing;
 	
-	public PairingPanel(Pairing p) {
+	public PairingPanel(MiddleEnd me, Round r, Pairing p) {
+		_middleEnd = me;
+		_round = r;
 		_pairing = p;
 		resetPanel();
 	}
@@ -29,14 +34,35 @@ public class PairingPanel extends JPanel implements GUIConstants {
 		this.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black));
 		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		this.add(Box.createHorizontalGlue());
+		JPanel deletepanel = new JPanel();
+		deletepanel.setLayout(new BoxLayout(deletepanel, BoxLayout.Y_AXIS));
+		final JButton actuallydeletebutton = new JButton("Actually delete this pairing");
+		actuallydeletebutton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				_round.removePairing(_pairing);
+				_middleEnd.repaintAll();
+			}
+		});
+		actuallydeletebutton.setVisible(false);
+		JButton deletebutton = new JButton("Delete this pairing");
+		deletebutton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				actuallydeletebutton.setVisible(true);
+				repaint();
+			}
+		});
+		deletepanel.add(deletebutton);
+		deletepanel.add(actuallydeletebutton);
+		this.add(deletepanel);
+		this.add(Box.createRigidArea(BIGSPACING_SIZE));
 		for (Attribute attribute : _pairing.getAttributes()) {
 			if (attribute.getType() == Attribute.Type.UNIT) {
 				JPanel attrpanel = new JPanel();
 				attrpanel.setLayout(new BoxLayout(attrpanel, BoxLayout.Y_AXIS));
 				attrpanel.add(Utility.getTitleLabel(attribute));
-				attrpanel.add(new UnitAttributeComboBox((UnitAttribute) attribute, _pairing, this));//Not header, needs to be editable
-				if (((UnitAttribute) attribute).att != null) {
-					for (Attribute attr : ((UnitAttribute) attribute).att.getAttributes()) {
+				attrpanel.add(new UnitAttributeComboBox((UnitAttribute<?>) attribute, _pairing, this));//Not header, needs to be editable
+				if (((UnitAttribute<?>) attribute).att != null) {
+					for (Attribute attr : ((UnitAttribute<?>) attribute).att.getAttributes()) {
 						this.add(Box.createRigidArea(SMALLSPACING_SIZE));
 						if (attr.getType() == Attribute.Type.GROUPING) {
 							JLabel label = Utility.getTitleLabel(attr);
@@ -68,8 +94,9 @@ public class PairingPanel extends JPanel implements GUIConstants {
 			else {
 				this.add(Utility.getField(attribute));
 			}
-			this.add(Box.createHorizontalGlue());//.createRigidArea(SPACING_SIZE));
+			this.add(Box.createRigidArea(BIGSPACING_SIZE));
 		}
+		this.add(Box.createHorizontalGlue());
 	}
 	
 	public void repaintAll() {

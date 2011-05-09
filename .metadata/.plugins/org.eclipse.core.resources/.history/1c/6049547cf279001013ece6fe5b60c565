@@ -83,11 +83,5 @@ public class Team implements CompetitiveUnit {
 		return _category.deleteMember(this);
 	}
 
-	@Override
-	public void setName(String name) {
-		this._name = name;
-		
-	}
-
 
 }
