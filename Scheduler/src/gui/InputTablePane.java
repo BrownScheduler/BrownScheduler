@@ -65,7 +65,6 @@ public class InputTablePane extends JScrollPane implements GUIConstants {
 			}
 		}
 		ExcelAdapter exceladapt = new ExcelAdapter(_table);
-		this.add(_table.getTableHeader());
 		this.add(_table);
 	}
 	
