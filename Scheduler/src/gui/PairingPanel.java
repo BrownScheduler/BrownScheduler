@@ -38,6 +38,7 @@ public class PairingPanel extends JPanel implements GUIConstants {
 		deletepanel.setLayout(new BoxLayout(deletepanel, BoxLayout.Y_AXIS));
 		final JButton actuallydeletebutton = new JButton("Actually delete this pairing");
 		actuallydeletebutton.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				_round.removePairing(_pairing);
 				_middleEnd.repaintAll();
@@ -46,6 +47,7 @@ public class PairingPanel extends JPanel implements GUIConstants {
 		actuallydeletebutton.setVisible(false);
 		JButton deletebutton = new JButton("Delete this pairing");
 		deletebutton.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				actuallydeletebutton.setVisible(true);
 				repaint();
@@ -131,6 +133,7 @@ public class PairingPanel extends JPanel implements GUIConstants {
 			this.setModel(new DefaultComboBoxModel(unitnames.toArray(new String[0])));
 			this.setSelectedIndex(toSelect);
 			this.addActionListener(new ActionListener() {
+				@Override
 				public void actionPerformed(ActionEvent e) {
 					UnitAttributeComboBox cb = (UnitAttributeComboBox) e.getSource();
 					if (cb.getSelectedIndex() <= 0) {

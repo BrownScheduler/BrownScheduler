@@ -18,6 +18,7 @@ public class BooleanAttribute extends Attribute {
 	 * 
 	 * @param title sets the title label
 	 */
+	@Deprecated
 	public BooleanAttribute(String title) {
 		super(title);
 		this.att = false;
@@ -39,6 +40,7 @@ public class BooleanAttribute extends Attribute {
 	 * 
 	 * Used primarily for checking and ensuring valid casts
 	 */
+	@Override
 	public Type getType() {
 		return Attribute.Type.BOOLEAN;
 	}

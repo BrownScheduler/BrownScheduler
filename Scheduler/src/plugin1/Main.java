@@ -5,14 +5,8 @@ import java.util.*;
 import exception.BackupException;
 import exception.CSVException;
 import fileio.CSVIO;
-import fileio.SerialIO;
-
-import backbone.Attribute;
-import backbone.Category;
 import backbone.Grouping;
 import backbone.IntAttribute;
-import backbone.Pairing;
-import backbone.UnitAttribute;
 
 public class Main {
 	

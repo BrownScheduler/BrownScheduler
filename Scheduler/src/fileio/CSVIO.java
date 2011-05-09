@@ -2,18 +2,13 @@ package fileio;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 
 import backbone.Attribute;
@@ -23,10 +18,8 @@ import backbone.Grouping;
 import backbone.GroupingAttribute;
 import backbone.IntAttribute;
 import backbone.StringAttribute;
-import backbone.Tournament;
 import backbone.Unit;
 import backbone.UnitAttribute;
-import exception.BackupException;
 import exception.CSVException;
 
 public class CSVIO {
@@ -207,8 +200,8 @@ public class CSVIO {
 
 					for(String unitName : groupsToSet.get(uni).get(gAtt)) {
 						Unit unit = null;
-						System.out.println(((Unit) gAtt.getGrouping().getBlank()));
-						for(Unit u : ((Unit) gAtt.getGrouping().getBlank()).getMemberOf().getMembers()) {
+						System.out.println((gAtt.getGrouping().getBlank()));
+						for(Unit u : (gAtt.getGrouping().getBlank()).getMemberOf().getMembers()) {
 							if(u.getName().equals(unitName)) {
 								unit = u;
 								break;

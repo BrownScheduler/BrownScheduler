@@ -124,6 +124,7 @@ public class App implements GUIConstants {
 	public JButton createButtonFromMenuItem(final JMenuItem item) {
 		JButton button = new JButton(item.getText());
 		button.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				item.doClick();
 			}
@@ -227,6 +228,7 @@ public class App implements GUIConstants {
 					Event.CTRL_MASK, true));
 			//TODO file extension?
 			_saveMenuItem.addActionListener(new ActionListener() {
+				@Override
 				public void actionPerformed(ActionEvent e) {
 					JFileChooser chooser = new JFileChooser();
 					int returnval = chooser.showSaveDialog(getJFrame());
@@ -254,6 +256,7 @@ public class App implements GUIConstants {
 			_printMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P,
 					Event.CTRL_MASK, true));
 			_printMenuItem.addActionListener(new ActionListener() {
+				@Override
 				public void actionPerformed(ActionEvent e) {
 					JDialog printDialog = getPrintDialog();
 					printDialog.pack();
@@ -307,6 +310,7 @@ public class App implements GUIConstants {
 			_openPluginMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L,
 					Event.CTRL_MASK, true));
 			_openPluginMenuItem.addActionListener(new ActionListener() {
+				@Override
 				public void actionPerformed(ActionEvent e) {
 					JFileChooser chooser = new JFileChooser();
 					chooser.setFileFilter(new FileNameExtensionFilter("Plugin File", "plug")); //TODO make constants
@@ -334,6 +338,7 @@ public class App implements GUIConstants {
 			_openTournamentMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,
 					Event.CTRL_MASK, true));
 			_openTournamentMenuItem.addActionListener(new ActionListener() {
+				@Override
 				public void actionPerformed(ActionEvent e) {
 					JFileChooser chooser = new JFileChooser();
 					chooser.setFileFilter(new FileNameExtensionFilter("Tournament File", ".xml", ".csv", ".tmnt")); //TODO make constants
@@ -361,6 +366,7 @@ public class App implements GUIConstants {
 			_exitMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q,
 					Event.CTRL_MASK, true));
 			_exitMenuItem.addActionListener(new ActionListener() {
+				@Override
 				public void actionPerformed(ActionEvent e) {
 					System.exit(0);
 				}
@@ -394,6 +400,7 @@ public class App implements GUIConstants {
 			_pluginOptionsMenuItem = new JMenuItem();
 			_pluginOptionsMenuItem.setText("Plugin Options...");
 			_pluginOptionsMenuItem.addActionListener(new ActionListener() {
+				@Override
 				public void actionPerformed(ActionEvent e) {
 					JDialog pluginOptionsDialog = getPluginOptionsDialog();
 					pluginOptionsDialog.pack();
@@ -444,6 +451,7 @@ public class App implements GUIConstants {
 			_programOptionsMenuItem = new JMenuItem();
 			_programOptionsMenuItem.setText("Program Options...");
 			_programOptionsMenuItem.addActionListener(new ActionListener() {
+				@Override
 				public void actionPerformed(ActionEvent e) {
 					JDialog programOptionsDialog = getProgramOptionsDialog();
 					programOptionsDialog.pack();
@@ -513,6 +521,7 @@ public class App implements GUIConstants {
 			_viewInputMenuItem.setText("View Input Panel");
 			_viewInputMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_I,	Event.CTRL_MASK, true));
 			_viewInputMenuItem.addActionListener(new java.awt.event.ActionListener() {
+				@Override
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					getInputPanel().setSize(_jFrame.getContentPane().getSize());
 					setMainContentPane(getInputPanel());
@@ -535,6 +544,7 @@ public class App implements GUIConstants {
 			_viewManagementMenuItem.setText("View Management Panel");
 			_viewManagementMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_M, Event.CTRL_MASK, true));
 			_viewManagementMenuItem.addActionListener(new java.awt.event.ActionListener() {
+				@Override
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					getManagementPanel().setSize(_jFrame.getSize());
 					setMainContentPane(getManagementPanel());
@@ -573,6 +583,7 @@ public class App implements GUIConstants {
 		JMenuItem item = new JMenuItem();
 		item.setText("Create new round from existing units...");
 		item.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				_middleEnd.getTournament().createNextRound();
 				getViewManagementMenuItem().doClick();
@@ -590,6 +601,7 @@ public class App implements GUIConstants {
 		JMenuItem item = new JMenuItem();
 		item.setText("New " + g.getName() + "...");
 		item.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				getInputPanel().getAddingPanel().setAddPanel(g);
 				getViewInputMenuItem().doClick();
@@ -622,6 +634,7 @@ public class App implements GUIConstants {
 			_aboutMenuItem = new JMenuItem();
 			_aboutMenuItem.setText("About...");
 			_aboutMenuItem.addActionListener(new ActionListener() {
+				@Override
 				public void actionPerformed(ActionEvent e) {
 					JDialog aboutDialog = getAboutDialog();
 					aboutDialog.pack();

@@ -1,7 +1,6 @@
 package backbone;
 
 import java.util.List;
-import backbone.Attribute.Type;
 
 public class UnitAttribute<T extends Unit> extends Attribute {
 	

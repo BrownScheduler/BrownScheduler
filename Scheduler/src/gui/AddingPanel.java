@@ -5,7 +5,6 @@ import backbone.*;
 import java.awt.GridLayout;
 import java.awt.Dimension;
 import javax.swing.Box;
-import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.JLabel;

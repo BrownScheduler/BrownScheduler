@@ -1,9 +1,5 @@
 package backbone;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-
 /**
  * @deprecated Poor design decision
  * @author pclay
@@ -11,5 +7,6 @@ import java.util.Collection;
  * @param <T>
  */
 
+@Deprecated
 public interface Category<T extends Unit> extends Grouping<T> {
 }
