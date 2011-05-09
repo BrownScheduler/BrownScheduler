@@ -1,5 +1,8 @@
 package middleend;
 
+import exception.BackupException;
+import exception.CSVException;
+import fileio.SerialIO;
 import gui.*;
 import backbone.*;
 import java.io.File;
@@ -28,11 +31,21 @@ public class MiddleEnd {
 	}
 	
 	public boolean openTournament(File file) {
-		return false;
+		try {
+			_tmnt = SerialIO.readTournament(file);
+			return true;
+		} catch (BackupException e) {
+			return false;
+		}
 	}
 	
 	public boolean saveFile(File file) {
-		return false;
+		try {
+			SerialIO.writeTournament(file, _tmnt);
+			return true;
+		} catch (BackupException e) {
+			return false;
+		}
 	}
 	
 }

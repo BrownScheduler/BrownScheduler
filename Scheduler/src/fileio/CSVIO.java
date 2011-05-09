@@ -26,7 +26,7 @@ import exception.CSVException;
 
 public class CSVIO {
 
-	public static void writeGrouping(String fileName, Grouping<Unit> category) throws exception.CSVException {
+	public static void writeGrouping(String fileName, Grouping<? extends Unit> category) throws exception.CSVException {
 		try {
 			BufferedWriter out = new BufferedWriter(new FileWriter(fileName));
 			out.write(category.getName() + "\n");
@@ -151,9 +151,12 @@ public class CSVIO {
 						unit.setAttribute(new StringAttribute(att.getTitle(),cells[i]));
 						break;
 					case UNIT:
-						HashMap<UnitAttribute, String> unitAttsToAdd = new HashMap<UnitAttribute, String>();
-						unitAttsToAdd.put((UnitAttribute) att, cells[i]);
-						unitsToAdd.put(unit, unitAttsToAdd);
+						if(cells.length > i && !cells[i].equals("")) {
+							HashMap<UnitAttribute, String> unitAttsToAdd = new HashMap<UnitAttribute, String>();
+							unitAttsToAdd.put((UnitAttribute) att, cells[i]);
+							unitsToAdd.put(unit, unitAttsToAdd);
+						} else
+							unit.setAttribute(new UnitAttribute(att.getTitle(), ((UnitAttribute) att).getMemberOf()));
 						break;
 					default:
 						throw new CSVException();

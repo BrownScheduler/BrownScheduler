@@ -7,6 +7,7 @@ import exception.CSVException;
 import fileio.CSVIO;
 import backbone.Grouping;
 import backbone.IntAttribute;
+import backbone.Round;
 
 public class Main {
 	
@@ -39,9 +40,10 @@ public class Main {
 		t4.setAttribute(new IntAttribute("Wins", 5));
 		j1.addConflictedTeam(t3);
 		
-		CSVIO.loadGrouping("judges2.csv", t);
-		CSVIO.writeGrouping("teams2.csv", t.getCategories().get(0));
-		CSVIO.writeGrouping("judges.csv", t.getCategories().get(1));
+		Round r = t.createNextRound();
+		
+		CSVIO.loadGrouping("blah.csv", t);
+		CSVIO.writeGrouping("blah2.csv", r);
 		
 	}
 
