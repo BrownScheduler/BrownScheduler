@@ -181,7 +181,8 @@ public class UnitPanel extends JPanel implements GUIConstants {
 					}
 					else if (attr.getType() == Attribute.Type.UNIT) {
 						Unit value = ((UnitAttributeComboBox) components.get(attr)).getSelectedUnit();
-						unit.setAttribute(new UnitAttribute(attr.getTitle(), value));
+						Grouping grouping = ((UnitAttributeComboBox) components.get(attr)).getGrouping();
+						unit.setAttribute(new UnitAttribute(attr.getTitle(), value, grouping));
 					}
 				}
 				if (_grouping != null) {

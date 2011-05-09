@@ -10,11 +10,13 @@ import java.util.ArrayList;
 public class UnitAttributeComboBox extends JComboBox implements GUIConstants {
 	
 	private Unit _selectedunit;
+	private Grouping<Unit> _grouping;
 	private ArrayList<Unit> _units;
 	
 	public UnitAttributeComboBox(final UnitAttribute<Unit> attribute) {
 		this.setSize(JCOMBOBOX_SIZE);
 		this.setMaximumSize(this.getSize());
+		_grouping = attribute.getMemberOf();
 		_units = new ArrayList<Unit>(attribute.getListOfUnits());
 		ArrayList<String> unitnames = new ArrayList<String>();
 		for (Unit unit : _units) {
@@ -28,6 +30,7 @@ public class UnitAttributeComboBox extends JComboBox implements GUIConstants {
 				if ((getSelectedIndex() < 0) && (getSelectedItem() != null)) {
 					Unit toadd = attribute.getMemberOf().getBlank();
 					toadd.setName((String) getSelectedItem());
+					attribute.getMemberOf().addMember(toadd);
 					_units.add(toadd);
 					addItem(getSelectedItem());
 					_selectedunit = toadd;
@@ -41,5 +44,9 @@ public class UnitAttributeComboBox extends JComboBox implements GUIConstants {
 	
 	public Unit getSelectedUnit() {
 		return _selectedunit;
+	}
+	
+	public Grouping<Unit> getGrouping() {
+		return _grouping;
 	}
 }

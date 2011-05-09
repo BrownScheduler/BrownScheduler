@@ -68,15 +68,6 @@ public class InputTablePane extends JScrollPane implements GUIConstants {
 		public InputTableModel(List<Attribute> headers, List<List<Attribute>> data, boolean editable) {
 			_editable = editable;
 			_headers = headers.toArray(new Attribute[0]);
-			for (int i = 0; i < _table.getColumnCount(); i++) {
-				if (_headers[i].getType() == Attribute.Type.UNIT) {
-					TableColumn unitcolumn = _table.getColumnModel().getColumn(i);
-					UnitAttribute<Unit> header = (UnitAttribute) _headers[i];
-					UnitAttribute<Unit> uatt = new UnitAttribute<Unit>(header.getTitle(), header.getMemberOf());
-					UnitAttributeComboBox combobox = new UnitAttributeComboBox(uatt);
-					unitcolumn.setCellEditor(new DefaultCellEditor(combobox));
-				}
-			}
 			List<Object[]> d = new ArrayList<Object[]>();
 			for (List<Attribute> list : data) {
 				ArrayList<Object> row = new ArrayList<Object>();
@@ -106,6 +97,15 @@ public class InputTablePane extends JScrollPane implements GUIConstants {
 			}
 			Object[][] dataarray = d.toArray(new Object[0][0]);
 			this.setDataVector(dataarray, _headers);
+			for (int i = 0; i < _table.getColumnCount(); i++) {
+				if (_headers[i].getType() == Attribute.Type.UNIT) {
+					TableColumn unitcolumn = _table.getColumnModel().getColumn(i);
+					UnitAttribute<Unit> header = (UnitAttribute) _headers[i];
+					UnitAttribute<Unit> uatt = new UnitAttribute<Unit>(header.getTitle(), header.getMemberOf());
+					UnitAttributeComboBox combobox = new UnitAttributeComboBox(uatt);
+					unitcolumn.setCellEditor(new DefaultCellEditor(combobox));
+				}
+			}
 			this.addTableModelListener(new TableModelListener() {
 				public void tableChanged(TableModelEvent e) {
 					if ((e.getLastRow() == (getRowCount()-1)) && (e.getType() == TableModelEvent.UPDATE)) {
@@ -136,7 +136,10 @@ public class InputTablePane extends JScrollPane implements GUIConstants {
 			else if (a.getType() == Attribute.Type.INT) {
 				return Integer.class;
 			}
-			return String.class;
+			else if (a.getType() == Attribute.Type.STRING) {
+				return String.class;
+			}
+			return Object.class;
 		}
 
 		public int getColumnCount() {
