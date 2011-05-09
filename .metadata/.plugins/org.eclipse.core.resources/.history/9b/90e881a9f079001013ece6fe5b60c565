@@ -12,6 +12,7 @@ public class PlayerGrouping extends MyCategory<Player> {
 
 	@Override
 	public Player getBlank() {
+		// TODO Auto-generated method stub
 		return new Player(_t, "");
 	}
 

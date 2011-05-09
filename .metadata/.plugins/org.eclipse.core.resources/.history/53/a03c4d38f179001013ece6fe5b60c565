@@ -17,7 +17,7 @@ public class Player implements Unit {
 	
 	public Player(Tournament t, String name){
 		_name = new StringAttribute("Name", name);
-		_team = new UnitAttribute<Team>("Team", null, t.getTeams());
+		_team = new UnitAttribute<Team>("Team", null, _t.getTeams());
 		_t = t;
 	}
 	
