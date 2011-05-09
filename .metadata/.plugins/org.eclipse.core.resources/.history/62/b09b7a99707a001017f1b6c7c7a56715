@@ -19,6 +19,7 @@ public class TeamGrouping extends MyCategory<Team>{
 	
 	@Override
 	public Team getBlank() {
+		System.out.println(_t);
 		return new Team(_t, "");
 	}
 }

@@ -12,13 +12,13 @@ public class TeamGrouping extends MyCategory<Team>{
 		_t = t;
 	}
 	
-	public TeamGrouping(Tourney t, String name, List<Team> teams){
+	public TeamGrouping(String name, List<Team> teams){
 		super(name, teams);
-		_t = t;
 	}
 	
 	@Override
 	public Team getBlank() {
+		System.out.println(_t);
 		return new Team(_t, "");
 	}
 }

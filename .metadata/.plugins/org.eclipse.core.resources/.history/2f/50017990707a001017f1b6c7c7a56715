@@ -39,7 +39,7 @@ public class Judge implements Unit{
 		LinkedList<Attribute> atts = new LinkedList<Attribute>();
 		StringAttribute name = new StringAttribute("Name", this._name);
 		GroupingAttribute<Team> conflicts = new GroupingAttribute<Team>("Conflicted Teams", 
-				new TeamGrouping(_t, "Conflicted Teams", new LinkedList<Team>(_conflictedTeams)));
+				new TeamGrouping("Conflicted Teams", new LinkedList<Team>(_conflictedTeams)));
 		atts.add(name);
 		atts.add(conflicts);
 		return atts;
