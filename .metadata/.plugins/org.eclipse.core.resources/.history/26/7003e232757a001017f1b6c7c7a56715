@@ -1,0 +1,41 @@
+package backbone;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
+
+/**
+ * This interface provides a way to define a Grouping of a Unit.
+ * 
+ * Every Unit MUST have a grouping corresponding to it
+ * (and, in order to get types working correctly, each Unit
+ * needs its own Grouping class that extends this interface)
+ * @author pclay
+ *
+ * @param <T> must extend Unit
+ */
+public interface Grouping<T extends Unit> extends Cloneable{
+	
+	/**
+	 * Returns a blank Unit of type T (typically one with a name of "", but NOT null)
+	 * This is used so that the GUI can create new units.
+	 * 
+	 * @return a new, empty Unit of type T
+	 */
+	public T getBlank();
+	
+	/**
+	 * 
+	 * @return the name of the Grouping
+	 */
+	public String getName();
+
+	public List<T> getMembers();
+	
+	public void addMember(T member);
+
+	public boolean deleteMember(T member);
+	
+	public void clear();
+}
