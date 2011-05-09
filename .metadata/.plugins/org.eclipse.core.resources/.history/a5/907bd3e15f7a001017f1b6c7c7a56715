@@ -28,7 +28,7 @@ public class Team implements CompetitiveUnit {
 		_name = new StringAttribute("Name", name);
 		_gamesWon = new IntAttribute("Wins", 0);
 		_gamesLost = new IntAttribute("Losses", 0);
-		_players = new GroupingAttribute<Player>("Players", new PlayerGrouping(_t, "Players"));
+		_players = new GroupingAttribute<Player>("Players", _t.getPlayers());
 		_teamsFaced = new HashMap<Team, Integer>();
 	}
 	
