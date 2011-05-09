@@ -6,10 +6,8 @@ import backbone.Grouping;
 
 public class TeamGrouping extends MyCategory<Team>{
 
-	Tourney _t;
-	public TeamGrouping(Tourney t, String name) {
+	public TeamGrouping(String name) {
 		super(name);
-		_t = t;
 	}
 	
 	public TeamGrouping(String name, List<Team> teams){
@@ -18,6 +16,6 @@ public class TeamGrouping extends MyCategory<Team>{
 	
 	@Override
 	public Team getBlank() {
-		return new Team(_t, "");
+		return new Team("");
 	}
 }

@@ -9,10 +9,9 @@ public class Team implements CompetitiveUnit {
 	private Grouping<Unit> _category;
 	private String _name;
 	private int _wins;
-	public Team(Tourney t, String name){
+	public Team(String name){
 		this._name = name;
 		_wins = 0;
-		_category = t.getCategories().get(0);
 	}
 	
 	public void addWin(){
