@@ -107,10 +107,6 @@ public class Team implements CompetitiveUnit {
 			player.setTeam(this);
 		}
 	}
-	
-	public void removePlayer(Player player){
-		if(hasPlayer(player)) this._players.getMembers().remove(player);
-	}
 
 	public boolean hasPlayer(Player player) {
 		return this._players.getMembers().contains(player);

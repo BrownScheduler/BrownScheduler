@@ -9,75 +9,52 @@ import backbone.StringAttribute;
 import backbone.Unit;
 import backbone.UnitAttribute;
 
-public class Player implements Unit {
+public class Referee implements Unit {
 
-	private UnitAttribute<Team> _team;
 	private StringAttribute _name;
+	private UnitAttribute<Field> _associatedField;
 	private Tournament _t;
 	
-	public Player(Tournament t, String name){
+	public Referee(Tournament t, String name){
 		_t = t;
 		_name = new StringAttribute("Name", name);
-		_team = new UnitAttribute<Team>("Team", null, t.getTeams());
-		
-	}
-	
-	public void setTeam(Team t){
-		_team.att = t;
+		_associatedField = new UnitAttribute<Field>("Associated Field", null, t.getFields());
 	}
 	@Override
 	public boolean deleteFromGrouping() {
-		return _t.getPlayers().deleteMember(this);
+		return _t.getRefs().deleteMember(this);
 	}
 
 	@Override
 	public List<Attribute> getAttributes() {
 		ArrayList<Attribute> atts = new ArrayList<Attribute>();
 		atts.add(_name);
-		atts.add(_team);
+		atts.add(_associatedField);
 		return atts;
 	}
 
 	@Override
 	public Grouping getMemberOf() {
-		return _t.getPlayers();
+		return _t.getRefs();
 	}
 
 	@Override
 	public String getName() {
-		return _name.toString();
+		return this._name.value;
 	}
 
-	/**
-	 * Sets the attributes.
-	 */
 	@Override
 	public void setAttribute(Attribute attribute) {
 		if(attribute.getType() == Attribute.Type.STRING)
 			_name = (StringAttribute)attribute;
-		else if(attribute.getType() == Attribute.Type.UNIT){
-			Team t = (Team)((UnitAttribute<Team>)attribute).att;
-			if(t == null){
-				if(_team.att != null){
-					_team.att.removePlayer(this);
-				}
-				_team = (UnitAttribute<Team>)attribute;
-			}
-			else{
-				if(_team.att != null){
-					_team.att.removePlayer(this);
-				}
-				t.addPlayer(this);
-				_team = (UnitAttribute<Team>)attribute;
-			}
-		}
-
+		else if(attribute.getType() == Attribute.Type.UNIT)
+			_associatedField = (UnitAttribute)attribute;
 	}
 
 	@Override
 	public void setMemberOf(Grouping<Unit> g) {
+		//does nothing, as is always a member of the Referee category
 	}
-
 	@Override
 	public void setName(String name) {
 		this._name = new StringAttribute("Name", name);

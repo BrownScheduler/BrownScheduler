@@ -5,7 +5,7 @@ import backbone.Attribute.Type;
 
 public class UnitAttribute<T extends Unit> extends Attribute {
 	
-	public T att; //TODO: getter and the MAJOR REFACTORING that will follow, sigh
+	public T att; //TODO: getter
 	private Grouping<T> memberOf;
 	
 	public UnitAttribute(String title, Grouping<T> grouping){
@@ -42,7 +42,6 @@ public class UnitAttribute<T extends Unit> extends Attribute {
 	}
 	
 	public String toString(){
-		return "";
 	}
 
 }

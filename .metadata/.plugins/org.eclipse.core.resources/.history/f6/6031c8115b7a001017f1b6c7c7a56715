@@ -57,19 +57,7 @@ public class Player implements Unit {
 			_name = (StringAttribute)attribute;
 		else if(attribute.getType() == Attribute.Type.UNIT){
 			Team t = (Team)((UnitAttribute<Team>)attribute).att;
-			if(t == null){
-				if(_team.att != null){
-					_team.att.removePlayer(this);
-				}
-				_team = (UnitAttribute<Team>)attribute;
-			}
-			else{
-				if(_team.att != null){
-					_team.att.removePlayer(this);
-				}
-				t.addPlayer(this);
-				_team = (UnitAttribute<Team>)attribute;
-			}
+			t.addPlayer(this);
 		}
 
 	}
