@@ -85,7 +85,7 @@ public class CSVIO {
 			ArrayList<Integer> nongroupAtts = new ArrayList<Integer>();
 			ArrayList<Integer> groupAtts = new ArrayList<Integer>();
 			HashMap<Unit, HashMap<UnitAttribute, String>> unitsToAdd = new HashMap<Unit, HashMap<UnitAttribute, String>>();
-			HashMap<GroupingAttribute, LinkedList<String>> groupsToSet = new HashMap<GroupingAttribute, LinkedList<String>>();
+			HashMap<Unit, HashMap<GroupingAttribute, LinkedList<String>>> groupsToSet = new HashMap<Unit, HashMap<GroupingAttribute, LinkedList<String>>>();
 			List<Attribute> atts = group.getBlank().getAttributes();
 			for(int i = 0; i < atts.size(); i++) {
 				Attribute att = atts.get(i);
@@ -161,6 +161,7 @@ public class CSVIO {
 						throw new CSVException();
 					}
 				}
+				HashMap<GroupingAttribute, LinkedList<String>> groupAttsToAdd = new HashMap<GroupingAttribute, LinkedList<String>>();
 				for(int i = 0; i < groupAtts.size(); i++) {
 					line = in.readLine();
 					if(line == null)
@@ -172,8 +173,9 @@ public class CSVIO {
 					for(int j = 2; j < cells.length; j++) {
 						members.add(cells[j]);
 					}
-					groupsToSet.put((GroupingAttribute) unit.getAttributes().get(groupAtts.get(i)), members);
+					groupAttsToAdd.put((GroupingAttribute) unit.getAttributes().get(groupAtts.get(i)), members);
 				}
+				groupsToSet.put(unit, groupAttsToAdd);
 				line = in.readLine();
 			}
 
@@ -200,24 +202,26 @@ public class CSVIO {
 					unit.setAttribute(uAtt);
 				}
 			}
+			for(Unit uni: groupsToSet.keySet()) {
+				for(GroupingAttribute  gAtt : groupsToSet.get(uni).keySet()) {
 
-			for(GroupingAttribute  gAtt : groupsToSet.keySet()) {
-
-				for(String unitName : groupsToSet.get(gAtt)) {
-					Unit unit = null;
-					System.out.println(((Unit) gAtt.getGrouping().getBlank()));
-					for(Unit u : ((Unit) gAtt.getGrouping().getBlank()).getMemberOf().getMembers()) {
-						if(u.getName().equals(unitName)) {
-							unit = u;
-							break;
+					for(String unitName : groupsToSet.get(uni).get(gAtt)) {
+						Unit unit = null;
+						System.out.println(((Unit) gAtt.getGrouping().getBlank()));
+						for(Unit u : ((Unit) gAtt.getGrouping().getBlank()).getMemberOf().getMembers()) {
+							if(u.getName().equals(unitName)) {
+								unit = u;
+								break;
+							}
 						}
+						if(unit == null) {
+							unit = gAtt.getGrouping().getBlank().getMemberOf().getBlank();
+							gAtt.getGrouping().getBlank().getMemberOf().addMember(unit);
+							unit.setName(unitName);
+						}
+						gAtt.addMember(unit);
+						uni.setAttribute(gAtt);
 					}
-					if(unit == null) {
-						unit = gAtt.getGrouping().getBlank().getMemberOf().getBlank();
-						gAtt.getGrouping().getBlank().getMemberOf().addMember(unit);
-						unit.setName(unitName);
-					}
-					gAtt.addMember(unit);
 				}
 
 			}

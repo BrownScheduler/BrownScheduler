@@ -43,6 +43,7 @@ public class Main {
 
 		t1.setAttribute(new IntAttribute("Wins", 1));
 		t4.setAttribute(new IntAttribute("Wins", 5));
+		j1.addConflictedTeam(t3);
 		
 		CSVIO.loadGrouping("judges2.csv", t.getCategories());
 		CSVIO.writeGrouping("teams2.csv", t.getCategories().get(0));

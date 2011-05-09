@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- * @deprecated Poor design decision
+ * @deprecated
  * @author pclay
  *
  * @param <T>
