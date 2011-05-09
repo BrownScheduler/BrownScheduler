@@ -72,11 +72,13 @@ public class MyPairing implements backbone.Pairing{
 		atts.add(new UnitAttribute<Team>("Opp", _opp, _t.getCategories().get(0)));
 		atts.add(new UnitAttribute<Judge>("Judge", _judge, _t.getCategories().get(1)));
 		GovOppGrouping teamGroup = new GovOppGrouping("Teams");
+		GovOppUnit n = new GovOppUnit();
 		GovOppUnit g = new GovOppUnit(true);
 		GovOppUnit o = new GovOppUnit(false);
+		teamGroup.addMember(n);
 		teamGroup.addMember(g);
 		teamGroup.addMember(o);
-		GovOppUnit winner = null;
+		GovOppUnit winner = n;
 		if(_winner == _gov) winner = g;
 		else if(_winner == _opp) winner = o;
 		atts.add(new UnitAttribute<GovOppUnit>("Winner", winner, teamGroup));
