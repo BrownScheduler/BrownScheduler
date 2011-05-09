@@ -16,10 +16,14 @@ public class Tournament implements backbone.Tournament {
 	
 	public Tournament(){
 		_rounds = new ArrayList<Round>();
-		_allRefs = new RefereeGrouping("Referees");
-		_allTeams = new TeamGrouping("Teams");
-		_allPlayers = new PlayerGrouping("Players");
-		_allFields = new FieldGrouping("Fields");
+		_allRefs = new RefereeGrouping(this, "Referees");
+		_allTeams = new TeamGrouping(this, "Teams");
+		_allPlayers = new PlayerGrouping(this, "Players");
+		_allFields = new FieldGrouping(this, "Fields");
+	}
+	
+	public int getNextRoundInt(){
+		return _rounds.size();
 	}
 	@Override
 	public Round createNextRound() {

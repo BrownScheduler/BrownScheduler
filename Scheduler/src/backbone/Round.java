@@ -25,12 +25,7 @@ public class Round implements Serializable, Grouping<Pairing> {
 	}
 
 	public void addPairing(Pairing pairing) {
-		pairings.remove(pairing);
-	}
-
-	public boolean isPaired(CompetitiveUnit comp) {
-		// TODO Auto-generated method stub
-		return false;
+		pairings.add(pairing);
 	}
 
 	public void removePairing(Pairing pairing) {

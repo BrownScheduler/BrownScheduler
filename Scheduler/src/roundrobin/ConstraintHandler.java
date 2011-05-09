@@ -4,12 +4,13 @@ import backbone.Round;
 
 public class ConstraintHandler {
 
+	private Tournament _t;
 	public ConstraintHandler(Tournament tournament) {
-		// TODO Auto-generated constructor stub
+		_t = tournament;
 	}
 
 	public Round creatRound() {
-		// TODO Auto-generated method stub
+		Round r = new Round(Integer.toString(_t.getNextRoundInt()));
 		return null;
 	}
 

@@ -4,15 +4,16 @@ import plugin1.MyCategory;
 
 public class PlayerGrouping extends MyCategory<Player> {
 
-	public PlayerGrouping(String name) {
+	private Tournament _t;
+	public PlayerGrouping(Tournament t, String name) {
 		super(name);
-		// TODO Auto-generated constructor stub
+		_t = t;
 	}
 
 	@Override
 	public Player getBlank() {
 		// TODO Auto-generated method stub
-		return null;
+		return new Player(_t, _name);
 	}
 
 }
