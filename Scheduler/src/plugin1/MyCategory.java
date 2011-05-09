@@ -8,7 +8,7 @@ import backbone.Unit;
 
 public abstract class MyCategory<T extends Unit> implements Grouping<T> {
 
-	private String _name;
+	protected String _name;
 	private List<T> _members;
 	
 	public MyCategory(String name){

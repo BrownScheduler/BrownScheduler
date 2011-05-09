@@ -37,6 +37,10 @@ public class UnitAttribute<T extends Unit> extends Attribute {
 		return Attribute.Type.UNIT;
 	}
 	
+	public void setGrouping(Grouping<T> group){
+		this.memberOf = group;
+	}
+	
 	public String toString(){
 		String s = "Att: ";
 		if(att == null) s += "null";

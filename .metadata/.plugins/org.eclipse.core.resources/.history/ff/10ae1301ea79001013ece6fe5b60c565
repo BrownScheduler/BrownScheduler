@@ -1,0 +1,46 @@
+package roundrobin;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Random;
+
+import backbone.Round;
+
+public class ConstraintHandler {
+
+	private Tournament _t;
+	private int _roundNum;
+	public ConstraintHandler(Tournament tournament, int roundNum) {
+		_t = tournament;
+		_roundNum = roundNum;
+	}
+
+	public Round createRound(ArrayList<Field> fields) {
+		Round r = new Round("Round" + Integer.toString(_roundNum));
+		Random rand = new Random();
+		if(fields.size() == 0) return null;
+		int offset = 0;
+		HashSet<Team> paired = new HashSet<Team>();
+		for(Team t : _t.getTeams().getMembers()){
+			for(Team other : _t.getTeams().getMembers()){
+				if(other != t && t.hasfacedBefore(other, _roundNum) && !paired.contains(other)){
+					paired.add(t);
+					paired.add(other);
+					Field f = fields.get(offset);
+					offset = offset + 1 % fields.size();
+					Game g = new Game(_t, r, "", f);
+					if(rand.nextBoolean()){
+						g.setHome(t);
+						g.setAway(other);
+					}else{
+						g.setHome(t);
+						g.setAway(other);
+					}
+				}
+			}
+		}
+		return null;
+	}
+
+}

@@ -1,5 +1,6 @@
 package roundrobin;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import backbone.Attribute;
@@ -12,40 +13,46 @@ public class Referee implements Unit {
 
 	private StringAttribute _name;
 	private UnitAttribute<Field> _associatedField;
+	private Tournament _t;
+	
+	public Referee(Tournament t, String name){
+		_name = new StringAttribute("Name", name);
+		_associatedField = new UnitAttribute<Field>("Associated Field", null, _t.getFields());
+	}
 	@Override
 	public boolean deleteFromGrouping() {
-		// TODO Auto-generated method stub
-		return false;
+		return _t.getRefs().deleteMember(this);
 	}
 
 	@Override
 	public List<Attribute> getAttributes() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Attribute> atts = new ArrayList<Attribute>();
+		atts.add(_name);
+		atts.add(_associatedField);
+		return atts;
 	}
 
 	@Override
-	public Grouping<Unit> getMemberOf() {
-		// TODO Auto-generated method stub
-		return null;
+	public Grouping getMemberOf() {
+		return _t.getRefs();
 	}
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		return this._name.value;
 	}
 
 	@Override
 	public void setAttribute(Attribute attribute) {
-		// TODO Auto-generated method stub
-
+		if(attribute.getType() == Attribute.Type.STRING)
+			_name = (StringAttribute)attribute;
+		else if(attribute.getType() == Attribute.Type.UNIT)
+			_associatedField = (UnitAttribute)attribute;
 	}
 
 	@Override
 	public void setMemberOf(Grouping<Unit> g) {
-		// TODO Auto-generated method stub
-
+		//does nothing, as is always a member of the Referee category
 	}
 
 }

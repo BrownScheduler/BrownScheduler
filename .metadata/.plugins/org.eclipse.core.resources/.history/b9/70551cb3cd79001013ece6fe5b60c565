@@ -1,0 +1,58 @@
+package roundrobin;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import backbone.Attribute;
+import backbone.Grouping;
+import backbone.StringAttribute;
+import backbone.Unit;
+import backbone.UnitAttribute;
+
+public class Referee implements Unit {
+
+	private StringAttribute _name;
+	private UnitAttribute<Field> _associatedField;
+	private Tournament _t;
+	
+	public Referee(Tournament t, String name){
+		_name = new StringAttribute("Name", name);
+		_associatedField = new UnitAttribute<Field>("Associated Field", null, _t.getFields());
+	}
+	@Override
+	public boolean deleteFromGrouping() {
+		return _t.getFields()._members.remove(this);
+	}
+
+	@Override
+	public List<Attribute> getAttributes() {
+		ArrayList<Attribute> atts = new ArrayList<Attribute>();
+		atts.add(_name);
+		atts.add(_associatedField);
+		return atts;
+	}
+
+	@Override
+	public Grouping<Unit> getMemberOf() {
+		return _t.getRefs();
+	}
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setAttribute(Attribute attribute) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void setMemberOf(Grouping<Unit> g) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

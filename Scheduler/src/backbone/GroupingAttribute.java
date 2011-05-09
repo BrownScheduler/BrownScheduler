@@ -29,6 +29,10 @@ public class GroupingAttribute<T extends Unit> extends Attribute{
 	public List<T> getMembers() {
 		return group.getMembers();
 	}
+	
+	public Grouping<T> getGrouping(){
+		return group;
+	}
 
 	public void addMember(T member) {
 		group.addMember(member);

@@ -2,17 +2,18 @@ package roundrobin;
 
 import plugin1.MyCategory;
 
-public class FieldGrouping extends MyCategory<Field> {
+public class FieldGrouping extends MyGrouping<Field> {
 
-	public FieldGrouping(String name) {
+	Tournament _t;
+	
+	public FieldGrouping(Tournament t, String name) {
 		super(name);
-		// TODO Auto-generated constructor stub
+		_t = t;
 	}
 
 	@Override
 	public Field getBlank() {
-		// TODO Auto-generated method stub
-		return null;
+		return new Field(_t, "");
 	}
 
 }

@@ -17,9 +17,24 @@ public class Field implements Unit {
 	
 	public Field(Tournament t, StringAttribute name){
 		_name = name;
-		_associatedRefs = new GroupingAttribute<Referee>("Referees");
+		_associatedRefs = new GroupingAttribute<Referee>("Referees", new RefereeGrouping(_t, "Associated Refs"));
 		_t = t;
 	}
+	
+	public Field(Tournament t, String name){
+		_name = new StringAttribute("Name", name);
+		_associatedRefs = new GroupingAttribute<Referee>("Referees", new RefereeGrouping(_t, "Associated Refs"));
+		_t = t;
+	}
+	
+	public RefereeGrouping ref(){
+		return (RefereeGrouping)_associatedRefs.getGrouping();
+	}
+	
+	public void addRef(Referee ref){
+		
+	}
+
 	@Override
 	public boolean deleteFromGrouping() {
 		return _t.getFields().deleteMember(this);
@@ -40,8 +55,7 @@ public class Field implements Unit {
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		return _name.value;
 	}
 
 	@Override
@@ -52,8 +66,8 @@ public class Field implements Unit {
 
 	@Override
 	public void setMemberOf(Grouping<Unit> g) {
-		// TODO Auto-generated method stub
-
+		//Doesn't do anything, as will always be a member of the
+		//tournament's FieldGrouping
 	}
 
 }
