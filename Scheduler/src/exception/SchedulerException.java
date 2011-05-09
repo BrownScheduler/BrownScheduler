@@ -5,8 +5,12 @@ public class SchedulerException extends Exception {
 	public SchedulerException() {
 		super();
 	}
+
+	public SchedulerException(String s) {
+		super(s);
+	}
 	
-	public SchedulerException(String e) {
+	public SchedulerException(Exception e) {
 		super(e);
 	}
 }

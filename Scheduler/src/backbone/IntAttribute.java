@@ -27,4 +27,9 @@ public class IntAttribute extends Attribute{
 	public void setAttribute(int a) {
 		att = a;
 	}
+	
+	@Override
+	public String toString() {
+		return att.toString();
+	}
 }

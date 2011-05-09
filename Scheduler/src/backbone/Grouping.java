@@ -1,5 +1,6 @@
 package backbone;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
@@ -15,7 +16,8 @@ import java.util.List;
  *
  * @param <T> must extend Unit
  */
-public interface Grouping<T extends Unit> extends Cloneable{
+
+public interface Grouping<T extends Unit> extends Serializable {
 	
 	/**
 	 * Returns a blank Unit of type T (typically one with a name of "", but NOT null)

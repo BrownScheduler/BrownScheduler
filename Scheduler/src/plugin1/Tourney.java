@@ -12,9 +12,9 @@ import javax.swing.UIManager.LookAndFeelInfo;
 
 import middleend.MiddleEnd;
 import backbone.Grouping;
+import backbone.Tournament;
 
 
-@SuppressWarnings("serial")
 public class Tourney implements backbone.Tournament{
 	
 	private ArrayList<plugin1.MyRound> rounds;

@@ -1,8 +1,10 @@
 package backbone;
 
+import java.io.Serializable;
 import java.util.List;
 
-public interface Unit {
+
+public interface Unit extends Serializable {
 	
 	public Grouping<Unit> getMemberOf();
 	

@@ -10,6 +10,7 @@ public class Team implements CompetitiveUnit {
 	private String _name;
 	private int _wins;
 	private Tourney _t;
+	
 	public Team(Tourney t, String name){
 		_t = t;
 		this._name = name;

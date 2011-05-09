@@ -44,7 +44,7 @@ public abstract class Attribute implements Serializable {
 	 *
 	 */
 	public enum Type {
-		INT, STRING, BOOLEAN, DOUBLE, MEMBER, GROUPING, UNIT
+		INT, STRING, BOOLEAN, DOUBLE, GROUPING, UNIT
 	}
 
 	/**

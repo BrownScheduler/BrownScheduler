@@ -40,9 +40,11 @@ public class UnitAttribute<T extends Unit> extends Attribute {
 	public void setGrouping(Grouping<T> group){
 		this.memberOf = group;
 	}
-	
-	public String toString(){
-		return "";
-	}
 
+	@Override
+	public String toString() {
+		if(att == null)
+			return "";
+		return att.getName();
+	}
 }
