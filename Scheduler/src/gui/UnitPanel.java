@@ -55,6 +55,7 @@ public class UnitPanel extends JPanel implements GUIConstants {
 				GroupingAttribute<Unit> g = (GroupingAttribute<Unit>) attr;
 				components.put(attr, new InputTablePane(_middleEnd, g.getBlankUnit().getAttributes(), g));
 				_tablePanel.setPreferredSize(components.get(attr).getPreferredSize());
+				_tablePanel.add(components.get(attr));
 			}
 			JComponent comp = Utility.getField(attr);
 			if (comp instanceof JButton) {
@@ -62,21 +63,14 @@ public class UnitPanel extends JPanel implements GUIConstants {
 					public void actionPerformed(ActionEvent e) {
 						boolean hasPanel = false;
 						for (int i = 0; i < _tablePanel.getComponentCount(); i++) {
-							if (_tablePanel.getComponent(i) == components.get(attr))
-								hasPanel = true;
-						}
-						if (_tablePanel.getComponentCount() == 0) {
-							_tablePanel.removeAll();
-							_tablePanel.add(((InputTablePane) components.get(attr)).getTable().getTableHeader());
-							_tablePanel.add(components.get(attr));
-						}
-						else if (hasPanel) {
-							_tablePanel.removeAll();
-						}
-						else {
-							_tablePanel.removeAll();
-							_tablePanel.add(((InputTablePane) components.get(attr)).getTable().getTableHeader());
-							_tablePanel.add(components.get(attr));
+							if (_tablePanel.getComponent(i) instanceof InputTablePane) {
+								InputTablePane pane = (InputTablePane) _tablePanel.getComponent(i);
+								System.out.println(pane == components.get(attr));
+								if (pane == components.get(attr))
+									pane.setVisible(!pane.isVisible());
+								else
+									pane.setVisible(false);
+							}
 						}
 						_tablePanel.repaint();
 					}
