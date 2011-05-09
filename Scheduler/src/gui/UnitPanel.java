@@ -54,6 +54,7 @@ public class UnitPanel extends JPanel implements GUIConstants {
 			if (attr instanceof GroupingAttribute) {
 				GroupingAttribute<Unit> g = (GroupingAttribute<Unit>) attr;
 				components.put(attr, new InputTablePane(_middleEnd, g.getBlankUnit().getAttributes(), g));
+				_tablePanel.setPreferredSize(components.get(attr).getPreferredSize());
 			}
 			JComponent comp = Utility.getField(attr);
 			if (comp instanceof JButton) {
@@ -153,19 +154,24 @@ public class UnitPanel extends JPanel implements GUIConstants {
 									rowunit.setAttribute(new StringAttribute(rowattr.getTitle(), value));
 								}
 								else if (rowattr.getType() == Attribute.Type.UNIT) {
+									DefaultCellEditor editor = (DefaultCellEditor) table.getTable().getCellEditor(i, j);
+									UnitAttributeComboBox combobox = (UnitAttributeComboBox) editor.getComponent();
+									Grouping<Unit> g = combobox.getGrouping();
 									Unit value = null;
 									if (table.getTable().getValueAt(i, j) != null) {
-										DefaultCellEditor editor = (DefaultCellEditor) table.getTable().getCellEditor(i, j);
-										UnitAttributeComboBox combobox = (UnitAttributeComboBox) editor.getComponent();
 										value = combobox.getSelectedUnit();
-										rowunitisnull = false;//TODO:Does this work?
+										if ((value != null) && (!g.getMembers().contains(value)))
+											g.addMember(value);
+										rowunitisnull = false;
 									}
-									rowunit.setAttribute(new UnitAttribute(rowattr.getTitle(), value));
+									rowunit.setAttribute(new UnitAttribute<Unit>(rowattr.getTitle(), value, g));
 								}
 								j++;
 							}
 							if (!rowunitisnull && !alreadyadded) {
+								System.out.println(rowunit.toString());
 								groupattr.addMember(rowunit);
+								groupattr.getGrouping().addMember(rowunit);
 							}
 						}
 						table = new InputTablePane(_middleEnd, groupattr.getBlankUnit().getAttributes(), groupattr);

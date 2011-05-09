@@ -52,6 +52,15 @@ public class InputTablePane extends JScrollPane implements GUIConstants {
 			data.add(group.getBlankUnit().getAttributes());
 		}
 		_table.setModel(new InputTableModel(headers, data, group.isEditable()));
+		for (int i = 0; i < _table.getColumnModel().getColumnCount(); i++) {
+			if (headers.get(i).getType() == Attribute.Type.UNIT) {
+				TableColumn unitcolumn = _table.getColumnModel().getColumn(i);
+				UnitAttribute<Unit> header = (UnitAttribute) headers.get(i);
+				UnitAttribute<Unit> uatt = new UnitAttribute<Unit>(header.getTitle(), header.getMemberOf());
+				UnitAttributeComboBox combobox = new UnitAttributeComboBox(uatt);
+				unitcolumn.setCellEditor(new DefaultCellEditor(combobox));
+			}
+		}
 		ExcelAdapter exceladapt = new ExcelAdapter(_table);
 		this.add(_table.getTableHeader());
 		this.add(_table);
@@ -97,19 +106,6 @@ public class InputTablePane extends JScrollPane implements GUIConstants {
 			}
 			Object[][] dataarray = d.toArray(new Object[0][0]);
 			this.setDataVector(dataarray, _headers);
-			System.out.println(_table.getColumnModel().getColumnCount());
-//			System.out.println(_table.getColumnModel().getColumnCount())
-			for (int i = 0; i < _table.getColumnModel().getColumnCount(); i++) {
-				System.out.println(i);
-				if (_headers[i].getType() == Attribute.Type.UNIT) {
-					TableColumn unitcolumn = _table.getColumnModel().getColumn(i);
-					UnitAttribute<Unit> header = (UnitAttribute) _headers[i];
-					UnitAttribute<Unit> uatt = new UnitAttribute<Unit>(header.getTitle(), header.getMemberOf());
-					UnitAttributeComboBox combobox = new UnitAttributeComboBox(uatt);
-					unitcolumn.setCellEditor(new DefaultCellEditor(combobox));
-					System.out.println(i);
-				}
-			}
 			this.addTableModelListener(new TableModelListener() {
 				public void tableChanged(TableModelEvent e) {
 					if ((e.getLastRow() == (getRowCount()-1)) && (e.getType() == TableModelEvent.UPDATE)) {

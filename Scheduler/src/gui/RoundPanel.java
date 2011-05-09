@@ -30,7 +30,7 @@ public class RoundPanel extends JPanel implements GUIConstants {
 		_pairingpanels.clear();
 		this.setSize(DEFAULT_SIZE);
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		JButton addpairingbutton = new JButton("Add New Pairing");
+		JButton addpairingbutton = new JButton("Add New Blank Pairing");
 		addpairingbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				_round.addPairing(_round.getBlank());
