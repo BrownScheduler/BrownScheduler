@@ -25,7 +25,7 @@ public class Tournament implements backbone.Tournament {
 		_rounds = new ArrayList<Round>();
 		_allRefs = new RefereeGrouping(this, "Referees");
 		_allTeams = new TeamGrouping(this, "Teams");
-		_allPlayers = new PlayerGrouping(this, "Players");
+		_allPlayers = new PlayerGrouping(this, null, "Players");
 		_allFields = new FieldGrouping(this, "Fields");
 	}
 	
