@@ -182,13 +182,16 @@ public class UnitPanel extends JPanel implements GUIConstants {
 					else if (attr.getType() == Attribute.Type.UNIT) {
 						Unit value = ((UnitAttributeComboBox) components.get(attr)).getSelectedUnit();
 						Grouping grouping = ((UnitAttributeComboBox) components.get(attr)).getGrouping();
-						grouping.addMember(value);
+						if ((value != null) && (!grouping.getMembers().contains(value)))
+							grouping.addMember(value);
 						unit.setAttribute(new UnitAttribute(attr.getTitle(), value, grouping));
 					}
 				}
 				if (_grouping != null) {
-					_grouping.addMember(unit);
-					_grouping = null;
+					if (!_grouping.getMembers().contains(unit)) {
+						_grouping.addMember(unit);
+						_grouping = null;
+					}
 				}
 				_middleEnd.repaintAll();
 			}
@@ -217,7 +220,7 @@ public class UnitPanel extends JPanel implements GUIConstants {
 		this.add(_buttonPanel);
 		this.add(Box.createRigidArea(new Dimension(10, 10)));
 		this.add(_tablePanel);
-		this.setPreferredSize(new Dimension(0,0));
+		this.setPreferredSize(UNITPANEL_SIZE);
 		this.repaint();
 	}
 }

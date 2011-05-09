@@ -97,8 +97,9 @@ public class InputTablePane extends JScrollPane implements GUIConstants {
 			}
 			Object[][] dataarray = d.toArray(new Object[0][0]);
 			this.setDataVector(dataarray, _headers);
-			System.out.println(_table.getColumnCount());
-			for (int i = 0; i < _table.getColumnCount(); i++) {
+			System.out.println(_table.getColumnModel().getColumnCount());
+//			System.out.println(_table.getColumnModel().getColumnCount())
+			for (int i = 0; i < _table.getColumnModel().getColumnCount(); i++) {
 				System.out.println(i);
 				if (_headers[i].getType() == Attribute.Type.UNIT) {
 					TableColumn unitcolumn = _table.getColumnModel().getColumn(i);
