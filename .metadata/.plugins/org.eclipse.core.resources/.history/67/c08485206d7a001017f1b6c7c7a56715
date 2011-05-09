@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- * @deprecated Poor design decision
- * @author pclay
+ * @deprecated
+ * @author matt
  *
  * @param <T>
  */

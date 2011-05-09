@@ -76,7 +76,6 @@ public class MyPairing implements backbone.Pairing{
 		GovOppUnit o = new GovOppUnit(false);
 		teamGroup.addMember(g);
 		teamGroup.addMember(o);
-		GovOppUnit winner = null;
 		if(_winner == _gov) winner = g;
 		else if(_winner == _opp) winner = o;
 		atts.add(new UnitAttribute<GovOppUnit>("Winner", winner, teamGroup));

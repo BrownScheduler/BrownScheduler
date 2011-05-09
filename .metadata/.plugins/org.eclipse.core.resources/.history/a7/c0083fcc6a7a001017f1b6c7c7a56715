@@ -9,11 +9,9 @@ public class Team implements CompetitiveUnit {
 	private Grouping<Unit> _category;
 	private String _name;
 	private int _wins;
-	private Tourney _t;
-	public Team(Tourney t, String name){
+	public Team(Tournament t, String name){
 		this._name = name;
 		_wins = 0;
-		_t = t;
 		_category = t.getCategories().get(0);
 	}
 	
@@ -72,7 +70,7 @@ public class Team implements CompetitiveUnit {
 
 	@Override
 	public Grouping<Unit> getMemberOf() {
-		return _t.getCategories().get(0);
+		return _category;
 	}
 
 	@Override

@@ -14,7 +14,7 @@ import backbone.StringAttribute;
 import backbone.Unit;
 import backbone.UnitAttribute;
 
-public class Team implements Unit {
+public class Team implements CompetitiveUnit {
 
 	private Tournament _t;
 	private StringAttribute _name;

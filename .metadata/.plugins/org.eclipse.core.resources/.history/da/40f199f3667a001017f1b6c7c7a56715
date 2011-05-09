@@ -24,37 +24,23 @@ public class BooleanAttribute extends Attribute {
 	}
 	
 	/**
-	 * Sets the title and attribute
 	 * 
-	 * @param title title of the Attribute
-	 * @param att true of false
+	 * @param title
+	 * @param att
 	 */
 	public BooleanAttribute(String title, boolean att) {
 		super(title);
 		this.att = att;
 	}
 	
-	/**
-	 * Returns that ti's a Type.BOOLEAN
-	 * 
-	 * Used primarily for checking and ensuring valid casts
-	 */
 	public Type getType() {
 		return Attribute.Type.BOOLEAN;
 	}
 
-	/**
-	 * 
-	 * @return the boolean this Attribute holds
-	 */
 	public boolean getAttribute() {
 		return att;
 	}
 	
-	/**
-	 * 
-	 * @param a the boolean value to set
-	 */
 	public void setAttribute(boolean a) {
 		att = a;
 	}
