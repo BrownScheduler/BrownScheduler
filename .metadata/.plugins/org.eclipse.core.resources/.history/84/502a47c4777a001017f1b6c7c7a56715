@@ -3,12 +3,10 @@ package backbone;
 import java.util.List;
 
 /**
- * Provides a way for Units to have Attributes containing
- * an indeterminate number of Units
  * 
  * @author pclay
  *
- * @param <T> must be a Unit
+ * @param <T>
  */
 public class GroupingAttribute<T extends Unit> extends Attribute{
 
