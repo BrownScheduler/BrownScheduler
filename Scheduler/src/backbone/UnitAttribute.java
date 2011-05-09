@@ -43,6 +43,8 @@ public class UnitAttribute<T extends Unit> extends Attribute {
 
 	@Override
 	public String toString() {
+		if(att == null)
+			return "";
 		return att.getName();
 	}
 }

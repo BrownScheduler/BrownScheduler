@@ -30,6 +30,7 @@ public class Judge implements Unit{
 		this._name = name;
 		_conflictedTeams = new HashSet<Team>();
 		_t = t;
+		_category = _t.getCategories().get(1);
 	}
 
 	@Override

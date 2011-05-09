@@ -42,18 +42,18 @@ public class CSVIO {
 			for(Unit member : category.getMembers()) {
 				String groups = "";
 				for(Attribute att : member.getAttributes()) {
-					switch (att.getType()) {
-					case GROUPING:
+					if(att.getType() == Attribute.Type.GROUPING) {
 						GroupingAttribute<Unit> gatt = (GroupingAttribute<Unit>) att;
 						String group = "," + gatt.getTitle();
 						for(Unit unit: gatt.getMembers())
 							group += "," + unit.getName();
 						groups += group + "\n";
 						break;
-					default:
-						out.write(att.toString());
 					}
+					else
+						out.write(att.toString() + ",");
 				}
+
 				out.write("\n");
 				out.write(groups);
 			}
@@ -68,18 +68,21 @@ public class CSVIO {
 	public static void loadGrouping(String fileName, List<Grouping> groups) throws exception.CSVException {
 		try {
 			BufferedReader in = new BufferedReader(new FileReader(fileName));
-			String name = in.readLine();
+			String name = in.readLine().split(",")[0];
 			in.readLine();
 			Grouping group = null;
 			for(Grouping g : groups) {
-				if(g.getName().equals(name));
-				group = g;
-				break;
+				if(g.getName().equals(name)) {
+					group = g;
+					break;
+				}
 			}
+
 			if(group == null)
 				throw new CSVException("Unknown grouping: " + name);
-			List<Unit> toDelete = group.getMembers();
-			ArrayList<Attribute> nongroupAtts = new ArrayList<Attribute>();
+			LinkedList<Unit> toDelete = new LinkedList<Unit>(group.getMembers());
+			LinkedList<Unit> toAdd = new LinkedList<Unit>();
+			ArrayList<Integer> nongroupAtts = new ArrayList<Integer>();
 			ArrayList<Integer> groupAtts = new ArrayList<Integer>();
 			HashMap<Unit, HashMap<UnitAttribute, String>> unitsToAdd = new HashMap<Unit, HashMap<UnitAttribute, String>>();
 			HashMap<GroupingAttribute, LinkedList<String>> groupsToSet = new HashMap<GroupingAttribute, LinkedList<String>>();
@@ -89,14 +92,15 @@ public class CSVIO {
 				if(att.getType() == Attribute.Type.GROUPING)
 					groupAtts.add(i);
 				else
-					nongroupAtts.add(att);
+					nongroupAtts.add(i);
 			}
 			String line = in.readLine();
 			while(line != null) {
+				System.out.println(line);
 				String[] cells = line.split(",");
 				Unit temp = group.getBlank();
 				for(int i = 0; i < nongroupAtts.size(); i++) {
-					Attribute att = nongroupAtts.get(i);
+					Attribute att = temp.getAttributes().get(nongroupAtts.get(i));
 					if(att.getType() == Attribute.Type.STRING)
 						temp.setAttribute(new StringAttribute(att.getTitle(), cells[i]));
 				}
@@ -111,24 +115,39 @@ public class CSVIO {
 					}
 				if(unit == null) {
 					unit = group.getBlank();
+					toAdd.add(unit);
 				}
 				else {
 					toDelete.remove(unit);
 				}
 				for(int i = 0; i < nongroupAtts.size(); i++) {
-					Attribute att = nongroupAtts.get(i);
+					Attribute att = unit.getAttributes().get(nongroupAtts.get(i));
 					switch (att.getType()) {
 					case BOOLEAN:
-						unit.setAttribute(new BooleanAttribute(att.getTitle(),
-								Boolean.parseBoolean(cells[i].toLowerCase())));
+						if(cells.length > i && !cells[i].equals(""))
+							unit.setAttribute(new BooleanAttribute(att.getTitle(),
+									Boolean.parseBoolean(cells[i].toLowerCase())));
+						else 
+							unit.setAttribute(new BooleanAttribute(att.getTitle(),
+									((BooleanAttribute) temp.getAttributes().get(nongroupAtts.get(i))).getAttribute()));
 						break;
 					case DOUBLE:
-						unit.setAttribute(new DoubleAttribute(att.getTitle(),
-								Double.parseDouble(cells[i])));
+						if(cells.length > i && !cells[i].equals(""))
+							unit.setAttribute(new DoubleAttribute(att.getTitle(),
+									Double.parseDouble(cells[i])));
+						else 
+							unit.setAttribute(new DoubleAttribute(att.getTitle(),
+									((DoubleAttribute) temp.getAttributes().get(nongroupAtts.get(i))).getAttribute()));
 						break;
 					case INT:
-						unit.setAttribute(new IntAttribute(att.getTitle(),
-								Integer.parseInt(cells[i])));
+						if(cells.length > i && !cells[i].equals(""))
+							unit.setAttribute(new IntAttribute(att.getTitle(),
+									Integer.parseInt(cells[i])));
+						else 
+							unit.setAttribute(new IntAttribute(att.getTitle(),
+									((IntAttribute) temp.getAttributes().get(nongroupAtts.get(i))).getAttribute()));
+
+						System.out.println(group.getMembers().toString());
 						break;
 					case STRING:
 						unit.setAttribute(new StringAttribute(att.getTitle(),cells[i]));
@@ -142,7 +161,6 @@ public class CSVIO {
 						throw new CSVException();
 					}
 				}
-
 				for(int i = 0; i < groupAtts.size(); i++) {
 					line = in.readLine();
 					if(line == null)
@@ -159,12 +177,16 @@ public class CSVIO {
 				line = in.readLine();
 			}
 
+			for(Unit unit : toAdd) {
+				group.addMember(unit);
+			}
+
 			for(Unit unit : unitsToAdd.keySet()) {
 				for(Entry<UnitAttribute, String> entry : unitsToAdd.get(unit).entrySet()) {
 					UnitAttribute uAtt = entry.getKey();
 					uAtt.att = null;
-					for(Unit u : uAtt.getMemberOf()) {
-
+					for(Object obj : uAtt.getMemberOf().getMembers()) {
+						Unit u = (Unit) obj;
 						if(u.getName().equals(entry.getValue())) {
 							uAtt.att = u;
 							break;
@@ -183,15 +205,16 @@ public class CSVIO {
 
 				for(String unitName : groupsToSet.get(gAtt)) {
 					Unit unit = null;
-					for(Unit u : gAtt.getGroup().getMemberOf()) {
+					System.out.println(((Unit) gAtt.getGrouping().getBlank()).toString());
+					for(Unit u : ((Unit) gAtt.getGrouping().getBlank()).getMemberOf().getMembers()) {
 						if(u.getName().equals(unitName)) {
 							unit = u;
 							break;
 						}
 					}
 					if(unit == null) {
-						unit = gAtt.getGroup().getMemberOf().getBlank();
-						gAtt.getGroup().getMemberOf().addMember(unit);
+						unit = gAtt.getGrouping().getBlank().getMemberOf().getBlank();
+						gAtt.getGrouping().getBlank().getMemberOf().addMember(unit);
 						unit.setName(unitName);
 					}
 					gAtt.addMember(unit);
@@ -199,7 +222,8 @@ public class CSVIO {
 
 			}
 
-			for(Unit unit : toDelete) 
+			for(Unit unit : toDelete) {
+				group.deleteMember(unit);
 				for(Grouping<Unit> g : groups) 
 					for(Unit u : g.getMembers())
 						for(Attribute att : u.getAttributes())
@@ -218,13 +242,14 @@ public class CSVIO {
 								if(un != null)
 									((GroupingAttribute) att).deleteMember(un);
 							}
+			}
 
-
+			System.out.println("hi");
 		} catch (NumberFormatException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			throw new exception.CSVException(e);
 		} catch (IOException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			throw new exception.CSVException(e);
 		} 
 	}
