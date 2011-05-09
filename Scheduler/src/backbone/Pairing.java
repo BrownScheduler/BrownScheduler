@@ -1,6 +1,4 @@
-package backbone;    
-
-import java.util.ArrayList;
+package backbone;
 
 public interface Pairing extends Unit {	
 }

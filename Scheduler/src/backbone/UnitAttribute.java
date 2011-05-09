@@ -1,7 +1,6 @@
 package backbone;
 
 import java.util.List;
-import backbone.Attribute.Type;
 
 public class UnitAttribute<T extends Unit> extends Attribute {
 	
@@ -17,11 +16,6 @@ public class UnitAttribute<T extends Unit> extends Attribute {
 		super(title);
 		this.att = att;
 		this.memberOf = grouping;
-	}
-	public UnitAttribute(String title, T att){
-		super(title);
-		this.att = att;
-		this.memberOf = (Grouping<T>) att.getMemberOf();
 	}
 	
 	public Grouping<T> getMemberOf() {

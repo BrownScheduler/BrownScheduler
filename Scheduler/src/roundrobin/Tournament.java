@@ -8,8 +8,6 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.UIManager.LookAndFeelInfo;
 
 import middleend.MiddleEnd;
-import plugin1.Tourney;
-
 import backbone.Grouping;
 import backbone.Round;
 

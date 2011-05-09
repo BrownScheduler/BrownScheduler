@@ -34,6 +34,7 @@ public class UnitAttributeComboBox extends JComboBox implements GUIConstants {
 		this.setSelectedIndex(toSelect);
 		this.setEditable(true);
 		this.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				if ((getSelectedIndex() < 0) && (getSelectedItem() != null)) {
 					Unit toadd = attribute.getMemberOf().getBlank();

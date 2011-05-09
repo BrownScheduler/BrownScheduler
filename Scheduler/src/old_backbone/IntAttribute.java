@@ -1,7 +1,5 @@
 package old_backbone;
 
-import old_backbone.Attribute.Type;
-
 public class IntAttribute extends Attribute{
 	
 	public Integer att;

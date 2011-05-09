@@ -30,10 +30,12 @@ public class Team implements CompetitiveUnit {
 		_wins = i;
 	}
 	
+	@Override
 	public String getName(){
 		return this._name;
 	}
 	
+	@Override
 	public LinkedList<Attribute> getAttributes(){
 		
 		StringAttribute name = new StringAttribute("Name", this._name);
@@ -65,6 +67,7 @@ public class Team implements CompetitiveUnit {
 			setStringAttribute((StringAttribute)attribute);
 	}
 	
+	@Override
 	public String toString(){
 		String r = "Name: " + this._name;
 		r += " Wins: " + String.valueOf(this._wins);

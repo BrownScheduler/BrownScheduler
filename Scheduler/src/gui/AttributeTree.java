@@ -59,6 +59,7 @@ public class AttributeTree extends JTree implements GUIConstants {
 		_treeModel = new DefaultTreeModel(root);
 		this.setModel(_treeModel);
 		this.addTreeSelectionListener(new TreeSelectionListener() {
+			@Override
 			public void valueChanged(TreeSelectionEvent e) {
 				DefaultMutableTreeNode node = (DefaultMutableTreeNode) getLastSelectedPathComponent();
 				if (node == null)
@@ -84,6 +85,7 @@ public class AttributeTree extends JTree implements GUIConstants {
 			group = g;
 		}
 		
+		@Override
 		public String toString() {
 			return group.getName();
 		}
@@ -96,6 +98,7 @@ public class AttributeTree extends JTree implements GUIConstants {
 			unit = u;
 		}
 		
+		@Override
 		public String toString() {
 			return unit.getName();
 		}

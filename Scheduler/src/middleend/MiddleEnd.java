@@ -1,10 +1,12 @@
 package middleend;
 
+import exception.BackupException;
+import exception.CSVException;
+import fileio.CSVIO;
+import fileio.SerialIO;
 import gui.*;
 import backbone.*;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 public class MiddleEnd {
 	
@@ -30,18 +32,38 @@ public class MiddleEnd {
 	}
 	
 	public boolean openTournament(File file) {
-		return false;
+		try {
+			_tmnt = SerialIO.readTournament(file);
+			return true;
+		} catch (BackupException e) {
+			return false;
+		}
 	}
 	
 	public boolean saveTournament(File file) {
-		return false;
+		try {
+			SerialIO.writeTournament(file, _tmnt);
+			return true;
+		} catch (BackupException e) {
+			return false;
+		}
 	}
 	
 	public boolean importCategory(File file) {
-		return false;
+		try {
+			CSVIO.loadGrouping(file, _tmnt);
+			return true;
+		} catch (CSVException e) {
+			return false;
+		}
 	}
 	
-	public boolean exportCategory(File file) {
-		return false;
+	public boolean exportCategory(Grouping g, File file) {
+		try {
+			CSVIO.writeGrouping(file, (Grouping<? extends Unit>) g);
+			return true;
+		} catch (CSVException e) {
+			return false;
+		}
 	}
 }

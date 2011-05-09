@@ -2,8 +2,6 @@ package backbone;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.LinkedList;
 import java.util.List;
 
 public class Round implements Serializable, Grouping<Pairing> {
@@ -16,6 +14,7 @@ public class Round implements Serializable, Grouping<Pairing> {
 		this.name = name;
 	}
 	
+	@Override
 	public String getName() {
 		return this.name;
 	}

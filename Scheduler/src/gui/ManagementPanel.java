@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import javax.swing.SwingConstants;
 
 public class ManagementPanel extends JTabbedPane implements GUIConstants {
 
@@ -17,7 +18,7 @@ public class ManagementPanel extends JTabbedPane implements GUIConstants {
 	 * This is the default constructor
 	 */
 	public ManagementPanel(MiddleEnd me) {
-		super(JTabbedPane.TOP);
+		super(SwingConstants.TOP);
 		_middleEnd = me;
 		_roundpanels = new ArrayList<RoundPanel>();
 		this.setSize(DEFAULT_SIZE);

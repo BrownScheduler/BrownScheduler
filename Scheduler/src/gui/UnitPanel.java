@@ -3,7 +3,6 @@ package gui;
 import backbone.*;
 import middleend.*;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -60,6 +59,7 @@ public class UnitPanel extends JPanel implements GUIConstants {
 			JComponent comp = Utility.getField(attr);
 			if (comp instanceof JButton) {
 				((JButton) comp).addActionListener(new ActionListener() {
+					@Override
 					public void actionPerformed(ActionEvent e) {
 						boolean hasPanel = false;
 						for (int i = 0; i < _tablePanel.getComponentCount(); i++) {
@@ -89,6 +89,7 @@ public class UnitPanel extends JPanel implements GUIConstants {
 		this.add(Box.createRigidArea(new Dimension(10, 10)));
 		JButton savebutton = new JButton(buttonstring);
 		savebutton.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				Collection<Attribute> attributes = components.keySet();
 				for (Attribute attr : attributes) {
@@ -199,6 +200,7 @@ public class UnitPanel extends JPanel implements GUIConstants {
 		});
 		final JButton actuallydeletebutton = new JButton("Actually delete this unit");
 		actuallydeletebutton.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				_mainPanel.removeAll();
 				_buttonPanel.removeAll();
@@ -210,6 +212,7 @@ public class UnitPanel extends JPanel implements GUIConstants {
 		actuallydeletebutton.setVisible(false);
 		JButton deletebutton = new JButton("Delete this unit");
 		deletebutton.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				actuallydeletebutton.setVisible(true);
 				_buttonPanel.repaint();
