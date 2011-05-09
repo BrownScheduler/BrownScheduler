@@ -45,7 +45,7 @@ public class Player implements Unit {
 
 	@Override
 	public String getName() {
-		return _name.toString();
+		return _name.getAttribute();
 	}
 
 	/**
