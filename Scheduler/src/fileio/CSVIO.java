@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -18,6 +19,7 @@ import backbone.Grouping;
 import backbone.GroupingAttribute;
 import backbone.IntAttribute;
 import backbone.StringAttribute;
+import backbone.Tournament;
 import backbone.Unit;
 import backbone.UnitAttribute;
 import exception.CSVException;
@@ -58,8 +60,11 @@ public class CSVIO {
 		}
 	}
 
-	public static void loadGrouping(String fileName, List<Grouping> groups) throws exception.CSVException {
+	public static void loadGrouping(String fileName, Tournament t) throws exception.CSVException {
 		try {
+			LinkedList<Grouping<Unit>> groups = new LinkedList<Grouping<Unit>>();
+			groups.addAll((Collection<? extends Grouping<Unit>>) t.getCategories());
+			groups.addAll((Collection<? extends Grouping<Unit>>) t.getRounds());
 			BufferedReader in = new BufferedReader(new FileReader(fileName));
 			String name = in.readLine().split(",")[0];
 			in.readLine();
