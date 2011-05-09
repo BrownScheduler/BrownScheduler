@@ -2,6 +2,7 @@ package gui;
 
 import backbone.*;
 import middleend.*;
+import gui.PairingPanel.UnitAttributeComboBox;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;

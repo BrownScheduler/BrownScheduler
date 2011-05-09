@@ -94,12 +94,7 @@ public class InputTablePane extends JScrollPane implements GUIConstants {
 						row.add(((StringAttribute) attr).getAttribute());
 					}
 					else if (attr.getType() == Attribute.Type.UNIT) {
-						if ((((UnitAttribute) attr).att) == null) {
-							row.add("");
-						}
-						else {
-							row.add(((UnitAttribute) attr).att.getName());
-						}
+						row.add(((UnitAttribute) attr).att.getName());
 					}
 				}
 				d.add(row.toArray(new Object[0]));
