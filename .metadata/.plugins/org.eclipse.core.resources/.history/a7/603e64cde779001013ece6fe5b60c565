@@ -38,38 +38,6 @@ public class Game implements Pairing {
 		_headRef = new UnitAttribute<Referee>("Head Ref", null, possibleRefs);
 		_assistantRef = new UnitAttribute<Referee>("Assistant Ref", null, possibleRefs);
 	}
-	
-	public void setHome(Team homeTeam){
-		TeamGrouping canFace = new TeamGrouping(_t, "Home Can Face");
-		if(_homeTeam.att != null && _awayTeam.att != null){
-			if(homeTeam == _homeTeam.att) return;
-			_awayTeam.att.removeFacedTeam(_homeTeam.att);
-		}
-		for(Team t : _t.getTeams().getMembers()){
-			if(t != homeTeam && !homeTeam.hasfacedBefore(t, _roundNum)){
-				canFace.addMember(t);
-			}
-		}
-		_awayTeam.setGrouping(canFace);
-		_homeTeam = new UnitAttribute<Team>("Home Team", homeTeam, new TeamGrouping(_t, "Away can Face", _homeTeam.getListOfUnits()));
-		if(_awayTeam.att != null) homeTeam.addFacedTeam(_awayTeam.att, _roundNum);
-	}
-	
-	public void setAway(Team awayTeam){
-		TeamGrouping canFace = new TeamGrouping(_t, "Away Can Face");
-		if(_homeTeam.att != null && _awayTeam.att != null){
-			if(awayTeam == _awayTeam.att) return;
-			_homeTeam.att.removeFacedTeam(_homeTeam.att);
-		}
-		for(Team t : _t.getTeams().getMembers()){
-			if(t != awayTeam && !awayTeam.hasfacedBefore(t, _roundNum)){
-				canFace.addMember(t);
-			}
-		}
-		_homeTeam.setGrouping(canFace);
-		_awayTeam = new UnitAttribute<Team>("Away Team", awayTeam, new TeamGrouping(_t, "Away can Face", _homeTeam.getListOfUnits()));
-		if(_homeTeam.att != null) awayTeam.addFacedTeam(_homeTeam.att, _roundNum);
-	}
 	@Override
 	public boolean deleteFromGrouping() {
 		if(_r == null) return false;
@@ -108,11 +76,25 @@ public class Game implements Pairing {
 			String title = att.getTitle();
 			if(title.equals("Location")) _location = att;
 			else if(title.equals("Home Team")){
-				setHome((Team)att.att);
+				_homeTeam = att;
+				TeamGrouping canFace = new TeamGrouping(_t, "Home Can Face");
+				for(Team t : _t.getTeams().getMembers()){
+					if(t != _homeTeam.att && !_homeTeam.att.hasfacedBefore(t, _roundNum)){
+						canFace.addMember(t);
+					}
+				}
+				_awayTeam.setGrouping(canFace);
 				
 			}
 			else if(title.equals("Away Team")){
-				setAway((Team)att.att);
+				_awayTeam = att;
+				TeamGrouping canFace = new TeamGrouping(_t, "Away Can Face");
+				for(Team t : _t.getTeams().getMembers()){
+					if(t != _awayTeam.att && !_awayTeam.att.hasfacedBefore(t, _roundNum)){
+						canFace.addMember(t);
+					}
+				}
+				_homeTeam.setGrouping(canFace);
 			}
 			else if(title.equals("Head Ref")) _headRef = att;
 			else if(title.equals("Assistant Ref")) _assistantRef = att;

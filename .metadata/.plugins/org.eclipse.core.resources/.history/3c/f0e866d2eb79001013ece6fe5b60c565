@@ -108,11 +108,25 @@ public class Game implements Pairing {
 			String title = att.getTitle();
 			if(title.equals("Location")) _location = att;
 			else if(title.equals("Home Team")){
-				setHome((Team)att.att);
+				_homeTeam = att;
+				TeamGrouping canFace = new TeamGrouping(_t, "Home Can Face");
+				for(Team t : _t.getTeams().getMembers()){
+					if(t != _homeTeam.att && !_homeTeam.att.hasfacedBefore(t, _roundNum)){
+						canFace.addMember(t);
+					}
+				}
+				_awayTeam.setGrouping(canFace);
 				
 			}
 			else if(title.equals("Away Team")){
-				setAway((Team)att.att);
+				_awayTeam = att;
+				TeamGrouping canFace = new TeamGrouping(_t, "Away Can Face");
+				for(Team t : _t.getTeams().getMembers()){
+					if(t != _awayTeam.att && !_awayTeam.att.hasfacedBefore(t, _roundNum)){
+						canFace.addMember(t);
+					}
+				}
+				_homeTeam.setGrouping(canFace);
 			}
 			else if(title.equals("Head Ref")) _headRef = att;
 			else if(title.equals("Assistant Ref")) _assistantRef = att;

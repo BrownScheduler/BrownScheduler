@@ -11,13 +11,6 @@ public class TeamGrouping extends MyCategory<Team> {
 		super(name);
 		_t = t;
 	}
-	public TeamGrouping(Tournament t, String name, List<Team> teams) {
-		super(name);
-		_t = t;
-		for(Team te : teams){
-			this.addMember(te);
-		}
-	}
 
 	@Override
 	public Team getBlank() {

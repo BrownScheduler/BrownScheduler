@@ -1,0 +1,27 @@
+package roundrobin;
+
+import backbone.Round;
+
+public class ConstraintHandler {
+
+	private Tournament _t;
+	private int _roundNum;
+	public ConstraintHandler(Tournament tournament, int roundNum) {
+		_t = tournament;
+		_roundNum = roundNum;
+	}
+
+	public Round creatRound() {
+		Round r = new Round(Integer.toString(_t.getNextRoundInt()));
+		for(Team t : _t.getTeams().getMembers()){
+			Team otherTeam = null;
+			for(Team other : _t.getTeams().getMembers()){
+				if(other != t && t.hasfacedBefore(other, i)){
+					
+				}
+			}
+		}
+		return null;
+	}
+
+}
