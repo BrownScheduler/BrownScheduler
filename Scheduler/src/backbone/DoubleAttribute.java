@@ -32,5 +32,10 @@ public class DoubleAttribute extends Attribute {
 	public void setAttribute(double a) {
 		att = a;
 	}
+	
+	@Override
+	public String toString() {
+		return att.toString();
+	}
 
 }

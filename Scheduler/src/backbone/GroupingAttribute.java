@@ -6,11 +6,6 @@ import java.util.List;
 public class GroupingAttribute<T extends Unit> extends Attribute{
 
 	private Grouping<T> group;
-
-	public GroupingAttribute(String title) {
-		super(title);
-		group = null;
-	}
 	
 	public GroupingAttribute(String title, Grouping<T> group){
 		super(title);
@@ -40,5 +35,10 @@ public class GroupingAttribute<T extends Unit> extends Attribute{
 
 	public void deleteMember(T member) {
 		group.deleteMember(member);
+	}
+	
+	@Override
+	public String toString() {
+		return group.toString();
 	}
 }

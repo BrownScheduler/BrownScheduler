@@ -58,4 +58,9 @@ public class BooleanAttribute extends Attribute {
 	public void setAttribute(boolean a) {
 		att = a;
 	}
+	
+	@Override
+	public String toString() {
+		return Boolean.toString(att);
+	}
 }
