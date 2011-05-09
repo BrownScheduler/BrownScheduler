@@ -22,23 +22,24 @@ public class UnitPanel extends JPanel implements GUIConstants {
 
 	private MiddleEnd _middleEnd;
 	private JPanel _mainPanel, _buttonPanel, _tablePanel;
-	private Grouping _grouping;
+	private Grouping<Unit> _grouping;
 	
 	public UnitPanel(MiddleEnd m, Unit u) {
 		_middleEnd = m;
+		_grouping = u.getMemberOf();
 		_mainPanel = new JPanel();
 		_buttonPanel = new JPanel();
 		_tablePanel = new JPanel();
 		initialize(u, "Save Changes");
 	}
 	
-	public UnitPanel(MiddleEnd m, Unit u, Grouping g) {
+	public UnitPanel(MiddleEnd m, Unit u, Grouping<Unit> g) {
 		_middleEnd = m;
 		_grouping = g;
 		_mainPanel = new JPanel();
 		_buttonPanel = new JPanel();
 		_tablePanel = new JPanel();
-		initialize(u, "Save Changes to New Unit");
+		initialize(u, "Save Changes and Add Another New Unit");
 	}
 	
 	public void initialize(final Unit unit, String buttonstring) {
@@ -189,7 +190,27 @@ public class UnitPanel extends JPanel implements GUIConstants {
 				_middleEnd.repaintAll();
 			}
 		});
+		final JButton actuallydeletebutton = new JButton("Actually delete this unit");
+		actuallydeletebutton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				_mainPanel.removeAll();
+				_buttonPanel.removeAll();
+				_tablePanel.removeAll();
+				unit.deleteFromGrouping();
+				_middleEnd.repaintAll();
+			}
+		});
+		actuallydeletebutton.setVisible(false);
+		JButton deletebutton = new JButton("Delete this unit");
+		deletebutton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				actuallydeletebutton.setVisible(true);
+				_buttonPanel.repaint();
+			}
+		});
 		_buttonPanel.add(savebutton);
+		_buttonPanel.add(deletebutton);
+		_buttonPanel.add(actuallydeletebutton);
 		this.add(_buttonPanel);
 		this.add(Box.createRigidArea(new Dimension(10, 10)));
 		this.add(_tablePanel);

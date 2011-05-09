@@ -215,57 +215,6 @@ public class App implements GUIConstants {
 	}
 	
 	/**
-	 * This method initializes jMenu	
-	 * 	
-	 * @return javax.swing.JMenu	
-	 */
-	public JMenu getOptionsMenu() {
-		if (_optionsMenu == null) {
-			_optionsMenu = new JMenu();
-			_optionsMenu.setText("Options");
-			_optionsMenu.add(getProgramOptionsMenuItem());
-			_optionsMenu.add(getPluginOptionsMenuItem());
-		}
-		return _optionsMenu;
-	}
-	
-	/**
-	 * This method initializes jMenu	
-	 * 	
-	 * @return javax.swing.JMenu	
-	 */
-	public JMenu getViewMenu() {
-		if (_viewMenu == null) {
-			_viewMenu = new JMenu();
-			_viewMenu.setText("View");
-			_viewMenu.add(getViewInputMenuItem());
-			_viewMenu.add(getViewManagementMenuItem());
-			ButtonGroup viewgroup = new ButtonGroup();
-			viewgroup.add(getViewInputMenuItem());
-			viewgroup.add(getViewManagementMenuItem());
-		}
-		return _viewMenu;
-	}
-	
-	/**
-	 * This method initializes jMenu	
-	 * 	
-	 * @return javax.swing.JMenu	
-	 */
-	public JMenu getEditMenu() {
-		if (_editMenu == null) {
-			_editMenu = new JMenu();
-			_editMenu.setText("Edit");
-			_editMenu.add(getCreateRoundMenuItem());
-			List<Grouping> groupings = _middleEnd.getTournament().getCategories();
-			for (Grouping<Unit> g : groupings) {
-				_editMenu.add(createEditMenuItem(g));
-			}
-		}
-		return _editMenu;
-	}
-	
-	/**
 	 * This method initializes jMenuItem	
 	 * 	
 	 * @return javax.swing.JMenuItem	
@@ -421,6 +370,21 @@ public class App implements GUIConstants {
 	}
 	
 	/**
+	 * This method initializes jMenu	
+	 * 	
+	 * @return javax.swing.JMenu	
+	 */
+	public JMenu getOptionsMenu() {
+		if (_optionsMenu == null) {
+			_optionsMenu = new JMenu();
+			_optionsMenu.setText("Options");
+			_optionsMenu.add(getProgramOptionsMenuItem());
+			_optionsMenu.add(getPluginOptionsMenuItem());
+		}
+		return _optionsMenu;
+	}
+	
+	/**
 	 * This method initializes jMenuItem	
 	 * 	
 	 * @return javax.swing.JMenuItem	
@@ -519,6 +483,24 @@ public class App implements GUIConstants {
 		}
 		return _programOptionsContentPane;
 	}
+	
+	/**
+	 * This method initializes jMenu	
+	 * 	
+	 * @return javax.swing.JMenu	
+	 */
+	public JMenu getViewMenu() {
+		if (_viewMenu == null) {
+			_viewMenu = new JMenu();
+			_viewMenu.setText("View");
+			_viewMenu.add(getViewInputMenuItem());
+			_viewMenu.add(getViewManagementMenuItem());
+			ButtonGroup viewgroup = new ButtonGroup();
+			viewgroup.add(getViewInputMenuItem());
+			viewgroup.add(getViewManagementMenuItem());
+		}
+		return _viewMenu;
+	}
 
 	/**
 	 * This method initializes jMenuItem	
@@ -565,6 +547,24 @@ public class App implements GUIConstants {
 	}
 	
 	/**
+	 * This method initializes jMenu	
+	 * 	
+	 * @return javax.swing.JMenu	
+	 */
+	public JMenu getEditMenu() {
+		if (_editMenu == null) {
+			_editMenu = new JMenu();
+			_editMenu.setText("Edit");
+			_editMenu.add(getCreateRoundMenuItem());
+			List<Grouping> groupings = _middleEnd.getTournament().getCategories();
+			for (Grouping<Unit> g : groupings) {
+				_editMenu.add(createEditMenuItem(g));
+			}
+		}
+		return _editMenu;
+	}
+	
+	/**
 	 * This method initializes jMenuItem	
 	 * 	
 	 * @return javax.swing.JMenuItem	
@@ -592,7 +592,7 @@ public class App implements GUIConstants {
 		item.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				getInputPanel().getAddingPanel().setAddPanel(g);
-				_middleEnd.repaintAll();
+				getViewInputMenuItem().doClick();
 			}
 		});
 		return item;

@@ -7,8 +7,8 @@ import java.awt.Dimension;
  */
 public interface GUIConstants {
 
-	int DEFAULT_WIDTH = 800;
-	int DEFAULT_HEIGHT = 600;
+	int DEFAULT_WIDTH = 900;
+	int DEFAULT_HEIGHT = 700;
 	Dimension DEFAULT_SIZE = new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 	
 	int MIN_WIDTH = 400;
@@ -19,7 +19,7 @@ public interface GUIConstants {
 	int TREE_HEIGHT = 400;
 	Dimension TREE_SIZE = new Dimension(TREE_WIDTH, TREE_HEIGHT);
 	
-	int ADDINGPANEL_WIDTH = 600;
+	int ADDINGPANEL_WIDTH = 700;
 	int ADDINGPANEL_HEIGHT = 400;
 	Dimension ADDINGPANEL_SIZE = new Dimension(ADDINGPANEL_WIDTH, ADDINGPANEL_HEIGHT);
 	
@@ -27,11 +27,11 @@ public interface GUIConstants {
 	int INPUTTABLE_HEIGHT = 400;
 	Dimension INPUTTABLE_SIZE = new Dimension(INPUTTABLE_WIDTH, INPUTTABLE_HEIGHT);
 	
-	int PAIRINGPANEL_WIDTH = 800;
+	int PAIRINGPANEL_WIDTH = 900;
 	int PAIRINGPANEL_HEIGHT = 300;
 	Dimension PAIRINGPANEL_SIZE = new Dimension(PAIRINGPANEL_WIDTH, PAIRINGPANEL_HEIGHT);
 	
-	int TOOLBAR_WIDTH = 800;
+	int TOOLBAR_WIDTH = 900;
 	int TOOLBAR_HEIGHT = 50;
 	Dimension TOOLBAR_SIZE = new Dimension(TOOLBAR_WIDTH, TOOLBAR_HEIGHT);
 	
@@ -47,8 +47,8 @@ public interface GUIConstants {
 	int SMALLSPACING_Y = 10;
 	Dimension SMALLSPACING_SIZE = new Dimension(SMALLSPACING_X, SMALLSPACING_Y);
 	
-	int BIGSPACING_X = 100;
-	int BIGSPACING_Y = 100;
+	int BIGSPACING_X = 50;
+	int BIGSPACING_Y = 50;
 	Dimension BIGSPACING_SIZE = new Dimension(BIGSPACING_X, BIGSPACING_Y);
 	
 	int DEFAULT_TABLE_BLANK_ROWS = 1;
