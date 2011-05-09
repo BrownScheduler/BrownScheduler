@@ -21,7 +21,6 @@ public class TeamGrouping extends MyCategory<Team> {
 
 	@Override
 	public Team getBlank() {
-		// TODO Auto-generated method stub
 		return new Team(_t, "");
 	}
 
