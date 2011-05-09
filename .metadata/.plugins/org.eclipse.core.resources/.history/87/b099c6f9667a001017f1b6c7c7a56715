@@ -51,10 +51,6 @@ public class BooleanAttribute extends Attribute {
 		return att;
 	}
 	
-	/**
-	 * 
-	 * @param a the boolean value to set
-	 */
 	public void setAttribute(boolean a) {
 		att = a;
 	}
