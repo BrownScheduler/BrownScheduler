@@ -2,21 +2,20 @@ package gui;
 
 import middleend.*;
 import backbone.*;
-
-import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Component;
 import java.awt.Event;
 import java.awt.BorderLayout;
-import javax.swing.SwingUtilities;
 import javax.swing.KeyStroke;
 import java.awt.Point;
-import java.util.Collection;
 import java.util.List;
-
 import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -27,30 +26,29 @@ import javax.swing.JMenu;
 import javax.swing.JFrame;
 import javax.swing.JDialog;
 import javax.swing.JRadioButtonMenuItem;
-import javax.swing.JScrollPane;
+import javax.swing.JToolBar;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class App implements GUIConstants {
 
 	private MiddleEnd _middleEnd;
 	private JFrame _jFrame;
+	private JToolBar _toolbar;
+	private JPanel _mainContentAndToolbarPane;
+	private JComponent _mainContentPane;
 	private InputPanel _inputPane;
-	private JScrollPane _managementScrollPane;
 	private ManagementPanel _managementPane;
 	private JMenuBar _jJMenuBar;
 	private JMenu _fileMenu;
-	private JMenuItem _pluginOptionsMenuItem;
-	private JMenuItem _programOptionsMenuItem;
 	private JMenuItem _printMenuItem;
 	private JMenuItem _openPluginMenuItem;
 	private JMenuItem _openTournamentMenuItem;
 	private JMenuItem _saveMenuItem;
 	private JMenuItem _exitMenuItem;
+	private JMenu _optionsMenu;
+	private JMenuItem _programOptionsMenuItem;
+	private JMenuItem _pluginOptionsMenuItem;
 	private JMenu _editMenu;
-	private JMenuItem _cutMenuItem;
-	private JMenuItem _copyMenuItem;
-	private JMenuItem _pasteMenuItem;
-	private JMenu _addMenu;
 	private JMenu _viewMenu;
 	private JRadioButtonMenuItem _viewInputMenuItem;
 	private JRadioButtonMenuItem _viewManagementMenuItem;
@@ -68,6 +66,7 @@ public class App implements GUIConstants {
 	
 	public App(MiddleEnd me) {
 		_middleEnd = me;
+		this.getJFrame().setVisible(true);
 	}
 	
 	public MiddleEnd getMiddleEnd() {
@@ -86,11 +85,74 @@ public class App implements GUIConstants {
 			_jFrame.setJMenuBar(getJJMenuBar());
 			_jFrame.setSize(DEFAULT_SIZE);
 			_jFrame.setMinimumSize(MIN_SIZE);
-			_jFrame.setContentPane(getInputPanel());
+			getViewInputMenuItem().doClick();
+			_jFrame.setContentPane(getMainContentAndToolbarPane());
 			getViewInputMenuItem().setSelected(true);
 			_jFrame.setTitle("Tournament Scheduler v1.0");
 		}
 		return _jFrame;
+	}
+	
+	/**
+	 * This method initializes JToolBar
+	 * 
+	 * @return JToolBar
+	 */
+	public JToolBar getToolbar() {
+		if (_toolbar == null) {
+			_toolbar = new JToolBar();
+			_toolbar.setSize(TOOLBAR_SIZE);
+			_toolbar.setMinimumSize(TOOLBAR_SIZE);
+			_toolbar.setMaximumSize(TOOLBAR_SIZE);
+			for (int i = 0; i < getEditMenu().getMenuComponentCount(); i++) {
+				Component comp = getEditMenu().getMenuComponent(i);
+				if (comp instanceof JMenuItem) {
+					_toolbar.add(createButtonFromMenuItem((JMenuItem) comp));
+					_toolbar.add(Box.createRigidArea(SMALLSPACING_SIZE));
+				}
+			}
+		}
+		return _toolbar;
+	}
+	
+	/**
+	 * Creates a JButton from a JMenuItem
+	 * 
+	 * @param JMenuItem
+	 * @return JButton
+	 */
+	public JButton createButtonFromMenuItem(final JMenuItem item) {
+		JButton button = new JButton(item.getText());
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				item.doClick();
+			}
+		});
+		return button;
+	}
+	
+	public JPanel getMainContentAndToolbarPane() {
+		if (_mainContentAndToolbarPane == null) {
+			_mainContentAndToolbarPane = new JPanel();
+			_mainContentAndToolbarPane.setLayout(new BorderLayout());
+			_mainContentAndToolbarPane.add(getToolbar(), BorderLayout.NORTH);
+			_mainContentAndToolbarPane.add(getMainContentPane(), BorderLayout.CENTER);
+		}
+		return _mainContentAndToolbarPane;
+	}
+	
+	public void setMainContentPane(JComponent pane) {
+		getMainContentPane().removeAll();
+		getMainContentPane().add(pane, BorderLayout.CENTER);
+	}
+	
+	public JComponent getMainContentPane() {
+		if (_mainContentPane == null) {
+			_mainContentPane = new JPanel();
+			_mainContentPane.setLayout(new BorderLayout());
+			_mainContentPane.add(getInputPanel(), BorderLayout.CENTER);
+		}
+		return _mainContentPane;
 	}
 	
 	/**
@@ -103,18 +165,6 @@ public class App implements GUIConstants {
 			_inputPane = new InputPanel(getMiddleEnd());
 		}
 		return _inputPane;
-	}
-	
-	/**
-	 * This method initializes JScrollPanel
-	 * 
-	 * @return JScrollPanel
-	 */
-	public JScrollPane getManagementScrollPanel() {
-		if (_managementScrollPane == null) {
-			_managementScrollPane = new JScrollPane(getManagementPanel());
-		}
-		return _managementScrollPane;
 	}
 	
 	/**
@@ -138,9 +188,9 @@ public class App implements GUIConstants {
 		if (_jJMenuBar == null) {
 			_jJMenuBar = new JMenuBar();
 			_jJMenuBar.add(getFileMenu());
-			_jJMenuBar.add(getEditMenu());
+			_jJMenuBar.add(getOptionsMenu());
 			_jJMenuBar.add(getViewMenu());
-			_jJMenuBar.add(getAddMenu());
+			_jJMenuBar.add(getEditMenu());
 			_jJMenuBar.add(getHelpMenu());
 		}
 		return _jJMenuBar;
@@ -155,96 +205,13 @@ public class App implements GUIConstants {
 		if (_fileMenu == null) {
 			_fileMenu = new JMenu();
 			_fileMenu.setText("File");
-			_fileMenu.add(getOpenPluginMenuItem());
+//			_fileMenu.add(getOpenPluginMenuItem()); //TODO:Open plugin menu, or not?
 			_fileMenu.add(getOpenTournamentMenuItem());
-			_fileMenu.add(getPluginOptionsMenuItem());
-			_fileMenu.add(getProgramOptionsMenuItem());
 			_fileMenu.add(getPrintMenuItem());
 			_fileMenu.add(getSaveMenuItem());
 			_fileMenu.add(getExitMenuItem());
 		}
 		return _fileMenu;
-	}
-
-	/**
-	 * This method initializes jMenu	
-	 * 	
-	 * @return javax.swing.JMenu	
-	 */
-	public JMenu getEditMenu() {
-		if (_editMenu == null) {
-			_editMenu = new JMenu();
-			_editMenu.setText("Edit");
-			_editMenu.add(getCutMenuItem());
-			_editMenu.add(getCopyMenuItem());
-			_editMenu.add(getPasteMenuItem());
-		}
-		return _editMenu;
-	}
-	
-	/**
-	 * This method initializes jMenu	
-	 * 	
-	 * @return javax.swing.JMenu	
-	 */
-	public JMenu getViewMenu() {
-		if (_viewMenu == null) {
-			_viewMenu = new JMenu();
-			_viewMenu.setText("View");
-			_viewMenu.add(getViewInputMenuItem());
-			_viewMenu.add(getViewManagementMenuItem());
-			ButtonGroup viewgroup = new ButtonGroup();
-			viewgroup.add(getViewInputMenuItem());
-			viewgroup.add(getViewManagementMenuItem());
-		}
-		return _viewMenu;
-	}
-	
-	/**
-	 * This method initializes jMenu	
-	 * 	
-	 * @return javax.swing.JMenu	
-	 */
-	public JMenu getAddMenu() {
-		if (_addMenu == null) {
-			_addMenu = new JMenu();
-			_addMenu.setText("Add");
-			List<Grouping> groupings = _middleEnd.getTournament().getCategories();
-			for (Grouping<Unit> g : groupings) {
-				_addMenu.add(createAddMenuItem(g));
-			}
-		}
-		return _addMenu;
-	}
-	
-	/**
-	 * This method initializes jMenuItem	
-	 * 	
-	 * @return javax.swing.JMenuItem	
-	 */
-	public JMenuItem createAddMenuItem(final Grouping<Unit> g) {
-		JMenuItem item = new JMenuItem();
-		item.setText("New " + g.getName() + "...");
-		item.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				getInputPanel().getAddingPanel().setAddPanel(g);
-			}
-		});
-		return item;
-	}
-
-	/**
-	 * This method initializes jMenu	
-	 * 	
-	 * @return javax.swing.JMenu	
-	 */
-	public JMenu getHelpMenu() {
-		if (_helpMenu == null) {
-			_helpMenu = new JMenu();
-			_helpMenu.setText("Help");
-			_helpMenu.add(getAboutMenuItem());
-		}
-		return _helpMenu;
 	}
 	
 	/**
@@ -273,106 +240,6 @@ public class App implements GUIConstants {
 			});
 		}
 		return _saveMenuItem;
-	}
-	
-	/**
-	 * This method initializes jMenuItem	
-	 * 	
-	 * @return javax.swing.JMenuItem	
-	 */
-	public JMenuItem getPluginOptionsMenuItem() {
-		if (_pluginOptionsMenuItem == null) {
-			_pluginOptionsMenuItem = new JMenuItem();
-			_pluginOptionsMenuItem.setText("Plugin Options...");
-			_pluginOptionsMenuItem.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					JDialog pluginOptionsDialog = getPluginOptionsDialog();
-					pluginOptionsDialog.pack();
-					Point loc = getJFrame().getLocation();
-					loc.translate(20, 20);
-					pluginOptionsDialog.setLocation(loc);
-					pluginOptionsDialog.setVisible(true);
-				}
-			});
-		}
-		return _pluginOptionsMenuItem;
-	}
-	
-	/**
-	 * This method initializes _pluginOptionsPane	
-	 * 	
-	 * @return javax.swing.JDialog	
-	 */
-	private JDialog getPluginOptionsDialog() {
-		if (_pluginOptionsDialog == null) {
-			_pluginOptionsDialog = new JDialog(getJFrame());
-			_pluginOptionsDialog.setTitle("Plugin Options");
-			_pluginOptionsDialog.setContentPane(getPluginOptionsContentPane());
-		}
-		return _pluginOptionsDialog;
-	}
-
-	/**
-	 * This method initializes _pluginOptionsContentPane	
-	 * 	
-	 * @return javax.swing.JPanel	
-	 */
-	private JPanel getPluginOptionsContentPane() {
-		if (_pluginOptionsContentPane == null) {
-			_pluginOptionsContentPane = new JPanel();
-			_pluginOptionsContentPane.setLayout(new BorderLayout());
-		}
-		return _pluginOptionsContentPane;
-	}
-	
-	/**
-	 * This method initializes jMenuItem	
-	 * 	
-	 * @return javax.swing.JMenuItem	
-	 */
-	public JMenuItem getProgramOptionsMenuItem() {
-		if (_programOptionsMenuItem == null) {
-			_programOptionsMenuItem = new JMenuItem();
-			_programOptionsMenuItem.setText("Program Options...");
-			_programOptionsMenuItem.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					JDialog programOptionsDialog = getProgramOptionsDialog();
-					programOptionsDialog.pack();
-					Point loc = getJFrame().getLocation();
-					loc.translate(20, 20);
-					programOptionsDialog.setLocation(loc);
-					programOptionsDialog.setVisible(true);
-				}
-			});
-		}
-		return _programOptionsMenuItem;
-	}
-	
-	/**
-	 * This method initializes _optionsDialog	
-	 * 	
-	 * @return javax.swing.JDialog	
-	 */
-	private JDialog getProgramOptionsDialog() {
-		if (_programOptionsDialog == null) {
-			_programOptionsDialog = new JDialog(getJFrame());
-			_programOptionsDialog.setTitle("Program Options");
-			_programOptionsDialog.setContentPane(getProgramOptionsContentPane());
-		}
-		return _programOptionsDialog;
-	}
-
-	/**
-	 * This method initializes _optionsContentPane	
-	 * 	
-	 * @return javax.swing.JPanel	
-	 */
-	private JPanel getProgramOptionsContentPane() {
-		if (_programOptionsContentPane == null) {
-			_programOptionsContentPane = new JPanel();
-			_programOptionsContentPane.setLayout(new BorderLayout());
-		}
-		return _programOptionsContentPane;
 	}
 	
 	/**
@@ -501,50 +368,138 @@ public class App implements GUIConstants {
 		}
 		return _exitMenuItem;
 	}
-
+	
+	/**
+	 * This method initializes jMenu	
+	 * 	
+	 * @return javax.swing.JMenu	
+	 */
+	public JMenu getOptionsMenu() {
+		if (_optionsMenu == null) {
+			_optionsMenu = new JMenu();
+			_optionsMenu.setText("Options");
+			_optionsMenu.add(getProgramOptionsMenuItem());
+			_optionsMenu.add(getPluginOptionsMenuItem());
+		}
+		return _optionsMenu;
+	}
+	
 	/**
 	 * This method initializes jMenuItem	
 	 * 	
 	 * @return javax.swing.JMenuItem	
 	 */
-	public JMenuItem getCutMenuItem() {
-		if (_cutMenuItem == null) {
-			_cutMenuItem = new JMenuItem();
-			_cutMenuItem.setText("Cut");
-			_cutMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X,
-					Event.CTRL_MASK, true));
+	public JMenuItem getPluginOptionsMenuItem() {
+		if (_pluginOptionsMenuItem == null) {
+			_pluginOptionsMenuItem = new JMenuItem();
+			_pluginOptionsMenuItem.setText("Plugin Options...");
+			_pluginOptionsMenuItem.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					JDialog pluginOptionsDialog = getPluginOptionsDialog();
+					pluginOptionsDialog.pack();
+					Point loc = getJFrame().getLocation();
+					loc.translate(20, 20);
+					pluginOptionsDialog.setLocation(loc);
+					pluginOptionsDialog.setVisible(true);
+				}
+			});
 		}
-		return _cutMenuItem;
+		return _pluginOptionsMenuItem;
+	}
+	
+	/**
+	 * This method initializes _pluginOptionsPane	
+	 * 	
+	 * @return javax.swing.JDialog	
+	 */
+	private JDialog getPluginOptionsDialog() {
+		if (_pluginOptionsDialog == null) {
+			_pluginOptionsDialog = new JDialog(getJFrame());
+			_pluginOptionsDialog.setTitle("Plugin Options");
+			_pluginOptionsDialog.setContentPane(getPluginOptionsContentPane());
+		}
+		return _pluginOptionsDialog;
 	}
 
 	/**
-	 * This method initializes jMenuItem	
+	 * This method initializes _pluginOptionsContentPane	
 	 * 	
-	 * @return javax.swing.JMenuItem	
+	 * @return javax.swing.JPanel	
 	 */
-	public JMenuItem getCopyMenuItem() {
-		if (_copyMenuItem == null) {
-			_copyMenuItem = new JMenuItem();
-			_copyMenuItem.setText("Copy");
-			_copyMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C,
-					Event.CTRL_MASK, true));
+	private JPanel getPluginOptionsContentPane() {
+		if (_pluginOptionsContentPane == null) {
+			_pluginOptionsContentPane = new JPanel();
+			_pluginOptionsContentPane.setLayout(new BorderLayout());
 		}
-		return _copyMenuItem;
+		return _pluginOptionsContentPane;
 	}
-
+	
 	/**
 	 * This method initializes jMenuItem	
 	 * 	
 	 * @return javax.swing.JMenuItem	
 	 */
-	public JMenuItem getPasteMenuItem() {
-		if (_pasteMenuItem == null) {
-			_pasteMenuItem = new JMenuItem();
-			_pasteMenuItem.setText("Paste");
-			_pasteMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V,
-					Event.CTRL_MASK, true));
+	public JMenuItem getProgramOptionsMenuItem() {
+		if (_programOptionsMenuItem == null) {
+			_programOptionsMenuItem = new JMenuItem();
+			_programOptionsMenuItem.setText("Program Options...");
+			_programOptionsMenuItem.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					JDialog programOptionsDialog = getProgramOptionsDialog();
+					programOptionsDialog.pack();
+					Point loc = getJFrame().getLocation();
+					loc.translate(20, 20);
+					programOptionsDialog.setLocation(loc);
+					programOptionsDialog.setVisible(true);
+				}
+			});
 		}
-		return _pasteMenuItem;
+		return _programOptionsMenuItem;
+	}
+	
+	/**
+	 * This method initializes _optionsDialog	
+	 * 	
+	 * @return javax.swing.JDialog	
+	 */
+	private JDialog getProgramOptionsDialog() {
+		if (_programOptionsDialog == null) {
+			_programOptionsDialog = new JDialog(getJFrame());
+			_programOptionsDialog.setTitle("Program Options");
+			_programOptionsDialog.setContentPane(getProgramOptionsContentPane());
+		}
+		return _programOptionsDialog;
+	}
+
+	/**
+	 * This method initializes _optionsContentPane	
+	 * 	
+	 * @return javax.swing.JPanel	
+	 */
+	private JPanel getProgramOptionsContentPane() {
+		if (_programOptionsContentPane == null) {
+			_programOptionsContentPane = new JPanel();
+			_programOptionsContentPane.setLayout(new BorderLayout());
+		}
+		return _programOptionsContentPane;
+	}
+	
+	/**
+	 * This method initializes jMenu	
+	 * 	
+	 * @return javax.swing.JMenu	
+	 */
+	public JMenu getViewMenu() {
+		if (_viewMenu == null) {
+			_viewMenu = new JMenu();
+			_viewMenu.setText("View");
+			_viewMenu.add(getViewInputMenuItem());
+			_viewMenu.add(getViewManagementMenuItem());
+			ButtonGroup viewgroup = new ButtonGroup();
+			viewgroup.add(getViewInputMenuItem());
+			viewgroup.add(getViewManagementMenuItem());
+		}
+		return _viewMenu;
 	}
 
 	/**
@@ -556,12 +511,13 @@ public class App implements GUIConstants {
 		if (_viewInputMenuItem == null) {
 			_viewInputMenuItem = new JRadioButtonMenuItem();
 			_viewInputMenuItem.setText("View Input Panel");
-			_viewInputMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_I,
-					Event.CTRL_MASK, true));
+			_viewInputMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_I,	Event.CTRL_MASK, true));
 			_viewInputMenuItem.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					getInputPanel().setSize(_jFrame.getContentPane().getSize());
-					_jFrame.setContentPane(getInputPanel());
+					setMainContentPane(getInputPanel());
+					getMainContentAndToolbarPane().repaint();
+					getInputPanel().repaintAll();
 				}
 			});
 		}
@@ -577,16 +533,83 @@ public class App implements GUIConstants {
 		if (_viewManagementMenuItem == null) {
 			_viewManagementMenuItem = new JRadioButtonMenuItem();
 			_viewManagementMenuItem.setText("View Management Panel");
-			_viewManagementMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_M,
-					Event.CTRL_MASK, true));
+			_viewManagementMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_M, Event.CTRL_MASK, true));
 			_viewManagementMenuItem.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					getManagementScrollPanel().setSize(_jFrame.getContentPane().getSize());
-					_jFrame.setContentPane(getManagementScrollPanel());
+					getManagementPanel().setSize(_jFrame.getSize());
+					setMainContentPane(getManagementPanel());
+					getMainContentAndToolbarPane().repaint();
+					getManagementPanel().repaintAll();
 				}
 			});
 		}
 		return _viewManagementMenuItem;
+	}
+	
+	/**
+	 * This method initializes jMenu	
+	 * 	
+	 * @return javax.swing.JMenu	
+	 */
+	public JMenu getEditMenu() {
+		if (_editMenu == null) {
+			_editMenu = new JMenu();
+			_editMenu.setText("Edit");
+			_editMenu.add(getCreateRoundMenuItem());
+			List<Grouping> groupings = _middleEnd.getTournament().getCategories();
+			for (Grouping<Unit> g : groupings) {
+				_editMenu.add(createEditMenuItem(g));
+			}
+		}
+		return _editMenu;
+	}
+	
+	/**
+	 * This method initializes jMenuItem	
+	 * 	
+	 * @return javax.swing.JMenuItem	
+	 */
+	public JMenuItem getCreateRoundMenuItem() {
+		JMenuItem item = new JMenuItem();
+		item.setText("Create new round from existing units...");
+		item.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				_middleEnd.getTournament().createNextRound();
+				getViewManagementMenuItem().doClick();
+			}
+		});
+		return item;
+	}
+	
+	/**
+	 * This method initializes jMenuItem	
+	 * 	
+	 * @return javax.swing.JMenuItem	
+	 */
+	public JMenuItem createEditMenuItem(final Grouping<Unit> g) {
+		JMenuItem item = new JMenuItem();
+		item.setText("New " + g.getName() + "...");
+		item.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				getInputPanel().getAddingPanel().setAddPanel(g);
+				getViewInputMenuItem().doClick();
+			}
+		});
+		return item;
+	}
+	
+	/**
+	 * This method initializes jMenu	
+	 * 	
+	 * @return javax.swing.JMenu	
+	 */
+	public JMenu getHelpMenu() {
+		if (_helpMenu == null) {
+			_helpMenu = new JMenu();
+			_helpMenu.setText("Help");
+			_helpMenu.add(getAboutMenuItem());
+		}
+		return _helpMenu;
 	}
 	
 	/**
@@ -653,6 +676,15 @@ public class App implements GUIConstants {
 			_aboutVersionLabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		}
 		return _aboutVersionLabel;
+	}
+	
+	/**
+	 * Repaints all the important components.
+	 */
+	public void repaintAll() {
+		getInputPanel().repaintAll();
+		getManagementPanel().repaintAll();
+		getMainContentAndToolbarPane().repaint();
 	}
 
 	/**

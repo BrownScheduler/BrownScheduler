@@ -1,9 +1,11 @@
 package plugin1;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 
 import backbone.Attribute;
+import backbone.Grouping;
 import backbone.GroupingAttribute;
 import backbone.StringAttribute;
 import backbone.Unit;
@@ -19,12 +21,15 @@ import backbone.Unit;
 public class Judge implements Unit{
 	
 	
-	LinkedList<Team> _conflictedTeams;
+	HashSet<Team> _conflictedTeams;
+	private Grouping<Unit> _category;
 	private String _name;
+	private Tourney _t;
 	
-	public Judge(String name) {
+	public Judge(Tourney t, String name) {
 		this._name = name;
-		_conflictedTeams = new LinkedList<Team>();
+		_conflictedTeams = new HashSet<Team>();
+		_t = t;
 	}
 
 	@Override
@@ -33,7 +38,7 @@ public class Judge implements Unit{
 		LinkedList<Attribute> atts = new LinkedList<Attribute>();
 		StringAttribute name = new StringAttribute("Name", this._name);
 		GroupingAttribute<Team> conflicts = new GroupingAttribute<Team>("Conflicted Teams", 
-				new TeamGrouping("Conflicted Teams", _conflictedTeams));
+				new TeamGrouping("Conflicted Teams", new LinkedList<Team>(_conflictedTeams)));
 		atts.add(name);
 		atts.add(conflicts);
 		return atts;
@@ -41,6 +46,10 @@ public class Judge implements Unit{
 	
 	public String getName(){
 		return this._name;
+	}
+	
+	public boolean hasConflict(Team t){
+		return _conflictedTeams.contains(t);
 	}
 
 	@Override
@@ -50,8 +59,50 @@ public class Judge implements Unit{
 			this._name = att.getAttribute();
 		}
 		else if(attribute.getType() == Attribute.Type.GROUPING){
-			this._conflictedTeams = new LinkedList<Team>(((GroupingAttribute<Team>)attribute).getMembers());
+			this._conflictedTeams = new HashSet<Team>(((GroupingAttribute<Team>)attribute).getMembers());
+			for(Team t : _conflictedTeams){
+				if(!_t.getCategories().get(0).getMembers().contains(t)){
+					_t.getCategories().get(0).addMember(t);
+				}
+			}
 		}
+		
+	}
+	
+	public void addConflictedTeam(Team t){
+		this._conflictedTeams.add(t);
+	}
+
+	public String toString(){
+		String r = "Name: " + this._name;
+		r += " Conflicts: ";
+		for(Team t : this._conflictedTeams){
+			r += t.getName() + "; ";
+		}
+		
+		return r;
+	}
+
+	@Override
+	public Grouping<Unit> getMemberOf() {
+		return this._category;
+	}
+
+	@Override
+	public void setMemberOf(Grouping<Unit> g) {
+		this._category = g;
+		
+	}
+
+	@Override
+	public boolean deleteFromGrouping() {
+		return _category.deleteMember(this);
+		
+	}
+
+	@Override
+	public void setName(String name) {
+		this._name = name;
 		
 	}
 	

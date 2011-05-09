@@ -4,8 +4,10 @@ import java.util.List;
 
 public class JudgeGrouping extends MyCategory<Judge> {
 
-	public JudgeGrouping(String name) {
+	private Tourney _t;
+	public JudgeGrouping(Tourney t, String name) {
 		super(name);
+		_t = t;
 	}
 	public JudgeGrouping(String name, List<Judge> judges){
 		super(name, judges);
@@ -13,7 +15,7 @@ public class JudgeGrouping extends MyCategory<Judge> {
 
 	@Override
 	public Judge getBlank() {
-		return new Judge(null);
+		return new Judge(_t, "");
 	}
 
 }

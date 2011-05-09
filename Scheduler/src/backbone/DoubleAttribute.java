@@ -6,7 +6,7 @@ public class DoubleAttribute extends Attribute {
 	
 	public DoubleAttribute(String title){
 		super(title);
-		this.att = null;
+		this.att = 0.0;
 	}
 	
 	public DoubleAttribute(String title, Double att){

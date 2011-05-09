@@ -6,6 +6,7 @@ import backbone.*;
 
 public class Team implements CompetitiveUnit {
 	
+	private Grouping<Unit> _category;
 	private String _name;
 	private int _wins;
 	public Team(String name){
@@ -15,6 +16,10 @@ public class Team implements CompetitiveUnit {
 	
 	public void addWin(){
 		_wins++;
+	}
+	
+	public int getWins(){
+		return _wins;
 	}
 	
 	public void setWins(int i){
@@ -55,5 +60,34 @@ public class Team implements CompetitiveUnit {
 		else if(t == Attribute.Type.STRING)
 			setStringAttribute((StringAttribute)attribute);
 	}
+	
+	public String toString(){
+		String r = "Name: " + this._name;
+		r += " Wins: " + String.valueOf(this._wins);
+		return r;
+	}
+
+	@Override
+	public Grouping<Unit> getMemberOf() {
+		return _category;
+	}
+
+	@Override
+	public void setMemberOf(Grouping<Unit> g) {
+		this._category = g;
+		
+	}
+
+	@Override
+	public boolean deleteFromGrouping() {
+		return _category.deleteMember(this);
+	}
+
+	@Override
+	public void setName(String name) {
+		this._name = name;
+		
+	}
+
 
 }

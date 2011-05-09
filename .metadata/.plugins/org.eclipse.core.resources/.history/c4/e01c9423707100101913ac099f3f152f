@@ -1,7 +1,0 @@
-package plugin1;
-
-import backbone.Grouping;
-
-public class ConflictedTeams extends Grouping<T> {
-
-}

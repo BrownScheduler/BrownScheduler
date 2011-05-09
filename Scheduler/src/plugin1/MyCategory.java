@@ -8,7 +8,7 @@ import backbone.Unit;
 
 public abstract class MyCategory<T extends Unit> implements Grouping<T> {
 
-	private String _name;
+	protected String _name;
 	private List<T> _members;
 	
 	public MyCategory(String name){
@@ -24,7 +24,12 @@ public abstract class MyCategory<T extends Unit> implements Grouping<T> {
 	@Override
 	public void addMember(T member) {
 		_members.add(member);
+		member.setMemberOf((Grouping<Unit>) this);
 		
+	}
+	
+	public void addMemberDown(T member){
+		_members.add(member);
 	}
 
 	@Override
@@ -43,6 +48,11 @@ public abstract class MyCategory<T extends Unit> implements Grouping<T> {
 	public boolean deleteMember(T member) {
 		return _members.remove(member);
 		
+	}
+	
+	@Override
+	public void clear(){
+		this._members.clear();
 	}
 
 }

@@ -7,6 +7,8 @@ public class StringAttribute extends Attribute{
 	//
 	public StringAttribute(String title, String val) {
 		super(title);
+		if (val == null)
+			val = "";
 		this.value = val;
 	}
 

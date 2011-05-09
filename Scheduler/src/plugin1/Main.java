@@ -48,8 +48,9 @@ public class Main {
 		CSVIO.writeGrouping("blah2.csv", t.getCategories().get(1));
 		
 		MyRound r = t.createNextRound();
-		System.out.println(t.getCurrentRound().toString());
+		//System.out.println(t.getCurrentRound().toString());
 		
+<<<<<<< HEAD
 		
 		
 		
@@ -73,6 +74,28 @@ public class Main {
 		MyRound r2 = t.createNextRound();
 		System.out.println(t.getCurrentRound().toString());
 	
+=======
+		//MyRound r1 = t.getCurrentRound();
+		//ArrayList<Pairing> r1Pairs = r1.getPairings();
+		//Pairing p11 = r1Pairs.get(0);
+		System.out.print("Is the current round finished? ");
+		//System.out.println(r1.isFinished());
+		//p11.setAttribute(new UnitAttribute<Team>("Winner", 
+				//(Team)((UnitAttribute<Team>)p11.getAttributes().get(0)).att));
+		//Pairing p12 = r1Pairs.get(1);
+		//p12.setAttribute(new UnitAttribute<Team>("Winner", 
+				//(Team)((UnitAttribute<Team>)p12.getAttributes().get(1)).att));
+		
+		//System.out.print("Is round 1 finished? ");
+		//System.out.println(r.isFinished());
+		//System.out.print("Is the current round finished? ");
+		//System.out.println(r1.isFinished());
+		
+		//System.out.println(r1);
+		//MyRound r2 = t.createNextRound();
+		//System.out.println(t.getCurrentRound().toString());
+		
+>>>>>>> b42f2d1e8360de210a2a83bea4c2b77666cb0c84
 	}
 
 }

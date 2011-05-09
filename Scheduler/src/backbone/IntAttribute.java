@@ -8,7 +8,7 @@ public class IntAttribute extends Attribute{
 	
 	public IntAttribute(String title){
 		super(title);
-		this.att = null;
+		this.att = 0;
 	}
 	public IntAttribute(String title, Integer att){
 		super(title);

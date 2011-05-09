@@ -1,0 +1,54 @@
+package roundrobin;
+
+import java.util.List;
+
+import backbone.Grouping;
+import backbone.StringAttribute;
+import backbone.Unit;
+
+public class MyGrouping<T extends Unit> implements Grouping<T> {
+
+	
+	private StringAttribute _name;
+	private List<T> _members;
+	
+	public MyGrouping(String name){
+		_name = new StringAttribute("Name", name);
+	}
+	@Override
+	public void addMember(T member) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void clear() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean deleteMember(T member) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public T getBlank() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<T> getMembers() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

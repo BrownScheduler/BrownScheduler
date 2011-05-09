@@ -6,6 +6,11 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.UIManager.LookAndFeelInfo;
+
+import middleend.MiddleEnd;
 import backbone.Grouping;
 import backbone.Tournament;
 
@@ -20,54 +25,18 @@ public class Tourney implements backbone.Tournament{
 	public Tourney(){
 		rounds = new ArrayList<MyRound>();
 		competitors = new TeamGrouping("Competitors");
-		judges = new JudgeGrouping("Judges");
+		judges = new JudgeGrouping(this, "Judges");
 		totalRounds = 2;
-	}
-
-	
-	@Override
-	public MyRound getCurrentRound() {
-		if(rounds == null){
-			rounds = new ArrayList<MyRound>();
-			rounds.add(new MyRound(0));
-		}
-		int r = rounds.size() - 1;
-		plugin1.MyRound currRound = rounds.get(r);
-		if(currRound != null){
-			if(!currRound.isFinished() || currRound.getRoundNum() >= totalRounds){
-				return currRound;
-			}
-			else{
-				MyRound nextRound = new MyRound(0);
-				rounds.add(nextRound);
-				return nextRound;
-			}
-		}
-		return null;
 	}
 	
 	@Override
 	public MyRound createNextRound(){
-		int num = rounds.size();
-		LinkedList<Team> teams = new LinkedList<Team>();
-		teams.addAll(competitors.getMembers());
-		Collections.shuffle(teams);
-		LinkedList<Judge> judges = new LinkedList<Judge>();
-		judges.addAll(this.judges.getMembers());
-		Collections.shuffle(judges);
-		MyRound round = new MyRound(num);
-		
-		while(!teams.isEmpty()){
-			Team gov = teams.remove();
-			Team opp = null;
-			if(!teams.isEmpty()) opp = teams.remove();
-			Judge j = null;
-			if(!judges.isEmpty()) j = judges.remove();
-			MyPairing pair = new MyPairing(gov, opp, j);
-			round.addPairing(pair);
-		}
-		this.rounds.add(round);
-		return round;
+		ConstraintHandler handle = new ConstraintHandler(this, this.competitors.getMembers(), 
+				this.judges.getMembers());
+		MyRound r = handle.createNewRound();
+		rounds.add(r);
+		System.out.println(r);
+		return r;
 	}
 
 	
@@ -83,5 +52,27 @@ public class Tourney implements backbone.Tournament{
 		LinkedList<backbone.Round> rs = new LinkedList<backbone.Round>();
 		rs.addAll(rounds);
 		return rs;
+	}
+	
+	public static void main(String[] args) {
+		
+		try {
+		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+		        if ("Nimbus".equals(info.getName())) {
+		            UIManager.setLookAndFeel(info.getClassName());
+		            break;
+		        }
+		    }
+		} catch (UnsupportedLookAndFeelException e) {
+		    // handle exception
+		} catch (ClassNotFoundException e) {
+		    // handle exception
+		} catch (InstantiationException e) {
+		    // handle exception
+		} catch (IllegalAccessException e) {
+		    // handle exception
+		}
+		Tourney t = new Tourney();
+		new MiddleEnd(t);
 	}
 }

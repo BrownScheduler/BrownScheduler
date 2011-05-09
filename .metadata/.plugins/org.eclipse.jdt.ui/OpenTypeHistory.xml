@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <typeInfoHistroy>
-<typeInfo handle="=Scheduler/src&lt;backbone{Grouping.java[Grouping" modifiers="513" timestamp="1304401488000"/>
+<typeInfo handle="=Scheduler/src&lt;backbone{Grouping.java[Grouping" modifiers="513" timestamp="1304885162000"/>
 <typeInfo handle="=Scheduler/src&lt;backbone{Category.java[Category" modifiers="513" timestamp="1304395791000"/>
+<typeInfo handle="=Scheduler/src&lt;plugin1{MyCategory.java[MyCategory" modifiers="1025" timestamp="1304907528000"/>
+<typeInfo handle="=Scheduler/src&lt;backbone{Unit.java[Unit" modifiers="513" timestamp="1304914021000"/>
+<typeInfo handle="=Scheduler/\/usr\/lib\/jvm\/java-6-openjdk\/jre\/lib\/rt.jar&lt;sun.text.normalizer(UnicodeMatcher.class[UnicodeMatcher" modifiers="1537" timestamp="1302015517000"/>
+<typeInfo handle="=Scheduler/src&lt;backbone{CompetitiveUnit.java[CompetitiveUnit" modifiers="513" timestamp="1304395791000"/>
+<typeInfo handle="=Scheduler/src&lt;backbone{Tournament.java[Tournament" modifiers="513" timestamp="1304887755000"/>
+<typeInfo handle="=Scheduler/src&lt;backbone{Pairing.java[Pairing" modifiers="513" timestamp="1304395969000"/>
 </typeInfoHistroy>
