@@ -9,9 +9,8 @@ public class JudgeGrouping extends MyCategory<Judge> {
 		super(name);
 		_t = t;
 	}
-	public JudgeGrouping(Tourney t, String name, List<Judge> judges){
+	public JudgeGrouping(String name, List<Judge> judges){
 		super(name, judges);
-		_t = t;
 	}
 
 	@Override
