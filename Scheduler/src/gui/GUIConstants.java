@@ -7,6 +7,12 @@ import java.awt.Dimension;
  */
 public interface GUIConstants {
 
+	String TOURNAMENT_EXTENSION = ".tmnt";
+	String CATEGORY_EXTENSION = ".csv";
+	
+	int DEFAULT_TABLE_BLANK_ROWS = 10;
+	int ROW_HEIGHT = 25;
+	
 	int DEFAULT_WIDTH = 900;
 	int DEFAULT_HEIGHT = 700;
 	Dimension DEFAULT_SIZE = new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT);
@@ -54,6 +60,4 @@ public interface GUIConstants {
 	int BIGSPACING_X = 50;
 	int BIGSPACING_Y = 50;
 	Dimension BIGSPACING_SIZE = new Dimension(BIGSPACING_X, BIGSPACING_Y);
-	
-	int DEFAULT_TABLE_BLANK_ROWS = 1;
 }

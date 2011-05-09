@@ -54,6 +54,7 @@ public class UnitPanel extends JPanel implements GUIConstants {
 				GroupingAttribute<Unit> g = (GroupingAttribute<Unit>) attr;
 				components.put(attr, new InputTablePane(_middleEnd, g.getBlankUnit().getAttributes(), g));
 				_tablePanel.setPreferredSize(components.get(attr).getPreferredSize());
+				_tablePanel.add(components.get(attr));
 			}
 			JComponent comp = Utility.getField(attr);
 			if (comp instanceof JButton) {
@@ -62,21 +63,15 @@ public class UnitPanel extends JPanel implements GUIConstants {
 					public void actionPerformed(ActionEvent e) {
 						boolean hasPanel = false;
 						for (int i = 0; i < _tablePanel.getComponentCount(); i++) {
-							if (_tablePanel.getComponent(i) == components.get(attr))
-								hasPanel = true;
-						}
-						if (_tablePanel.getComponentCount() == 0) {
-							_tablePanel.removeAll();
-							_tablePanel.add(((InputTablePane) components.get(attr)).getTable().getTableHeader());
-							_tablePanel.add(components.get(attr));
-						}
-						else if (hasPanel) {
-							_tablePanel.removeAll();
-						}
-						else {
-							_tablePanel.removeAll();
-							_tablePanel.add(((InputTablePane) components.get(attr)).getTable().getTableHeader());
-							_tablePanel.add(components.get(attr));
+							if (_tablePanel.getComponent(i) instanceof InputTablePane) {
+								InputTablePane pane = (InputTablePane) _tablePanel.getComponent(i);
+								if (pane == components.get(attr))
+									pane.setVisible(!pane.isVisible());
+								else
+									pane.setVisible(false);
+								revalidate();
+								repaint();
+							}
 						}
 						_tablePanel.repaint();
 					}
@@ -111,7 +106,6 @@ public class UnitPanel extends JPanel implements GUIConstants {
 						GroupingAttribute<Unit> groupattr = (GroupingAttribute) attr;
 						for (int i = 0; i < table.getTable().getRowCount(); i++) {
 							Unit rowunit;
-							boolean rowunitisnull = true;
 							boolean alreadyadded = false;
 							if (i < table.getUnitsInRowsList().size()) {
 								rowunit = table.getUnitsInRowsList().get(i);
@@ -126,7 +120,6 @@ public class UnitPanel extends JPanel implements GUIConstants {
 									boolean value = false;
 									if (table.getTable().getValueAt(i, j) != null) {
 										value = (Boolean) table.getTable().getValueAt(i, j);
-										rowunitisnull = false;
 									}
 									rowunit.setAttribute(new BooleanAttribute(rowattr.getTitle(), value));
 								}
@@ -134,7 +127,6 @@ public class UnitPanel extends JPanel implements GUIConstants {
 									double value = 0;
 									if (table.getTable().getValueAt(i, j) != null) {
 										value = (Double) table.getTable().getValueAt(i, j);
-										rowunitisnull = false;
 									}
 									rowunit.setAttribute(new DoubleAttribute(rowattr.getTitle(), value));
 								}
@@ -142,7 +134,6 @@ public class UnitPanel extends JPanel implements GUIConstants {
 									int value = 0;
 									if (table.getTable().getValueAt(i, j) != null) {
 										value = (Integer) table.getTable().getValueAt(i, j);
-										rowunitisnull = false;
 									}
 									rowunit.setAttribute(new IntAttribute(rowattr.getTitle(), value));
 								}
@@ -150,7 +141,6 @@ public class UnitPanel extends JPanel implements GUIConstants {
 									String value = "";
 									if (table.getTable().getValueAt(i, j) != null) {
 										value = (String) table.getTable().getValueAt(i, j);
-										rowunitisnull = false;
 									}
 									rowunit.setAttribute(new StringAttribute(rowattr.getTitle(), value));
 								}
@@ -163,12 +153,16 @@ public class UnitPanel extends JPanel implements GUIConstants {
 										value = combobox.getSelectedUnit();
 										if ((value != null) && (!g.getMembers().contains(value)))
 											g.addMember(value);
-										rowunitisnull = false;
 									}
 									rowunit.setAttribute(new UnitAttribute<Unit>(rowattr.getTitle(), value, g));
 								}
 								j++;
 							}
+							boolean rowunitisnull = false;
+							if (rowunit.getName() == null)
+								rowunitisnull = true;
+							else if (rowunit.getName() == "")
+								rowunitisnull = true;
 							if (!rowunitisnull && !alreadyadded) {
 								groupattr.addMember(rowunit);
 								if (!groupattr.getBlankUnit().getMemberOf().getMembers().contains(rowunit))

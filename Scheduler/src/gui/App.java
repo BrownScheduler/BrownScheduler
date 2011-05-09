@@ -40,14 +40,18 @@ public class App implements GUIConstants {
 	private ManagementPanel _managementPane;
 	private JMenuBar _jJMenuBar;
 	private JMenu _fileMenu;
-	private JMenuItem _printMenuItem;
-	private JMenuItem _openPluginMenuItem;
 	private JMenuItem _openTournamentMenuItem;
-	private JMenuItem _saveMenuItem;
+	private JMenuItem _saveTournamentMenuItem;
+	private JMenuItem _importCategoryMenuItem;
+	private JMenuItem _exportCategoryMenuItem;
 	private JMenuItem _exitMenuItem;
 	private JMenu _optionsMenu;
 	private JMenuItem _programOptionsMenuItem;
+	private JDialog _programOptionsDialog;
+	private JPanel _programOptionsContentPane;
 	private JMenuItem _pluginOptionsMenuItem;
+	private JDialog _pluginOptionsDialog;
+	private JPanel _pluginOptionsContentPane;
 	private JMenu _editMenu;
 	private JMenu _viewMenu;
 	private JRadioButtonMenuItem _viewInputMenuItem;
@@ -57,12 +61,6 @@ public class App implements GUIConstants {
 	private JDialog _aboutDialog;
 	private JPanel _aboutContentPane;
 	private JLabel _aboutVersionLabel;
-	private JDialog _programOptionsDialog;
-	private JPanel _programOptionsContentPane;
-	private JDialog _pluginOptionsDialog;
-	private JPanel _pluginOptionsContentPane;
-	private JDialog _printDialog;
-	private JPanel _printContentPane;
 	
 	public App(MiddleEnd me) {
 		_middleEnd = me;
@@ -206,124 +204,13 @@ public class App implements GUIConstants {
 		if (_fileMenu == null) {
 			_fileMenu = new JMenu();
 			_fileMenu.setText("File");
-//			_fileMenu.add(getOpenPluginMenuItem()); //TODO:Open plugin menu, or not?
 			_fileMenu.add(getOpenTournamentMenuItem());
-			_fileMenu.add(getPrintMenuItem());
-			_fileMenu.add(getSaveMenuItem());
+			_fileMenu.add(getSaveTournamentMenuItem());
+			_fileMenu.add(getImportCategoryMenuItem());
+			_fileMenu.add(getExportCategoryMenuItem());
 			_fileMenu.add(getExitMenuItem());
 		}
 		return _fileMenu;
-	}
-	
-	/**
-	 * This method initializes jMenuItem	
-	 * 	
-	 * @return javax.swing.JMenuItem	
-	 */
-	public JMenuItem getSaveMenuItem() {
-		if (_saveMenuItem == null) {
-			_saveMenuItem = new JMenuItem();
-			_saveMenuItem.setText("Save");
-			_saveMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,
-					Event.CTRL_MASK, true));
-			//TODO file extension?
-			_saveMenuItem.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					JFileChooser chooser = new JFileChooser();
-					int returnval = chooser.showSaveDialog(getJFrame());
-					if (returnval == JFileChooser.APPROVE_OPTION) {
-						getMiddleEnd().saveFile(chooser.getSelectedFile());
-						if (!getMiddleEnd().saveFile(chooser.getSelectedFile())) {
-							JOptionPane.showMessageDialog(_jFrame, "The name specified for the file was invalid.", "Error", JOptionPane.ERROR_MESSAGE);
-						}
-					}
-				}
-			});
-		}
-		return _saveMenuItem;
-	}
-	
-	/**
-	 * This method initializes jMenuItem	
-	 * 	
-	 * @return javax.swing.JMenuItem	
-	 */
-	public JMenuItem getPrintMenuItem() {
-		if (_printMenuItem == null) {
-			_printMenuItem = new JMenuItem();
-			_printMenuItem.setText("Print...");
-			_printMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P,
-					Event.CTRL_MASK, true));
-			_printMenuItem.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					JDialog printDialog = getPrintDialog();
-					printDialog.pack();
-					Point loc = getJFrame().getLocation();
-					loc.translate(20, 20);
-					printDialog.setLocation(loc);
-					printDialog.setVisible(true);
-				}
-			});
-		}
-		return _printMenuItem;
-	}
-	
-
-	/**
-	 * This method initializes _printDialog	
-	 * 	
-	 * @return javax.swing.JDialog	
-	 */
-	private JDialog getPrintDialog() {
-		if (_printDialog == null) {
-			_printDialog = new JDialog(getJFrame());
-			_printDialog.setTitle("Print");
-			_printDialog.setContentPane(getPrintContentPane());
-		}
-		return _printDialog;
-	}
-
-	/**
-	 * This method initializes _printContentPane	
-	 * 	
-	 * @return javax.swing.JPanel	
-	 */
-	private JPanel getPrintContentPane() {
-		if (_printContentPane == null) {
-			_printContentPane = new JPanel();
-			_printContentPane.setLayout(new BorderLayout());
-		}
-		return _printContentPane;
-	}
-	
-	/**
-	 * This method initializes jMenuItem	
-	 * 	
-	 * @return javax.swing.JMenuItem	
-	 */
-	public JMenuItem getOpenPluginMenuItem() {
-		if (_openPluginMenuItem == null) {
-			_openPluginMenuItem = new JMenuItem();
-			_openPluginMenuItem.setText("Open Plugin...");
-			_openPluginMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L,
-					Event.CTRL_MASK, true));
-			_openPluginMenuItem.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					JFileChooser chooser = new JFileChooser();
-					chooser.setFileFilter(new FileNameExtensionFilter("Plugin File", "plug")); //TODO make constants
-					int returnval = chooser.showOpenDialog(getJFrame());
-					if (returnval == JFileChooser.APPROVE_OPTION) {
-						if (!getMiddleEnd().openPlugin(chooser.getSelectedFile())) {
-							JOptionPane.showMessageDialog(_jFrame, "The selected file was not a valid plugin file.", "Error", JOptionPane.ERROR_MESSAGE);
-						}
-					}
-				}
-			});
-		}
-		return _openPluginMenuItem;
 	}
 	
 	/**
@@ -337,11 +224,16 @@ public class App implements GUIConstants {
 			_openTournamentMenuItem.setText("Open Tournament...");
 			_openTournamentMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,
 					Event.CTRL_MASK, true));
-			_openTournamentMenuItem.addActionListener(new ActionListener() {
+<<<<<<< HEAD
+			//TODO file extension?
+			_saveMenuItem.addActionListener(new ActionListener() {
 				@Override
+=======
+			_openTournamentMenuItem.addActionListener(new ActionListener() {
+>>>>>>> 818488f081894b675756d74e7b894e4e4cbe6499
 				public void actionPerformed(ActionEvent e) {
 					JFileChooser chooser = new JFileChooser();
-					chooser.setFileFilter(new FileNameExtensionFilter("Tournament File", ".xml", ".csv", ".tmnt")); //TODO make constants
+					chooser.setFileFilter(new FileNameExtensionFilter("Tournament File", TOURNAMENT_EXTENSION));
 					int returnval = chooser.showOpenDialog(getJFrame());
 					if (returnval == JFileChooser.APPROVE_OPTION) {
 						if (!getMiddleEnd().openTournament(chooser.getSelectedFile())) {
@@ -352,6 +244,104 @@ public class App implements GUIConstants {
 			});
 		}
 		return _openTournamentMenuItem;
+	}
+	
+	/**
+	 * This method initializes jMenuItem	
+	 * 	
+	 * @return javax.swing.JMenuItem	
+	 */
+	public JMenuItem getSaveTournamentMenuItem() {
+		if (_saveTournamentMenuItem == null) {
+			_saveTournamentMenuItem = new JMenuItem();
+			_saveTournamentMenuItem.setText("Save Tournament...");
+			_saveTournamentMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,
+					Event.CTRL_MASK, true));
+<<<<<<< HEAD
+			_printMenuItem.addActionListener(new ActionListener() {
+				@Override
+=======
+			_saveTournamentMenuItem.addActionListener(new ActionListener() {
+>>>>>>> 818488f081894b675756d74e7b894e4e4cbe6499
+				public void actionPerformed(ActionEvent e) {
+					JFileChooser chooser = new JFileChooser();
+					chooser.setFileFilter(new FileNameExtensionFilter("Tournament File", TOURNAMENT_EXTENSION));
+					int returnval = chooser.showSaveDialog(getJFrame());
+					if (returnval == JFileChooser.APPROVE_OPTION) {
+						getMiddleEnd().saveTournament(chooser.getSelectedFile());
+						if (!getMiddleEnd().saveTournament(chooser.getSelectedFile())) {
+							JOptionPane.showMessageDialog(_jFrame, "The name specified for the file was invalid.", "Error", JOptionPane.ERROR_MESSAGE);
+						}
+					}
+				}
+			});
+		}
+		return _saveTournamentMenuItem;
+	}
+	
+	/**
+	 * This method initializes jMenuItem	
+	 * 	
+	 * @return javax.swing.JMenuItem	
+	 */
+	public JMenuItem getImportCategoryMenuItem() {
+		if (_importCategoryMenuItem == null) {
+			_importCategoryMenuItem = new JMenuItem();
+			_importCategoryMenuItem.setText("Import Category...");
+			_importCategoryMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_I,
+					Event.CTRL_MASK, true));
+<<<<<<< HEAD
+			_openPluginMenuItem.addActionListener(new ActionListener() {
+				@Override
+=======
+			_importCategoryMenuItem.addActionListener(new ActionListener() {
+>>>>>>> 818488f081894b675756d74e7b894e4e4cbe6499
+				public void actionPerformed(ActionEvent e) {
+					JFileChooser chooser = new JFileChooser();
+					chooser.setFileFilter(new FileNameExtensionFilter("CSV File", CATEGORY_EXTENSION));
+					int returnval = chooser.showSaveDialog(getJFrame());
+					if (returnval == JFileChooser.APPROVE_OPTION) {
+						getMiddleEnd().saveTournament(chooser.getSelectedFile());
+						if (!getMiddleEnd().importCategory(chooser.getSelectedFile())) {
+							JOptionPane.showMessageDialog(_jFrame, "The name specified for the file was invalid.", "Error", JOptionPane.ERROR_MESSAGE);
+						}
+					}
+				}
+			});
+		}
+		return _importCategoryMenuItem;
+	}
+	
+	/**
+	 * This method initializes jMenuItem	
+	 * 	
+	 * @return javax.swing.JMenuItem	
+	 */
+	public JMenuItem getExportCategoryMenuItem() {
+		if (_exportCategoryMenuItem == null) {
+			_exportCategoryMenuItem = new JMenuItem();
+			_exportCategoryMenuItem.setText("Export Category...");
+			_exportCategoryMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E,
+					Event.CTRL_MASK, true));
+<<<<<<< HEAD
+			_openTournamentMenuItem.addActionListener(new ActionListener() {
+				@Override
+=======
+			_exportCategoryMenuItem.addActionListener(new ActionListener() {
+>>>>>>> 818488f081894b675756d74e7b894e4e4cbe6499
+				public void actionPerformed(ActionEvent e) {
+					JFileChooser chooser = new JFileChooser();
+					chooser.setFileFilter(new FileNameExtensionFilter("CSV File", CATEGORY_EXTENSION));
+					int returnval = chooser.showOpenDialog(getJFrame());
+					if (returnval == JFileChooser.APPROVE_OPTION) {
+						if (!getMiddleEnd().exportCategory(chooser.getSelectedFile())) {
+							JOptionPane.showMessageDialog(_jFrame, "The selected file was not a valid tournament file.", "Error", JOptionPane.ERROR_MESSAGE);
+						}
+					}
+				}
+			});
+		}
+		return _exportCategoryMenuItem;
 	}
 
 	/**
@@ -519,7 +509,7 @@ public class App implements GUIConstants {
 		if (_viewInputMenuItem == null) {
 			_viewInputMenuItem = new JRadioButtonMenuItem();
 			_viewInputMenuItem.setText("View Input Panel");
-			_viewInputMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_I,	Event.CTRL_MASK, true));
+			_viewInputMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N,	Event.CTRL_MASK, true));
 			_viewInputMenuItem.addActionListener(new java.awt.event.ActionListener() {
 				@Override
 				public void actionPerformed(java.awt.event.ActionEvent e) {

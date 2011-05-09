@@ -41,6 +41,8 @@ public class RoundPanel extends JPanel implements GUIConstants {
 		addpairingbutton.setHorizontalAlignment(SwingConstants.LEFT);
 		this.add(addpairingbutton);
 		this.add(Box.createHorizontalGlue());
+		if (_round == null)
+			return;
 		for (Pairing pairing : _round.getPairings()) {
 			PairingPanel pp = new PairingPanel(_middleEnd, _round, pairing);
 			_pairingpanels.add(pp);

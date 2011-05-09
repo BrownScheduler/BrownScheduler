@@ -2,6 +2,7 @@ package fileio;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -26,9 +27,9 @@ import exception.CSVException;
 
 public class CSVIO {
 
-	public static void writeGrouping(String fileName, Grouping<? extends Unit> category) throws exception.CSVException {
+	public static void writeGrouping(File file, Grouping<? extends Unit> category) throws exception.CSVException {
 		try {
-			BufferedWriter out = new BufferedWriter(new FileWriter(fileName));
+			BufferedWriter out = new BufferedWriter(new FileWriter(file));
 			out.write(category.getName() + "\n");
 			for(Attribute att : category.getBlank().getAttributes())
 				if(att.getType() != Attribute.Type.GROUPING)
@@ -60,12 +61,12 @@ public class CSVIO {
 		}
 	}
 
-	public static void loadGrouping(String fileName, Tournament t) throws exception.CSVException {
+	public static void loadGrouping(File file, Tournament t) throws exception.CSVException {
 		try {
 			LinkedList<Grouping<Unit>> groups = new LinkedList<Grouping<Unit>>();
 			groups.addAll((Collection<? extends Grouping<Unit>>) t.getCategories());
 			groups.addAll((Collection<? extends Grouping<Unit>>) t.getRounds());
-			BufferedReader in = new BufferedReader(new FileReader(fileName));
+			BufferedReader in = new BufferedReader(new FileReader(file));
 			String name = in.readLine().split(",")[0];
 			in.readLine();
 			Grouping group = null;
