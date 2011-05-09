@@ -110,7 +110,6 @@ public class UnitPanel extends JPanel implements GUIConstants {
 						GroupingAttribute<Unit> groupattr = (GroupingAttribute) attr;
 						for (int i = 0; i < table.getTable().getRowCount(); i++) {
 							Unit rowunit;
-							boolean rowunitisnull = true;
 							boolean alreadyadded = false;
 							if (i < table.getUnitsInRowsList().size()) {
 								rowunit = table.getUnitsInRowsList().get(i);
@@ -125,7 +124,6 @@ public class UnitPanel extends JPanel implements GUIConstants {
 									boolean value = false;
 									if (table.getTable().getValueAt(i, j) != null) {
 										value = (Boolean) table.getTable().getValueAt(i, j);
-										rowunitisnull = false;
 									}
 									rowunit.setAttribute(new BooleanAttribute(rowattr.getTitle(), value));
 								}
@@ -133,7 +131,6 @@ public class UnitPanel extends JPanel implements GUIConstants {
 									double value = 0;
 									if (table.getTable().getValueAt(i, j) != null) {
 										value = (Double) table.getTable().getValueAt(i, j);
-										rowunitisnull = false;
 									}
 									rowunit.setAttribute(new DoubleAttribute(rowattr.getTitle(), value));
 								}
@@ -141,7 +138,6 @@ public class UnitPanel extends JPanel implements GUIConstants {
 									int value = 0;
 									if (table.getTable().getValueAt(i, j) != null) {
 										value = (Integer) table.getTable().getValueAt(i, j);
-										rowunitisnull = false;
 									}
 									rowunit.setAttribute(new IntAttribute(rowattr.getTitle(), value));
 								}
@@ -149,7 +145,6 @@ public class UnitPanel extends JPanel implements GUIConstants {
 									String value = "";
 									if (table.getTable().getValueAt(i, j) != null) {
 										value = (String) table.getTable().getValueAt(i, j);
-										rowunitisnull = false;
 									}
 									rowunit.setAttribute(new StringAttribute(rowattr.getTitle(), value));
 								}
@@ -162,12 +157,16 @@ public class UnitPanel extends JPanel implements GUIConstants {
 										value = combobox.getSelectedUnit();
 										if ((value != null) && (!g.getMembers().contains(value)))
 											g.addMember(value);
-										rowunitisnull = false;
 									}
 									rowunit.setAttribute(new UnitAttribute<Unit>(rowattr.getTitle(), value, g));
 								}
 								j++;
 							}
+							boolean rowunitisnull = false;
+							if (rowunit.getName() == null)
+								rowunitisnull = true;
+							else if (rowunit.getName() == "")
+								rowunitisnull = true;
 							if (!rowunitisnull && !alreadyadded) {
 								groupattr.addMember(rowunit);
 								if (!groupattr.getBlankUnit().getMemberOf().getMembers().contains(rowunit))

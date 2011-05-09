@@ -11,6 +11,7 @@ public interface GUIConstants {
 	String CATEGORY_EXTENSION = ".csv";
 	
 	int DEFAULT_TABLE_BLANK_ROWS = 1;
+	int ROW_HEIGHT = 25;
 	
 	int DEFAULT_WIDTH = 900;
 	int DEFAULT_HEIGHT = 700;
