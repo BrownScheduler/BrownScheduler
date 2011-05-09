@@ -1,10 +1,9 @@
 package backbone;
 
+import java.io.Serializable;
 import java.util.List;
 
-public interface Unit {
-	
-	public Unit getBlank();
+public interface Unit extends Serializable {
 
 	public void setAttribute(Attribute attribute);
 	

@@ -22,5 +22,9 @@ public class StringAttribute extends Attribute{
 	public void setAttribute(String a) {
 		value = a;
 	}
-
+	
+	@Override
+	public String toString() {
+		return value;
+	}
 }

@@ -2,7 +2,7 @@ package backbone;
 
 public class BooleanAttribute extends Attribute {
 
-	private boolean att;
+	private Boolean att;
 	
 	public BooleanAttribute(String title) {
 		super(title);
@@ -24,5 +24,10 @@ public class BooleanAttribute extends Attribute {
 	
 	public void setAttribute(boolean a) {
 		att = a;
+	}
+	
+	@Override
+	public String toString() {
+		return att.toString();
 	}
 }

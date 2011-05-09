@@ -6,32 +6,34 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import old_backbone.Tournament;
+import exception.BackupException;
+
+import backbone.Tournament;
 
 public class SerialIO {
 
-	public static void writeTournament(String fileName, Tournament tournament) {
+	public static void writeTournament(String fileName, Tournament tournament) throws BackupException {
 		try {
-			FileOutputStream fos = new FileOutputStream(fileName);
-			ObjectOutputStream out = new ObjectOutputStream(fos);
+			ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(fileName));
 			out.writeObject(tournament);
 			out.flush();
 			out.close();
 		} catch (IOException e) {
 			e.printStackTrace();
+			throw new exception.BackupException(e);
 		}
 	}
 
-	public static Tournament readTournament(String fileName) {
+	public static Tournament readTournament(String fileName) throws BackupException {
 		try {
-			FileInputStream fis = new FileInputStream(fileName);
-			ObjectInputStream in = new ObjectInputStream(fis);
+			ObjectInputStream in = new ObjectInputStream(new FileInputStream(fileName));
 			return (Tournament) in.readObject();
 		} catch (IOException e) {
 			e.printStackTrace();
+			throw new exception.BackupException(e);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
+			throw new exception.BackupException(e);
 		}
-		return null;
 	}
 }

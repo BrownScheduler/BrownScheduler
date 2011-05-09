@@ -20,4 +20,8 @@ public class UnitAttribute<T extends Unit> extends Attribute {
 		return Attribute.Type.UNIT;
 	}
 
+	@Override
+	public String toString() {
+		return att.getName();
+	}
 }

@@ -23,7 +23,6 @@ public class Round implements Serializable {
 	}
 
 	public boolean isPaired(CompetitiveUnit comp) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 

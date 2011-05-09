@@ -2,6 +2,11 @@ package plugin1;
 
 import java.util.*;
 
+import exception.BackupException;
+import exception.CSVException;
+import fileio.CSVIO;
+import fileio.SerialIO;
+
 import backbone.Attribute;
 import backbone.Category;
 import backbone.Grouping;
@@ -12,7 +17,8 @@ public class Main {
 	
 	
 	
-	public static void main(String args[]){
+	public static void main(String args[]) throws CSVException, BackupException{
+		
 		Tourney t = new Tourney();
 		
 		Team t1 = new Team("Team 1");
@@ -34,8 +40,18 @@ public class Main {
 		judges.addMember(j1);
 		judges.addMember(j2);
 		
+
+		
+		SerialIO.writeTournament("blah", t);
+		t = t.getClass().cast(SerialIO.readTournament("blah"));
+		CSVIO.writeGrouping("blah.csv", t.getCategories().get(0));
+		CSVIO.writeGrouping("blah2.csv", t.getCategories().get(1));
+		
 		MyRound r = t.createNextRound();
 		System.out.println(t.getCurrentRound().toString());
+		
+		
+		
 		
 		MyRound r1 = t.getCurrentRound();
 		ArrayList<Pairing> r1Pairs = r1.getPairings();
@@ -56,7 +72,7 @@ public class Main {
 		System.out.println(r1);
 		MyRound r2 = t.createNextRound();
 		System.out.println(t.getCurrentRound().toString());
-		
+	
 	}
 
 }

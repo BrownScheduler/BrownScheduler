@@ -11,9 +11,9 @@ public interface Tournament extends Serializable {
 
 	public List<Grouping> getCategories();
 	
-	public Round createNextRound();
+	public Round createNextRound() throws exception.ImpossibleTournamentException, exception.InvalidStateException;
 	
-	public Collection<Round> getRounds();
+	public List<Round> getRounds();
 	
 	
 }

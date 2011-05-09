@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
+import java.util.List;
+
 import backbone.Grouping;
+import backbone.Tournament;
 
 
-@SuppressWarnings("serial")
 public class Tourney implements backbone.Tournament{
 	
 	private ArrayList<plugin1.MyRound> rounds;
@@ -77,7 +79,7 @@ public class Tourney implements backbone.Tournament{
 		return cats;
 	}
 	
-	public Collection<backbone.Round> getRounds() {
+	public List<backbone.Round> getRounds() {
 		LinkedList<backbone.Round> rs = new LinkedList<backbone.Round>();
 		rs.addAll(rounds);
 		return rs;
