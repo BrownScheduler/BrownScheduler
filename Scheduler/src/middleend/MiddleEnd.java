@@ -25,7 +25,7 @@ public class MiddleEnd extends Thread {
 	}
 	
 	public void openNewMiddleEnd() {
-		//TODO: _scheduler.addTMNT(new Tournament());
+		_scheduler.addTMNT(_tmnt.getNew());
 	}
 	
 	public void openNewMiddleEnd(Tournament t) {
@@ -43,7 +43,7 @@ public class MiddleEnd extends Thread {
 	public boolean openTournament(File file) {
 		System.out.println(_tmnt.toString());
 		try {
-			_tmnt = SerialIO.readTournament(file);
+			_scheduler.addTMNT(SerialIO.readTournament(file));
 			System.out.println(_tmnt.toString());
 			return true;
 		} catch (BackupException e) {

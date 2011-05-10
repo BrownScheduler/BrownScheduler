@@ -48,6 +48,11 @@ public class Tournament implements backbone.Tournament {
 		return groups;
 	}
 
+	@Override
+	public backbone.Tournament getNew() {
+		return new Tournament();
+	}
+
 
 	@Override
 	public List<Round> getRounds() {
