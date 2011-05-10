@@ -1,5 +1,7 @@
 package roundrobin;
 
+import plugin1.MyCategory;
+
 public class FieldGrouping extends MyGrouping<Field> {
 
 	Tournament _t;

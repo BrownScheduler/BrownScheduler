@@ -38,7 +38,7 @@ public class AddingPanel extends JPanel implements GUIConstants {
 		this.setMinimumSize(ADDINGPANEL_SIZE);
 		initLabel.setText("Choose a category on the side to begin editing!");
 		initLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		this.setLayout(new GridLayout(0, 1));
 		this.add(initLabel);
 	}
 	
@@ -83,7 +83,7 @@ public class AddingPanel extends JPanel implements GUIConstants {
 			break;
 		default:
 		}
-		this.revalidate();
 		this.repaint();
-	}
+		this.setSize(new Dimension(this.getWidth() + 1, this.getHeight() + 1));
+		this.setSize(new Dimension(this.getWidth() - 1, this.getHeight() - 1));	}
 }

@@ -1,6 +1,8 @@
 package plugin1;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -10,6 +12,7 @@ import javax.swing.UIManager.LookAndFeelInfo;
 
 import middleend.MiddleEnd;
 import backbone.Grouping;
+import backbone.Tournament;
 
 
 public class Tourney implements backbone.Tournament{
@@ -37,7 +40,6 @@ public class Tourney implements backbone.Tournament{
 	}
 
 	
-	@Override
 	@SuppressWarnings("unchecked")
 	public ArrayList<Grouping> getCategories() {
 		ArrayList<Grouping> cats = new ArrayList<Grouping>();
@@ -46,7 +48,6 @@ public class Tourney implements backbone.Tournament{
 		return cats;
 	}
 	
-	@Override
 	public List<backbone.Round> getRounds() {
 		LinkedList<backbone.Round> rs = new LinkedList<backbone.Round>();
 		rs.addAll(rounds);

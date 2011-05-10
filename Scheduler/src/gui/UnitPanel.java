@@ -3,6 +3,7 @@ package gui;
 import backbone.*;
 import middleend.*;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -46,32 +47,36 @@ public class UnitPanel extends JPanel implements GUIConstants {
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		_mainPanel.setLayout(new BoxLayout(_mainPanel, BoxLayout.X_AXIS));
 		_tablePanel.setLayout(new BoxLayout(_tablePanel, BoxLayout.Y_AXIS));
+//		_tablePanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, INPUTTABLE_HEIGHT));
 		final HashMap<Attribute, JComponent> components = new HashMap<Attribute, JComponent>();
 		for (final Attribute attr : unit.getAttributes()) {
 			JLabel titleLabel = Utility.getTitleLabel(attr);
 			if (attr instanceof GroupingAttribute) {
 				GroupingAttribute<Unit> g = (GroupingAttribute<Unit>) attr;
-				if (null == components.put(attr, new InputTablePane(_middleEnd, g.getBlankUnit().getAttributes(), g))) {
-					_tablePanel.add(components.get(attr));
-					_tablePanel.setVisible(false);
-				}
+				components.put(attr, new InputTablePane(_middleEnd, g.getBlankUnit().getAttributes(), g));
+				_tablePanel.setPreferredSize(components.get(attr).getPreferredSize());
 			}
 			JComponent comp = Utility.getField(attr);
 			if (comp instanceof JButton) {
 				((JButton) comp).addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						boolean hasPanel = false;
 						for (int i = 0; i < _tablePanel.getComponentCount(); i++) {
-							if (_tablePanel.getComponent(i) instanceof InputTablePane) {
-								InputTablePane pane = (InputTablePane) _tablePanel.getComponent(i);
-								if (pane == components.get(attr)) {
-									pane.setVisible(!pane.isVisible());
-									_tablePanel.setVisible(pane.isVisible());
-								}
-								else {
-									pane.setVisible(false);
-								}
-								repaint();
-							}
+							if (_tablePanel.getComponent(i) == components.get(attr))
+								hasPanel = true;
+						}
+						if (_tablePanel.getComponentCount() == 0) {
+							_tablePanel.removeAll();
+							_tablePanel.add(((InputTablePane) components.get(attr)).getTable().getTableHeader());
+							_tablePanel.add(components.get(attr));
+						}
+						else if (hasPanel) {
+							_tablePanel.removeAll();
+						}
+						else {
+							_tablePanel.removeAll();
+							_tablePanel.add(((InputTablePane) components.get(attr)).getTable().getTableHeader());
+							_tablePanel.add(components.get(attr));
 						}
 						_tablePanel.repaint();
 					}
@@ -85,6 +90,8 @@ public class UnitPanel extends JPanel implements GUIConstants {
 			toAdd.add(comp);
 			_mainPanel.add(toAdd);
 		}
+		this.add(_mainPanel);
+		this.add(Box.createRigidArea(new Dimension(10, 10)));
 		JButton savebutton = new JButton(buttonstring);
 		savebutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -186,9 +193,11 @@ public class UnitPanel extends JPanel implements GUIConstants {
 						unit.setAttribute(new UnitAttribute(attr.getTitle(), value, grouping));
 					}
 				}
-				
-				if (!_grouping.getMembers().contains(unit)) {
-					_grouping.addMember(unit);
+				if (_grouping != null) {
+					if (!_grouping.getMembers().contains(unit)) {
+						_grouping.addMember(unit);
+						_grouping = null;
+					}
 				}
 				_middleEnd.repaintAll();
 			}
@@ -204,24 +213,20 @@ public class UnitPanel extends JPanel implements GUIConstants {
 			}
 		});
 		actuallydeletebutton.setVisible(false);
-		final JButton deletebutton = new JButton("Delete this unit");
+		JButton deletebutton = new JButton("Delete this unit");
 		deletebutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				actuallydeletebutton.setVisible(true);
 				_buttonPanel.repaint();
-				deletebutton.setText("Over there ----->");
 			}
 		});
 		_buttonPanel.add(savebutton);
 		_buttonPanel.add(deletebutton);
 		_buttonPanel.add(actuallydeletebutton);
-		_buttonPanel.setMaximumSize(UNITPANEL_SIZE);
-		this.add(_mainPanel);
-		this.add(Box.createRigidArea(SMALLSPACING_SIZE));
 		this.add(_buttonPanel);
-		this.add(Box.createRigidArea(SMALLSPACING_SIZE));
+		this.add(Box.createRigidArea(new Dimension(10, 10)));
 		this.add(_tablePanel);
-		this.add(Box.createVerticalGlue());
+		this.setPreferredSize(UNITPANEL_SIZE);
 		this.repaint();
 	}
 }

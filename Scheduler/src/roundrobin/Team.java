@@ -2,14 +2,17 @@ package roundrobin;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 import backbone.Attribute;
+import backbone.CompetitiveUnit;
 import backbone.Grouping;
 import backbone.GroupingAttribute;
 import backbone.IntAttribute;
 import backbone.StringAttribute;
 import backbone.Unit;
+import backbone.UnitAttribute;
 
 public class Team implements Unit {
 
@@ -25,7 +28,7 @@ public class Team implements Unit {
 		_name = new StringAttribute("Name", name);
 		_gamesWon = new IntAttribute("Wins", 0);
 		_gamesLost = new IntAttribute("Losses", 0);
-		_players = new GroupingAttribute<Player>("Players", new PlayerGrouping(_t, "Players"));
+		_players = new GroupingAttribute<Player>("Players", new PlayerGrouping(_t, this, "Players"));
 		_teamsFaced = new HashMap<Team, Integer>();
 	}
 	

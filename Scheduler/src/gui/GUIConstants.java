@@ -1,24 +1,16 @@
 package gui;
 
 import java.awt.Dimension;
-import java.awt.Color;
 
 /**
  * Holds constants that the GUI needs to use.
  */
 public interface GUIConstants {
 
-	Color FOREGROUND_COLOR = Color.gray;
-	Color BACKGROUND_COLOR = Color.white;
-	Color FG_TEXT_COLOR = Color.black;
-	Color BG_TEXT_COLOR = Color.black;
-	
-	boolean imagesOn = false;
-	
 	String TOURNAMENT_EXTENSION = ".tmnt";
 	String CATEGORY_EXTENSION = ".csv";
 	
-	int DEFAULT_TABLE_BLANK_ROWS = 10;
+	int DEFAULT_TABLE_BLANK_ROWS = 1;
 	int ROW_HEIGHT = 25;
 	
 	int DEFAULT_WIDTH = 900;

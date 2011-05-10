@@ -67,7 +67,6 @@ public abstract class Attribute implements Serializable {
 	/**
 	 * @deprecated
 	 */
-	@Deprecated
 	public float getConflictMagnitude() {
 		return conflictMagnitude;
 	}

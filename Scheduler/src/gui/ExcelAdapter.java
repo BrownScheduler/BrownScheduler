@@ -50,7 +50,6 @@ public void setJTable(JTable jTable1) {this.jTable1=jTable1;}
     * Paste is done by aligning the upper left corner of the selection with the
     * 1st element in the current selection of the JTable.
     */
-@Override
 public void actionPerformed(ActionEvent e)
    {
       if (e.getActionCommand().compareTo("Copy")==0)
@@ -101,7 +100,7 @@ sbf.append(jTable1.getValueAt(rowsselected[i],colsselected[j]));
                 StringTokenizer st2=new StringTokenizer(rowstring,"\t");
                 for(int j=0;st2.hasMoreTokens();j++)
                 {
-                   value=st2.nextToken();
+                   value=(String)st2.nextToken();
                    if (startRow+i< jTable1.getRowCount()  &&
                        startCol+j< jTable1.getColumnCount())
                       jTable1.setValueAt(value,startRow+i,startCol+j);

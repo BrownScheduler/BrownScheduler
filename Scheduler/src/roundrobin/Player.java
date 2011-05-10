@@ -23,7 +23,15 @@ public class Player implements Unit {
 	}
 	
 	public void setTeam(Team t){
+		if(t == null){
+			if(_team.att != null)
+				_team.att.removePlayer(this);
+		}
+		else if(!t.hasPlayer(this)){
+			t.addPlayer(this);
+		}
 		_team.att = t;
+		
 	}
 	@Override
 	public boolean deleteFromGrouping() {
@@ -56,7 +64,7 @@ public class Player implements Unit {
 		if(attribute.getType() == Attribute.Type.STRING)
 			_name = (StringAttribute)attribute;
 		else if(attribute.getType() == Attribute.Type.UNIT){
-			Team t = ((UnitAttribute<Team>)attribute).att;
+			Team t = (Team)((UnitAttribute<Team>)attribute).att;
 			if(t == null){
 				if(_team.att != null){
 					_team.att.removePlayer(this);
