@@ -17,6 +17,7 @@ public interface GUIConstants {
 	Color BG_TEXT_COLOR = Color.black;
 	
 	boolean IMAGESON = true;
+	//	If on laptop:
 	ImageIcon INTROIMAGE = new ImageIcon("src/images/logo.png");
 	ImageIcon TREEOPENIMAGE = new ImageIcon("src/images/openmanhole.png");
 	ImageIcon TREECLOSEDIMAGE = new ImageIcon("src/images/closedmanhole.png");
@@ -26,6 +27,16 @@ public interface GUIConstants {
 	ImageIcon DELETEBUTTONIMAGE = new ImageIcon("src/images/michelangelo.png");
 	ImageIcon SAVEBUTTONIMAGE = new ImageIcon("src/images/leonardo.png");
 	ImageIcon FRAMEIMAGE = new ImageIcon("src/images/minilogo.png");
+	//	If on filesystem:
+	//ImageIcon INTROIMAGE = new ImageIcon("Scheduler/src/images/logo.png");
+	//ImageIcon TREEOPENIMAGE = new ImageIcon("Scheduler/src/images/openmanhole.png");
+	//ImageIcon TREECLOSEDIMAGE = new ImageIcon("Scheduler/src/images/closedmanhole.png");
+	//ImageIcon TREELEAFIMAGE = new ImageIcon("Scheduler/src/images/splinter.png");
+	//ImageIcon ADDBUTTONIMAGE = new ImageIcon("Scheduler/src/images/raphael.png");
+	//ImageIcon EDITBUTTONIMAGE = new ImageIcon("Scheduler/src/images/donatello.png");
+	//ImageIcon DELETEBUTTONIMAGE = new ImageIcon("Scheduler/src/images/michelangelo.png");
+	//ImageIcon SAVEBUTTONIMAGE = new ImageIcon("Scheduler/src/images/leonardo.png");
+	//ImageIcon FRAMEIMAGE = new ImageIcon("Scheduler/src/images/minilogo.png");
 	
 	String TOURNAMENT_EXTENSION = ".tmnt";
 	String CATEGORY_EXTENSION = ".csv";
