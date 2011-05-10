@@ -52,7 +52,7 @@ public class AddingPanel extends JPanel implements GUIConstants {
 		this.removeAll();
 		for (Unit u : grouping.getMembers()) {
 			this.add(new UnitPanel(_middleEnd, u));
-			this.add(Box.createRigidArea(SMALLSPACING_SIZE));
+//			this.add(Box.createRigidArea(SMALLSPACING_SIZE));
 		}
 		this.add(Box.createVerticalGlue());
 		_currView = 2;
@@ -82,7 +82,7 @@ public class AddingPanel extends JPanel implements GUIConstants {
 			break;
 		default:
 		}
+		this.revalidate();
 		this.repaint();
-		this.setSize(new Dimension(this.getWidth() + 1, this.getHeight() + 1));
-		this.setSize(new Dimension(this.getWidth() - 1, this.getHeight() - 1));	}
+	}
 }

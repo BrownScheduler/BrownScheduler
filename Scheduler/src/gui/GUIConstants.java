@@ -1,12 +1,20 @@
 package gui;
 
 import java.awt.Dimension;
+import java.awt.Color;
 
 /**
  * Holds constants that the GUI needs to use.
  */
 public interface GUIConstants {
 
+	Color FOREGROUND_COLOR = Color.gray;
+	Color BACKGROUND_COLOR = Color.white;
+	Color FG_TEXT_COLOR = Color.black;
+	Color BG_TEXT_COLOR = Color.black;
+	
+	boolean imagesOn = false;
+	
 	String TOURNAMENT_EXTENSION = ".tmnt";
 	String CATEGORY_EXTENSION = ".csv";
 	
@@ -34,7 +42,7 @@ public interface GUIConstants {
 	Dimension ADDINGPANEL_SIZE = new Dimension(ADDINGPANEL_WIDTH, ADDINGPANEL_HEIGHT);
 	
 	int INPUTTABLE_WIDTH = 600;
-	int INPUTTABLE_HEIGHT = 300;
+	int INPUTTABLE_HEIGHT = 400;
 	Dimension INPUTTABLE_SIZE = new Dimension(INPUTTABLE_WIDTH, INPUTTABLE_HEIGHT);
 	
 	int PAIRINGPANEL_WIDTH = 900;
