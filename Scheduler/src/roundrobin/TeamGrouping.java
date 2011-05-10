@@ -26,14 +26,4 @@ public class TeamGrouping extends MyCategory<Team> {
 	public Team getBlank() {
 		return new Team(_t, "");
 	}
-
-
-	@Override
-	public void addMember(Team member) {
-		super.addMember(member);
-		
-		System.out.println(_t.toString());
-		System.out.println("0" + this.toString());
-		
-	}
 }

@@ -95,7 +95,6 @@ public class CSVIO {
 			}
 			String line = in.readLine();
 			while(line != null) {
-				System.out.println(line);
 				String[] cells = line.split(",");
 				Unit temp = group.getBlank();
 				for(int i = 0; i < nongroupAtts.size(); i++) {
@@ -250,7 +249,6 @@ public class CSVIO {
 							}
 			}
 
-			System.out.println("hi");
 		} catch (NumberFormatException e) {
 			//e.printStackTrace();
 			throw new exception.CSVException(e);
