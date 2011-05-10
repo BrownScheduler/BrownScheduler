@@ -4,11 +4,8 @@
 <fullyQualifiedTypeName name="java.util.Collection"/>
 <fullyQualifiedTypeName name="backbone.Category"/>
 <fullyQualifiedTypeName name="backbone.Attribute"/>
-<fullyQualifiedTypeName name="backbone.Pairing"/>
 <fullyQualifiedTypeName name="java.util.PriorityQueue"/>
 <fullyQualifiedTypeName name="java.util.Comparator"/>
-<fullyQualifiedTypeName name="java.util.LinkedList"/>
-<fullyQualifiedTypeName name="java.util.Collections"/>
 <fullyQualifiedTypeName name="javax.swing.UIManager.LookAndFeelInfo"/>
 <fullyQualifiedTypeName name="javax.swing.UIManager"/>
 <fullyQualifiedTypeName name="javax.swing.UnsupportedLookAndFeelException"/>
@@ -17,7 +14,6 @@
 <fullyQualifiedTypeName name="backbone.Grouping"/>
 <fullyQualifiedTypeName name="backbone.Round"/>
 <fullyQualifiedTypeName name="backbone.IntAttribute"/>
-<fullyQualifiedTypeName name="backbone.StringAttribute"/>
 <fullyQualifiedTypeName name="backbone.GroupingAttribute"/>
 <fullyQualifiedTypeName name="backbone.UnitAttribute"/>
 <fullyQualifiedTypeName name="java.util.HashMap"/>
@@ -27,4 +23,9 @@
 <fullyQualifiedTypeName name="java.util.Random"/>
 <fullyQualifiedTypeName name="gui.PairingPanel.UnitAttributeComboBox"/>
 <fullyQualifiedTypeName name="backbone.Attribute.Type"/>
+<fullyQualifiedTypeName name="java.util.LinkedList"/>
+<fullyQualifiedTypeName name="java.util.Collections"/>
+<fullyQualifiedTypeName name="backbone.Pairing"/>
+<fullyQualifiedTypeName name="backbone.StringAttribute"/>
+<fullyQualifiedTypeName name="middleend.TMNTScheduler"/>
 </qualifiedTypeNameHistroy>
