@@ -236,6 +236,9 @@ public class App implements GUIConstants {
 						if (!getMiddleEnd().openTournament(chooser.getSelectedFile())) {
 							JOptionPane.showMessageDialog(_jFrame, "The selected file was not a valid tournament file.", "Error", JOptionPane.ERROR_MESSAGE);
 						}
+						else {
+							_middleEnd.repaintAll();
+						}
 					}
 				}
 			});
@@ -264,6 +267,9 @@ public class App implements GUIConstants {
 						if (!getMiddleEnd().saveTournament(chooser.getSelectedFile())) {
 							JOptionPane.showMessageDialog(_jFrame, "The name specified for the file was invalid.", "Error", JOptionPane.ERROR_MESSAGE);
 						}
+						else {
+							_middleEnd.repaintAll();
+						}
 					}
 				}
 			});
@@ -291,6 +297,9 @@ public class App implements GUIConstants {
 						getMiddleEnd().saveTournament(chooser.getSelectedFile());
 						if (!getMiddleEnd().importCategory(chooser.getSelectedFile())) {
 							JOptionPane.showMessageDialog(_jFrame, "The name specified for the file was invalid.", "Error", JOptionPane.ERROR_MESSAGE);
+						}
+						else {
+							_middleEnd.repaintAll();
 						}
 					}
 				}
@@ -325,6 +334,9 @@ public class App implements GUIConstants {
 					if (returnval == JFileChooser.APPROVE_OPTION) {
 						if (!getMiddleEnd().exportCategory(toadd, chooser.getSelectedFile())) {
 							JOptionPane.showMessageDialog(_jFrame, "The selected file was not a valid tournament file.", "Error", JOptionPane.ERROR_MESSAGE);
+						}
+						else {
+							_middleEnd.repaintAll();
 						}
 					}
 				}
@@ -604,13 +616,11 @@ public class App implements GUIConstants {
 	 * @return javax.swing.JMenuItem	
 	 */
 	public JMenuItem createEditMenuItem(final Grouping<Unit> g) {
-		System.out.println("7" + g.toString());
 		JMenuItem item = new JMenuItem();
 		item.setText("New " + g.getName() + "...");
 		item.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("6" + g.toString());
 				getInputPanel().getAddingPanel().setAddPanel(g);
 				getViewInputMenuItem().doClick();
 			}

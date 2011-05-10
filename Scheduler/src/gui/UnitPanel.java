@@ -25,7 +25,6 @@ public class UnitPanel extends JPanel implements GUIConstants {
 	private Grouping<Unit> _grouping;
 	
 	public UnitPanel(MiddleEnd m, Unit u) {
-		System.out.println("3" + u.getMemberOf());
 		_middleEnd = m;
 		_grouping = u.getMemberOf();
 		_mainPanel = new JPanel();
@@ -35,7 +34,6 @@ public class UnitPanel extends JPanel implements GUIConstants {
 	}
 	
 	public UnitPanel(MiddleEnd m, Unit u, Grouping<Unit> g) {
-		System.out.println("2" + g.toString());
 		_middleEnd = m;
 		_grouping = g;
 		_mainPanel = new JPanel();
@@ -48,30 +46,30 @@ public class UnitPanel extends JPanel implements GUIConstants {
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		_mainPanel.setLayout(new BoxLayout(_mainPanel, BoxLayout.X_AXIS));
 		_tablePanel.setLayout(new BoxLayout(_tablePanel, BoxLayout.Y_AXIS));
-//		_tablePanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, INPUTTABLE_HEIGHT));
 		final HashMap<Attribute, JComponent> components = new HashMap<Attribute, JComponent>();
 		for (final Attribute attr : unit.getAttributes()) {
 			JLabel titleLabel = Utility.getTitleLabel(attr);
 			if (attr instanceof GroupingAttribute) {
 				GroupingAttribute<Unit> g = (GroupingAttribute<Unit>) attr;
-				components.put(attr, new InputTablePane(_middleEnd, g.getBlankUnit().getAttributes(), g));
-				_tablePanel.setPreferredSize(components.get(attr).getPreferredSize());
-				_tablePanel.add(components.get(attr));
+				if (null == components.put(attr, new InputTablePane(_middleEnd, g.getBlankUnit().getAttributes(), g))) {
+					_tablePanel.add(components.get(attr));
+					_tablePanel.setVisible(false);
+				}
 			}
 			JComponent comp = Utility.getField(attr);
 			if (comp instanceof JButton) {
 				((JButton) comp).addActionListener(new ActionListener() {
-					@Override
 					public void actionPerformed(ActionEvent e) {
-						boolean hasPanel = false;
 						for (int i = 0; i < _tablePanel.getComponentCount(); i++) {
 							if (_tablePanel.getComponent(i) instanceof InputTablePane) {
 								InputTablePane pane = (InputTablePane) _tablePanel.getComponent(i);
-								if (pane == components.get(attr))
+								if (pane == components.get(attr)) {
 									pane.setVisible(!pane.isVisible());
-								else
+									_tablePanel.setVisible(pane.isVisible());
+								}
+								else {
 									pane.setVisible(false);
-								revalidate();
+								}
 								repaint();
 							}
 						}
@@ -87,11 +85,8 @@ public class UnitPanel extends JPanel implements GUIConstants {
 			toAdd.add(comp);
 			_mainPanel.add(toAdd);
 		}
-		this.add(_mainPanel);
-		this.add(Box.createRigidArea(new Dimension(10, 10)));
 		JButton savebutton = new JButton(buttonstring);
 		savebutton.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				Collection<Attribute> attributes = components.keySet();
 				for (Attribute attr : attributes) {
@@ -191,19 +186,15 @@ public class UnitPanel extends JPanel implements GUIConstants {
 						unit.setAttribute(new UnitAttribute(attr.getTitle(), value, grouping));
 					}
 				}
-				if (_grouping != null) {
-					if (!_grouping.getMembers().contains(unit)) {
-						_grouping.addMember(unit);
-						System.out.println("1" + _grouping.toString());
-						_grouping = null;
-					}
+				
+				if (!_grouping.getMembers().contains(unit)) {
+					_grouping.addMember(unit);
 				}
 				_middleEnd.repaintAll();
 			}
 		});
 		final JButton actuallydeletebutton = new JButton("Actually delete this unit");
 		actuallydeletebutton.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				_mainPanel.removeAll();
 				_buttonPanel.removeAll();
@@ -213,21 +204,22 @@ public class UnitPanel extends JPanel implements GUIConstants {
 			}
 		});
 		actuallydeletebutton.setVisible(false);
-		JButton deletebutton = new JButton("Delete this unit");
+		final JButton deletebutton = new JButton("Delete this unit");
 		deletebutton.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				actuallydeletebutton.setVisible(true);
 				_buttonPanel.repaint();
+				deletebutton.setText("Over there ----->");
 			}
 		});
 		_buttonPanel.add(savebutton);
 		_buttonPanel.add(deletebutton);
 		_buttonPanel.add(actuallydeletebutton);
+		this.add(_mainPanel);
+		this.add(Box.createRigidArea(SMALLSPACING_SIZE));
 		this.add(_buttonPanel);
-		this.add(Box.createRigidArea(new Dimension(10, 10)));
+		this.add(Box.createRigidArea(SMALLSPACING_SIZE));
 		this.add(_tablePanel);
-		this.setPreferredSize(UNITPANEL_SIZE);
 		this.repaint();
 	}
 }
