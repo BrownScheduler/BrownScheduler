@@ -2,9 +2,12 @@ package basic;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 import backbone.Attribute;
+import backbone.GroupingAttribute;
+import backbone.StringAttribute;
 import backbone.Unit;
 
 
@@ -37,7 +40,6 @@ public abstract class DefaultUnit implements Unit{
 		titles.put(attribute.getTitle(), attribute);
 	}
 	
-	@Override
 	public String getName(){
 		return this._name;
 	}

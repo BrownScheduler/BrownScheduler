@@ -44,7 +44,6 @@ public class DefaultRound extends backbone.Round{
 	}
 	
 	
-	@Override
 	public String toString(){
 		
 		String r = "";

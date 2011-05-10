@@ -1,6 +1,5 @@
 package fileio;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -13,9 +12,9 @@ import backbone.Tournament;
 
 public class SerialIO {
 
-	public static void writeTournament(File file, Tournament tournament) throws BackupException {
+	public static void writeTournament(String fileName, Tournament tournament) throws BackupException {
 		try {
-			ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(file));
+			ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(fileName));
 			out.writeObject(tournament);
 			out.flush();
 			out.close();
@@ -25,9 +24,9 @@ public class SerialIO {
 		}
 	}
 
-	public static Tournament readTournament(File file) throws BackupException {
+	public static Tournament readTournament(String fileName) throws BackupException {
 		try {
-			ObjectInputStream in = new ObjectInputStream(new FileInputStream(file));
+			ObjectInputStream in = new ObjectInputStream(new FileInputStream(fileName));
 			return (Tournament) in.readObject();
 		} catch (IOException e) {
 			e.printStackTrace();

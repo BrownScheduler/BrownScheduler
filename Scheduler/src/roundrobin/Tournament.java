@@ -7,7 +7,9 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.UIManager.LookAndFeelInfo;
 
-import middleend.TMNTScheduler;
+import middleend.MiddleEnd;
+import plugin1.Tourney;
+
 import backbone.Grouping;
 import backbone.Round;
 
@@ -23,7 +25,7 @@ public class Tournament implements backbone.Tournament {
 		_rounds = new ArrayList<Round>();
 		_allRefs = new RefereeGrouping(this, "Referees");
 		_allTeams = new TeamGrouping(this, "Teams");
-		_allPlayers = new PlayerGrouping(this, "Players");
+		_allPlayers = new PlayerGrouping(this, null, "Players");
 		_allFields = new FieldGrouping(this, "Fields");
 	}
 	
@@ -46,11 +48,6 @@ public class Tournament implements backbone.Tournament {
 		groups.add(_allPlayers);
 		groups.add(_allFields);
 		return groups;
-	}
-
-	@Override
-	public backbone.Tournament getNew() {
-		return new Tournament();
 	}
 
 
@@ -93,7 +90,7 @@ public class Tournament implements backbone.Tournament {
 		    // handle exception
 		}
 		Tournament t = new Tournament();
-		new TMNTScheduler(t);
+		new MiddleEnd(t);
 	}
 
 }

@@ -5,14 +5,18 @@ import plugin1.MyCategory;
 public class PlayerGrouping extends MyCategory<Player> {
 
 	private Tournament _t;
-	public PlayerGrouping(Tournament t, String name) {
+	private Team _team;
+	public PlayerGrouping(Tournament t, Team team, String name) {
 		super(name);
 		_t = t;
+		_team = team;
 	}
 
 	@Override
 	public Player getBlank() {
-		return new Player(_t, "");
+		Player p = new Player(_t, "");
+		p.setTeam(_team);
+		return p;
 	}
 
 }
