@@ -16,16 +16,16 @@ public interface GUIConstants {
 	Color FG_TEXT_COLOR = Color.black;
 	Color BG_TEXT_COLOR = Color.black;
 	
-	boolean IMAGESON = false;
-	ImageIcon INTROIMAGE = new ImageIcon("src/images/tmnt.jpg");
-	ImageIcon TREEOPENIMAGE = new ImageIcon("src/images/tmnt.jpg");
-	ImageIcon TREECLOSEDIMAGE = new ImageIcon("src/images/tmnt.jpg");
-	ImageIcon TREELEAFIMAGE = new ImageIcon("src/images/tmnt.jpg");
-	ImageIcon ADDBUTTONIMAGE = new ImageIcon("src/images/tmnt.jpg");
-	ImageIcon EDITBUTTONIMAGE = new ImageIcon("src/images/tmnt.jpg");
-	ImageIcon DELETEBUTTONIMAGE = new ImageIcon("src/images/tmnt.jpg");
-	ImageIcon SAVEBUTTONIMAGE = new ImageIcon("src/images/tmnt.jpg");
-	ImageIcon FRAMEIMAGE = new ImageIcon("src/images/tmnt.jpg");
+	boolean IMAGESON = true;
+	ImageIcon INTROIMAGE = new ImageIcon("src/images/logo.png");
+	ImageIcon TREEOPENIMAGE = null;
+	ImageIcon TREECLOSEDIMAGE = null;
+	ImageIcon TREELEAFIMAGE = null;
+	ImageIcon ADDBUTTONIMAGE = null;
+	ImageIcon EDITBUTTONIMAGE = null;
+	ImageIcon DELETEBUTTONIMAGE = null;
+	ImageIcon SAVEBUTTONIMAGE = null;
+	ImageIcon FRAMEIMAGE = null;
 	
 	String TOURNAMENT_EXTENSION = ".tmnt";
 	String CATEGORY_EXTENSION = ".csv";

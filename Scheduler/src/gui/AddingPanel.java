@@ -40,9 +40,11 @@ public class AddingPanel extends JPanel implements GUIConstants {
 		}
 		JLabel initLabel = new JLabel();
 		this.setMinimumSize(ADDINGPANEL_SIZE);
-		initLabel.setText("Choose a category on the side to begin editing!");
-		if (IMAGESON)
+		initLabel.setText("Welcome to TMNTScheduler! Choose a category on the side to begin editing!");
+		if (IMAGESON) {
 			initLabel.setIcon(INTROIMAGE);
+			initLabel.setText("");
+		}
 		initLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		JPanel initPanel = new JPanel();
