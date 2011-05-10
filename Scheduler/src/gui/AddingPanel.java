@@ -60,6 +60,7 @@ public class AddingPanel extends JPanel implements GUIConstants {
 	}
 	
 	public void setAddPanel(Grouping<Unit> grouping) {
+		System.out.println("4" + grouping.toString());
 		this.removeAll();
 		this.add(new UnitPanel(_middleEnd, grouping.getBlank(), grouping));
 		_currView = 3;
@@ -79,6 +80,7 @@ public class AddingPanel extends JPanel implements GUIConstants {
 			break;
 		case 3:
 			this.setAddPanel((Grouping<Unit>) _currViewObject);
+			System.out.println("5" + _currViewObject.toString());
 			break;
 		default:
 		}

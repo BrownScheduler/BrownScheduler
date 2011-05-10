@@ -25,6 +25,7 @@ public class UnitPanel extends JPanel implements GUIConstants {
 	private Grouping<Unit> _grouping;
 	
 	public UnitPanel(MiddleEnd m, Unit u) {
+		System.out.println("3" + u.getMemberOf());
 		_middleEnd = m;
 		_grouping = u.getMemberOf();
 		_mainPanel = new JPanel();
@@ -34,6 +35,7 @@ public class UnitPanel extends JPanel implements GUIConstants {
 	}
 	
 	public UnitPanel(MiddleEnd m, Unit u, Grouping<Unit> g) {
+		System.out.println("2" + g.toString());
 		_middleEnd = m;
 		_grouping = g;
 		_mainPanel = new JPanel();
@@ -192,6 +194,7 @@ public class UnitPanel extends JPanel implements GUIConstants {
 				if (_grouping != null) {
 					if (!_grouping.getMembers().contains(unit)) {
 						_grouping.addMember(unit);
+						System.out.println("1" + _grouping.toString());
 						_grouping = null;
 					}
 				}

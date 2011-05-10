@@ -604,11 +604,13 @@ public class App implements GUIConstants {
 	 * @return javax.swing.JMenuItem	
 	 */
 	public JMenuItem createEditMenuItem(final Grouping<Unit> g) {
+		System.out.println("7" + g.toString());
 		JMenuItem item = new JMenuItem();
 		item.setText("New " + g.getName() + "...");
 		item.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				System.out.println("6" + g.toString());
 				getInputPanel().getAddingPanel().setAddPanel(g);
 				getViewInputMenuItem().doClick();
 			}

@@ -32,8 +32,10 @@ public class MiddleEnd {
 	}
 	
 	public boolean openTournament(File file) {
+		System.out.println(_tmnt.toString());
 		try {
 			_tmnt = SerialIO.readTournament(file);
+			System.out.println(_tmnt.toString());
 			return true;
 		} catch (BackupException e) {
 			return false;

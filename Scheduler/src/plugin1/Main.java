@@ -1,5 +1,6 @@
 package plugin1;
 
+import java.io.File;
 import java.util.*;
 
 import exception.BackupException;
@@ -42,8 +43,8 @@ public class Main {
 		
 		Round r = t.createNextRound();
 		
-		CSVIO.loadGrouping("blah.csv", t);
-		CSVIO.writeGrouping("blah2.csv", r);
+		CSVIO.loadGrouping(new File("blah.csv"), t);
+		CSVIO.writeGrouping(new File("blah2.csv"), r);
 		
 	}
 
