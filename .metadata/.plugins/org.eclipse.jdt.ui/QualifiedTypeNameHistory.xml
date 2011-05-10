@@ -27,4 +27,5 @@
 <fullyQualifiedTypeName name="java.util.Collections"/>
 <fullyQualifiedTypeName name="backbone.Pairing"/>
 <fullyQualifiedTypeName name="backbone.StringAttribute"/>
+<fullyQualifiedTypeName name="middleend.TMNTScheduler"/>
 </qualifiedTypeNameHistroy>
