@@ -1,4 +1,4 @@
-package roundrobin;
+package roundrobin2;
 
 import java.util.List;
 
@@ -6,13 +6,13 @@ import plugin1.MyCategory;
 
 public class TeamGrouping extends MyCategory<Team> {
 
-	private Tournament _t;
+	private Turn _t;
 	
-	public TeamGrouping(Tournament t, String name) {
+	public TeamGrouping(Turn t, String name) {
 		super(name);
 		_t = t;
 	}
-	public TeamGrouping(Tournament t, String name, List<Team> teams) {
+	public TeamGrouping(Turn t, String name, List<Team> teams) {
 		super(name);
 		_t = t;
 		for(Team te : teams){
@@ -24,8 +24,5 @@ public class TeamGrouping extends MyCategory<Team> {
 	public Team getBlank() {
 		return new Team(_t, "");
 	}
-<<<<<<< HEAD
-=======
 
->>>>>>> 55df286c4cdb3d6cc03cc13bd49f3ca598666edf
 }
