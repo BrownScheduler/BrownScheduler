@@ -1,0 +1,25 @@
+situations:
+	invalid tournament edit
+	duplicate names
+	unfilled information
+	invalidly filled ingormation????
+	ungeneratable tournament
+	plugin error (catch all for can't run)
+	
+	
+
+
+SchedulerException: super
+	InvalidStateException: the tournaments state cannot be set or used because of some problem
+		InvalidInfoException: we have been given bad information
+			MissingInfoException: back end/plugin are missing requisite information
+				MissingInputInfoException: Missing info from first input section
+				MissingManagementInfoException: missing info in management section
+					MissingResultsException: we need the results of the previous round
+			DuplicateNameException
+		InvalidRoundException
+	ImpossibleTournamentException
+	IOException: we can't io
+		CSVIOException: Throw when CSV reading/writing throws an Exception
+		BackUpException: Thrown when back up fails
+

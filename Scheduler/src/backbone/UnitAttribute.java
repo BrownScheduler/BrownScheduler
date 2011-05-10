@@ -1,0 +1,44 @@
+package backbone;
+
+import java.util.List;
+
+public class UnitAttribute<T extends Unit> extends Attribute {
+	
+	public T att; //TODO: getter and the MAJOR REFACTORING that will follow, sigh
+	private Grouping<T> memberOf;
+	
+	public UnitAttribute(String title, Grouping<T> grouping){
+		super(title);
+		this.att = null;
+		this.memberOf = grouping;
+	}
+	public UnitAttribute(String title, T att, Grouping<T> grouping){
+		super(title);
+		this.att = att;
+		this.memberOf = grouping;
+	}
+	
+	public Grouping<T> getMemberOf() {
+		return this.memberOf;
+	}
+	
+	public List<T> getListOfUnits() {
+		return this.memberOf.getMembers();
+	}
+	
+	@Override
+	public Type getType() {
+		return Attribute.Type.UNIT;
+	}
+	
+	public void setGrouping(Grouping<T> group){
+		this.memberOf = group;
+	}
+
+	@Override
+	public String toString() {
+		if(att == null)
+			return "";
+		return att.getName();
+	}
+}

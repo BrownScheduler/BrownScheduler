@@ -1,0 +1,13 @@
+package plugin1;
+
+public class Main {
+	
+	
+	
+	public static void main(String args[]){
+		Tourney t = new Tourney();
+		
+		Team t1 = new Team("Team 1");
+	}
+
+}
