@@ -1,5 +1,0 @@
-package roundrobin2;
-
-public class Round extends backbone.Round {
-
-}

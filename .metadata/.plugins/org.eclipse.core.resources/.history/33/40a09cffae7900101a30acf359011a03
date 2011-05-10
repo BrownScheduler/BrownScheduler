@@ -1,7 +1,0 @@
-package roundrobin;
-
-import plugin1.MyCategory;
-
-public class RefereeGrouping extends MyCategory<T> {
-
-}

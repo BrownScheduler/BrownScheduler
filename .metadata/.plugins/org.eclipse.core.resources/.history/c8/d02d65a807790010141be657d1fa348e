@@ -1,7 +1,0 @@
-package roundrobin;
-
-import backbone.Pairing;
-
-public class Game extends Pairing{
-
-}

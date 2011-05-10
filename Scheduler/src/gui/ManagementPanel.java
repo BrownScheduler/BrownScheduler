@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import javax.swing.SwingConstants;
 
 public class ManagementPanel extends JTabbedPane implements GUIConstants {
 
@@ -17,7 +18,7 @@ public class ManagementPanel extends JTabbedPane implements GUIConstants {
 	 * This is the default constructor
 	 */
 	public ManagementPanel(MiddleEnd me) {
-		super(JTabbedPane.TOP);
+		super(SwingConstants.TOP);
 		_middleEnd = me;
 		_roundpanels = new ArrayList<RoundPanel>();
 		this.setSize(DEFAULT_SIZE);
@@ -34,14 +35,20 @@ public class ManagementPanel extends JTabbedPane implements GUIConstants {
 		_roundpanels.clear();
 		this.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 		for (Round round : _middleEnd.getTournament().getRounds()) {
-			RoundPanel rp = new RoundPanel(_middleEnd, round);
-			_roundpanels.add(rp);
-			JPanel rpcontainer = new JPanel();
-			rpcontainer.setLayout(new java.awt.BorderLayout());
-			rpcontainer.add(rp, java.awt.BorderLayout.CENTER);
-			JScrollPane rpscroller = new JScrollPane(rpcontainer);
-			this.addTab(round.getName(), rpscroller);
-			this.setSelectedComponent(rpscroller);
+			if (round != null) {
+				RoundPanel rp = new RoundPanel(_middleEnd, round);
+				_roundpanels.add(rp);
+				JPanel rpcontainer = new JPanel();
+				if (COLORSON) {
+					rpcontainer.setBackground(BACKGROUND_COLOR);
+					rpcontainer.setForeground(FOREGROUND_COLOR);
+				}
+				rpcontainer.setLayout(new java.awt.BorderLayout());
+				rpcontainer.add(rp, java.awt.BorderLayout.CENTER);
+				JScrollPane rpscroller = new JScrollPane(rpcontainer);
+				this.addTab(round.getName(), rpscroller);
+				this.setSelectedComponent(rpscroller);
+			}
 		}
 	}
 

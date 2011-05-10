@@ -34,12 +34,28 @@ public class AddingPanel extends JPanel implements GUIConstants {
 	 * @return void
 	 */
 	private void initialize() {
+		if (COLORSON) {
+			this.setBackground(BACKGROUND_COLOR);
+			this.setForeground(FOREGROUND_COLOR);
+		}
 		JLabel initLabel = new JLabel();
 		this.setMinimumSize(ADDINGPANEL_SIZE);
 		initLabel.setText("Choose a category on the side to begin editing!");
+		if (IMAGESON)
+			initLabel.setIcon(INTROIMAGE);
 		initLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		this.setLayout(new GridLayout(0, 1));
-		this.add(initLabel);
+		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		JPanel initPanel = new JPanel();
+		if (COLORSON) {
+			initPanel.setBackground(BACKGROUND_COLOR);
+			this.setForeground(FOREGROUND_COLOR);
+		}
+		initPanel.add(Box.createHorizontalGlue());
+		initPanel.add(initLabel);
+		initPanel.add(Box.createHorizontalGlue());
+		this.add(Box.createVerticalGlue());
+		this.add(initPanel);
+		this.add(Box.createVerticalGlue());
 	}
 	
 	public void setViewPanel(Unit unit) {
@@ -83,7 +99,7 @@ public class AddingPanel extends JPanel implements GUIConstants {
 			break;
 		default:
 		}
+		this.revalidate();
 		this.repaint();
-		this.setSize(new Dimension(this.getWidth() + 1, this.getHeight() + 1));
-		this.setSize(new Dimension(this.getWidth() - 1, this.getHeight() - 1));	}
+	}
 }

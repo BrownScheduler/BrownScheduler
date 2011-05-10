@@ -7,6 +7,7 @@ import javax.swing.JTree;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreeSelectionModel;
@@ -15,7 +16,7 @@ public class AttributeTree extends JTree implements GUIConstants {
 
 	public static final long serialVersionUID = 1L;
 	
-	private TreeModel _treeModel;  //  @jve:decl-index=0:
+	private TreeModel _treeModel;
 	private MiddleEnd _middleEnd;
 	private AddingPanel _addingPanel;
 	
@@ -35,6 +36,17 @@ public class AttributeTree extends JTree implements GUIConstants {
 			this.setSize(TREE_SIZE);
 			this.setMaximumSize(new Dimension(getWidth(), Integer.MAX_VALUE));
 			this.setPreferredSize(getSize());
+			if (COLORSON) {
+				this.setBackground(BACKGROUND_COLOR);
+				this.setForeground(FOREGROUND_COLOR);
+			}
+			if (IMAGESON) {
+				DefaultTreeCellRenderer renderer = new DefaultTreeCellRenderer();
+				renderer.setOpenIcon(TREEOPENIMAGE);
+				renderer.setClosedIcon(TREECLOSEDIMAGE);
+				renderer.setLeafIcon(TREELEAFIMAGE);
+				this.setCellRenderer(renderer);
+			}
 			this.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
 			this.setScrollsOnExpand(true);
 			this.resetTreeModel();
@@ -59,6 +71,7 @@ public class AttributeTree extends JTree implements GUIConstants {
 		_treeModel = new DefaultTreeModel(root);
 		this.setModel(_treeModel);
 		this.addTreeSelectionListener(new TreeSelectionListener() {
+			@Override
 			public void valueChanged(TreeSelectionEvent e) {
 				DefaultMutableTreeNode node = (DefaultMutableTreeNode) getLastSelectedPathComponent();
 				if (node == null)
@@ -84,6 +97,7 @@ public class AttributeTree extends JTree implements GUIConstants {
 			group = g;
 		}
 		
+		@Override
 		public String toString() {
 			return group.getName();
 		}
@@ -96,6 +110,7 @@ public class AttributeTree extends JTree implements GUIConstants {
 			unit = u;
 		}
 		
+		@Override
 		public String toString() {
 			return unit.getName();
 		}

@@ -35,7 +35,6 @@ public class Player implements Unit {
 	}
 	@Override
 	public boolean deleteFromGrouping() {
-		_team.att.removePlayer(this);
 		return _t.getPlayers().deleteMember(this);
 	}
 

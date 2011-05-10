@@ -38,17 +38,14 @@ public class InputTablePane extends JScrollPane implements GUIConstants {
 	}
 	
 	private void initialize(List<Attribute> headers, GroupingAttribute<Unit> group) {
-		this.setSize(INPUTTABLE_SIZE);
 		this.setPreferredSize(INPUTTABLE_SIZE);
-		this.setMinimumSize(this.getSize());
-		this.setMaximumSize(new Dimension(Integer.MAX_VALUE, this.getHeight()));
+		this.setMaximumSize(new Dimension(Integer.MAX_VALUE, INPUTTABLE_HEIGHT));
 		this.setVisible(false);
 		_table = new JTable();
 		_table.setSize(INPUTTABLE_SIZE);
 		_table.setRowHeight(ROW_HEIGHT);
 		_table.getTableHeader().setReorderingAllowed(false);
-		List<List<Attribute>> data = (List<List<Attribute>>) new ArrayList<List<Attribute>>();
-		System.out.println(group.getMembers().size());
+		List<List<Attribute>> data = new ArrayList<List<Attribute>>();
 		for (Unit u : group.getMembers()) {
 			data.add(u.getAttributes());
 		}
@@ -66,7 +63,7 @@ public class InputTablePane extends JScrollPane implements GUIConstants {
 			}
 		}
 		ExcelAdapter exceladapt = new ExcelAdapter(_table);
-		this.add(_table);
+		this.getViewport().add(_table);
 	}
 	
 	public List<Unit> getUnitsInRowsList() {
@@ -110,6 +107,7 @@ public class InputTablePane extends JScrollPane implements GUIConstants {
 			Object[][] dataarray = d.toArray(new Object[0][0]);
 			this.setDataVector(dataarray, _headers);
 			this.addTableModelListener(new TableModelListener() {
+				@Override
 				public void tableChanged(TableModelEvent e) {
 					if ((e.getLastRow() == (getRowCount()-1)) && (e.getType() == TableModelEvent.UPDATE)) {
 						for (int i = 0; i < DEFAULT_TABLE_BLANK_ROWS; i++) {
@@ -120,14 +118,17 @@ public class InputTablePane extends JScrollPane implements GUIConstants {
 			});
 		}
 		
+		@Override
 		public boolean isCellEditable(int row, int column) {
 			return _editable;
 		}
 		
+		@Override
 		public String getColumnName(int i) {
 			return _headers[i].getTitle();
 		}
 		
+		@Override
 		public Class<?> getColumnClass(int i) {
 			Attribute a = _headers[i];
 			if (a.getType() == Attribute.Type.BOOLEAN) {
@@ -145,6 +146,7 @@ public class InputTablePane extends JScrollPane implements GUIConstants {
 			return Object.class;
 		}
 
+		@Override
 		public int getColumnCount() {
 			return _headers.length;
 		}
