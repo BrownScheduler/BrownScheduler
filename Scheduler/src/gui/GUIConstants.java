@@ -10,8 +10,8 @@ import javax.swing.ImageIcon;
  */
 public interface GUIConstants {
 
-	boolean COLORSON = false;
-	Color BACKGROUND_COLOR = new Color(219,219,112);
+	boolean COLORSON = true;
+	Color BACKGROUND_COLOR = new Color(214, 223, 217);
 	Color FOREGROUND_COLOR = Color.black;
 	Color FG_TEXT_COLOR = Color.black;
 	Color BG_TEXT_COLOR = Color.black;
