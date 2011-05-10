@@ -24,8 +24,4 @@ public class TeamGrouping extends MyCategory<Team> {
 	public Team getBlank() {
 		return new Team(_t, "");
 	}
-<<<<<<< HEAD
-=======
-
->>>>>>> 55df286c4cdb3d6cc03cc13bd49f3ca598666edf
 }
