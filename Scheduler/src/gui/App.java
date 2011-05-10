@@ -94,8 +94,10 @@ public class App implements GUIConstants {
 					_middleEnd.closeThisMiddleEnd();
 				}
 			});
-			if (IMAGESON)
-				_jFrame.setIconImage(FRAMEIMAGE.getImage());
+			if (IMAGESON) {
+				if (FRAMEIMAGE != null)
+					_jFrame.setIconImage(FRAMEIMAGE.getImage());
+			}
 			getViewInputMenuItem().doClick();
 			_jFrame.setContentPane(getMainContentAndToolbarPane());
 			getViewInputMenuItem().setSelected(true);
