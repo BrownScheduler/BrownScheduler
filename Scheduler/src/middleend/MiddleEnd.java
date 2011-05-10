@@ -75,8 +75,4 @@ public class MiddleEnd extends Thread {
 			return false;
 		}
 	}
-//	
-//	public void run() {
-//		while(true) {}
-//	}
 }

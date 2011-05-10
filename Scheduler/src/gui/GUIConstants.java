@@ -3,6 +3,8 @@ package gui;
 import java.awt.Dimension;
 import java.awt.Color;
 
+import javax.swing.ImageIcon;
+
 /**
  * Holds constants that the GUI needs to use.
  */
@@ -13,7 +15,15 @@ public interface GUIConstants {
 	Color FG_TEXT_COLOR = Color.black;
 	Color BG_TEXT_COLOR = Color.black;
 	
-	boolean imagesOn = false;
+	boolean IMAGESON = false;
+	ImageIcon BEGINNINGIMAGE = null;
+	ImageIcon OPENFOLDERIMAGE = null;
+	ImageIcon CLOSEDFOLDERIMAGE = null;
+	ImageIcon PAGEIMAGE = null;
+	ImageIcon ADDBUTTONIMAGE = null;
+	ImageIcon DELETEBUTTONIMAGE = null;
+	ImageIcon SAVEBUTTONIMAGE = null;
+	ImageIcon FRAMEIMAGE = null;
 	
 	String TOURNAMENT_EXTENSION = ".tmnt";
 	String CATEGORY_EXTENSION = ".csv";

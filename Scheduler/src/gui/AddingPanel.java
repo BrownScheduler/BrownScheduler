@@ -39,7 +39,13 @@ public class AddingPanel extends JPanel implements GUIConstants {
 		initLabel.setText("Choose a category on the side to begin editing!");
 		initLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		this.add(initLabel);
+		JPanel initPanel = new JPanel();
+		initPanel.add(Box.createHorizontalGlue());
+		initPanel.add(initLabel);
+		initPanel.add(Box.createHorizontalGlue());
+		this.add(Box.createVerticalGlue());
+		this.add(initPanel);
+		this.add(Box.createVerticalGlue());
 	}
 	
 	public void setViewPanel(Unit unit) {

@@ -87,6 +87,8 @@ public class App implements GUIConstants {
 			_jFrame.setJMenuBar(getJJMenuBar());
 			_jFrame.setSize(DEFAULT_SIZE);
 			_jFrame.setMinimumSize(MIN_SIZE);
+			if (IMAGESON)
+				_jFrame.setIconImage(FRAMEIMAGE.getImage());
 			getViewInputMenuItem().doClick();
 			_jFrame.setContentPane(getMainContentAndToolbarPane());
 			getViewInputMenuItem().setSelected(true);
