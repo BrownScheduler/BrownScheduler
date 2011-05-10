@@ -285,7 +285,6 @@ public class App implements GUIConstants {
 					chooser.setFileFilter(new FileNameExtensionFilter("Tournament File", TOURNAMENT_EXTENSION));
 					int returnval = chooser.showSaveDialog(getJFrame());
 					if (returnval == JFileChooser.APPROVE_OPTION) {
-						getMiddleEnd().saveTournament(chooser.getSelectedFile());
 						if (!getMiddleEnd().saveTournament(chooser.getSelectedFile())) {
 							JOptionPane.showMessageDialog(_jFrame, "The name specified for the file was invalid.", "Error", JOptionPane.ERROR_MESSAGE);
 						}
@@ -316,7 +315,6 @@ public class App implements GUIConstants {
 					chooser.setFileFilter(new FileNameExtensionFilter("CSV File", CATEGORY_EXTENSION));
 					int returnval = chooser.showSaveDialog(getJFrame());
 					if (returnval == JFileChooser.APPROVE_OPTION) {
-						getMiddleEnd().saveTournament(chooser.getSelectedFile());
 						if (!getMiddleEnd().importCategory(chooser.getSelectedFile())) {
 							JOptionPane.showMessageDialog(_jFrame, "The name specified for the file was invalid.", "Error", JOptionPane.ERROR_MESSAGE);
 						}
