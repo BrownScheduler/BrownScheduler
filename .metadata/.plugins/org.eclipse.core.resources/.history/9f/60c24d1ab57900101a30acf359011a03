@@ -1,9 +1,0 @@
-package roundrobin;
-
-public class ConstraintHandler {
-
-	public ConstraintHandler(Tournament tournament) {
-		// TODO Auto-generated constructor stub
-	}
-
-}
