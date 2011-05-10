@@ -7,7 +7,6 @@ import backbone.Attribute;
 import backbone.Grouping;
 import backbone.StringAttribute;
 import backbone.Unit;
-import backbone.UnitAttribute;
 
 public class Player implements Unit {
 

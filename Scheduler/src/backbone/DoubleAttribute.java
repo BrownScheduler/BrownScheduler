@@ -21,6 +21,7 @@ public class DoubleAttribute extends Attribute {
 		this.att = att;
 	}
 	
+	@Override
 	public Type getType() {
 		return Attribute.Type.DOUBLE;
 	}

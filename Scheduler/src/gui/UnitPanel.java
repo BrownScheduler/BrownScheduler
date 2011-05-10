@@ -3,7 +3,6 @@ package gui;
 import backbone.*;
 import middleend.*;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Collection;
@@ -69,6 +68,7 @@ public class UnitPanel extends JPanel implements GUIConstants {
 			JComponent comp = Utility.getField(attr);
 			if (comp instanceof JButton) {
 				((JButton) comp).addActionListener(new ActionListener() {
+					@Override
 					public void actionPerformed(ActionEvent e) {
 						for (int i = 0; i < _tablePanel.getComponentCount(); i++) {
 							if (_tablePanel.getComponent(i) instanceof InputTablePane) {
@@ -107,6 +107,7 @@ public class UnitPanel extends JPanel implements GUIConstants {
 			savebutton.setForeground(FOREGROUND_COLOR);
 		}
 		savebutton.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				Collection<Attribute> attributes = components.keySet();
 				for (Attribute attr : attributes) {
@@ -221,6 +222,7 @@ public class UnitPanel extends JPanel implements GUIConstants {
 			actuallydeletebutton.setForeground(FOREGROUND_COLOR);
 		}
 		actuallydeletebutton.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				_mainPanel.removeAll();
 				_buttonPanel.removeAll();
@@ -238,6 +240,7 @@ public class UnitPanel extends JPanel implements GUIConstants {
 			deletebutton.setForeground(FOREGROUND_COLOR);
 		}
 		deletebutton.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				actuallydeletebutton.setVisible(true);
 				_buttonPanel.repaint();

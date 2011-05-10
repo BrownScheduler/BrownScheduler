@@ -40,6 +40,7 @@ public class Tourney implements backbone.Tournament{
 	}
 
 	
+	@Override
 	@SuppressWarnings("unchecked")
 	public ArrayList<Grouping> getCategories() {
 		ArrayList<Grouping> cats = new ArrayList<Grouping>();
@@ -48,6 +49,7 @@ public class Tourney implements backbone.Tournament{
 		return cats;
 	}
 	
+	@Override
 	public List<backbone.Round> getRounds() {
 		LinkedList<backbone.Round> rs = new LinkedList<backbone.Round>();
 		rs.addAll(rounds);

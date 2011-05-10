@@ -90,6 +90,7 @@ public class App implements GUIConstants {
 			_jFrame.setSize(DEFAULT_SIZE);
 			_jFrame.setMinimumSize(MIN_SIZE);
 			_jFrame.addWindowListener(new WindowAdapter() {
+				@Override
 				public void windowClosing(WindowEvent e) {
 					_middleEnd.closeThisMiddleEnd();
 				}
@@ -141,6 +142,7 @@ public class App implements GUIConstants {
 		if (COLORSON)
 			button.setBackground(BACKGROUND_COLOR);
 		button.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				item.doClick();
 			}
@@ -252,6 +254,7 @@ public class App implements GUIConstants {
 			_newTournamentMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_T,
 					Event.CTRL_MASK, true));
 			_newTournamentMenuItem.addActionListener(new ActionListener() {
+				@Override
 				public void actionPerformed(ActionEvent e) {
 					_middleEnd.openNewMiddleEnd();
 				}
@@ -272,6 +275,7 @@ public class App implements GUIConstants {
 			_openTournamentMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,
 					Event.CTRL_MASK, true));
 			_openTournamentMenuItem.addActionListener(new ActionListener() {
+				@Override
 				public void actionPerformed(ActionEvent e) {
 					JFileChooser chooser = new JFileChooser();
 					chooser.setFileFilter(new FileNameExtensionFilter("Tournament File", TOURNAMENT_EXTENSION));
@@ -302,6 +306,7 @@ public class App implements GUIConstants {
 			_saveTournamentMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,
 					Event.CTRL_MASK, true));
 			_saveTournamentMenuItem.addActionListener(new ActionListener() {
+				@Override
 				public void actionPerformed(ActionEvent e) {
 					JFileChooser chooser = new JFileChooser();
 					chooser.setFileFilter(new FileNameExtensionFilter("Tournament File", TOURNAMENT_EXTENSION));
@@ -332,6 +337,7 @@ public class App implements GUIConstants {
 			_importCategoryMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_I,
 					Event.CTRL_MASK, true));
 			_importCategoryMenuItem.addActionListener(new ActionListener() {
+				@Override
 				public void actionPerformed(ActionEvent e) {
 					JFileChooser chooser = new JFileChooser();
 					chooser.setFileFilter(new FileNameExtensionFilter("CSV File", CATEGORY_EXTENSION));
@@ -362,6 +368,7 @@ public class App implements GUIConstants {
 			_exportCategoryMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E,
 					Event.CTRL_MASK, true));
 			_exportCategoryMenuItem.addActionListener(new ActionListener() {
+				@Override
 				public void actionPerformed(ActionEvent e) {
 					ArrayList<Grouping> categories = new ArrayList<Grouping>(_middleEnd.getTournament().getCategories());
 					ArrayList<String> catnames = new ArrayList<String>();
@@ -430,6 +437,7 @@ public class App implements GUIConstants {
 			_exitMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q,
 					Event.CTRL_MASK, true));
 			_exitMenuItem.addActionListener(new ActionListener() {
+				@Override
 				public void actionPerformed(ActionEvent e) {
 					_middleEnd.closeThisMiddleEnd();
 				}

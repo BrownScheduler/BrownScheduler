@@ -13,12 +13,10 @@ public class MiddleEnd extends Thread {
 	TMNTScheduler _scheduler;
 	Tournament _tmnt;
 	App _app;
-	boolean _continue;
 	
 	public MiddleEnd(Tournament t, TMNTScheduler s) {
 		_tmnt = t;
 		_scheduler = s;
-		_continue = true;
 		_app = new App(this);
 	}
 	
@@ -32,15 +30,6 @@ public class MiddleEnd extends Thread {
 	
 	public void openNewMiddleEnd(Tournament t) {
 		_scheduler.addTMNT(t);
-	}
-	
-	public void closeThisMiddleEnd() {
-		_scheduler.removeTMNT(_tmnt);
-		this.quit();
-	}
-	
-	public void quit() {
-		_continue = false;
 	}
 	
 	public Tournament getTournament() {
@@ -80,15 +69,10 @@ public class MiddleEnd extends Thread {
 	
 	public boolean exportCategory(Grouping g, File file) {
 		try {
-			CSVIO.writeGrouping(file, (Grouping<? extends Unit>) g);
+			CSVIO.writeGrouping(file, g);
 			return true;
 		} catch (CSVException e) {
 			return false;
 		}
-	}
-	
-	public void run() {
-		while (_continue)
-		{}
 	}
 }
