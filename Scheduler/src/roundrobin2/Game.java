@@ -185,7 +185,7 @@ public class Game implements Pairing {
 			UnitAttribute att = (UnitAttribute)attribute;
 			String title = att.getTitle();
 			if(title.equals("Location")){
-				UnitAttribute<Field> attr = (UnitAttribute<Field>)att;
+				UnitAttribute<Field> attr = att;
 				if(attr == null && _location.att != null){
 					_headRef = new UnitAttribute<Referee>("Head Ref", null, _t.getRefs());
 					_assistantRef = new UnitAttribute<Referee>("Assistant Ref", null, _t.getRefs());

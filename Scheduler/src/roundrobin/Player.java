@@ -64,7 +64,7 @@ public class Player implements Unit {
 		if(attribute.getType() == Attribute.Type.STRING)
 			_name = (StringAttribute)attribute;
 		else if(attribute.getType() == Attribute.Type.UNIT){
-			Team t = (Team)((UnitAttribute<Team>)attribute).att;
+			Team t = ((UnitAttribute<Team>)attribute).att;
 			if(t == null){
 				if(_team.att != null){
 					_team.att.removePlayer(this);

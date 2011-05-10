@@ -13,12 +13,10 @@ public class MiddleEnd extends Thread {
 	TMNTScheduler _scheduler;
 	Tournament _tmnt;
 	App _app;
-	boolean _continue;
 	
 	public MiddleEnd(Tournament t, TMNTScheduler s) {
 		_tmnt = t;
 		_scheduler = s;
-		_continue = true;
 		_app = new App(this);
 	}
 	
@@ -34,15 +32,6 @@ public class MiddleEnd extends Thread {
 		_scheduler.addTMNT(t);
 	}
 	
-	public void closeThisMiddleEnd() {
-		_scheduler.removeTMNT(_tmnt);
-		this.quit();
-	}
-	
-	public void quit() {
-		_continue = false;
-	}
-	
 	public Tournament getTournament() {
 		return _tmnt;
 	}
@@ -52,26 +41,12 @@ public class MiddleEnd extends Thread {
 	}
 	
 	public boolean openTournament(File file) {
-<<<<<<< HEAD
-<<<<<<< HEAD
 		try {
 			_scheduler.addTMNT(SerialIO.readTournament(file));
-=======
-		System.out.println(_tmnt.toString());
-		try {
-			_scheduler.addTMNT(SerialIO.readTournament(file));
-			System.out.println(_tmnt.toString());
->>>>>>> 4dce8d0a0c92439693b102ec9c5a1897aa753074
 			return true;
 		} catch (BackupException e) {
 			return false;
 		}
-<<<<<<< HEAD
-=======
-		return false;
->>>>>>> 55df286c4cdb3d6cc03cc13bd49f3ca598666edf
-=======
->>>>>>> 4dce8d0a0c92439693b102ec9c5a1897aa753074
 	}
 	
 	public boolean saveTournament(File file) {
@@ -94,15 +69,10 @@ public class MiddleEnd extends Thread {
 	
 	public boolean exportCategory(Grouping g, File file) {
 		try {
-			CSVIO.writeGrouping(file, (Grouping<? extends Unit>) g);
+			CSVIO.writeGrouping(file, g);
 			return true;
 		} catch (CSVException e) {
 			return false;
 		}
-	}
-	
-	public void run() {
-		while (_continue)
-		{}
 	}
 }

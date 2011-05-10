@@ -5,7 +5,6 @@ import java.util.List;
 
 import backbone.Attribute;
 import backbone.Grouping;
-import backbone.GroupingAttribute;
 import backbone.StringAttribute;
 import backbone.Unit;
 

@@ -2,17 +2,14 @@ package roundrobin2;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 
 import backbone.Attribute;
-import backbone.CompetitiveUnit;
 import backbone.Grouping;
 import backbone.GroupingAttribute;
 import backbone.IntAttribute;
 import backbone.StringAttribute;
 import backbone.Unit;
-import backbone.UnitAttribute;
 
 public class Team implements Unit {
 

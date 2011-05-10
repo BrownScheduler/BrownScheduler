@@ -57,6 +57,7 @@ public class GovOppUnit implements Unit{
 		
 	}
 	
+	@Override
 	public String toString(){
 		String r = "Gov? ";
 		r += isGov;

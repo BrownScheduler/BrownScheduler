@@ -45,6 +45,7 @@ public class Judge implements Unit{
 		return atts;
 	}
 	
+	@Override
 	public String getName(){
 		return this._name;
 	}
@@ -69,6 +70,7 @@ public class Judge implements Unit{
 		this._conflictedTeams.add(t);
 	}
 
+	@Override
 	public String toString(){
 		String r = "Name: " + this._name;
 		r += " Conflicts: ";

@@ -2,8 +2,6 @@ package gui;
 
 import middleend.*;
 import backbone.*;
-import java.awt.GridLayout;
-import java.awt.Dimension;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;

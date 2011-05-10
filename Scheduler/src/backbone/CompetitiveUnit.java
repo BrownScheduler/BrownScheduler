@@ -1,7 +1,5 @@
 package backbone;
 
-import java.util.ArrayList;
-
 /**
  * The interface used for describing a competitive unit
  * 
@@ -9,5 +7,6 @@ import java.util.ArrayList;
  * @author pclay
  *
  */
+@Deprecated
 public interface CompetitiveUnit extends Unit {
 }
