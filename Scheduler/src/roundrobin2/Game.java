@@ -172,7 +172,7 @@ public class Game implements Pairing {
 			return g;
 		}
 		for(Referee r : _t.getRefs().getMembers()){
-			if(r.getField() == f) g.addMember(r);
+			if(r.getField() == f || r.getField() == null) g.addMember(r);
 		}
 		return g;
 	}
@@ -222,19 +222,19 @@ public class Game implements Pairing {
 					_winner = null;
 					_loser = null;
 				}
-				if(newWinner.isGov){
+				else if(newWinner.isGov){
 					if(_winner != _homeTeam.att){
 						if(_winner != null) _winner.setGamesWon(_winner.getGamesWon() - 1);
 						_winner = _homeTeam.att;
 						_winner.setGamesWon(_winner.getGamesWon() + 1);
 					}
-					if(_loser != _awayTeam.att){
+					if(_loser != _awayTeam.att ){
 						if(_loser != null) _loser.setGamesLost(_loser.getGamesLost() - 1);
 						_loser = _awayTeam.att;
-						_loser.setGamesLost(_loser.getGamesLost() + 1);
+						if(_winner != null) _loser.setGamesLost(_loser.getGamesLost() + 1);
 					}
 				}
-				if(newWinner.isOpp){
+				else if(newWinner.isOpp){
 					if(_winner != _awayTeam.att){
 						if(_winner != null) _winner.setGamesWon(_winner.getGamesWon() - 1);
 						_winner = _awayTeam.att;
@@ -243,7 +243,7 @@ public class Game implements Pairing {
 					if(_loser != _homeTeam.att){
 						if(_loser != null) _loser.setGamesLost(_loser.getGamesLost() - 1);
 						_loser = _homeTeam.att;
-						_loser.setGamesLost(_loser.getGamesLost() + 1);
+						if(_winner != null) _loser.setGamesLost(_loser.getGamesLost() + 1);
 					}
 				}
 			}

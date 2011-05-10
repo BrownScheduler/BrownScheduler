@@ -95,6 +95,7 @@ public class App implements GUIConstants {
 					_middleEnd.closeThisMiddleEnd();
 				}
 			});
+			System.out.println(System.getProperty("user.dir"));
 			if (IMAGESON) {
 				if (FRAMEIMAGE != null)
 					_jFrame.setIconImage(FRAMEIMAGE.getImage());

@@ -17,7 +17,7 @@ public interface GUIConstants {
 	Color BG_TEXT_COLOR = Color.black;
 	
 	boolean IMAGESON = true;
-	ImageIcon INTROIMAGE = new ImageIcon("src/images/logo.png");
+	ImageIcon INTROIMAGE = new ImageIcon("Scheduler/src/images/logo.png");
 	ImageIcon TREEOPENIMAGE = null;
 	ImageIcon TREECLOSEDIMAGE = null;
 	ImageIcon TREELEAFIMAGE = null;
