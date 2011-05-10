@@ -9,7 +9,7 @@ public class GovOppGrouping extends MyCategory<GovOppUnit>{
 	@Override
 	public GovOppUnit getBlank() {
 		// TODO Auto-generated method stub
-		return new GovOppUnit(null);
+		return new GovOppUnit();
 	}
 
 	@Override

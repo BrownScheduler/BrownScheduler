@@ -30,6 +30,10 @@ public class InputPanel extends JPanel implements GUIConstants {
 	 * @return void
 	 */
 	public void initialize() {
+		if (COLORSON) {
+			this.setBackground(BACKGROUND_COLOR);
+			this.setForeground(FOREGROUND_COLOR);
+		}
 		this.setSize(DEFAULT_SIZE);
 		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		this.add(getAttributeScrollPane());

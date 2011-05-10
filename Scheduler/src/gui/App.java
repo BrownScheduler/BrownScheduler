@@ -5,6 +5,9 @@ import backbone.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Event;
 import java.awt.BorderLayout;
@@ -83,10 +86,14 @@ public class App implements GUIConstants {
 	public JFrame getJFrame() {
 		if (_jFrame == null) {
 			_jFrame = new JFrame();
-			_jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			_jFrame.setJMenuBar(getJJMenuBar());
 			_jFrame.setSize(DEFAULT_SIZE);
 			_jFrame.setMinimumSize(MIN_SIZE);
+			_jFrame.addWindowListener(new WindowAdapter() {
+				public void windowClosing(WindowEvent e) {
+					_middleEnd.closeThisMiddleEnd();
+				}
+			});
 			if (IMAGESON)
 				_jFrame.setIconImage(FRAMEIMAGE.getImage());
 			getViewInputMenuItem().doClick();
@@ -127,8 +134,11 @@ public class App implements GUIConstants {
 	 */
 	public JButton createButtonFromMenuItem(final JMenuItem item) {
 		JButton button = new JButton(item.getText());
+		if (IMAGESON)
+			button.setIcon(ADDBUTTONIMAGE);
+		if (COLORSON)
+			button.setBackground(BACKGROUND_COLOR);
 		button.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				item.doClick();
 			}
@@ -139,6 +149,10 @@ public class App implements GUIConstants {
 	public JPanel getMainContentAndToolbarPane() {
 		if (_mainContentAndToolbarPane == null) {
 			_mainContentAndToolbarPane = new JPanel();
+			if (COLORSON) {
+				_mainContentAndToolbarPane.setBackground(BACKGROUND_COLOR);
+				_mainContentAndToolbarPane.setForeground(FOREGROUND_COLOR);
+			}
 			_mainContentAndToolbarPane.setLayout(new BorderLayout());
 			_mainContentAndToolbarPane.add(getToolbar(), BorderLayout.NORTH);
 			_mainContentAndToolbarPane.add(getMainContentPane(), BorderLayout.CENTER);
@@ -154,6 +168,10 @@ public class App implements GUIConstants {
 	public JComponent getMainContentPane() {
 		if (_mainContentPane == null) {
 			_mainContentPane = new JPanel();
+			if (COLORSON) {
+				_mainContentPane.setBackground(BACKGROUND_COLOR);
+				_mainContentPane.setForeground(FOREGROUND_COLOR);
+			}
 			_mainContentPane.setLayout(new BorderLayout());
 			_mainContentPane.add(getInputPanel(), BorderLayout.CENTER);
 		}
@@ -287,7 +305,6 @@ public class App implements GUIConstants {
 					chooser.setFileFilter(new FileNameExtensionFilter("Tournament File", TOURNAMENT_EXTENSION));
 					int returnval = chooser.showSaveDialog(getJFrame());
 					if (returnval == JFileChooser.APPROVE_OPTION) {
-						getMiddleEnd().saveTournament(chooser.getSelectedFile());
 						if (!getMiddleEnd().saveTournament(chooser.getSelectedFile())) {
 							JOptionPane.showMessageDialog(_jFrame, "The name specified for the file was invalid.", "Error", JOptionPane.ERROR_MESSAGE);
 						}
@@ -316,9 +333,8 @@ public class App implements GUIConstants {
 				public void actionPerformed(ActionEvent e) {
 					JFileChooser chooser = new JFileChooser();
 					chooser.setFileFilter(new FileNameExtensionFilter("CSV File", CATEGORY_EXTENSION));
-					int returnval = chooser.showSaveDialog(getJFrame());
+					int returnval = chooser.showOpenDialog(getJFrame());
 					if (returnval == JFileChooser.APPROVE_OPTION) {
-						getMiddleEnd().saveTournament(chooser.getSelectedFile());
 						if (!getMiddleEnd().importCategory(chooser.getSelectedFile())) {
 							JOptionPane.showMessageDialog(_jFrame, "The name specified for the file was invalid.", "Error", JOptionPane.ERROR_MESSAGE);
 						}
@@ -354,7 +370,7 @@ public class App implements GUIConstants {
 					Grouping toadd = categories.get(catnames.indexOf(str));
 					JFileChooser chooser = new JFileChooser();
 					chooser.setFileFilter(new FileNameExtensionFilter("CSV File", CATEGORY_EXTENSION));
-					int returnval = chooser.showOpenDialog(getJFrame());
+					int returnval = chooser.showSaveDialog(getJFrame());
 					if (returnval == JFileChooser.APPROVE_OPTION) {
 						if (!getMiddleEnd().exportCategory(toadd, chooser.getSelectedFile())) {
 							JOptionPane.showMessageDialog(_jFrame, "The selected file was not a valid tournament file.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -391,6 +407,10 @@ public class App implements GUIConstants {
 	private JPanel getExportCategoryContentPane() {
 		if (_exportCategoryContentPane == null) {
 			_exportCategoryContentPane = new JPanel();
+			if (COLORSON) {
+				_exportCategoryContentPane.setBackground(BACKGROUND_COLOR);
+				_exportCategoryContentPane.setForeground(FOREGROUND_COLOR);
+			}
 			_exportCategoryContentPane.setLayout(new BorderLayout());
 		}
 		return _exportCategoryContentPane;
@@ -408,9 +428,8 @@ public class App implements GUIConstants {
 			_exitMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q,
 					Event.CTRL_MASK, true));
 			_exitMenuItem.addActionListener(new ActionListener() {
-				@Override
 				public void actionPerformed(ActionEvent e) {
-					System.exit(0);
+					_middleEnd.closeThisMiddleEnd();
 				}
 			});
 		}
@@ -478,6 +497,10 @@ public class App implements GUIConstants {
 	private JPanel getPluginOptionsContentPane() {
 		if (_pluginOptionsContentPane == null) {
 			_pluginOptionsContentPane = new JPanel();
+			if (COLORSON) {
+				_pluginOptionsContentPane.setBackground(BACKGROUND_COLOR);
+				_pluginOptionsContentPane.setForeground(FOREGROUND_COLOR);
+			}
 			_pluginOptionsContentPane.setLayout(new BorderLayout());
 		}
 		return _pluginOptionsContentPane;
@@ -529,6 +552,10 @@ public class App implements GUIConstants {
 	private JPanel getProgramOptionsContentPane() {
 		if (_programOptionsContentPane == null) {
 			_programOptionsContentPane = new JPanel();
+			if (COLORSON) {
+				_programOptionsContentPane.setBackground(BACKGROUND_COLOR);
+				_programOptionsContentPane.setForeground(FOREGROUND_COLOR);
+			}
 			_programOptionsContentPane.setLayout(new BorderLayout());
 		}
 		return _programOptionsContentPane;
@@ -712,6 +739,10 @@ public class App implements GUIConstants {
 	public JPanel getAboutContentPane() {
 		if (_aboutContentPane == null) {
 			_aboutContentPane = new JPanel();
+			if (COLORSON) {
+				_aboutContentPane.setBackground(BACKGROUND_COLOR);
+				_aboutContentPane.setForeground(FOREGROUND_COLOR);
+			}
 			_aboutContentPane.setLayout(new BorderLayout());
 			_aboutContentPane.add(getAboutVersionLabel(), BorderLayout.CENTER);
 		}

@@ -30,13 +30,27 @@ public class PairingPanel extends JPanel implements GUIConstants {
 	
 	public void resetPanel() {
 		this.removeAll();
+		if (COLORSON) {
+			this.setBackground(BACKGROUND_COLOR);
+			this.setForeground(FOREGROUND_COLOR);
+		}
 		this.setSize(PAIRINGPANEL_SIZE);
 		this.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black));
 		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		this.add(Box.createHorizontalGlue());
 		JPanel deletepanel = new JPanel();
+		if (COLORSON) {
+			deletepanel.setBackground(BACKGROUND_COLOR);
+			deletepanel.setForeground(FOREGROUND_COLOR);
+		}
 		deletepanel.setLayout(new BoxLayout(deletepanel, BoxLayout.Y_AXIS));
 		final JButton actuallydeletebutton = new JButton("Actually delete this pairing");
+		if (IMAGESON)
+			actuallydeletebutton.setIcon(DELETEBUTTONIMAGE);
+		if (COLORSON) {
+			actuallydeletebutton.setBackground(BACKGROUND_COLOR);
+			actuallydeletebutton.setForeground(FOREGROUND_COLOR);
+		}
 		actuallydeletebutton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -45,12 +59,19 @@ public class PairingPanel extends JPanel implements GUIConstants {
 			}
 		});
 		actuallydeletebutton.setVisible(false);
-		JButton deletebutton = new JButton("Delete this pairing");
+		final JButton deletebutton = new JButton("Delete this pairing");
+		if (IMAGESON)
+			deletebutton.setIcon(DELETEBUTTONIMAGE);
+		if (COLORSON) {
+			deletebutton.setBackground(BACKGROUND_COLOR);
+			deletebutton.setForeground(FOREGROUND_COLOR);
+		}
 		deletebutton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				actuallydeletebutton.setVisible(true);
 				repaint();
+				deletebutton.setText("Click over there to delete ----->");
 			}
 		});
 		deletepanel.add(deletebutton);

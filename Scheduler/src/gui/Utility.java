@@ -103,6 +103,10 @@ public class Utility implements GUIConstants {
 		field.setValue(attribute.getAttribute());
 		field.setMaximumSize(TEXTFIELD_SIZE);
 		field.setEditable(isEditable);
+		if (COLORSON) {
+			field.setBackground(BACKGROUND_COLOR);
+			field.setForeground(FOREGROUND_COLOR);
+		}
 		return field;
 	}
 	
@@ -114,6 +118,10 @@ public class Utility implements GUIConstants {
 		field.setValue(attribute.getAttribute());
 		field.setEditable(isEditable);
 		field.setMaximumSize(new Dimension(100, 20));
+		if (COLORSON) {
+			field.setBackground(BACKGROUND_COLOR);
+			field.setForeground(FOREGROUND_COLOR);
+		}
 		return field;
 	}
 	
@@ -134,6 +142,12 @@ public class Utility implements GUIConstants {
 	
 	public static JButton getGroupingField(GroupingAttribute<?> attribute, boolean isEditable) {
 		JButton button = new JButton("Edit " + attribute.getTitle() + "...");
+		if (IMAGESON)
+			button.setIcon(EDITBUTTONIMAGE);
+		if (COLORSON) {
+			button.setBackground(BACKGROUND_COLOR);
+			button.setForeground(FOREGROUND_COLOR);
+		}
 		return button;
 	}
 	

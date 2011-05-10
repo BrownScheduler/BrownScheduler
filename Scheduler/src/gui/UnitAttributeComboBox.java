@@ -17,6 +17,10 @@ public class UnitAttributeComboBox extends JComboBox implements GUIConstants {
 		this.setSize(JCOMBOBOX_SIZE);
 		this.setMaximumSize(this.getSize());
 		this.setToolTipText("Create a new team by typing a name instead of selecting one from the drop-down box");
+		if (COLORSON) {
+			this.setBackground(BACKGROUND_COLOR);
+			this.setForeground(FOREGROUND_COLOR);
+		}
 		_grouping = attribute.getMemberOf();
 		_units = new ArrayList<Unit>(attribute.getListOfUnits());
 		ArrayList<String> unitnames = new ArrayList<String>();

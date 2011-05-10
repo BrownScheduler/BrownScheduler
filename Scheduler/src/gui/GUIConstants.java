@@ -10,20 +10,22 @@ import javax.swing.ImageIcon;
  */
 public interface GUIConstants {
 
-	Color FOREGROUND_COLOR = Color.gray;
-	Color BACKGROUND_COLOR = Color.white;
+	boolean COLORSON = false;
+	Color BACKGROUND_COLOR = Color.lightGray;
+	Color FOREGROUND_COLOR = Color.white;
 	Color FG_TEXT_COLOR = Color.black;
 	Color BG_TEXT_COLOR = Color.black;
 	
 	boolean IMAGESON = false;
-	ImageIcon BEGINNINGIMAGE = null;
-	ImageIcon OPENFOLDERIMAGE = null;
-	ImageIcon CLOSEDFOLDERIMAGE = null;
-	ImageIcon PAGEIMAGE = null;
-	ImageIcon ADDBUTTONIMAGE = null;
-	ImageIcon DELETEBUTTONIMAGE = null;
-	ImageIcon SAVEBUTTONIMAGE = null;
-	ImageIcon FRAMEIMAGE = null;
+	ImageIcon INTROIMAGE = new ImageIcon("src/images/tmnt.jpg");
+	ImageIcon TREEOPENIMAGE = new ImageIcon("src/images/tmnt.jpg");
+	ImageIcon TREECLOSEDIMAGE = new ImageIcon("src/images/tmnt.jpg");
+	ImageIcon TREELEAFIMAGE = new ImageIcon("src/images/tmnt.jpg");
+	ImageIcon ADDBUTTONIMAGE = new ImageIcon("src/images/tmnt.jpg");
+	ImageIcon EDITBUTTONIMAGE = new ImageIcon("src/images/tmnt.jpg");
+	ImageIcon DELETEBUTTONIMAGE = new ImageIcon("src/images/tmnt.jpg");
+	ImageIcon SAVEBUTTONIMAGE = new ImageIcon("src/images/tmnt.jpg");
+	ImageIcon FRAMEIMAGE = new ImageIcon("src/images/tmnt.jpg");
 	
 	String TOURNAMENT_EXTENSION = ".tmnt";
 	String CATEGORY_EXTENSION = ".csv";

@@ -28,9 +28,19 @@ public class RoundPanel extends JPanel implements GUIConstants {
 	public void resetPanel() {
 		this.removeAll();
 		_pairingpanels.clear();
+		if (COLORSON) {
+			this.setBackground(BACKGROUND_COLOR);
+			this.setForeground(FOREGROUND_COLOR);
+		}
 		this.setSize(DEFAULT_SIZE);
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		JButton addpairingbutton = new JButton("Add New Blank Pairing");
+		if (IMAGESON)
+			addpairingbutton.setIcon(ADDBUTTONIMAGE);
+		if (COLORSON) {
+			addpairingbutton.setBackground(BACKGROUND_COLOR);
+			addpairingbutton.setForeground(FOREGROUND_COLOR);
+		}
 		addpairingbutton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

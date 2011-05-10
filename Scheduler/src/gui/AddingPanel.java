@@ -34,12 +34,22 @@ public class AddingPanel extends JPanel implements GUIConstants {
 	 * @return void
 	 */
 	private void initialize() {
+		if (COLORSON) {
+			this.setBackground(BACKGROUND_COLOR);
+			this.setForeground(FOREGROUND_COLOR);
+		}
 		JLabel initLabel = new JLabel();
 		this.setMinimumSize(ADDINGPANEL_SIZE);
 		initLabel.setText("Choose a category on the side to begin editing!");
+		if (IMAGESON)
+			initLabel.setIcon(INTROIMAGE);
 		initLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		JPanel initPanel = new JPanel();
+		if (COLORSON) {
+			initPanel.setBackground(BACKGROUND_COLOR);
+			this.setForeground(FOREGROUND_COLOR);
+		}
 		initPanel.add(Box.createHorizontalGlue());
 		initPanel.add(initLabel);
 		initPanel.add(Box.createHorizontalGlue());

@@ -44,6 +44,16 @@ public class UnitPanel extends JPanel implements GUIConstants {
 	
 	public void initialize(final Unit unit, String buttonstring) {
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		if (COLORSON) {
+			this.setBackground(BACKGROUND_COLOR);
+			this.setForeground(FOREGROUND_COLOR);
+			_mainPanel.setBackground(BACKGROUND_COLOR);
+			_mainPanel.setForeground(FOREGROUND_COLOR);
+			_buttonPanel.setBackground(BACKGROUND_COLOR);
+			_buttonPanel.setForeground(FOREGROUND_COLOR);
+			_tablePanel.setBackground(BACKGROUND_COLOR);
+			_tablePanel.setForeground(FOREGROUND_COLOR);
+		}
 		_mainPanel.setLayout(new BoxLayout(_mainPanel, BoxLayout.X_AXIS));
 		_tablePanel.setLayout(new BoxLayout(_tablePanel, BoxLayout.Y_AXIS));
 		final HashMap<Attribute, JComponent> components = new HashMap<Attribute, JComponent>();
@@ -83,9 +93,19 @@ public class UnitPanel extends JPanel implements GUIConstants {
 			toAdd.setLayout(new BoxLayout(toAdd, BoxLayout.Y_AXIS));
 			toAdd.add(titleLabel);
 			toAdd.add(comp);
+			if (COLORSON) {
+				toAdd.setBackground(BACKGROUND_COLOR);
+				toAdd.setForeground(FOREGROUND_COLOR);
+			}
 			_mainPanel.add(toAdd);
 		}
 		JButton savebutton = new JButton(buttonstring);
+		if (IMAGESON)
+			savebutton.setIcon(SAVEBUTTONIMAGE);
+		if (COLORSON) {
+			savebutton.setBackground(BACKGROUND_COLOR);
+			savebutton.setForeground(FOREGROUND_COLOR);
+		}
 		savebutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Collection<Attribute> attributes = components.keySet();
@@ -186,6 +206,7 @@ public class UnitPanel extends JPanel implements GUIConstants {
 						unit.setAttribute(new UnitAttribute(attr.getTitle(), value, grouping));
 					}
 				}
+				
 				if (!_grouping.getMembers().contains(unit)) {
 					_grouping.addMember(unit);
 				}
@@ -193,6 +214,12 @@ public class UnitPanel extends JPanel implements GUIConstants {
 			}
 		});
 		final JButton actuallydeletebutton = new JButton("Actually delete this unit");
+		if (IMAGESON)
+			actuallydeletebutton.setIcon(DELETEBUTTONIMAGE);
+		if (COLORSON) {
+			actuallydeletebutton.setBackground(BACKGROUND_COLOR);
+			actuallydeletebutton.setForeground(FOREGROUND_COLOR);
+		}
 		actuallydeletebutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				_mainPanel.removeAll();
@@ -204,11 +231,17 @@ public class UnitPanel extends JPanel implements GUIConstants {
 		});
 		actuallydeletebutton.setVisible(false);
 		final JButton deletebutton = new JButton("Delete this unit");
+		if (IMAGESON)
+			deletebutton.setIcon(DELETEBUTTONIMAGE);
+		if (COLORSON) {
+			deletebutton.setBackground(BACKGROUND_COLOR);
+			deletebutton.setForeground(FOREGROUND_COLOR);
+		}
 		deletebutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				actuallydeletebutton.setVisible(true);
 				_buttonPanel.repaint();
-				deletebutton.setText("Over there ----->");
+				deletebutton.setText("Click over there to delete ----->");
 			}
 		});
 		_buttonPanel.add(savebutton);
