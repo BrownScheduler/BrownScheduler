@@ -1,0 +1,11 @@
+package roundrobin2;
+
+public class Round extends backbone.Round {
+
+	private Tournament _t;
+	public Round(Tournament t, String name) {
+		super(name);
+		_t = t;
+	}
+
+}

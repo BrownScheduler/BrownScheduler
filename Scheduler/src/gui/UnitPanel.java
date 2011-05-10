@@ -65,11 +65,12 @@ public class UnitPanel extends JPanel implements GUIConstants {
 						for (int i = 0; i < _tablePanel.getComponentCount(); i++) {
 							if (_tablePanel.getComponent(i) instanceof InputTablePane) {
 								InputTablePane pane = (InputTablePane) _tablePanel.getComponent(i);
-								System.out.println(pane == components.get(attr));
 								if (pane == components.get(attr))
 									pane.setVisible(!pane.isVisible());
 								else
 									pane.setVisible(false);
+								revalidate();
+								repaint();
 							}
 						}
 						_tablePanel.repaint();

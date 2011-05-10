@@ -3,6 +3,7 @@ package backbone;
 /**
  * The Attribute which wraps a double
  * Default value is 0.0
+ * 
  * @author pclay
  *
  */
@@ -11,6 +12,11 @@ public class DoubleAttribute extends Attribute {
 
 	private Double att;
 	
+	/**
+	 * @deprecated
+	 * 
+	 * @param title What the title should be
+	 */
 	public DoubleAttribute(String title){
 		super(title);
 		this.att = 0.0;

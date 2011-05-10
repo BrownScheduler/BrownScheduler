@@ -48,6 +48,7 @@ public class InputTablePane extends JScrollPane implements GUIConstants {
 		_table.setRowHeight(ROW_HEIGHT);
 		_table.getTableHeader().setReorderingAllowed(false);
 		List<List<Attribute>> data = (List<List<Attribute>>) new ArrayList<List<Attribute>>();
+		System.out.println(group.getMembers().size());
 		for (Unit u : group.getMembers()) {
 			data.add(u.getAttributes());
 		}
@@ -65,7 +66,6 @@ public class InputTablePane extends JScrollPane implements GUIConstants {
 			}
 		}
 		ExcelAdapter exceladapt = new ExcelAdapter(_table);
-		this.add(_table.getTableHeader());
 		this.add(_table);
 	}
 	

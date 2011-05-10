@@ -1,0 +1,15 @@
+package roundrobin2;
+
+public class Round extends backbone.Round {
+
+	private Turn _t;
+	public Round(Turn t, String name) {
+		super(name);
+		_t = t;
+	}
+	
+	public void addGame(Game g){
+		this.pairings.add(g);
+	}
+
+}

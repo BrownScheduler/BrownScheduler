@@ -10,7 +10,7 @@ public interface GUIConstants {
 	String TOURNAMENT_EXTENSION = ".tmnt";
 	String CATEGORY_EXTENSION = ".csv";
 	
-	int DEFAULT_TABLE_BLANK_ROWS = 1;
+	int DEFAULT_TABLE_BLANK_ROWS = 10;
 	int ROW_HEIGHT = 25;
 	
 	int DEFAULT_WIDTH = 900;

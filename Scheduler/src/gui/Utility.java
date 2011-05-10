@@ -165,7 +165,8 @@ public class Utility implements GUIConstants {
 			return new JLabel(((StringAttribute) attribute).getAttribute());
 		}
 		else if (attribute.getType() == Attribute.Type.UNIT) {
-			return new JLabel(((UnitAttribute) attribute).att.getName());
+			if(((UnitAttribute) attribute).att == null) return new JLabel("");
+			else return new JLabel(((UnitAttribute) attribute).att.getName());
 		}
 		return null;
 	}
