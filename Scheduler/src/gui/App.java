@@ -41,6 +41,7 @@ public class App implements GUIConstants {
 	private ManagementPanel _managementPane;
 	private JMenuBar _jJMenuBar;
 	private JMenu _fileMenu;
+	private JMenuItem _newTournamentMenuItem;
 	private JMenuItem _openTournamentMenuItem;
 	private JMenuItem _saveTournamentMenuItem;
 	private JMenuItem _importCategoryMenuItem;
@@ -207,6 +208,7 @@ public class App implements GUIConstants {
 		if (_fileMenu == null) {
 			_fileMenu = new JMenu();
 			_fileMenu.setText("File");
+			_fileMenu.add(getNewTournamentMenuItem());
 			_fileMenu.add(getOpenTournamentMenuItem());
 			_fileMenu.add(getSaveTournamentMenuItem());
 			_fileMenu.add(getImportCategoryMenuItem());
@@ -214,6 +216,26 @@ public class App implements GUIConstants {
 			_fileMenu.add(getExitMenuItem());
 		}
 		return _fileMenu;
+	}
+	
+	/**
+	 * This method initializes jMenuItem	
+	 * 	
+	 * @return javax.swing.JMenuItem	
+	 */
+	public JMenuItem getNewTournamentMenuItem() {
+		if (_newTournamentMenuItem == null) {
+			_newTournamentMenuItem = new JMenuItem();
+			_newTournamentMenuItem.setText("New Tournament...");
+			_newTournamentMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_T,
+					Event.CTRL_MASK, true));
+			_newTournamentMenuItem.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					_middleEnd.openNewMiddleEnd();
+				}
+			});
+		}
+		return _newTournamentMenuItem;
 	}
 	
 	/**

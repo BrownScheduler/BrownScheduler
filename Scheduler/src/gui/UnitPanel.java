@@ -215,11 +215,13 @@ public class UnitPanel extends JPanel implements GUIConstants {
 		_buttonPanel.add(savebutton);
 		_buttonPanel.add(deletebutton);
 		_buttonPanel.add(actuallydeletebutton);
+		_buttonPanel.setMaximumSize(UNITPANEL_SIZE);
 		this.add(_mainPanel);
 		this.add(Box.createRigidArea(SMALLSPACING_SIZE));
 		this.add(_buttonPanel);
 		this.add(Box.createRigidArea(SMALLSPACING_SIZE));
 		this.add(_tablePanel);
+		this.add(Box.createVerticalGlue());
 		this.repaint();
 	}
 }

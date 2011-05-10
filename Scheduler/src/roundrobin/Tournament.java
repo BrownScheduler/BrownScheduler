@@ -7,7 +7,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.UIManager.LookAndFeelInfo;
 
-import middleend.MiddleEnd;
+import middleend.TMNTScheduler;
 import backbone.Grouping;
 import backbone.Round;
 
@@ -88,7 +88,7 @@ public class Tournament implements backbone.Tournament {
 		    // handle exception
 		}
 		Tournament t = new Tournament();
-		new MiddleEnd(t);
+		new TMNTScheduler(t);
 	}
 
 }
