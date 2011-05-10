@@ -13,4 +13,6 @@ public interface Tournament extends Serializable {
 
 	public Tournament getNew();
 	
+	public Tournament getNew();
+	
 }
