@@ -2,18 +2,15 @@ package fileio;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 
 import backbone.Attribute;
@@ -26,14 +23,13 @@ import backbone.StringAttribute;
 import backbone.Tournament;
 import backbone.Unit;
 import backbone.UnitAttribute;
-import exception.BackupException;
 import exception.CSVException;
 
 public class CSVIO {
 
-	public static void writeGrouping(String fileName, Grouping<Unit> category) throws exception.CSVException {
+	public static void writeGrouping(File file, Grouping<? extends Unit> category) throws exception.CSVException {
 		try {
-			BufferedWriter out = new BufferedWriter(new FileWriter(fileName));
+			BufferedWriter out = new BufferedWriter(new FileWriter(file));
 			out.write(category.getName() + "\n");
 			for(Attribute att : category.getBlank().getAttributes())
 				if(att.getType() != Attribute.Type.GROUPING)
@@ -65,9 +61,12 @@ public class CSVIO {
 		}
 	}
 
-	public static void loadGrouping(String fileName, List<Grouping> groups) throws exception.CSVException {
+	public static void loadGrouping(File file, Tournament t) throws exception.CSVException {
 		try {
-			BufferedReader in = new BufferedReader(new FileReader(fileName));
+			LinkedList<Grouping<Unit>> groups = new LinkedList<Grouping<Unit>>();
+			groups.addAll((Collection<? extends Grouping<Unit>>) t.getCategories());
+			groups.addAll((Collection<? extends Grouping<Unit>>) t.getRounds());
+			BufferedReader in = new BufferedReader(new FileReader(file));
 			String name = in.readLine().split(",")[0];
 			in.readLine();
 			Grouping group = null;
@@ -152,9 +151,12 @@ public class CSVIO {
 						unit.setAttribute(new StringAttribute(att.getTitle(),cells[i]));
 						break;
 					case UNIT:
-						HashMap<UnitAttribute, String> unitAttsToAdd = new HashMap<UnitAttribute, String>();
-						unitAttsToAdd.put((UnitAttribute) att, cells[i]);
-						unitsToAdd.put(unit, unitAttsToAdd);
+						if(cells.length > i && !cells[i].equals("")) {
+							HashMap<UnitAttribute, String> unitAttsToAdd = new HashMap<UnitAttribute, String>();
+							unitAttsToAdd.put((UnitAttribute) att, cells[i]);
+							unitsToAdd.put(unit, unitAttsToAdd);
+						} else
+							unit.setAttribute(new UnitAttribute(att.getTitle(), ((UnitAttribute) att).getMemberOf()));
 						break;
 					default:
 						throw new CSVException();
@@ -206,8 +208,8 @@ public class CSVIO {
 
 					for(String unitName : groupsToSet.get(uni).get(gAtt)) {
 						Unit unit = null;
-						System.out.println(((Unit) gAtt.getGrouping().getBlank()));
-						for(Unit u : ((Unit) gAtt.getGrouping().getBlank()).getMemberOf().getMembers()) {
+						System.out.println((gAtt.getGrouping().getBlank()));
+						for(Unit u : (gAtt.getGrouping().getBlank()).getMemberOf().getMembers()) {
 							if(u.getName().equals(unitName)) {
 								unit = u;
 								break;

@@ -8,12 +8,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.util.ArrayList;
-
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
@@ -106,6 +103,10 @@ public class Utility implements GUIConstants {
 		field.setValue(attribute.getAttribute());
 		field.setMaximumSize(TEXTFIELD_SIZE);
 		field.setEditable(isEditable);
+		if (COLORSON) {
+			field.setBackground(BACKGROUND_COLOR);
+			field.setForeground(FOREGROUND_COLOR);
+		}
 		return field;
 	}
 	
@@ -117,6 +118,10 @@ public class Utility implements GUIConstants {
 		field.setValue(attribute.getAttribute());
 		field.setEditable(isEditable);
 		field.setMaximumSize(new Dimension(100, 20));
+		if (COLORSON) {
+			field.setBackground(BACKGROUND_COLOR);
+			field.setForeground(FOREGROUND_COLOR);
+		}
 		return field;
 	}
 	
@@ -126,6 +131,7 @@ public class Utility implements GUIConstants {
 		if (!isEditable) {
 			final boolean val = attribute.getAttribute();
 			field.addActionListener(new ActionListener() {
+				@Override
 				public void actionPerformed(ActionEvent arg0) {
 					field.setSelected(val);
 				}
@@ -136,6 +142,12 @@ public class Utility implements GUIConstants {
 	
 	public static JButton getGroupingField(GroupingAttribute<?> attribute, boolean isEditable) {
 		JButton button = new JButton("Edit " + attribute.getTitle() + "...");
+		if (IMAGESON)
+			button.setIcon(EDITBUTTONIMAGE);
+		if (COLORSON) {
+			button.setBackground(BACKGROUND_COLOR);
+			button.setForeground(FOREGROUND_COLOR);
+		}
 		return button;
 	}
 	

@@ -30,25 +30,48 @@ public class PairingPanel extends JPanel implements GUIConstants {
 	
 	public void resetPanel() {
 		this.removeAll();
+		if (COLORSON) {
+			this.setBackground(BACKGROUND_COLOR);
+			this.setForeground(FOREGROUND_COLOR);
+		}
 		this.setSize(PAIRINGPANEL_SIZE);
 		this.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black));
 		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		this.add(Box.createHorizontalGlue());
 		JPanel deletepanel = new JPanel();
+		if (COLORSON) {
+			deletepanel.setBackground(BACKGROUND_COLOR);
+			deletepanel.setForeground(FOREGROUND_COLOR);
+		}
 		deletepanel.setLayout(new BoxLayout(deletepanel, BoxLayout.Y_AXIS));
 		final JButton actuallydeletebutton = new JButton("Actually delete this pairing");
+		if (IMAGESON)
+			actuallydeletebutton.setIcon(DELETEBUTTONIMAGE);
+		if (COLORSON) {
+			actuallydeletebutton.setBackground(BACKGROUND_COLOR);
+			actuallydeletebutton.setForeground(FOREGROUND_COLOR);
+		}
 		actuallydeletebutton.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				_round.removePairing(_pairing);
 				_middleEnd.repaintAll();
 			}
 		});
 		actuallydeletebutton.setVisible(false);
-		JButton deletebutton = new JButton("Delete this pairing");
+		final JButton deletebutton = new JButton("Delete this pairing");
+		if (IMAGESON)
+			deletebutton.setIcon(DELETEBUTTONIMAGE);
+		if (COLORSON) {
+			deletebutton.setBackground(BACKGROUND_COLOR);
+			deletebutton.setForeground(FOREGROUND_COLOR);
+		}
 		deletebutton.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				actuallydeletebutton.setVisible(true);
 				repaint();
+				deletebutton.setText("Click over there to delete ----->");
 			}
 		});
 		deletepanel.add(deletebutton);
@@ -131,6 +154,7 @@ public class PairingPanel extends JPanel implements GUIConstants {
 			this.setModel(new DefaultComboBoxModel(unitnames.toArray(new String[0])));
 			this.setSelectedIndex(toSelect);
 			this.addActionListener(new ActionListener() {
+				@Override
 				public void actionPerformed(ActionEvent e) {
 					UnitAttributeComboBox cb = (UnitAttributeComboBox) e.getSource();
 					if (cb.getSelectedIndex() <= 0) {
@@ -138,7 +162,7 @@ public class PairingPanel extends JPanel implements GUIConstants {
 						_pairingpanel.repaintAll();
 					}
 					else {
-						_pairing.setAttribute(new UnitAttribute(_unitattribute.getTitle(), units.get(cb.getSelectedIndex())));
+						_pairing.setAttribute(new UnitAttribute(_unitattribute.getTitle(), units.get(cb.getSelectedIndex()), _unitattribute.getMemberOf()));
 						_pairingpanel.repaintAll();
 					}
 				}

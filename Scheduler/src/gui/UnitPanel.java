@@ -3,7 +3,6 @@ package gui;
 import backbone.*;
 import middleend.*;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -45,38 +44,44 @@ public class UnitPanel extends JPanel implements GUIConstants {
 	
 	public void initialize(final Unit unit, String buttonstring) {
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		if (COLORSON) {
+			this.setBackground(BACKGROUND_COLOR);
+			this.setForeground(FOREGROUND_COLOR);
+			_mainPanel.setBackground(BACKGROUND_COLOR);
+			_mainPanel.setForeground(FOREGROUND_COLOR);
+			_buttonPanel.setBackground(BACKGROUND_COLOR);
+			_buttonPanel.setForeground(FOREGROUND_COLOR);
+			_tablePanel.setBackground(BACKGROUND_COLOR);
+			_tablePanel.setForeground(FOREGROUND_COLOR);
+		}
 		_mainPanel.setLayout(new BoxLayout(_mainPanel, BoxLayout.X_AXIS));
 		_tablePanel.setLayout(new BoxLayout(_tablePanel, BoxLayout.Y_AXIS));
-//		_tablePanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, INPUTTABLE_HEIGHT));
 		final HashMap<Attribute, JComponent> components = new HashMap<Attribute, JComponent>();
 		for (final Attribute attr : unit.getAttributes()) {
 			JLabel titleLabel = Utility.getTitleLabel(attr);
 			if (attr instanceof GroupingAttribute) {
 				GroupingAttribute<Unit> g = (GroupingAttribute<Unit>) attr;
-				components.put(attr, new InputTablePane(_middleEnd, g.getBlankUnit().getAttributes(), g));
-				_tablePanel.setPreferredSize(components.get(attr).getPreferredSize());
+				if (null == components.put(attr, new InputTablePane(_middleEnd, g.getBlankUnit().getAttributes(), g))) {
+					_tablePanel.add(components.get(attr));
+					_tablePanel.setVisible(false);
+				}
 			}
 			JComponent comp = Utility.getField(attr);
 			if (comp instanceof JButton) {
 				((JButton) comp).addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						boolean hasPanel = false;
 						for (int i = 0; i < _tablePanel.getComponentCount(); i++) {
-							if (_tablePanel.getComponent(i) == components.get(attr))
-								hasPanel = true;
-						}
-						if (_tablePanel.getComponentCount() == 0) {
-							_tablePanel.removeAll();
-							_tablePanel.add(((InputTablePane) components.get(attr)).getTable().getTableHeader());
-							_tablePanel.add(components.get(attr));
-						}
-						else if (hasPanel) {
-							_tablePanel.removeAll();
-						}
-						else {
-							_tablePanel.removeAll();
-							_tablePanel.add(((InputTablePane) components.get(attr)).getTable().getTableHeader());
-							_tablePanel.add(components.get(attr));
+							if (_tablePanel.getComponent(i) instanceof InputTablePane) {
+								InputTablePane pane = (InputTablePane) _tablePanel.getComponent(i);
+								if (pane == components.get(attr)) {
+									pane.setVisible(!pane.isVisible());
+									_tablePanel.setVisible(pane.isVisible());
+								}
+								else {
+									pane.setVisible(false);
+								}
+								repaint();
+							}
 						}
 						_tablePanel.repaint();
 					}
@@ -88,11 +93,19 @@ public class UnitPanel extends JPanel implements GUIConstants {
 			toAdd.setLayout(new BoxLayout(toAdd, BoxLayout.Y_AXIS));
 			toAdd.add(titleLabel);
 			toAdd.add(comp);
+			if (COLORSON) {
+				toAdd.setBackground(BACKGROUND_COLOR);
+				toAdd.setForeground(FOREGROUND_COLOR);
+			}
 			_mainPanel.add(toAdd);
 		}
-		this.add(_mainPanel);
-		this.add(Box.createRigidArea(new Dimension(10, 10)));
 		JButton savebutton = new JButton(buttonstring);
+		if (IMAGESON)
+			savebutton.setIcon(SAVEBUTTONIMAGE);
+		if (COLORSON) {
+			savebutton.setBackground(BACKGROUND_COLOR);
+			savebutton.setForeground(FOREGROUND_COLOR);
+		}
 		savebutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Collection<Attribute> attributes = components.keySet();
@@ -193,16 +206,20 @@ public class UnitPanel extends JPanel implements GUIConstants {
 						unit.setAttribute(new UnitAttribute(attr.getTitle(), value, grouping));
 					}
 				}
-				if (_grouping != null) {
-					if (!_grouping.getMembers().contains(unit)) {
-						_grouping.addMember(unit);
-						_grouping = null;
-					}
+				
+				if (!_grouping.getMembers().contains(unit)) {
+					_grouping.addMember(unit);
 				}
 				_middleEnd.repaintAll();
 			}
 		});
 		final JButton actuallydeletebutton = new JButton("Actually delete this unit");
+		if (IMAGESON)
+			actuallydeletebutton.setIcon(DELETEBUTTONIMAGE);
+		if (COLORSON) {
+			actuallydeletebutton.setBackground(BACKGROUND_COLOR);
+			actuallydeletebutton.setForeground(FOREGROUND_COLOR);
+		}
 		actuallydeletebutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				_mainPanel.removeAll();
@@ -213,20 +230,30 @@ public class UnitPanel extends JPanel implements GUIConstants {
 			}
 		});
 		actuallydeletebutton.setVisible(false);
-		JButton deletebutton = new JButton("Delete this unit");
+		final JButton deletebutton = new JButton("Delete this unit");
+		if (IMAGESON)
+			deletebutton.setIcon(DELETEBUTTONIMAGE);
+		if (COLORSON) {
+			deletebutton.setBackground(BACKGROUND_COLOR);
+			deletebutton.setForeground(FOREGROUND_COLOR);
+		}
 		deletebutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				actuallydeletebutton.setVisible(true);
 				_buttonPanel.repaint();
+				deletebutton.setText("Click over there to delete ----->");
 			}
 		});
 		_buttonPanel.add(savebutton);
 		_buttonPanel.add(deletebutton);
 		_buttonPanel.add(actuallydeletebutton);
+		_buttonPanel.setMaximumSize(UNITPANEL_SIZE);
+		this.add(_mainPanel);
+		this.add(Box.createRigidArea(SMALLSPACING_SIZE));
 		this.add(_buttonPanel);
-		this.add(Box.createRigidArea(new Dimension(10, 10)));
+		this.add(Box.createRigidArea(SMALLSPACING_SIZE));
 		this.add(_tablePanel);
-		this.setPreferredSize(UNITPANEL_SIZE);
+		this.add(Box.createVerticalGlue());
 		this.repaint();
 	}
 }
