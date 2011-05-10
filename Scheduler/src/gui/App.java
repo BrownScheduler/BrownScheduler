@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Event;
 import java.awt.BorderLayout;
@@ -49,8 +48,6 @@ public class App implements GUIConstants {
 	private JMenuItem _saveTournamentMenuItem;
 	private JMenuItem _importCategoryMenuItem;
 	private JMenuItem _exportCategoryMenuItem;
-	private JDialog _exportCategoryDialog;
-	private JPanel _exportCategoryContentPane;
 	private JMenuItem _exitMenuItem;
 	private JMenu _optionsMenu;
 	private JMenuItem _programOptionsMenuItem;
@@ -90,7 +87,6 @@ public class App implements GUIConstants {
 			_jFrame.setSize(DEFAULT_SIZE);
 			_jFrame.setMinimumSize(MIN_SIZE);
 			_jFrame.addWindowListener(new WindowAdapter() {
-				@Override
 				public void windowClosing(WindowEvent e) {
 					_middleEnd.closeThisMiddleEnd();
 				}
@@ -139,8 +135,10 @@ public class App implements GUIConstants {
 		JButton button = new JButton(item.getText());
 		if (IMAGESON)
 			button.setIcon(ADDBUTTONIMAGE);
-		if (COLORSON)
+		if (COLORSON) {
 			button.setBackground(BACKGROUND_COLOR);
+			button.setForeground(FOREGROUND_COLOR);
+		}
 		button.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -394,37 +392,6 @@ public class App implements GUIConstants {
 		return _exportCategoryMenuItem;
 	}
 	
-	/**
-	 * This method initializes _exportCategoryPane	
-	 * 	
-	 * @return javax.swing.JDialog	
-	 */
-	private JDialog getExportCategoryDialog() {
-		if (_exportCategoryDialog == null) {
-			_exportCategoryDialog = new JDialog(getJFrame());
-			_exportCategoryDialog.setTitle("Export Category");
-			_exportCategoryDialog.setContentPane(getPluginOptionsContentPane());
-		}
-		return _exportCategoryDialog;
-	}
-
-	/**
-	 * This method initializes _exportCategoryContentPane	
-	 * 	
-	 * @return javax.swing.JPanel	
-	 */
-	private JPanel getExportCategoryContentPane() {
-		if (_exportCategoryContentPane == null) {
-			_exportCategoryContentPane = new JPanel();
-			if (COLORSON) {
-				_exportCategoryContentPane.setBackground(BACKGROUND_COLOR);
-				_exportCategoryContentPane.setForeground(FOREGROUND_COLOR);
-			}
-			_exportCategoryContentPane.setLayout(new BorderLayout());
-		}
-		return _exportCategoryContentPane;
-	}
-
 	/**
 	 * This method initializes jMenuItem	
 	 * 	
@@ -680,7 +647,6 @@ public class App implements GUIConstants {
 		JMenuItem item = new JMenuItem();
 		item.setText("New " + g.getName() + "...");
 		item.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				getInputPanel().getAddingPanel().setAddPanel(g);
 				getViewInputMenuItem().doClick();

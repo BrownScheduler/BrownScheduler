@@ -93,6 +93,10 @@ public class Utility implements GUIConstants {
 		JTextField field = new JTextField(attribute.getAttribute());
 		field.setMaximumSize(TEXTFIELD_SIZE);
 		field.setEditable(isEditable);
+		if (COLORSON) {
+			field.setBackground(BACKGROUND_COLOR);
+			field.setForeground(FOREGROUND_COLOR);
+		}
 		return field;
 	}
 	

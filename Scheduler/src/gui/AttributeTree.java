@@ -36,16 +36,16 @@ public class AttributeTree extends JTree implements GUIConstants {
 			this.setSize(TREE_SIZE);
 			this.setMaximumSize(new Dimension(getWidth(), Integer.MAX_VALUE));
 			this.setPreferredSize(getSize());
-			if (COLORSON) {
-				this.setBackground(BACKGROUND_COLOR);
-				this.setForeground(FOREGROUND_COLOR);
-			}
 			if (IMAGESON) {
 				DefaultTreeCellRenderer renderer = new DefaultTreeCellRenderer();
 				renderer.setOpenIcon(TREEOPENIMAGE);
 				renderer.setClosedIcon(TREECLOSEDIMAGE);
 				renderer.setLeafIcon(TREELEAFIMAGE);
 				this.setCellRenderer(renderer);
+			}
+			if (COLORSON) {
+				this.setBackground(BACKGROUND_COLOR);
+				this.setForeground(FOREGROUND_COLOR);
 			}
 			this.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
 			this.setScrollsOnExpand(true);

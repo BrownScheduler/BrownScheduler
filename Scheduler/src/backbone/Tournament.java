@@ -10,8 +10,6 @@ public interface Tournament extends Serializable {
 	public Round createNextRound();
 	
 	public List<Round> getRounds();
-
-	public Tournament getNew();
 	
 	public Tournament getNew();
 	
