@@ -8,19 +8,28 @@ import gui.*;
 import backbone.*;
 import java.io.File;
 
-public class MiddleEnd {
+public class MiddleEnd extends Thread {
 	
+	TMNTScheduler _scheduler;
 	Tournament _tmnt;
 	App _app;
 	
-	public MiddleEnd(Tournament t) {
+	public MiddleEnd(Tournament t, TMNTScheduler s) {
 		_tmnt = t;
-		
+		_scheduler = s;
 		_app = new App(this);
 	}
 	
 	public void repaintAll() {
 		_app.repaintAll();
+	}
+	
+	public void openNewMiddleEnd() {
+		//TODO: _scheduler.addTMNT(new Tournament());
+	}
+	
+	public void openNewMiddleEnd(Tournament t) {
+		_scheduler.addTMNT(t);
 	}
 	
 	public Tournament getTournament() {
@@ -66,4 +75,8 @@ public class MiddleEnd {
 			return false;
 		}
 	}
+//	
+//	public void run() {
+//		while(true) {}
+//	}
 }

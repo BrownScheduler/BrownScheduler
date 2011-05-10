@@ -5,6 +5,7 @@ import backbone.*;
 import java.awt.GridLayout;
 import java.awt.Dimension;
 import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.JLabel;
@@ -37,7 +38,7 @@ public class AddingPanel extends JPanel implements GUIConstants {
 		this.setMinimumSize(ADDINGPANEL_SIZE);
 		initLabel.setText("Choose a category on the side to begin editing!");
 		initLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		this.setLayout(new GridLayout(0, 1));
+		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.add(initLabel);
 	}
 	
@@ -52,7 +53,7 @@ public class AddingPanel extends JPanel implements GUIConstants {
 		this.removeAll();
 		for (Unit u : grouping.getMembers()) {
 			this.add(new UnitPanel(_middleEnd, u));
-//			this.add(Box.createRigidArea(SMALLSPACING_SIZE));
+			this.add(Box.createRigidArea(SMALLSPACING_SIZE));
 		}
 		this.add(Box.createVerticalGlue());
 		_currView = 2;
