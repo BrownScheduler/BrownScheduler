@@ -105,10 +105,10 @@ public class Game implements Pairing {
 	
 	
 	public void setHeadReferee(Referee ref){
-		if(_location.att == null){
+		if(_location.att == null && ref != null){
 			_location = new UnitAttribute<Field>("Location", ref.getField(), _t.getFields());
 		}
-		if(_assistantRef.att == null || _assistantRef.att.getField() != _location.att){
+		if(_assistantRef.att == null){
 			_assistantRef = new UnitAttribute<Referee>("Assistant Ref", null, getPossibleRefs(_location.att));
 		}
 		_headRef = new UnitAttribute<Referee>("Head Ref", ref, getPossibleRefs(_location.att));
@@ -118,7 +118,7 @@ public class Game implements Pairing {
 		if(_location.att == null){
 			_location = new UnitAttribute<Field>("Location", ref.getField(), _t.getFields());
 		}
-		if(_headRef.att == null || _headRef.att.getField() != _location.att){
+		if(_headRef.att == null){
 			_headRef = new UnitAttribute<Referee>("Head Ref", null, getPossibleRefs(_location.att));
 		}
 		_assistantRef = new UnitAttribute<Referee>("Assistant Ref", ref, getPossibleRefs(_location.att));
@@ -126,7 +126,11 @@ public class Game implements Pairing {
 	@Override
 	public boolean deleteFromGrouping() {
 		if(_r == null) return false;
-		else return _r.deleteMember(this);
+		if(_winner != null) _winner.setGamesWon(_winner.getGamesWon() - 1);
+		if(_loser != null) _loser.setGamesLost(_loser.getGamesLost() - 1);
+		if(_homeTeam.att != null) _homeTeam.att.removeFacedTeam(_awayTeam.att);
+		if(_awayTeam.att != null) _awayTeam.att.removeFacedTeam(_homeTeam.att);
+		return _r.deleteMember(this);
 	}
 
 	@Override
@@ -190,9 +194,9 @@ public class Game implements Pairing {
 					_headRef = new UnitAttribute<Referee>("Head Ref", null, _t.getRefs());
 					_assistantRef = new UnitAttribute<Referee>("Assistant Ref", null, _t.getRefs());
 				}else{
-					if(_headRef.att.getField() != attr.att)
+					if(_headRef.att == null || _headRef.att.getField() != attr.att)
 						_headRef = new UnitAttribute<Referee>("Head Ref", null, getPossibleRefs(attr.att));
-					if(_assistantRef.att.getField() != attr.att)
+					if(_assistantRef.att == null || _assistantRef.att.getField() != attr.att)
 						_assistantRef = new UnitAttribute<Referee>("Assistant Ref", null, getPossibleRefs(attr.att));
 				}
 				_location = attr;

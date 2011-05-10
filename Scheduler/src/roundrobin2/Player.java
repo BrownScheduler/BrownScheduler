@@ -26,6 +26,11 @@ public class Player implements Unit {
 	
 	@Override
 	public boolean deleteFromGrouping() {
+		for(Team t : _t.getTeams().getMembers()){
+			if(t.hasPlayer(this)){
+				t.removePlayer(this);
+			}
+		}
 		return _t.getPlayers().deleteMember(this);
 	}
 
@@ -55,12 +60,8 @@ public class Player implements Unit {
 	public void setAttribute(Attribute attribute) {
 		if(attribute.getType() == Attribute.Type.STRING && attribute.getTitle().equals("Name"))
 			_name = (StringAttribute)attribute;
-		else if(attribute.getType() == Attribute.Type.STRING && attribute.getTitle().equals("Position")){
-			Position.Pos p = Position.determinePosFromString(((StringAttribute)attribute).getAttribute());
-			if(p != null) _pos = new UnitAttribute<Position>("Position", null, new PositionGrouping("Positions"));
-			else _pos = new UnitAttribute<Position>("Position", 
-					new Position("Position", p), 
-					new PositionGrouping("Positions"));
+		else if(attribute.getType() == Attribute.Type.UNIT && attribute.getTitle().equals("Position")){
+			_pos = (UnitAttribute<Position>)attribute;
 		}
 		else if(attribute.getType() == Attribute.Type.BOOLEAN){
 			_hasYellowCard = (BooleanAttribute)attribute;

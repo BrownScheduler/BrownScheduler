@@ -103,10 +103,6 @@ public class Utility implements GUIConstants {
 		field.setValue(attribute.getAttribute());
 		field.setMaximumSize(TEXTFIELD_SIZE);
 		field.setEditable(isEditable);
-		if (COLORSON) {
-			field.setBackground(BACKGROUND_COLOR);
-			field.setForeground(FOREGROUND_COLOR);
-		}
 		return field;
 	}
 	
@@ -118,10 +114,6 @@ public class Utility implements GUIConstants {
 		field.setValue(attribute.getAttribute());
 		field.setEditable(isEditable);
 		field.setMaximumSize(new Dimension(100, 20));
-		if (COLORSON) {
-			field.setBackground(BACKGROUND_COLOR);
-			field.setForeground(FOREGROUND_COLOR);
-		}
 		return field;
 	}
 	
@@ -177,6 +169,7 @@ public class Utility implements GUIConstants {
 			return new JLabel(((StringAttribute) attribute).getAttribute());
 		}
 		else if (attribute.getType() == Attribute.Type.UNIT) {
+			if(((UnitAttribute) attribute).att == null) return new JLabel("");
 			return new JLabel(((UnitAttribute) attribute).att.getName());
 		}
 		return null;

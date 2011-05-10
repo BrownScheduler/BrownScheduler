@@ -48,12 +48,12 @@ public class ConstraintHandler {
 		g.setAway(t2);
 		g.setField(field);
 		RefereeGrouping possibleRefs = g.getPossibleRefs(field);
-		List<Referee> shuffled = possibleRefs.getMembers();
+		LinkedList<Referee> shuffled = new LinkedList<Referee>(possibleRefs.getMembers());
 		Collections.shuffle(shuffled);
 		if(!shuffled.isEmpty())
-			g.setHeadReferee(shuffled.remove(0));
+			g.setHeadReferee(shuffled.pop());
 		if(!shuffled.isEmpty())
-			g.setAssistantReferee(shuffled.remove(0));
+			g.setAssistantReferee(shuffled.pop());
 		return g;
 	}
 

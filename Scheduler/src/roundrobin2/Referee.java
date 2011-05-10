@@ -23,6 +23,9 @@ public class Referee implements Unit {
 	}
 	@Override
 	public boolean deleteFromGrouping() {
+		for(Field f : _t.getFields().getMembers()){
+			f.removeRef(this);
+		}
 		return _t.getRefs().deleteMember(this);
 	}
 

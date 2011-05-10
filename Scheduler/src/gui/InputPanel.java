@@ -72,6 +72,8 @@ public class InputPanel extends JPanel implements GUIConstants {
 	public JScrollPane getAttributeScrollPane() {
 		if (_attributeScrollPane == null) {
 			_attributeScrollPane = new JScrollPane(getAttributeTree());
+			_attributeScrollPane.getVerticalScrollBar().setBlockIncrement(90);
+			_attributeScrollPane.getVerticalScrollBar().setUnitIncrement(30);
 			_attributeScrollPane.setSize(getAttributeTree().getSize());
 			_attributeScrollPane.setMaximumSize(getAttributeTree().getMaximumSize());
 		}
@@ -86,6 +88,8 @@ public class InputPanel extends JPanel implements GUIConstants {
 	public JScrollPane getAddingScrollPane() {
 		if (_addingScrollPane == null) {
 			_addingScrollPane = new JScrollPane(getAddingPanel());
+			_addingScrollPane.getVerticalScrollBar().setBlockIncrement(90);
+			_addingScrollPane.getVerticalScrollBar().setUnitIncrement(30);
 			_addingScrollPane.setSize(getAddingPanel().getSize());
 		}
 		return _addingScrollPane;

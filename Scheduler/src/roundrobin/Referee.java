@@ -16,7 +16,6 @@ public class Referee implements Unit {
 	private Tournament _t;
 	
 	public Referee(Tournament t, String name){
-		System.out.println(t);
 		_t = t;
 		_name = new StringAttribute("Name", name);
 		_associatedField = new UnitAttribute<Field>("Associated Field", null, t.getFields());

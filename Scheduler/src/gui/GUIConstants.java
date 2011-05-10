@@ -10,25 +10,36 @@ import javax.swing.ImageIcon;
  */
 public interface GUIConstants {
 
-	boolean COLORSON = false;
-	Color BACKGROUND_COLOR = Color.lightGray;
-	Color FOREGROUND_COLOR = Color.white;
+	boolean COLORSON = true;
+	Color BACKGROUND_COLOR = new Color(214, 223, 217);
+	Color FOREGROUND_COLOR = Color.black;
 	Color FG_TEXT_COLOR = Color.black;
 	Color BG_TEXT_COLOR = Color.black;
 	
 	boolean IMAGESON = true;
-	ImageIcon INTROIMAGE = new ImageIcon("Scheduler/src/images/logo.png");
-	ImageIcon TREEOPENIMAGE = null;
-	ImageIcon TREECLOSEDIMAGE = null;
-	ImageIcon TREELEAFIMAGE = null;
-	ImageIcon ADDBUTTONIMAGE = null;
-	ImageIcon EDITBUTTONIMAGE = null;
-	ImageIcon DELETEBUTTONIMAGE = null;
-	ImageIcon SAVEBUTTONIMAGE = null;
-	ImageIcon FRAMEIMAGE = null;
+	//	If on laptop:
+//	ImageIcon INTROIMAGE = new ImageIcon("src/images/logo.png");
+//	ImageIcon TREEOPENIMAGE = new ImageIcon("src/images/openmanhole.png");
+//	ImageIcon TREECLOSEDIMAGE = new ImageIcon("src/images/closedmanhole.png");
+//	ImageIcon TREELEAFIMAGE = new ImageIcon("src/images/splinter.png");
+//	ImageIcon ADDBUTTONIMAGE = new ImageIcon("src/images/raphael.png");
+//	ImageIcon EDITBUTTONIMAGE = new ImageIcon("src/images/donatello.png");
+//	ImageIcon DELETEBUTTONIMAGE = new ImageIcon("src/images/michelangelo.png");
+//	ImageIcon SAVEBUTTONIMAGE = new ImageIcon("src/images/leonardo.png");
+//	ImageIcon FRAMEIMAGE = new ImageIcon("src/images/minilogo.png");
+	//	If on filesystem:
+	ImageIcon INTROIMAGE = new ImageIcon("images/logo.png");
+	ImageIcon TREEOPENIMAGE = new ImageIcon("images/openmanhole.png");
+	ImageIcon TREECLOSEDIMAGE = new ImageIcon("images/closedmanhole.png");
+	ImageIcon TREELEAFIMAGE = new ImageIcon("images/splinter.png");
+	ImageIcon ADDBUTTONIMAGE = new ImageIcon("images/raphael.png");
+	ImageIcon EDITBUTTONIMAGE = new ImageIcon("images/donatello.png");
+	ImageIcon DELETEBUTTONIMAGE = new ImageIcon("images/michelangelo.png");
+	ImageIcon SAVEBUTTONIMAGE = new ImageIcon("images/leonardo.png");
+	ImageIcon FRAMEIMAGE = new ImageIcon("images/minilogo.png");
 	
-	String TOURNAMENT_EXTENSION = ".tmnt";
-	String CATEGORY_EXTENSION = ".csv";
+	String TOURNAMENT_EXTENSION = "tmnt";
+	String CATEGORY_EXTENSION = "csv";
 	
 	int DEFAULT_TABLE_BLANK_ROWS = 10;
 	int ROW_HEIGHT = 25;

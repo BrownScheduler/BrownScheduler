@@ -1,0 +1,2 @@
+Main-Class: plugin1/Tourney
+
