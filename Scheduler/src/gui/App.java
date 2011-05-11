@@ -32,6 +32,8 @@ import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JToolBar;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import exception.InvalidRoundException;
+
 public class App implements GUIConstants {
 
 	private MiddleEnd _middleEnd;
@@ -91,6 +93,7 @@ public class App implements GUIConstants {
 					_middleEnd.closeThisMiddleEnd();
 				}
 			});
+			System.out.println(System.getProperty("user.dir"));
 			if (IMAGESON) {
 				if (FRAMEIMAGE != null)
 					_jFrame.setIconImage(FRAMEIMAGE.getImage());
@@ -98,7 +101,7 @@ public class App implements GUIConstants {
 			getViewInputMenuItem().doClick();
 			_jFrame.setContentPane(getMainContentAndToolbarPane());
 			getViewInputMenuItem().setSelected(true);
-			_jFrame.setTitle("Tournament Scheduler v1.0");
+			_jFrame.setTitle("TurtleTab v1.0");
 		}
 		return _jFrame;
 	}
@@ -629,8 +632,12 @@ public class App implements GUIConstants {
 		item.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				_middleEnd.getTournament().createNextRound();
-				getViewManagementMenuItem().doClick();
+				try{
+					_middleEnd.getTournament().createNextRound();
+					getViewManagementMenuItem().doClick();
+				}catch(InvalidRoundException err){
+					err.printStackTrace();
+				}
 			}
 		});
 		return item;

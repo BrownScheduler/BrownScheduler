@@ -9,7 +9,6 @@ import java.util.List;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.UIManager.LookAndFeelInfo;
-
 import middleend.TMNTScheduler;
 import backbone.Grouping;
 import backbone.Tournament;
@@ -76,5 +75,11 @@ public class Tourney implements backbone.Tournament{
 		}
 		Tourney t = new Tourney();
 		new TMNTScheduler(t);
+	}
+
+	@Override
+	public Tournament getNew() {
+		// TODO Auto-generated method stub
+		return new Tourney();
 	}
 }

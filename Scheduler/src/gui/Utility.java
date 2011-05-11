@@ -9,11 +9,14 @@ import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
@@ -96,11 +99,36 @@ public class Utility implements GUIConstants {
 		return field;
 	}
 	
+	public static JPanel wrapLeft(JComponent toWrap){
+		JPanel lilWrapper = new JPanel();
+		lilWrapper.setLayout(new BoxLayout(lilWrapper, BoxLayout.X_AXIS));
+		if (COLORSON) {
+			lilWrapper.setBackground(BACKGROUND_COLOR);
+			lilWrapper.setForeground(FOREGROUND_COLOR);
+		}
+		lilWrapper.add(toWrap);
+		lilWrapper.add(Box.createHorizontalGlue());
+		return lilWrapper;
+	}
+	
+	public static JPanel wrapUp(JComponent toWrap){
+		JPanel lilWrapper = new JPanel();
+		lilWrapper.setLayout(new BoxLayout(lilWrapper, BoxLayout.Y_AXIS));
+		if (COLORSON) {
+			lilWrapper.setBackground(BACKGROUND_COLOR);
+			lilWrapper.setForeground(FOREGROUND_COLOR);
+		}
+		lilWrapper.add(toWrap);
+//		lilWrapper.add(Box.createVerticalGlue());
+		return lilWrapper;
+	}
+	
 	public static JFormattedTextField getIntegerField(IntAttribute attribute, boolean isEditable) {
 		NumberFormat nf = NumberFormat.getIntegerInstance();
 		nf.setGroupingUsed(false);
 		JFormattedTextField field = new JFormattedTextField(nf);
 		field.setValue(attribute.getAttribute());
+		field.setPreferredSize(TEXTFIELD_SIZE);
 		field.setMaximumSize(TEXTFIELD_SIZE);
 		field.setEditable(isEditable);
 		return field;
@@ -110,6 +138,7 @@ public class Utility implements GUIConstants {
 		DecimalFormat df = new DecimalFormat();
 		df.setGroupingUsed(false);
 		JFormattedTextField field = new JFormattedTextField(df);
+		field.setPreferredSize(TEXTFIELD_SIZE);
 		field.setMaximumSize(TEXTFIELD_SIZE);
 		field.setValue(attribute.getAttribute());
 		field.setEditable(isEditable);
@@ -169,6 +198,7 @@ public class Utility implements GUIConstants {
 			return new JLabel(((StringAttribute) attribute).getAttribute());
 		}
 		else if (attribute.getType() == Attribute.Type.UNIT) {
+			if(((UnitAttribute) attribute).att == null) return new JLabel("");
 			return new JLabel(((UnitAttribute) attribute).att.getName());
 		}
 		return null;

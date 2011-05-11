@@ -3,6 +3,7 @@ package gui;
 import middleend.*;
 import backbone.*;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -34,31 +35,16 @@ public class PairingPanel extends JPanel implements GUIConstants {
 			this.setBackground(BACKGROUND_COLOR);
 			this.setForeground(FOREGROUND_COLOR);
 		}
-		this.setSize(PAIRINGPANEL_SIZE);
+		
 		this.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black));
 		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-		this.add(Box.createHorizontalGlue());
+//		this.add(Box.createHorizontalGlue());
 		JPanel deletepanel = new JPanel();
 		if (COLORSON) {
 			deletepanel.setBackground(BACKGROUND_COLOR);
 			deletepanel.setForeground(FOREGROUND_COLOR);
 		}
 		deletepanel.setLayout(new BoxLayout(deletepanel, BoxLayout.Y_AXIS));
-		final JButton actuallydeletebutton = new JButton("Actually delete this pairing");
-		if (IMAGESON)
-			actuallydeletebutton.setIcon(DELETEBUTTONIMAGE);
-		if (COLORSON) {
-			actuallydeletebutton.setBackground(BACKGROUND_COLOR);
-			actuallydeletebutton.setForeground(FOREGROUND_COLOR);
-		}
-		actuallydeletebutton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				_round.removePairing(_pairing);
-				_middleEnd.repaintAll();
-			}
-		});
-		actuallydeletebutton.setVisible(false);
 		final JButton deletebutton = new JButton("Delete this pairing");
 		if (IMAGESON)
 			deletebutton.setIcon(DELETEBUTTONIMAGE);
@@ -67,58 +53,90 @@ public class PairingPanel extends JPanel implements GUIConstants {
 			deletebutton.setForeground(FOREGROUND_COLOR);
 		}
 		deletebutton.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent e) {
-				actuallydeletebutton.setVisible(true);
-				repaint();
-				deletebutton.setText("Click over there to delete ----->");
+				if (deletebutton.getText().equals("Delete this pairing"))
+					deletebutton.setText("Are you sure?");
+				else {
+					_round.removePairing(_pairing);
+					_middleEnd.repaintAll();
+				}
+					
 			}
 		});
 		deletepanel.add(deletebutton);
-		deletepanel.add(actuallydeletebutton);
 		this.add(deletepanel);
-		this.add(Box.createRigidArea(BIGSPACING_SIZE));
+		this.add(Box.createRigidArea(SMALLSPACING_SIZE));
+		int attNum = 0;
+		JPanel bigWrapper = new JPanel();
+		if (COLORSON) {
+			bigWrapper.setBackground(BACKGROUND_COLOR);
+			bigWrapper.setForeground(FOREGROUND_COLOR);
+		}
+		bigWrapper.setLayout(new BoxLayout(bigWrapper, BoxLayout.Y_AXIS));
+		JPanel toAddTo = new JPanel();
 		for (Attribute attribute : _pairing.getAttributes()) {
+			if(attNum % 4 == 0){
+				if(attNum != 0){
+					bigWrapper.add(Utility.wrapLeft(toAddTo));
+					bigWrapper.add(Box.createRigidArea(SMALLSPACING_SIZE));
+				}
+				toAddTo = new JPanel();
+				if (COLORSON) {
+					toAddTo.setBackground(BACKGROUND_COLOR);
+					toAddTo.setForeground(FOREGROUND_COLOR);
+				}
+				toAddTo.setLayout(new BoxLayout(toAddTo, BoxLayout.X_AXIS));
+			}
+			attNum++;
 			if (attribute.getType() == Attribute.Type.UNIT) {
 				JPanel attrpanel = new JPanel();
+				if (COLORSON) {
+					attrpanel.setBackground(BACKGROUND_COLOR);
+					attrpanel.setForeground(FOREGROUND_COLOR);
+				}
 				attrpanel.setLayout(new BoxLayout(attrpanel, BoxLayout.Y_AXIS));
-				attrpanel.add(Utility.getTitleLabel(attribute));
-				attrpanel.add(new UnitAttributeComboBox((UnitAttribute<?>) attribute, _pairing, this));//Not header, needs to be editable
+				attrpanel.add(Utility.wrapLeft(Utility.getTitleLabel(attribute)));
+				attrpanel.add(Utility.wrapLeft(new UnitAttributeComboBox((UnitAttribute<?>) attribute, _pairing, this)));//Not header, needs to be editable
 				if (((UnitAttribute<?>) attribute).att != null) {
 					for (Attribute attr : ((UnitAttribute<?>) attribute).att.getAttributes()) {
-						this.add(Box.createRigidArea(SMALLSPACING_SIZE));
+						toAddTo.add(Box.createRigidArea(SMALLSPACING_SIZE));
 						if (attr.getType() == Attribute.Type.GROUPING) {
-							JLabel label = Utility.getTitleLabel(attr);
+							JLabel label = Utility.getTitleLabel(attr);							
 							label.setToolTipText("Go to the input panel to edit/view this attribute of this unit.");
-							attrpanel.add(label);
+							attrpanel.add(Utility.wrapLeft(label));
 						}
 						else {
 							JLabel title = Utility.getTitleLabel(attr);
 							JLabel value = Utility.getValueLabel(attr);
 							JLabel label = new JLabel(title.getText() + ": " + value.getText());
 							label.setToolTipText("Go to the input panel to edit/view this attribute of this unit.");
-							attrpanel.add(label);
+							attrpanel.add(Utility.wrapLeft(label));
 						}
 					}
 				}
 				else {
-					this.add(Box.createRigidArea(SMALLSPACING_SIZE));
+					toAddTo.add(Box.createRigidArea(SMALLSPACING_SIZE));
 					JLabel title = Utility.getTitleLabel(attribute);
 					title.setText(title.getText() + ": N/A");
-					attrpanel.add(title);
+					attrpanel.add(Utility.wrapLeft(title));
 				}
-				this.add(attrpanel);
+				toAddTo.add(Utility.wrapUp(attrpanel));
 			}
-			else if (attribute.getType() == Attribute.Type.GROUPING) {
-				JLabel label = Utility.getTitleLabel(attribute);
-				label.setToolTipText("Go to the input panel to edit/view this attribute of this unit.");
-				this.add(label);
-			}
+//			else if (attribute.getType() == Attribute.Type.GROUPING) {
+//				JLabel label = Utility.getTitleLabel(attribute);
+//				label.setToolTipText("Go to the input panel to edit/view this attribute of this unit.");
+//				toAddTo.add(label);
+//			}
 			else {
-				this.add(Utility.getField(attribute));
+				toAddTo.add(Utility.wrapUp(Utility.getField(attribute)));
 			}
-			this.add(Box.createRigidArea(BIGSPACING_SIZE));
+			toAddTo.add(Box.createRigidArea(SMALLSPACING_SIZE));
 		}
+		bigWrapper.add(Utility.wrapLeft(toAddTo));
+//		bigWrapper.add(Box.createVerticalGlue());
+		//bigWrapper.setPreferredSize(new Dimension(PAIRINGPANEL_SIZE.width, PAIRINGPANEL_SIZE.height * ((attNum / 4)+1) ));
+		//this.setSize(new Dimension(PAIRINGPANEL_SIZE.width, PAIRINGPANEL_SIZE.height * ((attNum / 4)+1) ));
+		this.add(bigWrapper);
 		this.add(Box.createHorizontalGlue());
 	}
 	
@@ -138,6 +156,7 @@ public class PairingPanel extends JPanel implements GUIConstants {
 			_pairingpanel = pp;
 			_pairing = p;
 			
+			this.setPreferredSize(JCOMBOBOX_SIZE);
 			this.setMaximumSize(JCOMBOBOX_SIZE);
 			
 			final ArrayList<Unit> units = new ArrayList<Unit>();

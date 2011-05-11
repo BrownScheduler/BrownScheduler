@@ -26,6 +26,9 @@ public class Field implements Unit {
 		
 	}
 
+	public boolean removeRef(Referee ref){
+		return _associatedRefs.remove(ref);
+	}
 	public ArrayList<Referee> possibleRefs(){
 		return _associatedRefs;
 	}
