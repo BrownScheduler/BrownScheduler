@@ -1,11 +1,14 @@
 package apda;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 
 import backbone.Attribute;
+import backbone.DoubleAttribute;
 import backbone.Grouping;
 import backbone.GroupingAttribute;
 import backbone.StringAttribute;
@@ -23,6 +26,7 @@ public class Judge implements Unit{
 	
 	
 	private String _name;
+	private DoubleAttribute _judgeScore;
 	private ArrayList<Team> _conflictedTeams;
 	private ArrayList<School> _conflictedSchools;
 	private boolean[] _roundsAvailable;
@@ -37,6 +41,25 @@ public class Judge implements Unit{
 		for(boolean b : _roundsAvailable)
 			b = true;
 		
+	}
+	
+	//returns -1 if j1 is higher ranked than j2
+	public static class JudgeComparator implements Serializable, Comparator {
+		
+		@Override
+		public int compare(Object arg0, Object arg1) {
+			Judge j1 = (Judge)arg0;
+			Judge j2 = (Judge)arg1;
+			int toreturn = 1;
+			if(j1.judgeScore() > j2.judgeScore()) return -1;
+			else if(j1.judgeScore() == j2.judgeScore()) return 0;
+			return toreturn;
+		}
+		
+	}
+	
+	public double judgeScore(){
+		return this._judgeScore.getAttribute();
 	}
 	public boolean canJudge(Team t){
 		return false;

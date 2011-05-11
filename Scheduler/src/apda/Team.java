@@ -24,6 +24,19 @@ public class Team implements Unit {
 	}
 	public Team(Tourney t, String name){
 	}
+	
+	public boolean isFullSeed(){
+		return false;
+	}
+	public boolean isHalfSeed(){
+		return false;
+	}
+	public boolean isFreeSeed(){
+		return false;
+	}
+	public static Team createBye(){
+		return null;
+	}
 
 	@Override
 	public boolean deleteFromGrouping() {
