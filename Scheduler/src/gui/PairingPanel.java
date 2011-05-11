@@ -90,8 +90,8 @@ public class PairingPanel extends JPanel implements GUIConstants {
 		for (Attribute attribute : _pairing.getAttributes()) {
 			if(attNum % 4 == 0){
 				if(attNum != 0){
-					toAddTo.add(Box.createHorizontalGlue());
-					bigWrapper.add(toAddTo);
+					bigWrapper.add(Utility.wrapLeft(toAddTo));
+					bigWrapper.add(Box.createRigidArea(SMALLSPACING_SIZE));
 				}
 				toAddTo = new JPanel();
 				if (COLORSON) {
@@ -145,8 +145,9 @@ public class PairingPanel extends JPanel implements GUIConstants {
 			}
 			toAddTo.add(Box.createRigidArea(BIGSPACING_SIZE));
 		}
-		toAddTo.add(Box.createHorizontalGlue());
+		//toAddTo.add(Box.createHorizontalGlue());
 		bigWrapper.add(Utility.wrapLeft(toAddTo));
+		bigWrapper.add(Box.createVerticalGlue());
 		//bigWrapper.setPreferredSize(new Dimension(PAIRINGPANEL_SIZE.width, PAIRINGPANEL_SIZE.height * ((attNum / 4)+1) ));
 		//this.setSize(new Dimension(PAIRINGPANEL_SIZE.width, PAIRINGPANEL_SIZE.height * ((attNum / 4)+1) ));
 		this.add(bigWrapper);
