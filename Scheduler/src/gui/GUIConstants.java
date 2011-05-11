@@ -38,8 +38,8 @@ public interface GUIConstants {
 	//ImageIcon SAVEBUTTONIMAGE = new ImageIcon("Scheduler/src/images/leonardo.png");
 	//ImageIcon FRAMEIMAGE = new ImageIcon("Scheduler/src/images/minilogo.png");
 	
-	String TOURNAMENT_EXTENSION = ".tmnt";
-	String CATEGORY_EXTENSION = ".csv";
+	String TOURNAMENT_EXTENSION = "tmnt";
+	String CATEGORY_EXTENSION = "csv";
 	
 	int DEFAULT_TABLE_BLANK_ROWS = 10;
 	int ROW_HEIGHT = 25;

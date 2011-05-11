@@ -252,7 +252,6 @@ public class App implements GUIConstants {
 			_newTournamentMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_T,
 					Event.CTRL_MASK, true));
 			_newTournamentMenuItem.addActionListener(new ActionListener() {
-				@Override
 				public void actionPerformed(ActionEvent e) {
 					_middleEnd.openNewMiddleEnd();
 				}
@@ -273,10 +272,9 @@ public class App implements GUIConstants {
 			_openTournamentMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,
 					Event.CTRL_MASK, true));
 			_openTournamentMenuItem.addActionListener(new ActionListener() {
-				@Override
 				public void actionPerformed(ActionEvent e) {
 					JFileChooser chooser = new JFileChooser();
-					chooser.setFileFilter(new FileNameExtensionFilter("Tournament File", TOURNAMENT_EXTENSION));
+					chooser.setFileFilter(new FileNameExtensionFilter("Tournament File (.tmnt)", TOURNAMENT_EXTENSION));
 					int returnval = chooser.showOpenDialog(getJFrame());
 					if (returnval == JFileChooser.APPROVE_OPTION) {
 						if (!getMiddleEnd().openTournament(chooser.getSelectedFile())) {
@@ -307,7 +305,7 @@ public class App implements GUIConstants {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					JFileChooser chooser = new JFileChooser();
-					chooser.setFileFilter(new FileNameExtensionFilter("Tournament File", TOURNAMENT_EXTENSION));
+					chooser.setFileFilter(new FileNameExtensionFilter("Tournament File (.tmnt)", TOURNAMENT_EXTENSION));
 					int returnval = chooser.showSaveDialog(getJFrame());
 					if (returnval == JFileChooser.APPROVE_OPTION) {
 						if (!getMiddleEnd().saveTournament(chooser.getSelectedFile())) {
@@ -338,7 +336,7 @@ public class App implements GUIConstants {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					JFileChooser chooser = new JFileChooser();
-					chooser.setFileFilter(new FileNameExtensionFilter("CSV File", CATEGORY_EXTENSION));
+					chooser.setFileFilter(new FileNameExtensionFilter("CSV File (.csv)", CATEGORY_EXTENSION));
 					int returnval = chooser.showOpenDialog(getJFrame());
 					if (returnval == JFileChooser.APPROVE_OPTION) {
 						if (!getMiddleEnd().importCategory(chooser.getSelectedFile())) {
@@ -376,7 +374,7 @@ public class App implements GUIConstants {
 							JOptionPane.PLAIN_MESSAGE, null, catnames.toArray(new String[0]), catnames.get(0));
 					Grouping toadd = categories.get(catnames.indexOf(str));
 					JFileChooser chooser = new JFileChooser();
-					chooser.setFileFilter(new FileNameExtensionFilter("CSV File", CATEGORY_EXTENSION));
+					chooser.setFileFilter(new FileNameExtensionFilter("CSV File (.csv)", CATEGORY_EXTENSION));
 					int returnval = chooser.showSaveDialog(getJFrame());
 					if (returnval == JFileChooser.APPROVE_OPTION) {
 						if (!getMiddleEnd().exportCategory(toadd, chooser.getSelectedFile())) {

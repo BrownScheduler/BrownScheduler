@@ -62,6 +62,21 @@ public class Judge implements Unit{
 		}
 		else if(attribute.getType() == Attribute.Type.GROUPING){
 			this._conflictedTeams = new HashSet<Team>(((GroupingAttribute<Team>)attribute).getMembers());
+			for(Team t : _conflictedTeams) {
+				Team t2 = null;
+				for(Object o : _t.getCategories().get(0).getMembers()) {
+					Team team = (Team) o;
+					if(team.getName().equals(t.getName())) {
+						t2 = team;
+						break;
+					}
+				}
+				if(t2 == null) {
+					_t.getCategories().get(0).addMember(t);
+				} else {
+					t2.setAttribute(t.getAttributes().get(1));
+				}
+			}
 		}
 		
 	}
