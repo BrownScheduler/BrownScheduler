@@ -31,6 +31,21 @@ public class Tourney implements Tournament{
 		return null;
 	}
 	
+	public MyRound createFirstRound(ArrayList<Team> teamsToPair, LinkedList<Judge> availableJudges){
+		//rounNum is one less than the string return
+		MyRound r = new MyRound(this, "Round 1", _rounds.size());
+		LinkedList<Team> fullSeeds = new LinkedList<Team>();
+		LinkedList<Team> halfSeeds = new LinkedList<Team>();
+		LinkedList<Team> freeSeeds = new LinkedList<Team>();
+		LinkedList<Team> nonSeeds = new LinkedList<Team>();
+		
+		for(Team t : teamsToPair){
+			if(t.)
+		}
+		return null;
+		
+	}
+	
 	@Override
 	public Round createNextRound() throws InvalidRoundException {
 		//the tournament is over, no more rounds should be created
@@ -45,13 +60,18 @@ public class Tourney implements Tournament{
 			if(t.stillInTournament)
 				teamsToPair.add(t);
 		}
-		ArrayList<ArrayList<Team>> sortedTeams = createTeamBrackets(teamsToPair);
 		LinkedList<Judge> availableJudges = new LinkedList<Judge>();
 		for(Judge j : _judges._members){
 			if(j.isAvailable(numCreating)) availableJudges.add(j);
 		}
 		//Not enough judges to actually pair this round!
-		if()
+		if(availableJudges.size() < teamsToPair.size() / 2)
+			throw new InvalidRoundException("There aren't enough judges to judge this round!");
+		//it's the first round, do special stuff
+		return createFirstRound(teamsToPair, availableJudges);
+		
+		ArrayList<ArrayList<Team>> sortedTeams = createTeamBrackets(teamsToPair);
+		
 		return null;
 	}
 
