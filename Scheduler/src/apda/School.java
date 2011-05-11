@@ -8,6 +8,10 @@ import backbone.Unit;
 
 public class School implements Unit {
 
+	
+	public boolean hasFreeSeed(){
+		return false;
+	}
 	@Override
 	public boolean deleteFromGrouping() {
 		// TODO Auto-generated method stub
