@@ -105,10 +105,10 @@ public class Game implements Pairing {
 	
 	
 	public void setHeadReferee(Referee ref){
-		if(_location.att == null){
+		if(_location.att == null && ref != null){
 			_location = new UnitAttribute<Field>("Location", ref.getField(), _t.getFields());
 		}
-		if(_assistantRef.att == null || _assistantRef.att.getField() != _location.att){
+		if(_assistantRef.att == null){
 			_assistantRef = new UnitAttribute<Referee>("Assistant Ref", null, getPossibleRefs(_location.att));
 		}
 		_headRef = new UnitAttribute<Referee>("Head Ref", ref, getPossibleRefs(_location.att));
@@ -118,7 +118,7 @@ public class Game implements Pairing {
 		if(_location.att == null){
 			_location = new UnitAttribute<Field>("Location", ref.getField(), _t.getFields());
 		}
-		if(_headRef.att == null || _headRef.att.getField() != _location.att){
+		if(_headRef.att == null){
 			_headRef = new UnitAttribute<Referee>("Head Ref", null, getPossibleRefs(_location.att));
 		}
 		_assistantRef = new UnitAttribute<Referee>("Assistant Ref", ref, getPossibleRefs(_location.att));
@@ -126,7 +126,11 @@ public class Game implements Pairing {
 	@Override
 	public boolean deleteFromGrouping() {
 		if(_r == null) return false;
-		else return _r.deleteMember(this);
+		if(_winner != null) _winner.setGamesWon(_winner.getGamesWon() - 1);
+		if(_loser != null) _loser.setGamesLost(_loser.getGamesLost() - 1);
+		if(_homeTeam.att != null) _homeTeam.att.removeFacedTeam(_awayTeam.att);
+		if(_awayTeam.att != null) _awayTeam.att.removeFacedTeam(_homeTeam.att);
+		return _r.deleteMember(this);
 	}
 
 	@Override
@@ -172,7 +176,7 @@ public class Game implements Pairing {
 			return g;
 		}
 		for(Referee r : _t.getRefs().getMembers()){
-			if(r.getField() == f) g.addMember(r);
+			if(r.getField() == f || r.getField() == null) g.addMember(r);
 		}
 		return g;
 	}
@@ -190,9 +194,9 @@ public class Game implements Pairing {
 					_headRef = new UnitAttribute<Referee>("Head Ref", null, _t.getRefs());
 					_assistantRef = new UnitAttribute<Referee>("Assistant Ref", null, _t.getRefs());
 				}else{
-					if(_headRef.att.getField() != attr.att)
+					if(_headRef.att == null || _headRef.att.getField() != attr.att)
 						_headRef = new UnitAttribute<Referee>("Head Ref", null, getPossibleRefs(attr.att));
-					if(_assistantRef.att.getField() != attr.att)
+					if(_assistantRef.att == null || _assistantRef.att.getField() != attr.att)
 						_assistantRef = new UnitAttribute<Referee>("Assistant Ref", null, getPossibleRefs(attr.att));
 				}
 				_location = attr;
@@ -222,19 +226,19 @@ public class Game implements Pairing {
 					_winner = null;
 					_loser = null;
 				}
-				if(newWinner.isGov){
+				else if(newWinner.isGov){
 					if(_winner != _homeTeam.att){
 						if(_winner != null) _winner.setGamesWon(_winner.getGamesWon() - 1);
 						_winner = _homeTeam.att;
 						_winner.setGamesWon(_winner.getGamesWon() + 1);
 					}
-					if(_loser != _awayTeam.att){
+					if(_loser != _awayTeam.att ){
 						if(_loser != null) _loser.setGamesLost(_loser.getGamesLost() - 1);
 						_loser = _awayTeam.att;
-						_loser.setGamesLost(_loser.getGamesLost() + 1);
+						if(_winner != null) _loser.setGamesLost(_loser.getGamesLost() + 1);
 					}
 				}
-				if(newWinner.isOpp){
+				else if(newWinner.isOpp){
 					if(_winner != _awayTeam.att){
 						if(_winner != null) _winner.setGamesWon(_winner.getGamesWon() - 1);
 						_winner = _awayTeam.att;
@@ -243,7 +247,7 @@ public class Game implements Pairing {
 					if(_loser != _homeTeam.att){
 						if(_loser != null) _loser.setGamesLost(_loser.getGamesLost() - 1);
 						_loser = _homeTeam.att;
-						_loser.setGamesLost(_loser.getGamesLost() + 1);
+						if(_winner != null) _loser.setGamesLost(_loser.getGamesLost() + 1);
 					}
 				}
 			}

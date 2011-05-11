@@ -214,7 +214,7 @@ public class UnitPanel extends JPanel implements GUIConstants {
 				_middleEnd.repaintAll();
 			}
 		});
-		final JButton actuallydeletebutton = new JButton("Actually delete this unit");
+		final JButton actuallydeletebutton = new JButton("Delete this unit");
 		if (IMAGESON)
 			actuallydeletebutton.setIcon(DELETEBUTTONIMAGE);
 		if (COLORSON) {
@@ -222,7 +222,6 @@ public class UnitPanel extends JPanel implements GUIConstants {
 			actuallydeletebutton.setForeground(FOREGROUND_COLOR);
 		}
 		actuallydeletebutton.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				_mainPanel.removeAll();
 				_buttonPanel.removeAll();
@@ -231,24 +230,23 @@ public class UnitPanel extends JPanel implements GUIConstants {
 				_middleEnd.repaintAll();
 			}
 		});
-		actuallydeletebutton.setVisible(false);
-		final JButton deletebutton = new JButton("Delete this unit");
-		if (IMAGESON)
-			deletebutton.setIcon(DELETEBUTTONIMAGE);
-		if (COLORSON) {
-			deletebutton.setBackground(BACKGROUND_COLOR);
-			deletebutton.setForeground(FOREGROUND_COLOR);
-		}
-		deletebutton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				actuallydeletebutton.setVisible(true);
-				_buttonPanel.repaint();
-				deletebutton.setText("Click over there to delete ----->");
-			}
-		});
+//		actuallydeletebutton.setVisible(true);
+//		final JButton deletebutton = new JButton("Delete this unit");
+//		if (IMAGESON)
+//			deletebutton.setIcon(DELETEBUTTONIMAGE);
+//		if (COLORSON) {
+//			deletebutton.setBackground(BACKGROUND_COLOR);
+//			deletebutton.setForeground(FOREGROUND_COLOR);
+//		}
+//		deletebutton.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				actuallydeletebutton.setVisible(true);
+//				_buttonPanel.repaint();
+//				deletebutton.setText("Click over there to delete ----->");
+//			}
+//		});
 		_buttonPanel.add(savebutton);
-		_buttonPanel.add(deletebutton);
+//		_buttonPanel.add(deletebutton);
 		_buttonPanel.add(actuallydeletebutton);
 		_buttonPanel.setMaximumSize(UNITPANEL_SIZE);
 		this.add(_mainPanel);

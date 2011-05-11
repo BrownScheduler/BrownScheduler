@@ -78,9 +78,14 @@ public class PairingPanel extends JPanel implements GUIConstants {
 		deletepanel.add(actuallydeletebutton);
 		this.add(deletepanel);
 		this.add(Box.createRigidArea(BIGSPACING_SIZE));
+		int attNum = 0;
 		for (Attribute attribute : _pairing.getAttributes()) {
 			if (attribute.getType() == Attribute.Type.UNIT) {
 				JPanel attrpanel = new JPanel();
+				if (COLORSON) {
+					attrpanel.setBackground(BACKGROUND_COLOR);
+					attrpanel.setForeground(FOREGROUND_COLOR);
+				}
 				attrpanel.setLayout(new BoxLayout(attrpanel, BoxLayout.Y_AXIS));
 				attrpanel.add(Utility.getTitleLabel(attribute));
 				attrpanel.add(new UnitAttributeComboBox((UnitAttribute<?>) attribute, _pairing, this));//Not header, needs to be editable
@@ -117,7 +122,7 @@ public class PairingPanel extends JPanel implements GUIConstants {
 			else {
 				this.add(Utility.getField(attribute));
 			}
-			this.add(Box.createRigidArea(BIGSPACING_SIZE));
+			//this.add(Box.createRigidArea(BIGSPACING_SIZE));
 		}
 		this.add(Box.createHorizontalGlue());
 	}

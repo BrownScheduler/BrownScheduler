@@ -46,6 +46,8 @@ public class ManagementPanel extends JTabbedPane implements GUIConstants {
 				rpcontainer.setLayout(new java.awt.BorderLayout());
 				rpcontainer.add(rp, java.awt.BorderLayout.CENTER);
 				JScrollPane rpscroller = new JScrollPane(rpcontainer);
+				rpscroller.getVerticalScrollBar().setBlockIncrement(90);
+				rpscroller.getVerticalScrollBar().setUnitIncrement(30);
 				this.addTab(round.getName(), rpscroller);
 				this.setSelectedComponent(rpscroller);
 			}
