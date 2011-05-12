@@ -38,14 +38,23 @@ public class CSVIO {
 	 */
 	public static void writeGrouping(File file, Grouping<? extends Unit> category) throws exception.CSVException {
 		try {
+			//prepares the file
 			BufferedWriter out = new BufferedWriter(new FileWriter(file));
+			
+			//prints first line
 			out.write(category.getName() + "\n");
+			
+			//prints titles
 			for(Attribute att : category.getBlank().getAttributes())
 				if(att.getType() != Attribute.Type.GROUPING)
 					out.write(att.getTitle() + ",");
 			out.write("\n");
+			
+			//prints units
 			for(Unit member : category.getMembers()) {
 				String groups = "";
+				
+				//prints nin-group attributes
 				for(Attribute att : member.getAttributes()) {
 					if(att.getType() == Attribute.Type.GROUPING) {
 						GroupingAttribute<Unit> gatt = (GroupingAttribute<Unit>) att;
@@ -59,6 +68,7 @@ public class CSVIO {
 						out.write(att.toString() + ",");
 				}
 
+				//prints group attributes
 				out.write("\n");
 				out.write(groups);
 			}
@@ -70,14 +80,23 @@ public class CSVIO {
 		}
 	}
 
+	/**
+	 * Edits a tournament based on the contents of a grouping in a CSV file
+	 * @param file the file
+	 * @param t the tournament
+	 * @throws exception.CSVException if the tournament is malformed or a file can't be opened
+	 */
 	public static void loadGrouping(File file, Tournament t) throws exception.CSVException {
 		try {
+			//finds the grouping from the first line of the file
 			LinkedList<Grouping<Unit>> groups = new LinkedList<Grouping<Unit>>();
 			groups.addAll((Collection<? extends Grouping<Unit>>) t.getCategories());
 			groups.addAll((Collection<? extends Grouping<Unit>>) t.getRounds());
 			BufferedReader in = new BufferedReader(new FileReader(file));
 			String name = in.readLine().split(",")[0];
-			in.readLine();
+			
+			in.readLine(); //skips over titles
+			
 			Grouping group = null;
 			for(Grouping g : groups) {
 				if(g.getName().equals(name)) {
@@ -88,6 +107,8 @@ public class CSVIO {
 
 			if(group == null)
 				throw new CSVException("Unknown grouping: " + name);
+			
+			//establishes lists to refer to for additions deletions and unit attribute settings
 			LinkedList<Unit> toDelete = new LinkedList<Unit>(group.getMembers());
 			LinkedList<Unit> toAdd = new LinkedList<Unit>();
 			ArrayList<Integer> nongroupAtts = new ArrayList<Integer>();
@@ -95,6 +116,7 @@ public class CSVIO {
 			HashMap<Unit, HashMap<UnitAttribute, String>> unitsToAdd = new HashMap<Unit, HashMap<UnitAttribute, String>>();
 			HashMap<Unit, HashMap<GroupingAttribute, LinkedList<String>>> groupsToSet = new HashMap<Unit, HashMap<GroupingAttribute, LinkedList<String>>>();
 			List<Attribute> atts = group.getBlank().getAttributes();
+			
 			for(int i = 0; i < atts.size(); i++) {
 				Attribute att = atts.get(i);
 				if(att.getType() == Attribute.Type.GROUPING)
@@ -102,8 +124,12 @@ public class CSVIO {
 				else
 					nongroupAtts.add(i);
 			}
+			
+			//reads in units
 			String line = in.readLine();
 			while(line != null) {
+				
+				//reads in string attributes to determine name
 				String[] cells = line.split(",");
 				Unit temp = group.getBlank();
 				for(int i = 0; i < nongroupAtts.size(); i++) {
@@ -115,6 +141,8 @@ public class CSVIO {
 				if(unitName == null || unitName == "")
 					throw new CSVException();
 				Unit unit = null;
+				
+				//finds if unit is currently in the grouping
 				for(Unit u : toDelete)
 					if(u.getName().equals(unitName)) {
 						unit = u;
@@ -127,9 +155,12 @@ public class CSVIO {
 				else {
 					toDelete.remove(unit);
 				}
+				
+				//sets all non-grouping attributes
 				for(int i = 0; i < nongroupAtts.size(); i++) {
 					Attribute att = unit.getAttributes().get(nongroupAtts.get(i));
 					switch (att.getType()) {
+					
 					case BOOLEAN:
 						if(cells.length > i && !cells[i].equals(""))
 							unit.setAttribute(new BooleanAttribute(att.getTitle(),
@@ -138,6 +169,7 @@ public class CSVIO {
 							unit.setAttribute(new BooleanAttribute(att.getTitle(),
 									((BooleanAttribute) temp.getAttributes().get(nongroupAtts.get(i))).getAttribute()));
 						break;
+						
 					case DOUBLE:
 						if(cells.length > i && !cells[i].equals(""))
 							unit.setAttribute(new DoubleAttribute(att.getTitle(),
@@ -146,6 +178,7 @@ public class CSVIO {
 							unit.setAttribute(new DoubleAttribute(att.getTitle(),
 									((DoubleAttribute) temp.getAttributes().get(nongroupAtts.get(i))).getAttribute()));
 						break;
+						
 					case INT:
 						if(cells.length > i && !cells[i].equals(""))
 							unit.setAttribute(new IntAttribute(att.getTitle(),
@@ -156,9 +189,12 @@ public class CSVIO {
 
 						System.out.println(group.getMembers().toString());
 						break;
+						
 					case STRING:
 						unit.setAttribute(new StringAttribute(att.getTitle(),cells[i]));
 						break;
+						
+						//Unit attributes are not set immediately in case the unit in question will appear later
 					case UNIT:
 						if(cells.length > i && !cells[i].equals("")) {
 							HashMap<UnitAttribute, String> unitAttsToAdd = new HashMap<UnitAttribute, String>();
@@ -259,11 +295,9 @@ public class CSVIO {
 			}
 
 		} catch (NumberFormatException e) {
-			//e.printStackTrace();
-			throw new exception.CSVException(e);
+			throw new exception.CSVException();
 		} catch (IOException e) {
-			//e.printStackTrace();
-			throw new exception.CSVException(e);
+			throw new exception.CSVException();
 		} 
 	}
 }

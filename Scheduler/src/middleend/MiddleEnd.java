@@ -118,10 +118,17 @@ public class MiddleEnd extends Thread {
 	 * @return boolean
 	 */
 	public boolean importCategory(File file) {
+		boolean saved = false;
+		File temp = new File("temp");
 		try {
+			 saved = saveTournament(temp);
 			CSVIO.loadGrouping(file, _tmnt);
 			return true;
 		} catch (CSVException e) {
+			if(saved) {
+				openTournament(temp);
+				closeThisMiddleEnd();
+			}
 			return false;
 		}
 	}
