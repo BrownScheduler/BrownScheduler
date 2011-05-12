@@ -8,6 +8,11 @@ import backbone.Unit;
 
 public class School implements Unit {
 
+	private String _name;
+	private Tourney _t;
+	public Team _freeSeed;
+	public TeamGrouping _teams;
+	
 	
 	public boolean hasFreeSeed(){
 		return false;
@@ -20,6 +25,8 @@ public class School implements Unit {
 		//TODO
 		return;
 	}
+	
+	
 	@Override
 	public boolean deleteFromGrouping() {
 		// TODO Auto-generated method stub

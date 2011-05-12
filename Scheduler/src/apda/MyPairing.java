@@ -37,7 +37,7 @@ public class MyPairing implements backbone.Pairing{
 	
 	public void setWinner(Team t){
 		_winner = t;
-		_winner.setWins(_winner.getWins() + 1);
+		//_winner.setWins(_winner.getWins() + 1);
 	}
 	
 	public boolean isFinished(){
@@ -95,7 +95,7 @@ public class MyPairing implements backbone.Pairing{
 
 	@Override
 	public void setMemberOf(Grouping g) {
-		_roundIn = g;
+		//_roundIn = g;
 		
 	}
 
