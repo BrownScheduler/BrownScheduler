@@ -107,12 +107,10 @@ public class App implements GUIConstants {
 			_jFrame.setSize(DEFAULT_SIZE);
 			_jFrame.setMinimumSize(MIN_SIZE);
 			_jFrame.addWindowListener(new WindowAdapter() {
-				@Override
 				public void windowClosing(WindowEvent e) {
 					_middleEnd.closeThisMiddleEnd();
 				}
 			});
-			System.out.println(System.getProperty("user.dir"));
 			if (IMAGESON) {
 				if (FRAMEIMAGE != null)
 					_jFrame.setIconImage(FRAMEIMAGE.getImage());
@@ -426,6 +424,10 @@ public class App implements GUIConstants {
 						catnames.add(category.getName());
 					String str = (String) JOptionPane.showInputDialog(getJFrame(), "Which category would you like to export?", "Export Category",
 							JOptionPane.PLAIN_MESSAGE, null, catnames.toArray(new String[0]), catnames.get(0));
+					if (catnames.indexOf(str) < 0) {
+						JOptionPane.showMessageDialog(getJFrame(), "Some error occurred while importing, please try again.", "Import error", JOptionPane.ERROR_MESSAGE);
+						return;
+					}
 					Grouping toadd = categories.get(catnames.indexOf(str));
 					JFileChooser chooser = new JFileChooser();
 					chooser.setApproveButtonText("Export");
@@ -699,7 +701,11 @@ public class App implements GUIConstants {
 					_middleEnd.getTournament().createNextRound(false);
 					getViewManagementMenuItem().doClick();
 				}catch(InvalidRoundException err){ //Thrown if a valid tournament cannot be created with the current unit setup
-					int result = JOptionPane.showConfirmDialog(getJFrame(), err.getMessage(), "Round Creation Error", JOptionPane.ERROR_MESSAGE);
+//					int result = JOptionPane.showConfirmDialog(getJFrame(), err.getMessage(), "Round Creation Error", JOptionPane.ERROR_MESSAGE);
+					String[] options = {"Continue anyway", "Abort"};
+					int result = JOptionPane.showOptionDialog(getJFrame(), err.getMessage(),
+							"Round Creation Error", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE,
+							null, options, options[1]);
 					if (result == JOptionPane.YES_OPTION) {
 						try {
 							_middleEnd.getTournament().createNextRound(true);
