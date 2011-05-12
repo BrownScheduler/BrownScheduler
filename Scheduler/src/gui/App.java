@@ -378,9 +378,18 @@ public class App implements GUIConstants {
 			_importCategoryMenuItem.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
+					String[] options = {"Continue importing", "Save first, then import", "Cancel import"};
+					int returnval = JOptionPane.showOptionDialog(getJFrame(), "Importing overwrites data in the current tournament. Importing a malformed CSV file could destroy some data, would you like to save the tournament before importing?",
+							"Import Warning", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null,
+							options, options[2]);
+					if (returnval == JOptionPane.CANCEL_OPTION)
+						return;
+					if (returnval == JOptionPane.NO_OPTION)
+						getSaveTournamentMenuItem().doClick();
 					JFileChooser chooser = new JFileChooser();
+					chooser.setApproveButtonText("Import");
 					chooser.setFileFilter(new FileNameExtensionFilter("CSV File (.csv)", CATEGORY_EXTENSION));
-					int returnval = chooser.showOpenDialog(getJFrame());
+					returnval = chooser.showOpenDialog(getJFrame());
 					if (returnval == JFileChooser.APPROVE_OPTION) {
 						if (!getMiddleEnd().importCategory(chooser.getSelectedFile())) {
 							JOptionPane.showMessageDialog(_jFrame, "The selected file was not a valid tournament file.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -419,6 +428,7 @@ public class App implements GUIConstants {
 							JOptionPane.PLAIN_MESSAGE, null, catnames.toArray(new String[0]), catnames.get(0));
 					Grouping toadd = categories.get(catnames.indexOf(str));
 					JFileChooser chooser = new JFileChooser();
+					chooser.setApproveButtonText("Export");
 					chooser.setFileFilter(new FileNameExtensionFilter("CSV File (.csv)", CATEGORY_EXTENSION));
 					int returnval = chooser.showSaveDialog(getJFrame());
 					if (returnval == JFileChooser.APPROVE_OPTION) {
