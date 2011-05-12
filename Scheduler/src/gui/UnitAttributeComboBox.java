@@ -44,6 +44,7 @@ public class UnitAttributeComboBox extends JComboBox implements GUIConstants {
 		_units.add(0, null);
 		if (attribute.att == null)
 			toSelect = 0;
+
 		// This combo box is editable
 		this.setEditable(true);
 		// Sets the value of getSelectedUnit() of this combobox to return the selected value

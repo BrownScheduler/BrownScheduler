@@ -52,6 +52,7 @@ public class PairingPanel extends JPanel implements GUIConstants {
 		return new Color(red, green, 0);
 		
 	}
+
 	/**
 	 * Resets this panel.
 	 */
@@ -252,6 +253,7 @@ public class PairingPanel extends JPanel implements GUIConstants {
 			this.add(Utility.wrapLeft(tf));
 		}
 	}
+
 	/**
 	 * This class represents a UnitAttribute in a Pairing.
 	 */

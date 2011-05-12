@@ -65,6 +65,7 @@ public class InputTablePane extends JScrollPane implements GUIConstants {
 		return _table;
 	}
 	
+
 	/**
 	 * Initializes this InputTablePane.
 	 * @param headers
@@ -91,6 +92,7 @@ public class InputTablePane extends JScrollPane implements GUIConstants {
 		_table.setSize(INPUTTABLE_SIZE);
 		_table.setRowHeight(ROW_HEIGHT);
 		_table.getTableHeader().setReorderingAllowed(false);
+
 		// Unit and Grouping Attributes can't be edited in the table
 		Iterator<Attribute> iter = headers.iterator();
 		while (iter.hasNext()) {
@@ -98,6 +100,7 @@ public class InputTablePane extends JScrollPane implements GUIConstants {
 			if ((a.getType() == Attribute.Type.UNIT) || (a.getType() == Attribute.Type.GROUPING))
 				iter.remove();
 		}
+
 		// Adds existing members of the GroupingAttribute to the table
 		List<List<Attribute>> data = new ArrayList<List<Attribute>>();
 		for (Unit u : group.getMembers()) {
@@ -118,6 +121,7 @@ public class InputTablePane extends JScrollPane implements GUIConstants {
 //				unitcolumn.setCellEditor(new DefaultCellEditor(combobox));
 //			}
 //		}
+
 		// Brings up a popup menu when the user right clicks in the table,
 		// allowing the user to delete selected rows (and their corresponding
 		// units) from the table

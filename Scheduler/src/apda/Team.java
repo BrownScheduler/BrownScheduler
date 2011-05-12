@@ -122,7 +122,8 @@ public class Team implements Unit {
 		atts.add(new BooleanAttribute("In Tourney", this.stillInTournament));
 		atts.add(new IntAttribute("Wins", wins));
 		atts.add(new IntAttribute("Losses", losses));
-		atts.add(new UnitAttribute<SeedUnit>("Seed", _seed, SeedUnit.getOnlyGrouping()));
+		//atts.add(new UnitAttribute<SeedUnit>("Seed", _seed, SeedUnit.getOnlyGrouping()));
+
 		return atts;
 	}
 
@@ -162,6 +163,11 @@ public class Team implements Unit {
 						school.removeTeam(this);
 						schoolAtt.att.addTeam(this);
 						school = schoolAtt.att;
+					}
+					if(school.getName().equals(schoolAtt.att.getName())){
+						if(school._teams.getDuplicate(this) == null){
+							school.addTeam(this);
+						}
 					}
 				}
 			}else if(school == null && schoolAtt.att != null){
