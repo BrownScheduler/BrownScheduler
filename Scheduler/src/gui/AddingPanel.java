@@ -93,7 +93,7 @@ public class AddingPanel extends JPanel implements GUIConstants {
 		}
 		switch (_currView) {
 		case 1:
-//			this.setViewPanel((Unit) _currViewObject);
+			this.setViewPanel((Unit) _currViewObject);
 			break;
 		case 2:
 			this.setViewPanel((Grouping<Unit>) _currViewObject);
