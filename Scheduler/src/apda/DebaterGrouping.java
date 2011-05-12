@@ -29,5 +29,10 @@ public class DebaterGrouping extends MyCategory<Debater> {
 		}
 		return null;
 	}
+	
+	public void addMember(Debater member){
+		if(!this._members.contains(member) && getDuplicate(member) == null && !member.getName().equals("")) 
+			_members.add(member);
+	}
 
 }

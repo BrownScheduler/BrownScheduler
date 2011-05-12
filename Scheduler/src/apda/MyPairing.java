@@ -79,37 +79,86 @@ public class MyPairing implements backbone.Pairing{
 		atts.add(new UnitAttribute<Team>("Winner", _winner, posWinners));
 		
 		DebaterGrouping posGovDebaters = new DebaterGrouping(_t, "Pos Gov Units");
-		if(_gov != null && _gov.d1 != null) posGovDebaters.addMember(_gov.d1);
-		if(_gov != null && _gov.d2 != null) posGovDebaters.addMember(_gov.d2);
+		if(_gov != null && _gov.d1.att != null) posGovDebaters.addMember(_gov.d1.att);
+		if(_gov != null && _gov.d2.att != null) posGovDebaters.addMember(_gov.d2.att);
 		atts.add(new UnitAttribute<Debater>("PM", _pm, posGovDebaters));
 		atts.add(new UnitAttribute<Debater>("MG", _mg, posGovDebaters));
 		DebaterGrouping posOppDebaters = new DebaterGrouping(_t, "Pos Opp Units");
-		if(_opp != null && _opp.d1 != null) posOppDebaters.addMember(_opp.d1);
-		if(_opp != null && _opp.d2 != null) posOppDebaters.addMember(_opp.d2);
+		if(_opp != null && _opp.d1.att != null) posOppDebaters.addMember(_opp.d1.att);
+		if(_opp != null && _opp.d2.att != null) posOppDebaters.addMember(_opp.d2.att);
 		atts.add(new UnitAttribute<Debater>("LO", _pm, posOppDebaters));
 		atts.add(new UnitAttribute<Debater>("MO", _mg, posOppDebaters));
 		
-		atts.add(new DoubleAttribute("PM Points", 0.0));
-		atts.add(new DoubleAttribute("PM Rank", 0.0));
-		atts.add(new DoubleAttribute("MG Points", 0.0)); 
-		atts.add(new DoubleAttribute("MG Points", 0.0));
+		//atts.add(new DoubleAttribute("PM Points", 0.0));
+		//atts.add(new DoubleAttribute("PM Rank", 0.0));
+		//atts.add(new DoubleAttribute("MG Points", 0.0)); 
+		//atts.add(new DoubleAttribute("MG Points", 0.0));
 		
-		atts.add(new DoubleAttribute("LO Points", 0.0));
-		atts.add(new DoubleAttribute("LO Rank", 0.0));
-		atts.add(new DoubleAttribute("MO Points", 0.0)); 
-		atts.add(new DoubleAttribute("MO Points", 0.0)); 
+		//atts.add(new DoubleAttribute("LO Points", 0.0));
+		//atts.add(new DoubleAttribute("LO Rank", 0.0));
+		//atts.add(new DoubleAttribute("MO Points", 0.0)); 
+		//atts.add(new DoubleAttribute("MO Points", 0.0)); 
 
 		return atts;
 	}
 
 	private void setUnitAttribute(UnitAttribute<Unit> att){
+		
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public void setAttribute(Attribute attribute) {
-		if(attribute.getType() == Attribute.Type.UNIT) 
-			setUnitAttribute((UnitAttribute<Unit>)attribute);
+	public void setAttribute(Attribute att) {
+		if(att.getTitle().equals("PM")){
+			_pm = ((UnitAttribute<Debater>)att).att;
+		}else if(att.getTitle().equals("MG")){
+			_mg = ((UnitAttribute<Debater>)att).att;
+		}else if(att.getTitle().equals("LO")){
+			_lo = ((UnitAttribute<Debater>)att).att;
+		}else if(att.getTitle().equals("MO")){
+			_mo = ((UnitAttribute<Debater>)att).att;
+		}else if(att.getTitle().equals("Gov")){
+			_gov = ((UnitAttribute<Team>)att).att;
+		}else if(att.getTitle().equals("Opp")){
+			_opp = ((UnitAttribute<Team>)att).att;
+		}else if(att.getTitle().equals("Judge")){
+			_judge = ((UnitAttribute<Judge>)att).att;
+		}else if(att.getTitle().equals("Winner")){
+			setWinner(((UnitAttribute<Team>)att).att);
+			
+		}
+		
+	}
+
+	private void setWinner(Team team) {
+		if(_winner == null && team != null){
+			_winner = team;
+			_winner.wins++;
+			if(_winner == _gov && _opp != null) _opp.losses++;
+			else if(_winner == _opp && _gov != null) _gov.losses++;
+		}
+		if(_winner != null && team == null){
+			_winner.wins--;
+			if(_winner == _gov) _opp.losses--;
+			else if(_winner == _opp) _gov.losses--;
+			_winner = team;
+		}else if(_winner != null && team != null){
+			_winner.wins--;
+			if(_winner == _gov) _opp.losses--;
+			else if(_winner == _opp) _gov.losses--;
+			_winner = team;
+			_winner.wins++;
+			if(_winner == _gov) _opp.losses++;
+			else if(_winner == _opp) _gov.losses++;
+		}
+		if(_gov != null && _opp != null){
+			_opp.facedBefore.add(_gov);
+			_gov.facedBefore.add(_opp);
+			if(_judge != null){
+				_judge.addCantJudge(_opp);
+				_judge.addCantJudge(_gov);
+			}
+		}
 		
 	}
 

@@ -45,7 +45,10 @@ public class School implements Unit {
 	@Override
 	public List<Attribute> getAttributes() {
 		LinkedList<Attribute> atts = new LinkedList<Attribute>();
-		atts.add(new StringAttribute("Name", _name));		
+		atts.add(new StringAttribute("Name", _name));
+		for(Team t : this._teams.getMembers()){
+			t.school = this;
+		}
 		atts.add(new GroupingAttribute<Team>("Teams", this._teams));
 		TeamGrouping possibleSeeds = new TeamGrouping(_t, "Possible Seeds");
 		for(Team t : _teams.getMembers()){
@@ -73,6 +76,9 @@ public class School implements Unit {
 			_name = ((StringAttribute)att).value;
 		}else if(title.equals("Teams")){
 			_teams = (TeamGrouping) ((GroupingAttribute<Team>)att).getGrouping();
+			for(Team t : _teams.getMembers()){
+				t.school = this;
+			}
 		}else if(title.equals("Free Seed")){
 			Team toSet = ((UnitAttribute<Team>)att).att;
 			if(toSet != _freeSeed){

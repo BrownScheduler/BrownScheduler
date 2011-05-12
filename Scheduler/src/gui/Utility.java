@@ -308,7 +308,7 @@ public class Utility implements GUIConstants {
 			lilWrapper.setForeground(FOREGROUND_COLOR);
 		}
 		lilWrapper.add(toWrap);
-//		lilWrapper.add(Box.createVerticalGlue());
+		lilWrapper.add(Box.createVerticalGlue());
 		return lilWrapper;
 	}
 	

@@ -695,7 +695,7 @@ public class App implements GUIConstants {
 							_middleEnd.getTournament().createNextRound(true);
 							getViewManagementMenuItem().doClick();
 						} catch (InvalidRoundException e1) {
-							e1.printStackTrace();
+							JOptionPane.showMessageDialog(getJFrame(), e1.getMessage(), "Round Creation Error", JOptionPane.ERROR_MESSAGE);
 						}
 					}
 				}

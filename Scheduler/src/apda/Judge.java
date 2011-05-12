@@ -38,8 +38,10 @@ public class Judge implements Unit{
 		_conflictedTeams = new TeamGrouping(_t, "Conflicted Teams");
 		_conflictedSchools = new SchoolGrouping(_t, "Conflicted Schools");
 		_roundsAvailable = new boolean[_t._totalRounds];
-		for(boolean b : _roundsAvailable)
-			b = true;
+		for(int i = 0; i < _t._totalRounds; i++){
+			_roundsAvailable[i] = true;
+		}
+			
 		
 	}
 	
@@ -58,6 +60,9 @@ public class Judge implements Unit{
 		
 	}
 	
+	public void addCantJudge(Team t){
+		this._conflictedTeams.addMember(t);
+	}
 	public double judgeScore(){
 		return this._judgeScore.getAttribute();
 	}
@@ -83,9 +88,9 @@ public class Judge implements Unit{
 		atts.add(new StringAttribute("Name", _name));		
 		atts.add(new GroupingAttribute<Team>("Conflicted Teams", this._conflictedTeams));
 		atts.add(new GroupingAttribute<School>("Conflicted Schools", this._conflictedSchools));
-		for(int i = 0; i < _roundsAvailable.length; i++){
-			atts.add(new BooleanAttribute("R" + Integer.toString(i + 1), _roundsAvailable[i]));
-		}
+//		for(int i = 0; i < _roundsAvailable.length; i++){
+//			atts.add(new BooleanAttribute("R" + Integer.toString(i + 1), _roundsAvailable[i]));
+//		}
 		
 		return atts;
 	}
@@ -114,7 +119,7 @@ public class Judge implements Unit{
 			tit = tit.substring(1);
 			if(tit.equals("")) return;
 			int titInt = Integer.parseInt(tit);
-			if(titInt < _roundsAvailable.length && titInt >= 0) _roundsAvailable[titInt] = b;
+			if(titInt <= _roundsAvailable.length && titInt > 0) _roundsAvailable[titInt - 1] = b;
 		}
 		
 	}

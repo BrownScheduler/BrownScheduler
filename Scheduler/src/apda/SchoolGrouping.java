@@ -48,7 +48,8 @@ public class SchoolGrouping extends MyCategory<School> {
 	
 	@Override
 	public void addMember(School member) {
-		_members.add(member);
+		if(!this._members.contains(member) && getDuplicate(member) == null && !member.getName().equals("")) 
+			_members.add(member);
 		
 	}
 

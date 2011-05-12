@@ -19,8 +19,8 @@ public class Team implements Unit {
 	public int numGovs;
 	public int numOpps;
 	private SeedUnit _seed;
-	public Debater d1;
-	public Debater d2;
+	public UnitAttribute<Debater> d1;
+	public UnitAttribute<Debater> d2;
 	private Tourney _t;
 	public int byeRound = -1;
 	public int pullUpRound = -1;
@@ -31,6 +31,9 @@ public class Team implements Unit {
 		_t = t;
 		_t._teams.addMember(this);
 		stillInTournament = true;
+		d1 = new UnitAttribute<Debater>("Debater 1", null, new DebaterGrouping(_t, "Deb1"));
+		d2 = new UnitAttribute<Debater>("Debater 2", null, new DebaterGrouping(_t, "Deb2"));
+		facedBefore = new ArrayList<Team>();
 	}
 	
 	public Team(Tourney t, String string, School s) {
@@ -42,6 +45,10 @@ public class Team implements Unit {
 		}
 		_t._teams.addMember(this);
 		stillInTournament = true;
+		
+		d1 = new UnitAttribute<Debater>("Debater 1", null, new DebaterGrouping(_t, "Deb1"));
+		d2 = new UnitAttribute<Debater>("Debater 2", null, new DebaterGrouping(_t, "Deb2"));
+		facedBefore = new ArrayList<Team>();
 	}
 
 	public static class TeamComparator implements Serializable, Comparator{
@@ -59,25 +66,28 @@ public class Team implements Unit {
 	
 	public double getSpeaks(){
 		double speaks = 0;
-		if(d1 != null) speaks += d1.getSpeaks();
-		if(d2 != null) speaks += d2.getSpeaks();
+		if(d1.att != null) speaks += d1.att.getSpeaks();
+		if(d2.att != null) speaks += d2.att.getSpeaks();
 		return speaks;
 	}
 	
 	public double getRanks(){
 		double ranks = 0;
-		if(d1 != null) ranks += d1.getRanks();
-		if(d2 != null) ranks += d2.getRanks();
+		if(d1.att != null) ranks += d1.att.getRanks();
+		if(d2.att != null) ranks += d2.att.getRanks();
 		return ranks;
 	}
 	public boolean isFullSeed(){
+		if(_seed == null) return false;
 		return _seed.getName().equals("Full");
 	}
 	public boolean isHalfSeed(){
+		if(_seed == null) return false;
 		return _seed.getName().equals("Half");
 	}
 	public boolean isFreeSeed(){
-		return _seed.getName().equals("Full");
+		if(_seed == null) return true;
+		return _seed.getName().equals("Free");
 	}
 	
 	public void setSeed(String seedName){
@@ -90,10 +100,11 @@ public class Team implements Unit {
 	}
 	@Override
 	public boolean deleteFromGrouping() {
-		if(d1 != null) this.d1.deleteFromGrouping();
-		if(d2 != null) this.d2.deleteFromGrouping();
+		//if(d1 != null) this.d1.deleteFromGrouping();
+		//if(d2 != null) this.d2.deleteFromGrouping();
 		_t._teams._members.remove(this);
-		return school.removeTeam(this);
+		if(school != null) school.removeTeam(this);
+		return false; 
 	}
 
 	@Override
@@ -102,12 +113,12 @@ public class Team implements Unit {
 		atts.add(new UnitAttribute<School>("School", school, _t._schools));
 		atts.add(new StringAttribute("Name", _name));
 		
-		DebaterGrouping deb1 = new DebaterGrouping(_t, "deb1 grouping");
-		if(d1 != null) deb1.addMember(d1);
-		DebaterGrouping deb2 = new DebaterGrouping(_t, "deb2 grouping");
-		if(d2 != null) deb2.addMember(d2);
-		atts.add(new UnitAttribute<Debater>("Debater 1", d1, deb1));
-		atts.add(new UnitAttribute<Debater>("Debater 2", d2, deb2));
+//		DebaterGrouping deb1 = new DebaterGrouping(_t, "deb1 grouping");
+//		if(d1 != null) deb1.addMember(d1);
+//		DebaterGrouping deb2 = new DebaterGrouping(_t, "deb2 grouping");
+//		if(d2 != null) deb2.addMember(d2);
+		atts.add(d1);
+		atts.add(d2);
 		atts.add(new BooleanAttribute("In Tourney", this.stillInTournament));
 		atts.add(new IntAttribute("Wins", wins));
 		atts.add(new IntAttribute("Losses", losses));
@@ -131,18 +142,30 @@ public class Team implements Unit {
 		}
 		else if(att.getTitle().equals("Debater 1")){
 			UnitAttribute<Debater> debAtt = (UnitAttribute<Debater>)att;
-			d1 = debAtt.att;
+			d1 = debAtt;
 		}
 		else if(att.getTitle().equals("Debater 2")){
 			UnitAttribute<Debater> debAtt = (UnitAttribute<Debater>)att;
-			d2 = debAtt.att;
+			d2 = debAtt;
 		}
 		else if(att.getTitle().equals("School")){
+			
 			UnitAttribute<School> schoolAtt = (UnitAttribute<School>)att;
-			if(school != null && school != schoolAtt.att){
-				school.removeTeam(this);
+			System.out.println(schoolAtt);
+			if(school != null){
+				if(schoolAtt.att == null){
+					school.removeTeam(this);
+					school = null;
+				}else{
+					if(!school.getName().equals(schoolAtt.att.getName())){
+						school.removeTeam(this);
+						schoolAtt.att.addTeam(this);
+						school = schoolAtt.att;
+					}
+				}
+			}else if(school == null && schoolAtt.att != null){
 				school = schoolAtt.att;
-				if(school != null) school.addTeam(this);
+				school.addTeam(this);
 			}
 		}
 		else if(att.getTitle().equals("In Tourney")){
