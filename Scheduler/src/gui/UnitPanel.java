@@ -117,7 +117,7 @@ public class UnitPanel extends JPanel implements GUIConstants {
 		savebutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Collection<Attribute> attributes = components.keySet();
-				boolean repaint = true;
+				int repaint = 0;
 				for (Attribute attr : attributes) {
 					if (attr.getType() == Attribute.Type.BOOLEAN) {
 						boolean value = ((JCheckBox) components.get(attr)).isSelected();
@@ -192,19 +192,23 @@ public class UnitPanel extends JPanel implements GUIConstants {
 						for (Unit rowunit : unitsintable.keySet()) {
 							for (Unit rowunit2 : unitsintable.keySet()) {
 								if ((rowunit != rowunit2) && (rowunit.getName().equals(rowunit2.getName())) && (!rowunit.getName().equals(""))) {
-									repaint = false;
+									repaint = 1;
 								}
 							}
+						}
+						for (Unit rowunit : unitsinrowslist) {
+							if (rowunit.getName().equals(""))
+								repaint = 2;
 						}
 						for (int i = 0; i < unitsinrowslist.size(); i++) {
 							if (unitsintable.get(unitsinrowslist.get(i))) {
 								Unit duplicate = groupattr.getBlankUnit().getMemberOf().getDuplicate(unitsinrowslist.get(i));
 								if ((unitsinrowslist.get(i) != duplicate) && (duplicate != null)) {
-									repaint = false;
+									repaint = 3;
 								}
 							}
 						}
-						if (repaint) {
+						if (repaint == 0) {
 							for (Unit rowunit : unitsintable.keySet()) {
 								Unit duplicate = groupattr.getBlankUnit().getMemberOf().getDuplicate(rowunit);
 								boolean rowunitisnull = false;
@@ -226,9 +230,6 @@ public class UnitPanel extends JPanel implements GUIConstants {
 							table = new InputTablePane(_middleEnd, groupattr.getBlankUnit().getAttributes(), groupattr);
 							components.put(attr, table);
 						}
-						else
-							JOptionPane.showMessageDialog(_mainPanel, "The name for a unit in the table is invalid. Either a unit with that name already exists, two units with the same name have been entered, or the name field for a unit was left blank.",
-									"Duplicate Unit", JOptionPane.ERROR_MESSAGE);
 					}
 					else if (attr.getType() == Attribute.Type.INT) {
 						int value = Integer.parseInt(((JTextField) components.get(attr)).getText());
@@ -248,20 +249,43 @@ public class UnitPanel extends JPanel implements GUIConstants {
 						unit.setAttribute(new UnitAttribute(attr.getTitle(), value, grouping));
 					}
 				}
-				if (_grouping.getDuplicate(unit) != null) {
+				if (unit.getName().equals("")) {
 					for (Attribute attr : originalattributes) {
 						unit.setAttribute(attr);
 					}
+					repaint = 4;
+					JOptionPane.showMessageDialog(_mainPanel, "The unit's name is blank! Change the name and try again.",
+							"Nameless Unit", JOptionPane.ERROR_MESSAGE);
+				}
+				else if (_grouping.getDuplicate(unit) != null) {
+					for (Attribute attr : originalattributes) {
+						unit.setAttribute(attr);
+					}
+					repaint = 4;
 					JOptionPane.showMessageDialog(_mainPanel, "A unit with the same name already exists. Change the name and try again.",
 							"Duplicate Unit", JOptionPane.ERROR_MESSAGE);
 				}
 				else if (!_grouping.getMembers().contains(unit)) {
 					_grouping.addMember(unit);
-					if (repaint)
-						_middleEnd.repaintAll();
 				}
-				else
+				switch (repaint) {
+				case 1:
+					JOptionPane.showMessageDialog(_mainPanel, "There are two units in the table with the same name! Change the name and try again.",
+							"Duplicate Units", JOptionPane.ERROR_MESSAGE);
+					break;
+				case 2:
+					JOptionPane.showMessageDialog(_mainPanel, "One of the units that was in the table now has a blank name! Change the name and try again.",
+							"Duplicate Units", JOptionPane.ERROR_MESSAGE);
+					break;
+				case 3:
+					JOptionPane.showMessageDialog(_mainPanel, "One of the units that was in the table is a duplicate of an already existing unit! Change the name and try again.",
+							"Duplicate Units", JOptionPane.ERROR_MESSAGE);
+					break;
+				case 4:
+					break;
+				default:
 					_middleEnd.repaintAll();
+				}
 			}
 		});
 		final JButton deletebutton = new JButton(deletestring);
