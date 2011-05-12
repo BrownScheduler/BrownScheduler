@@ -25,8 +25,17 @@ import backbone.Unit;
 import backbone.UnitAttribute;
 import exception.CSVException;
 
+/**
+ * Allows importing and exporting groupings to and from CSV files
+ */
 public class CSVIO {
 
+	/**
+	 * Writes a grouping to a CSV file
+	 * @param file the file
+	 * @param category the grouping to be written
+	 * @throws exception.CSVException thrown if the file cannot be written to
+	 */
 	public static void writeGrouping(File file, Grouping<? extends Unit> category) throws exception.CSVException {
 		try {
 			BufferedWriter out = new BufferedWriter(new FileWriter(file));

@@ -1,7 +1,6 @@
 package basic;
 
 import backbone.Round;
-import backbone.StringAttribute;
 import backbone.Tournament;
 import backbone.UnitAttribute;
 

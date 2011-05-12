@@ -63,6 +63,7 @@ public class TMNTScheduler extends Thread {
 	 * Runs the TMNTScheduler while there are still open tournament
 	 * windows.
 	 */
+	@Override
 	public void run() {
 		while (_middleEnds.size() > 0)
 		{System.out.print("");}

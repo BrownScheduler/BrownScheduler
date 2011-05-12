@@ -4,11 +4,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import exception.InvalidRoundException;
-
 import backbone.Grouping;
 import backbone.Round;
-import backbone.Tournament;
 
 public abstract class TournamentTemplate implements backbone.Tournament{
 	

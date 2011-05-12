@@ -11,8 +11,17 @@ import exception.BackupException;
 
 import backbone.Tournament;
 
+/**
+ * Handles Saving and Loading Tournaments uses Java Serialization
+ */
 public class SerialIO {
 
+	/**
+	 * Writes a tournament to a file
+	 * @param file the file
+	 * @param tournament the tournament
+	 * @throws BackupException If it cannot save the file
+	 */
 	public static void writeTournament(File file, Tournament tournament) throws BackupException {
 		try {
 			ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(file));
@@ -20,21 +29,24 @@ public class SerialIO {
 			out.flush();
 			out.close();
 		} catch (IOException e) {
-			e.printStackTrace();
-			throw new exception.BackupException(e);
+			throw new exception.BackupException();
 		}
 	}
 
+	/**
+	 * Reads a tournament from a file
+	 * @param file the file
+	 * @return the tournament
+	 * @throws BackupException If it cannot read the file or it is not a tournament
+	 */
 	public static Tournament readTournament(File file) throws BackupException {
 		try {
 			ObjectInputStream in = new ObjectInputStream(new FileInputStream(file));
 			return (Tournament) in.readObject();
 		} catch (IOException e) {
-			e.printStackTrace();
-			throw new exception.BackupException(e);
+			throw new exception.BackupException();
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-			throw new exception.BackupException(e);
+			throw new exception.BackupException();
 		}
 	}
 }

@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import roundrobin2.Game;
-
 public abstract class Round implements Serializable, Grouping<Pairing> {
 
 	protected ArrayList<Pairing> pairings;

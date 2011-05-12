@@ -1,9 +1,5 @@
 package basic;
 
-import java.util.List;
-
-import backbone.Grouping;
-
 public class ExampleGrouping extends GroupingTemplate<ExampleUnit> {
 
 	public ExampleGrouping(String name) {

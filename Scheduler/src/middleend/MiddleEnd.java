@@ -146,6 +146,7 @@ public class MiddleEnd extends Thread {
 	/**
 	 * Runs the program until the user closes it.
 	 */
+	@Override
 	public void run() {
 		while (_continue)
 		{}
