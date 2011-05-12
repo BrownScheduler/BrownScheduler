@@ -83,13 +83,29 @@ public class Tourney implements Tournament{
 	
 	@Override
 	public Round createNextRound(boolean suppress) throws InvalidRoundException {
+		//Check to make sure every team has a Free Seed, if it's the first round
+		if(_rounds.isEmpty() && !suppress){
+			for(School s : _schools.getMembers()){
+				if(s._freeSeed == null){
+					throw new InvalidRoundException("Not all teams have a free seed!\n"+
+							s.getName() + " does not have a Free Seed!\n\n" +
+					"Do you want to continue pairing anyways?");
+				}
+			}
+		}
 		//the tournament is over, no more rounds should be created
-		if(_rounds.size() > _totalRounds)
+		if(_rounds.size() >= _totalRounds)
 			throw new InvalidRoundException("The tournament has already had all it's rounds");
 		int numCreating = _rounds.size();
 		//the previous round wasn't completely paired
-		if(_rounds.size() > 0 && _rounds.get(_rounds.size() - 1).isFinished())
-			throw new InvalidRoundException("The previous round is not over yet!");
+		if(_rounds.size() > 0 && !_rounds.get(_rounds.size() - 1).isFinished()){
+			String toAdd = "";
+			if(suppress) toAdd = "You must finish tabbing the previous round before\n" +
+					"moving on to the next!";
+			throw new InvalidRoundException("The previous round is not over yet!\n\n" +
+					toAdd);
+		}
+			
 		ArrayList<Team> teamsToPair = new ArrayList<Team>();
 		for(Team t : this._teams._members){
 			if(t.stillInTournament)
@@ -103,15 +119,18 @@ public class Tourney implements Tournament{
 		}
 		//Not enough judges to actually pair this round!
 		if(availableJudges.size() < teamsToPair.size() / 2 && !suppress)
-			throw new InvalidRoundException("There aren't enough judges to judge this round!");
+			throw new InvalidRoundException("There aren't enough judges to judge this round!" +
+					"\nWould you like to continue pairing anyways?\n\n" +
+					"No to add more judges, Yes to continue pairing");
 		//it's the first round, do special stuff
 		MyRound round = new MyRound(this, _rounds.size());
 		//sorted within brackets by high speaks to low speaks, with the BYE in the correct bracket
 		ArrayList<ArrayList<Team>> sortedTeams = createTeamBrackets(teamsToPair);
 		//do the pairings for each bracket
 		for(ArrayList<Team> teamsList : sortedTeams){
-			ArrayList<Team> almostPairings = createBracketPairings(teamsList);
-			ArrayList<MyPairing> pairings = addJudges(almostPairings, availableJudges);
+			HashMap<Team, Double> oppSpeaks = new HashMap<Team, Double>();
+			ArrayList<Team> almostPairings = createBracketPairings(teamsList, oppSpeaks);
+			ArrayList<MyPairing> pairings = addJudges(almostPairings, availableJudges, oppSpeaks);
 			for(MyPairing p : pairings){
 				round.addPairing(p);
 			}
@@ -121,7 +140,7 @@ public class Tourney implements Tournament{
 	}
 	
 	private ArrayList<MyPairing> addJudges(ArrayList<Team> almostPairings,
-			LinkedList<Judge> judges) {
+			LinkedList<Judge> judges, HashMap<Team, Double> oppSpeaks) {
 		ArrayList<MyPairing> pairings = new ArrayList<MyPairing>();
 		ArrayList<Team> unPaired1 = new ArrayList<Team>();
 		ArrayList<Team> unPaired2 = new ArrayList<Team>();
@@ -133,14 +152,14 @@ public class Tourney implements Tournament{
 			for(Judge j : judges){
 				if(j.canJudge(t1) && j.canJudge(t2)){
 					if(t1.numGovs > t2.numGovs)
-						pairings.add(new MyPairing(this, t2, t1, j, _rounds.size(), next++));
+						pairings.add(new MyPairing(this, t2, t1, j, _rounds.size(), next++, oppSpeaks));
 					else if(t1.numOpps > t2.numOpps)
-						pairings.add(new MyPairing(this, t1, t2, j, _rounds.size(), next++));
+						pairings.add(new MyPairing(this, t1, t2, j, _rounds.size(), next++, oppSpeaks));
 					else{
 						Random r = new Random();
 						if(r.nextBoolean())
-							pairings.add(new MyPairing(this, t1, t2, j, _rounds.size(), next++));
-						else pairings.add(new MyPairing(this, t2, t1, j, _rounds.size(), next++));
+							pairings.add(new MyPairing(this, t1, t2, j, _rounds.size(), next++, oppSpeaks));
+						else pairings.add(new MyPairing(this, t2, t1, j, _rounds.size(), next++, oppSpeaks));
 					}
 					judges.remove(j);
 					wasPaired = true;
@@ -159,20 +178,20 @@ public class Tourney implements Tournament{
 			Judge j = null;
 			if(!judges.isEmpty()) j = judges.pop();
 			if(t1.numGovs > t2.numGovs)
-				pairings.add(new MyPairing(this, t2, t1, j, _rounds.size(), next++));
+				pairings.add(new MyPairing(this, t2, t1, j, _rounds.size(), next++, oppSpeaks));
 			else if(t1.numOpps > t2.numOpps)
-				pairings.add(new MyPairing(this, t1, t2, j, _rounds.size(), next++));
+				pairings.add(new MyPairing(this, t1, t2, j, _rounds.size(), next++, oppSpeaks));
 			else{
 				Random r = new Random();
 				if(r.nextBoolean())
-					pairings.add(new MyPairing(this, t1, t2, j, _rounds.size(), next++));
-				else pairings.add(new MyPairing(this, t2, t1, j, _rounds.size(), next++));
+					pairings.add(new MyPairing(this, t1, t2, j, _rounds.size(), next++, oppSpeaks));
+				else pairings.add(new MyPairing(this, t2, t1, j, _rounds.size(), next++, oppSpeaks));
 			}
 		}
 		return pairings;
 	}
 
-	private double calculateConflictScore(Team t1, Team t2, HashMap<Team, Double> opposingSpeaks){
+	public double calculateConflictScore(Team t1, Team t2, HashMap<Team, Double> opposingSpeaks){
 		double score = 0.0;
 		if(t1.getName().equals("Bye") || t2.getName().equals("Bye")){
 			if(t1.byeRound == -1 && t2.byeRound == -1)
@@ -201,8 +220,7 @@ public class Tourney implements Tournament{
 		score += (t2.getSpeaks() - origOppSpeaks) * 20;
 		return score;
 	}
-	private ArrayList<Team> createBracketPairings(ArrayList<Team> teamsList) {
-		HashMap<Team, Double> opposingSpeaks = new HashMap<Team, Double>();
+	private ArrayList<Team> createBracketPairings(ArrayList<Team> teamsList, HashMap<Team, Double> oppSpeaks) {
 		ArrayList<Team> reverseList = new ArrayList<Team>();
 		final int teamsInBracket = teamsList.size();
 		//guarunteed to be even in size
@@ -213,7 +231,7 @@ public class Tourney implements Tournament{
 		for(int i = 0; i < teamsInBracket; i++){
 			Team top = teamsList.get(i);
 			Team other = reverseList.get(i);
-			opposingSpeaks.put(top, other.getSpeaks());
+			oppSpeaks.put(top, other.getSpeaks());
 		}
 		
 		//ArrayList<Team> newList = new ArrayList<Team>(teamsInBracket);
@@ -223,10 +241,10 @@ public class Tourney implements Tournament{
 				Team t1facing = teamsList.get(teamsInBracket - 1 - i);
 				Team check = teamsList.get(j);
 				Team checkFacing = teamsList.get(teamsInBracket - 1 - j);
-				double origConflict = calculateConflictScore(t1, check, opposingSpeaks) + 
-					calculateConflictScore(t1facing, checkFacing, opposingSpeaks);
-				double newConflict = calculateConflictScore(t1, t1facing, opposingSpeaks) +
-					calculateConflictScore(check, checkFacing, opposingSpeaks);
+				double origConflict = calculateConflictScore(t1, check, oppSpeaks) + 
+					calculateConflictScore(t1facing, checkFacing, oppSpeaks);
+				double newConflict = calculateConflictScore(t1, t1facing, oppSpeaks) +
+					calculateConflictScore(check, checkFacing, oppSpeaks);
 				if(origConflict < newConflict){
 					teamsList.set(teamsInBracket - 1 - i, check);
 					teamsList.set(j, t1facing);

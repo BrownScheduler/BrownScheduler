@@ -121,6 +121,7 @@ public class Team implements Unit {
 		atts.add(new BooleanAttribute("In Tourney", this.stillInTournament));
 		atts.add(new IntAttribute("Wins", wins));
 		atts.add(new IntAttribute("Losses", losses));
+		atts.add(new UnitAttribute<SeedUnit>("Seed", _seed, SeedUnit.getOnlyGrouping()));
 		return atts;
 	}
 

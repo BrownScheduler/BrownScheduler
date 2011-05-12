@@ -41,7 +41,11 @@ public class SeedGrouping implements Grouping<SeedUnit> {
 
 	@Override
 	public SeedUnit getDuplicate(SeedUnit unit) {
-		// TODO Auto-generated method stub
+		for(SeedUnit t : this.getMembers()){
+			if(t.getName().equals(unit.getName()) && t != unit){
+				return t;
+			}
+		}
 		return null;
 	}
 

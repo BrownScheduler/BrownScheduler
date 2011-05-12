@@ -82,6 +82,7 @@ public class School implements Unit {
 			Team toSet = ((UnitAttribute<Team>)att).att;
 			if(toSet != _freeSeed){
 				toSet.setSeed("Free");
+				_freeSeed = toSet;
 			}
 		}
 

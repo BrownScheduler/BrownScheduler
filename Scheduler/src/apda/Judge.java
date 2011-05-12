@@ -7,9 +7,9 @@ import java.util.List;
 
 import backbone.Attribute;
 import backbone.BooleanAttribute;
-import backbone.DoubleAttribute;
 import backbone.Grouping;
 import backbone.GroupingAttribute;
+import backbone.IntAttribute;
 import backbone.StringAttribute;
 import backbone.Unit;
 
@@ -25,7 +25,7 @@ public class Judge implements Unit{
 	
 	
 	private String _name;
-	private DoubleAttribute _judgeScore;
+	private int _judgeScore;
 	private TeamGrouping _conflictedTeams;
 	private SchoolGrouping _conflictedSchools;
 	private boolean[] _roundsAvailable;
@@ -63,7 +63,7 @@ public class Judge implements Unit{
 		this._conflictedTeams.addMember(t);
 	}
 	public double judgeScore(){
-		return this._judgeScore.getAttribute();
+		return this._judgeScore;
 	}
 	public boolean canJudge(Team t){
 		return (!_conflictedTeams.getMembers().contains(t) && 
@@ -87,9 +87,10 @@ public class Judge implements Unit{
 		atts.add(new StringAttribute("Name", _name));		
 		atts.add(new GroupingAttribute<Team>("Conflicted Teams", this._conflictedTeams));
 		atts.add(new GroupingAttribute<School>("Conflicted Schools", this._conflictedSchools));
-//		for(int i = 0; i < _roundsAvailable.length; i++){
-//			atts.add(new BooleanAttribute("R" + Integer.toString(i + 1), _roundsAvailable[i]));
-//		}
+		for(int i = 0; i < _roundsAvailable.length; i++){
+			atts.add(new BooleanAttribute("R" + Integer.toString(i + 1), _roundsAvailable[i]));
+		}
+		atts.add(new IntAttribute("Rank", _judgeScore));
 		
 		return atts;
 	}
@@ -112,6 +113,8 @@ public class Judge implements Unit{
 			_conflictedTeams = (TeamGrouping) ((GroupingAttribute<Team>)attribute).getGrouping();
 		}else if(attribute.getTitle().equals("Conflicted Schools")){
 			_conflictedSchools = (SchoolGrouping) ((GroupingAttribute<School>)attribute).getGrouping();
+		}else if(attribute.getTitle().equals("Rank")){
+			_judgeScore = ((IntAttribute)attribute).att;
 		}else if(attribute.getTitle().startsWith("R")){
 			String tit = ((BooleanAttribute)attribute).getTitle();
 			boolean b = ((BooleanAttribute)attribute).getAttribute();

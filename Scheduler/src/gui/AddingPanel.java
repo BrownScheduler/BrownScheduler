@@ -62,6 +62,11 @@ public class AddingPanel extends JPanel implements GUIConstants {
 		this.add(Box.createVerticalGlue());
 	}
 	
+	/**
+	 * Sets the panel to view the info of one unit.
+	 * 
+	 * @param unit
+	 */
 	public void setViewPanel(Unit unit) {
 		this.removeAll();
 		this.add(new UnitPanel(_middleEnd, unit));
@@ -69,6 +74,12 @@ public class AddingPanel extends JPanel implements GUIConstants {
 		_currViewObject = unit;
 	}
 	
+	/**
+	 * Sets the panel to view the info of all the units
+	 * in a particular grouping.
+	 * 
+	 * @param grouping
+	 */
 	public void setViewPanel(Grouping<Unit> grouping) {
 		this.removeAll();
 		for (Unit u : grouping.getMembers()) {
@@ -80,6 +91,12 @@ public class AddingPanel extends JPanel implements GUIConstants {
 		_currViewObject = grouping;
 	}
 	
+	/**
+	 * Allows the user to add a new unit to the specified
+	 * grouping.
+	 * 
+	 * @param grouping
+	 */
 	public void setAddPanel(Grouping<Unit> grouping) {
 		this.removeAll();
 		this.add(new UnitPanel(_middleEnd, grouping.getBlank(), grouping));
@@ -87,6 +104,9 @@ public class AddingPanel extends JPanel implements GUIConstants {
 		_currViewObject = grouping;
 	}
 	
+	/**
+	 * Repaints this and all the contained components.
+	 */
 	public void repaintAll() {
 		for (int i = 0; i < this.getComponentCount(); i++) {
 			this.getComponent(i).repaint();

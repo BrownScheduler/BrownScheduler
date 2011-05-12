@@ -31,6 +31,8 @@ public class TeamGrouping extends MyCategory<Team>{
 	@Override
 	public Team getDuplicate(Team unit) {
 		for(Team t : this.getMembers()){
+			System.out.println(t.getName());
+			System.out.println(unit == null);
 			if(t.getName().equals(unit.getName()) && t != unit){
 				return t;
 			}

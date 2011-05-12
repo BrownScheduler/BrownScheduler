@@ -1,0 +1,24 @@
+\documentclass[11pt]{article}
+
+\usepackage{fullpage}
+
+\parskip 7pt
+\parindent 0pt
+
+\title{Final Part 2}
+\author{Matt Mahoney \\
+	Patrick Clay \\
+	Aswin Karumbunathan}
+\date{10 May 2011}
+
+\begin{document}
+
+\maketitle
+
+\section{So you want to write a plugin}
+
+The TMNT Scheduler was designed explicitly to give people who wanted to create their own tournament management
+systems that power. 
+
+
+\end{document}
