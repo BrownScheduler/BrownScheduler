@@ -15,6 +15,9 @@ public interface GUIConstants {
 	Color FOREGROUND_COLOR = Color.black;
 	Color FG_TEXT_COLOR = Color.black;
 	Color BG_TEXT_COLOR = Color.black;
+	Color ERROR_COLOR = Color.red;
+	Color ERROR1_COLOR = Color.orange;
+	Color ERROR2_COLOR = Color.yellow;
 	
 	boolean IMAGESON = true;
 	//	If on laptop:
