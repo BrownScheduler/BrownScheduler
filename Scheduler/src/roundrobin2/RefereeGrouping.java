@@ -1,8 +1,8 @@
 package roundrobin2;
 
-import plugin1.MyCategory;
+import basic.GroupingTemplate;
 
-public class RefereeGrouping extends MyCategory<Referee> {
+public class RefereeGrouping extends GroupingTemplate<Referee> {
 
 	private Turn _t;
 	public RefereeGrouping(Turn t, String name) {		

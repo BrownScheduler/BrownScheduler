@@ -18,10 +18,6 @@ public class Round implements Serializable, Grouping<Pairing> {
 	public String getName() {
 		return this.name;
 	}
-	
-	public boolean isFilled() {
-		return false;
-	}
 
 	public void addPairing(Pairing pairing) {
 		pairings.add(pairing);
@@ -46,9 +42,11 @@ public class Round implements Serializable, Grouping<Pairing> {
 		return pairings.remove(member);
 	}
 
+	/**
+	 * Not applicable should never be called.
+	 */
 	@Override
 	public Pairing getBlank() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -60,11 +58,13 @@ public class Round implements Serializable, Grouping<Pairing> {
 	@Override
 	public void clear() {
 		pairings.clear();
-		
 	}
 
+	/**
+	 * Not applicable should never be called/
+	 */
 	@Override
-	public Pairing hasDuplicate(Pairing unit) {
+	public Pairing getDuplicate(Pairing unit) {
 		return null;
 	}
 
