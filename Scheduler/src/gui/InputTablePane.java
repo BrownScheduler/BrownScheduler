@@ -38,6 +38,12 @@ public class InputTablePane extends JScrollPane implements GUIConstants {
 	private JTable _table;
 	private GroupingAttribute<Unit> _unitsInRows;
 	
+	/**
+	 * Constructor.
+	 * @param middleEnd
+	 * @param headers
+	 * @param group
+	 */
 	public InputTablePane(MiddleEnd middleEnd, List<Attribute> headers, GroupingAttribute<Unit> group) {
 		super(new JTable());
 		for (int i = 0; i < this.getComponentCount(); i++) {
@@ -51,10 +57,20 @@ public class InputTablePane extends JScrollPane implements GUIConstants {
 		this.initialize(headers, group);
 	}
 	
+	/**
+	 * Getter for the table in this scrollpane
+	 * @return JTable
+	 */
 	public JTable getTable() {
 		return _table;
 	}
 	
+
+	/**
+	 * Initializes this InputTablePane.
+	 * @param headers
+	 * @param group
+	 */
 	private void initialize(final List<Attribute> headers, GroupingAttribute<Unit> group) {
 		this.setPreferredSize(INPUTTABLE_SIZE);
 		this.setMaximumSize(new Dimension(Integer.MAX_VALUE, INPUTTABLE_HEIGHT));
@@ -76,17 +92,23 @@ public class InputTablePane extends JScrollPane implements GUIConstants {
 		_table.setSize(INPUTTABLE_SIZE);
 		_table.setRowHeight(ROW_HEIGHT);
 		_table.getTableHeader().setReorderingAllowed(false);
+
+		// Unit and Grouping Attributes can't be edited in the table
 		Iterator<Attribute> iter = headers.iterator();
 		while (iter.hasNext()) {
 			Attribute a = iter.next();
 			if ((a.getType() == Attribute.Type.UNIT) || (a.getType() == Attribute.Type.GROUPING))
 				iter.remove();
 		}
+
+		// Adds existing members of the GroupingAttribute to the table
 		List<List<Attribute>> data = new ArrayList<List<Attribute>>();
 		for (Unit u : group.getMembers()) {
 			data.add(u.getAttributes());
 		}
+		// Sets the table model
 		_table.setModel(new InputTableModel(headers, data, group.isEditable()));
+		// Adds extra blank rows to the bottom of the table
 		for (int i = 0; i < DEFAULT_TABLE_BLANK_ROWS; i++) {
 			((DefaultTableModel) _table.getModel()).insertRow(_table.getRowCount(), new Object[0]);
 		}
@@ -99,6 +121,10 @@ public class InputTablePane extends JScrollPane implements GUIConstants {
 //				unitcolumn.setCellEditor(new DefaultCellEditor(combobox));
 //			}
 //		}
+
+		// Brings up a popup menu when the user right clicks in the table,
+		// allowing the user to delete selected rows (and their corresponding
+		// units) from the table
 		final JPopupMenu popup = new JPopupMenu();
 		JMenuItem menuitem = new JMenuItem("Delete these rows");
 		popup.add(menuitem);
@@ -137,22 +163,40 @@ public class InputTablePane extends JScrollPane implements GUIConstants {
 				}
 			}
 		});
+		// This class allows copying and pasting support from Excel
 		ExcelAdapter exceladapt = new ExcelAdapter(_table);
+		// Adding the table
 		this.getViewport().add(_table);
 	}
 	
+	/**
+	 * Returns a list of the units already in the table,
+	 * even before editing.
+	 * 
+	 * @return List<Unit>
+	 */
 	public List<Unit> getUnitsInRowsList() {
 		return _unitsInRows.getMembers();
 	}
 	
+	/**
+	 * TableModel for the table in the InputTablePane.
+	 */
 	private class InputTableModel extends DefaultTableModel {
 		private Attribute[] _headers;
 		private boolean _editable;
 		
+		/** 
+		 * Constructor.
+		 * @param headers
+		 * @param data
+		 * @param editable
+		 */
 		public InputTableModel(List<Attribute> headers, List<List<Attribute>> data, boolean editable) {
 			_editable = editable;
 			_headers = headers.toArray(new Attribute[0]);
 			List<Object[]> d = new ArrayList<Object[]>();
+			// Adds the values of existing units to the table
 			for (List<Attribute> list : data) {
 				ArrayList<Object> row = new ArrayList<Object>();
 				for (Attribute attr : list) {
@@ -179,6 +223,7 @@ public class InputTablePane extends JScrollPane implements GUIConstants {
 				}
 				d.add(row.toArray(new Object[0]));
 			}
+			// Inserts blank rows into the table
 			Object[][] dataarray = d.toArray(new Object[0][0]);
 			this.setDataVector(dataarray, _headers);
 			this.addTableModelListener(new TableModelListener() {
@@ -193,17 +238,33 @@ public class InputTablePane extends JScrollPane implements GUIConstants {
 			});
 		}
 		
-		@Override
+		/**
+		 * Returns whether the cell is editable.
+		 * 
+		 * @param row
+		 * @param columb
+		 * @return boolean
+		 */
 		public boolean isCellEditable(int row, int column) {
 			return _editable;
 		}
 		
-		@Override
+		/**
+		 * Returns the title of a column.
+		 * 
+		 * @param int
+		 * @return String
+		 */
 		public String getColumnName(int i) {
 			return _headers[i].getTitle();
 		}
 		
-		@Override
+		/**
+		 * Returns the class of a column.
+		 * 
+		 * @param int
+		 * @return Class<?>
+		 */
 		public Class<?> getColumnClass(int i) {
 			Attribute a = _headers[i];
 			if (a.getType() == Attribute.Type.BOOLEAN) {
@@ -221,7 +282,11 @@ public class InputTablePane extends JScrollPane implements GUIConstants {
 			return Object.class;
 		}
 
-		@Override
+		/**
+		 * Returns the number of columns in this model.
+		 * 
+		 * @return int
+		 */
 		public int getColumnCount() {
 			return _headers.length;
 		}
