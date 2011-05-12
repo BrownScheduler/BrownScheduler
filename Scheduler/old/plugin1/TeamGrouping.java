@@ -2,7 +2,9 @@ package plugin1;
 
 import java.util.List;
 
-public class TeamGrouping extends MyCategory<Team>{
+import basic.DefaultGrouping;
+
+public class TeamGrouping extends DefaultGrouping<Team>{
 
 	Tourney _t;
 	public TeamGrouping(Tourney t, String name) {

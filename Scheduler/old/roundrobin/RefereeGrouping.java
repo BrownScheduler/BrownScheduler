@@ -1,8 +1,8 @@
 package roundrobin;
 
-import plugin1.MyCategory;
+import basic.DefaultGrouping;
 
-public class RefereeGrouping extends MyCategory<Referee> {
+public class RefereeGrouping extends DefaultGrouping<Referee> {
 
 	private Tournament _t;
 	public RefereeGrouping(Tournament t, String name) {		

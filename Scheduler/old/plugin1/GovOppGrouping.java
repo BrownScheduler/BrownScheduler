@@ -1,6 +1,8 @@
 package plugin1;
 
-public class GovOppGrouping extends MyCategory<GovOppUnit>{
+import basic.DefaultGrouping;
+
+public class GovOppGrouping extends DefaultGrouping<GovOppUnit>{
 
 	public GovOppGrouping(String name) {
 		super(name);

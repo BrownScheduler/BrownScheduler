@@ -1,4 +1,4 @@
-package plugin1;
+package basic;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,19 +6,14 @@ import java.util.List;
 import backbone.Grouping;
 import backbone.Unit;
 
-public abstract class MyCategory<T extends Unit> implements Grouping<T> {
+public abstract class GroupingTemplate<T extends Unit> implements Grouping<T> {
 
 	protected String _name;
 	protected List<T> _members;
 	
-	public MyCategory(String name){
+	public GroupingTemplate(String name){
 		this._name = name;
 		_members = new ArrayList<T>();
-	}
-	
-	public MyCategory(String name, List<T> members){
-		this._name = name;
-		this._members = members;
 	}
 	
 	@Override
@@ -34,7 +29,6 @@ public abstract class MyCategory<T extends Unit> implements Grouping<T> {
 
 	@Override
 	public List<T> getMembers() {
-		
 		return _members;
 	}
 

@@ -1,8 +1,8 @@
 package roundrobin2;
 
-import plugin1.MyCategory;
+import basic.GroupingTemplate;
 
-public class PlayerGrouping extends MyCategory<Player> {
+public class PlayerGrouping extends GroupingTemplate<Player> {
 
 	private Turn _t;
 	public PlayerGrouping(Turn t, String name) {

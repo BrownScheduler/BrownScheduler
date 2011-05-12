@@ -1,8 +1,8 @@
 package roundrobin;
 
-import plugin1.MyCategory;
+import basic.DefaultGrouping;
 
-public class PlayerGrouping extends MyCategory<Player> {
+public class PlayerGrouping extends DefaultGrouping<Player> {
 
 	private Tournament _t;
 	private Team _team;

@@ -40,7 +40,6 @@ public class PairingPanel extends JPanel implements GUIConstants {
 		}
 		this.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black));
 		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-		this.setBackground(Color.green);
 //		this.add(Box.createHorizontalGlue());
 		JPanel deletepanel = new JPanel();
 		if (COLORSON) {
