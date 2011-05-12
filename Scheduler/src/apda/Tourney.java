@@ -128,6 +128,7 @@ public class Tourney implements Tournament{
 		ArrayList<MyPairing> pairings = new ArrayList<MyPairing>();
 		ArrayList<Team> unPaired1 = new ArrayList<Team>();
 		ArrayList<Team> unPaired2 = new ArrayList<Team>();
+		int next = 0;
 		for(int i = 0; i < almostPairings.size() /2; i++){
 			Team t1 = almostPairings.get(i);
 			Team t2 = almostPairings.get(almostPairings.size() - 1 - i);
@@ -135,14 +136,14 @@ public class Tourney implements Tournament{
 			for(Judge j : judges){
 				if(j.canJudge(t1) && j.canJudge(t2)){
 					if(t1.numGovs > t2.numGovs)
-						pairings.add(new MyPairing(this, t2, t1, j));
+						pairings.add(new MyPairing(this, t2, t1, j, _rounds.size(), next++));
 					else if(t1.numOpps > t2.numOpps)
-						pairings.add(new MyPairing(this, t1, t2, j));
+						pairings.add(new MyPairing(this, t1, t2, j, _rounds.size(), next++));
 					else{
 						Random r = new Random();
 						if(r.nextBoolean())
-							pairings.add(new MyPairing(this, t1, t2, j));
-						else pairings.add(new MyPairing(this, t2, t1, j));
+							pairings.add(new MyPairing(this, t1, t2, j, _rounds.size(), next++));
+						else pairings.add(new MyPairing(this, t2, t1, j, _rounds.size(), next++));
 					}
 					judges.remove(j);
 					wasPaired = true;
@@ -160,14 +161,14 @@ public class Tourney implements Tournament{
 			Team t2 = almostPairings.get(almostPairings.size() - 1 - i);
 			Judge j = judges.pop();
 			if(t1.numGovs > t2.numGovs)
-				pairings.add(new MyPairing(this, t2, t1, j));
+				pairings.add(new MyPairing(this, t2, t1, j, _rounds.size(), next++));
 			else if(t1.numOpps > t2.numOpps)
-				pairings.add(new MyPairing(this, t1, t2, j));
+				pairings.add(new MyPairing(this, t1, t2, j, _rounds.size(), next++));
 			else{
 				Random r = new Random();
 				if(r.nextBoolean())
-					pairings.add(new MyPairing(this, t1, t2, j));
-				else pairings.add(new MyPairing(this, t2, t1, j));
+					pairings.add(new MyPairing(this, t1, t2, j, _rounds.size(), next++));
+				else pairings.add(new MyPairing(this, t2, t1, j, _rounds.size(), next++));
 			}
 		}
 		return pairings;

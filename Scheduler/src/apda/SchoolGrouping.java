@@ -3,47 +3,53 @@ package apda;
 import java.util.List;
 
 import backbone.Grouping;
+import backbone.Unit;
 
-public class SchoolGrouping implements Grouping<School> {
+public class SchoolGrouping extends MyCategory<School> {
 
+	Tourney _t;
 	public SchoolGrouping(Tourney tourney, String string) {
-		// TODO Auto-generated constructor stub
+		super(string);
+		_t = tourney;
 	}
 
-	@Override
-	public void addMember(School member) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void clear() {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public boolean deleteMember(School member) {
-		// TODO Auto-generated method stub
-		return false;
+		
+		return member.deleteFromGrouping();
 	}
 
 	@Override
 	public School getBlank() {
-		// TODO Auto-generated method stub
-		return null;
+		return new School(_t, "");
 	}
 
 	@Override
 	public List<School> getMembers() {
-		// TODO Auto-generated method stub
-		return null;
+		return this._members;
 	}
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
+		return this._name;
+	}
+
+
+	@Override
+	public School hasDuplicate(School unit) {
+		for(School t : this.getMembers()){
+			if(t.getName().equals(unit.getName()) && t != unit){
+				return t;
+			}
+		}
 		return null;
+	}
+	
+	@Override
+	public void addMember(School member) {
+		_members.add(member);
+		
 	}
 
 }

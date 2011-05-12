@@ -3,7 +3,6 @@ package gui;
 import middleend.*;
 import backbone.*;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -38,28 +37,13 @@ public class PairingPanel extends JPanel implements GUIConstants {
 		
 		this.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black));
 		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-		this.add(Box.createHorizontalGlue());
+//		this.add(Box.createHorizontalGlue());
 		JPanel deletepanel = new JPanel();
 		if (COLORSON) {
 			deletepanel.setBackground(BACKGROUND_COLOR);
 			deletepanel.setForeground(FOREGROUND_COLOR);
 		}
 		deletepanel.setLayout(new BoxLayout(deletepanel, BoxLayout.Y_AXIS));
-		final JButton actuallydeletebutton = new JButton("Actually delete this pairing");
-		if (IMAGESON)
-			actuallydeletebutton.setIcon(DELETEBUTTONIMAGE);
-		if (COLORSON) {
-			actuallydeletebutton.setBackground(BACKGROUND_COLOR);
-			actuallydeletebutton.setForeground(FOREGROUND_COLOR);
-		}
-		actuallydeletebutton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				_round.removePairing(_pairing);
-				_middleEnd.repaintAll();
-			}
-		});
-		actuallydeletebutton.setVisible(false);
 		final JButton deletebutton = new JButton("Delete this pairing");
 		if (IMAGESON)
 			deletebutton.setIcon(DELETEBUTTONIMAGE);
@@ -68,17 +52,19 @@ public class PairingPanel extends JPanel implements GUIConstants {
 			deletebutton.setForeground(FOREGROUND_COLOR);
 		}
 		deletebutton.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent e) {
-				actuallydeletebutton.setVisible(true);
-				repaint();
-				deletebutton.setText("Click over there to delete ----->");
+				if (deletebutton.getText().equals("Delete this pairing"))
+					deletebutton.setText("Are you sure?");
+				else {
+					_round.removePairing(_pairing);
+					_middleEnd.repaintAll();
+				}
+					
 			}
 		});
 		deletepanel.add(deletebutton);
-		deletepanel.add(actuallydeletebutton);
 		this.add(deletepanel);
-		this.add(Box.createRigidArea(BIGSPACING_SIZE));
+		this.add(Box.createRigidArea(SMALLSPACING_SIZE));
 		int attNum = 0;
 		JPanel bigWrapper = new JPanel();
 		if (COLORSON) {
@@ -143,11 +129,10 @@ public class PairingPanel extends JPanel implements GUIConstants {
 			else {
 				toAddTo.add(Utility.wrapUp(Utility.getField(attribute)));
 			}
-			toAddTo.add(Box.createRigidArea(BIGSPACING_SIZE));
+			toAddTo.add(Box.createRigidArea(SMALLSPACING_SIZE));
 		}
-		//toAddTo.add(Box.createHorizontalGlue());
 		bigWrapper.add(Utility.wrapLeft(toAddTo));
-		bigWrapper.add(Box.createVerticalGlue());
+//		bigWrapper.add(Box.createVerticalGlue());
 		//bigWrapper.setPreferredSize(new Dimension(PAIRINGPANEL_SIZE.width, PAIRINGPANEL_SIZE.height * ((attNum / 4)+1) ));
 		//this.setSize(new Dimension(PAIRINGPANEL_SIZE.width, PAIRINGPANEL_SIZE.height * ((attNum / 4)+1) ));
 		this.add(bigWrapper);
@@ -170,6 +155,7 @@ public class PairingPanel extends JPanel implements GUIConstants {
 			_pairingpanel = pp;
 			_pairing = p;
 			
+			this.setPreferredSize(JCOMBOBOX_SIZE);
 			this.setMaximumSize(JCOMBOBOX_SIZE);
 			
 			final ArrayList<Unit> units = new ArrayList<Unit>();

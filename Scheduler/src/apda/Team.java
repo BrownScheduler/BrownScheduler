@@ -1,4 +1,5 @@
 package apda;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -30,6 +31,12 @@ public class Team implements Unit {
 		_t = t;
 	}
 	
+	public Team(Tourney t, String string, School s) {
+		_name = string;
+		_t = t;
+		school = s;
+	}
+
 	public static class TeamComparator implements Serializable, Comparator{
 
 		@Override
@@ -65,6 +72,15 @@ public class Team implements Unit {
 	public boolean isFreeSeed(){
 		return _seed.getName().equals("Full");
 	}
+	
+	public void setSeed(String seedName){
+		if(seedName.equals("Full"))
+			_seed = new SeedUnit("Full");
+		else if(seedName.equals("Half"))
+			_seed = new SeedUnit("Half");
+		if(seedName.equals("Free"))
+			_seed = new SeedUnit("Free");
+	}
 	@Override
 	public boolean deleteFromGrouping() {
 		if(d1 != null) this.d1.deleteFromGrouping();
@@ -76,12 +92,13 @@ public class Team implements Unit {
 	@Override
 	public List<Attribute> getAttributes() {
 		ArrayList<Attribute> atts = new ArrayList<Attribute>();
-		atts.add(new StringAttribute("Name", _name));
 		atts.add(new UnitAttribute<School>("School", school, _t._schools));
+		atts.add(new StringAttribute("Name", _name));
+		
 		DebaterGrouping deb1 = new DebaterGrouping(_t, "deb1 grouping");
-		deb1.addMember(d1);
+		if(d1 != null) deb1.addMember(d1);
 		DebaterGrouping deb2 = new DebaterGrouping(_t, "deb2 grouping");
-		deb2.addMember(d2);
+		if(d2 != null) deb2.addMember(d2);
 		atts.add(new UnitAttribute<Debater>("Debater 1", d1, deb1));
 		atts.add(new UnitAttribute<Debater>("Debater 2", d2, deb2));
 		return atts;
@@ -114,7 +131,7 @@ public class Team implements Unit {
 			UnitAttribute<School> schoolAtt = (UnitAttribute<School>)att;
 			if(school != null) school.removeTeam(this);
 			school = schoolAtt.att;
-			school.addTeam(this);
+			if(school != null) school.addTeam(this);
 		}
 		else if(att.getTitle().equals("In Tournament")){
 			stillInTournament = ((BooleanAttribute)att).getAttribute();
@@ -125,7 +142,11 @@ public class Team implements Unit {
 			else if(newSeed.getName().equals("")) _seed = null;
 			else if(newSeed.getName().equals("Full") ||
 					newSeed.getName().equals("Half") ||
-					newSeed.getName().equals("Free")) _seed = newSeed;
+					newSeed.getName().equals("Free")){
+				_seed = newSeed;
+				if(newSeed.getName().equals("Free") && school != null)
+					school._freeSeed = this;
+			}
 		}
 	}
 

@@ -3,7 +3,6 @@ package apda;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -85,7 +84,7 @@ public class Judge implements Unit{
 		atts.add(new GroupingAttribute<Team>("Conflicted Teams", this._conflictedTeams));
 		atts.add(new GroupingAttribute<School>("Conflicted Schools", this._conflictedSchools));
 		for(int i = 0; i < _roundsAvailable.length; i++){
-			atts.add(new BooleanAttribute("Round" + Integer.toString(i + 1), _roundsAvailable[i]));
+			atts.add(new BooleanAttribute("R" + Integer.toString(i + 1), _roundsAvailable[i]));
 		}
 		
 		return atts;
@@ -109,10 +108,10 @@ public class Judge implements Unit{
 			_conflictedTeams = (TeamGrouping) ((GroupingAttribute<Team>)attribute).getGrouping();
 		}else if(attribute.getTitle().equals("Conflicted Schools")){
 			_conflictedSchools = (SchoolGrouping) ((GroupingAttribute<School>)attribute).getGrouping();
-		}else if(attribute.getTitle().startsWith("Round")){
+		}else if(attribute.getTitle().startsWith("R")){
 			String tit = ((BooleanAttribute)attribute).getTitle();
 			boolean b = ((BooleanAttribute)attribute).getAttribute();
-			tit = tit.substring(5);
+			tit = tit.substring(1);
 			if(tit.equals("")) return;
 			int titInt = Integer.parseInt(tit);
 			if(titInt < _roundsAvailable.length && titInt >= 0) _roundsAvailable[titInt] = b;

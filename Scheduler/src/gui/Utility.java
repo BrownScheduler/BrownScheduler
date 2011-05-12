@@ -119,7 +119,7 @@ public class Utility implements GUIConstants {
 			lilWrapper.setForeground(FOREGROUND_COLOR);
 		}
 		lilWrapper.add(toWrap);
-		lilWrapper.add(Box.createVerticalGlue());
+//		lilWrapper.add(Box.createVerticalGlue());
 		return lilWrapper;
 	}
 	
@@ -128,6 +128,7 @@ public class Utility implements GUIConstants {
 		nf.setGroupingUsed(false);
 		JFormattedTextField field = new JFormattedTextField(nf);
 		field.setValue(attribute.getAttribute());
+		field.setPreferredSize(TEXTFIELD_SIZE);
 		field.setMaximumSize(TEXTFIELD_SIZE);
 		field.setEditable(isEditable);
 		return field;
@@ -137,6 +138,7 @@ public class Utility implements GUIConstants {
 		DecimalFormat df = new DecimalFormat();
 		df.setGroupingUsed(false);
 		JFormattedTextField field = new JFormattedTextField(df);
+		field.setPreferredSize(TEXTFIELD_SIZE);
 		field.setMaximumSize(TEXTFIELD_SIZE);
 		field.setValue(attribute.getAttribute());
 		field.setEditable(isEditable);

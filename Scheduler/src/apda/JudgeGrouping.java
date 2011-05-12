@@ -18,5 +18,14 @@ public class JudgeGrouping extends MyCategory<Judge> {
 	public Judge getBlank() {
 		return new Judge(_t, "");
 	}
+	@Override
+	public Judge hasDuplicate(Judge unit) {
+		for(Judge j : this.getMembers()){
+			if(j.getName().equals(unit.getName()) && j != unit){
+				return j;
+			}
+		}
+		return null;
+	}
 
 }

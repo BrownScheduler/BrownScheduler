@@ -89,6 +89,7 @@ public class App implements GUIConstants {
 			_jFrame.setSize(DEFAULT_SIZE);
 			_jFrame.setMinimumSize(MIN_SIZE);
 			_jFrame.addWindowListener(new WindowAdapter() {
+				@Override
 				public void windowClosing(WindowEvent e) {
 					_middleEnd.closeThisMiddleEnd();
 				}
@@ -255,7 +256,6 @@ public class App implements GUIConstants {
 			_newTournamentMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_T,
 					Event.CTRL_MASK, true));
 			_newTournamentMenuItem.addActionListener(new ActionListener() {
-				@Override
 				public void actionPerformed(ActionEvent e) {
 					_middleEnd.openNewMiddleEnd();
 				}
@@ -276,7 +276,6 @@ public class App implements GUIConstants {
 			_openTournamentMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,
 					Event.CTRL_MASK, true));
 			_openTournamentMenuItem.addActionListener(new ActionListener() {
-				@Override
 				public void actionPerformed(ActionEvent e) {
 					JFileChooser chooser = new JFileChooser();
 					chooser.setFileFilter(new FileNameExtensionFilter("Tournament File (.tmnt)", TOURNAMENT_EXTENSION));
@@ -638,7 +637,17 @@ public class App implements GUIConstants {
 					_middleEnd.getTournament().createNextRound(false);
 					getViewManagementMenuItem().doClick();
 				}catch(InvalidRoundException err){
-					err.printStackTrace();
+					int result = JOptionPane.showConfirmDialog(getJFrame(),
+							"You canot create a valid tournament with the current competitor setup. Would you like to continue and try to create a round anyway?",
+							"Invalid Round Creation", JOptionPane.ERROR_MESSAGE);
+					if (result == JOptionPane.YES_OPTION) {
+						try {
+							_middleEnd.getTournament().createNextRound(true);
+							getViewManagementMenuItem().doClick();
+						} catch (InvalidRoundException e1) {
+							e1.printStackTrace();
+						}
+					}
 				}
 			}
 		});

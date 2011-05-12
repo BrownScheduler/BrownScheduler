@@ -17,11 +17,6 @@ public class UnitAttribute<T extends Unit> extends Attribute {
 		this.att = att;
 		this.memberOf = grouping;
 	}
-	public UnitAttribute(String title, T att){
-		super(title);
-		this.att = att;
-		this.memberOf = (Grouping<T>) att.getMemberOf();
-	}
 	
 	public Grouping<T> getMemberOf() {
 		return this.memberOf;

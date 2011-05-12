@@ -2,8 +2,6 @@ package constraint;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import old_backbone.*;
-
 
 public class ConstraintHandler {
 

@@ -4,7 +4,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import backbone.Attribute;
-import backbone.BooleanAttribute;
 import backbone.Grouping;
 import backbone.StringAttribute;
 import backbone.Unit;

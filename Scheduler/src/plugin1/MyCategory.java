@@ -54,5 +54,13 @@ public abstract class MyCategory<T extends Unit> implements Grouping<T> {
 	public void clear(){
 		this._members.clear();
 	}
+	
+	@Override
+	public T getDuplicate(T unit){
+		for(T u : _members)
+			if(u != unit && u.getName().equals(unit.getName()))
+				return u;
+		return null;
+	}
 
 }

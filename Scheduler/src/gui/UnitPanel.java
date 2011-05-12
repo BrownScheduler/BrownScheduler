@@ -5,6 +5,7 @@ import middleend.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import javax.swing.Box;
@@ -29,7 +30,7 @@ public class UnitPanel extends JPanel implements GUIConstants {
 		_mainPanel = new JPanel();
 		_buttonPanel = new JPanel();
 		_tablePanel = new JPanel();
-		initialize(u, "Save Changes");
+		initialize(u, "Save Changes", "Delete this unit");
 	}
 	
 	public UnitPanel(MiddleEnd m, Unit u, Grouping<Unit> g) {
@@ -38,10 +39,10 @@ public class UnitPanel extends JPanel implements GUIConstants {
 		_mainPanel = new JPanel();
 		_buttonPanel = new JPanel();
 		_tablePanel = new JPanel();
-		initialize(u, "Save Changes and Add Another New Unit");
+		initialize(u, "Save Changes and Add Another New Unit", "Clear values");
 	}
 	
-	public void initialize(final Unit unit, String buttonstring) {
+	public void initialize(final Unit unit, String savestring, final String deletestring) {
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		if (COLORSON) {
 			this.setBackground(BACKGROUND_COLOR);
@@ -56,7 +57,9 @@ public class UnitPanel extends JPanel implements GUIConstants {
 		_mainPanel.setLayout(new BoxLayout(_mainPanel, BoxLayout.X_AXIS));
 		_tablePanel.setLayout(new BoxLayout(_tablePanel, BoxLayout.Y_AXIS));
 		final HashMap<Attribute, JComponent> components = new HashMap<Attribute, JComponent>();
+		ArrayList<Attribute> originalattributes = new ArrayList<Attribute>();
 		for (final Attribute attr : unit.getAttributes()) {
+			originalattributes.add(attr);
 			JLabel titleLabel = Utility.getTitleLabel(attr);
 			if (attr instanceof GroupingAttribute) {
 				GroupingAttribute<Unit> g = (GroupingAttribute<Unit>) attr;
@@ -99,7 +102,7 @@ public class UnitPanel extends JPanel implements GUIConstants {
 			}
 			_mainPanel.add(toAdd);
 		}
-		JButton savebutton = new JButton(buttonstring);
+		JButton savebutton = new JButton(savestring);
 		if (IMAGESON)
 			savebutton.setIcon(SAVEBUTTONIMAGE);
 		if (COLORSON) {
@@ -214,40 +217,28 @@ public class UnitPanel extends JPanel implements GUIConstants {
 				_middleEnd.repaintAll();
 			}
 		});
-		final JButton actuallydeletebutton = new JButton("Delete this unit");
+		final JButton deletebutton = new JButton(deletestring);
 		if (IMAGESON)
-			actuallydeletebutton.setIcon(DELETEBUTTONIMAGE);
+			deletebutton.setIcon(DELETEBUTTONIMAGE);
 		if (COLORSON) {
-			actuallydeletebutton.setBackground(BACKGROUND_COLOR);
-			actuallydeletebutton.setForeground(FOREGROUND_COLOR);
+			deletebutton.setBackground(BACKGROUND_COLOR);
+			deletebutton.setForeground(FOREGROUND_COLOR);
 		}
-		actuallydeletebutton.addActionListener(new ActionListener() {
+		deletebutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				_mainPanel.removeAll();
-				_buttonPanel.removeAll();
-				_tablePanel.removeAll();
-				unit.deleteFromGrouping();
-				_middleEnd.repaintAll();
+				if (deletebutton.getText().equals(deletestring))
+					deletebutton.setText("Are you sure?");
+				else {
+					_mainPanel.removeAll();
+					_buttonPanel.removeAll();
+					_tablePanel.removeAll();
+					unit.deleteFromGrouping();
+					_middleEnd.repaintAll();
+				}
 			}
 		});
-//		actuallydeletebutton.setVisible(true);
-//		final JButton deletebutton = new JButton("Delete this unit");
-//		if (IMAGESON)
-//			deletebutton.setIcon(DELETEBUTTONIMAGE);
-//		if (COLORSON) {
-//			deletebutton.setBackground(BACKGROUND_COLOR);
-//			deletebutton.setForeground(FOREGROUND_COLOR);
-//		}
-//		deletebutton.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				actuallydeletebutton.setVisible(true);
-//				_buttonPanel.repaint();
-//				deletebutton.setText("Click over there to delete ----->");
-//			}
-//		});
 		_buttonPanel.add(savebutton);
-//		_buttonPanel.add(deletebutton);
-		_buttonPanel.add(actuallydeletebutton);
+		_buttonPanel.add(deletebutton);
 		_buttonPanel.setMaximumSize(UNITPANEL_SIZE);
 		this.add(_mainPanel);
 		this.add(Box.createRigidArea(SMALLSPACING_SIZE));
