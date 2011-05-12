@@ -8,6 +8,10 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.JLabel;
 
+/**
+ * This class is the display where units can be added,
+ * viewed, and edited. It consists of several UnitPanels.
+ */
 public class AddingPanel extends JPanel implements GUIConstants {
 
 	public static final long serialVersionUID = 1L;
@@ -16,7 +20,7 @@ public class AddingPanel extends JPanel implements GUIConstants {
 	private Object _currViewObject;
 
 	/**
-	 * This is the default constructor
+	 * This is the default constructor.
 	 */
 	public AddingPanel(MiddleEnd m) {
 		super();
@@ -27,7 +31,7 @@ public class AddingPanel extends JPanel implements GUIConstants {
 	}
 	
 	/**
-	 * This method initializes this
+	 * This method initializes this.
 	 * 
 	 * @return void
 	 */

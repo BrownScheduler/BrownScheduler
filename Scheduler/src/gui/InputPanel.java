@@ -6,6 +6,10 @@ import javax.swing.JScrollPane;
 
 import middleend.MiddleEnd;
 
+/**
+ * This class is what the user uses to add new units and manage
+ * their data. Contains an AttributeTree and an AddingPanel.
+ */
 public class InputPanel extends JPanel implements GUIConstants {
 
 	public static final long serialVersionUID = 1L;

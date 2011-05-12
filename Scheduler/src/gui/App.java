@@ -31,9 +31,17 @@ import javax.swing.JDialog;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JToolBar;
 import javax.swing.filechooser.FileNameExtensionFilter;
-
 import exception.InvalidRoundException;
 
+/**
+ * This is the App class that runs the program.
+ * 
+ * It takes care of creating all the basic GUI components.
+ * 
+ * All components in this should be accessed via the appropriate
+ * getters, which initialize the component if necessary. Again,
+ * all components are initialized by their getters.
+ */
 public class App implements GUIConstants {
 
 	private MiddleEnd _middleEnd;
@@ -68,19 +76,29 @@ public class App implements GUIConstants {
 	private JPanel _aboutContentPane;
 	private JLabel _aboutVersionLabel;
 	
+	/**
+	 * Constructor, requires a MiddleEnd.
+	 * 
+	 * @param me
+	 */
 	public App(MiddleEnd me) {
 		_middleEnd = me;
 		this.getJFrame().setVisible(true);
 	}
 	
+	/**
+	 * Getter for this app's MiddleEnd.
+	 * 
+	 * @return
+	 */
 	public MiddleEnd getMiddleEnd() {
 		return _middleEnd;
 	}
 	
 	/**
-	 * This method initializes jFrame
+	 * Getter for the outer JFrame.
 	 * 
-	 * @return javax.swing.JFrame
+	 * @return JFrame
 	 */
 	public JFrame getJFrame() {
 		if (_jFrame == null) {
@@ -108,7 +126,7 @@ public class App implements GUIConstants {
 	}
 	
 	/**
-	 * This method initializes JToolBar
+	 * Getter for the JToolBar.
 	 * 
 	 * @return JToolBar
 	 */
@@ -152,6 +170,11 @@ public class App implements GUIConstants {
 		return button;
 	}
 	
+	/**
+	 * Getter for the outermost JPanel.
+	 * 
+	 * @return
+	 */
 	public JPanel getMainContentAndToolbarPane() {
 		if (_mainContentAndToolbarPane == null) {
 			_mainContentAndToolbarPane = new JPanel();
@@ -166,11 +189,21 @@ public class App implements GUIConstants {
 		return _mainContentAndToolbarPane;
 	}
 	
+	/**
+	 * Setter for the outermost JPanel.
+	 * 
+	 * @param pane
+	 */
 	public void setMainContentPane(JComponent pane) {
 		getMainContentPane().removeAll();
 		getMainContentPane().add(pane, BorderLayout.CENTER);
 	}
 	
+	/**
+	 * Getter for the main content pane.
+	 * 
+	 * @return JComponent
+	 */
 	public JComponent getMainContentPane() {
 		if (_mainContentPane == null) {
 			_mainContentPane = new JPanel();
@@ -185,7 +218,7 @@ public class App implements GUIConstants {
 	}
 	
 	/**
-	 * This method initializes InputPanel
+	 * Getter for the InputPanel.
 	 * 
 	 * @return InputPanel
 	 */
@@ -197,7 +230,7 @@ public class App implements GUIConstants {
 	}
 	
 	/**
-	 * This method initializes ManagementPanel
+	 * Getter for the ManagementPanel.
 	 * 
 	 * @return MangementPanel
 	 */
@@ -209,9 +242,9 @@ public class App implements GUIConstants {
 	}
 
 	/**
-	 * This method initializes jJMenuBar	
+	 * Getter for the JMenuBar.
 	 * 	
-	 * @return javax.swing.JMenuBar	
+	 * @return JMenuBar	
 	 */
 	public JMenuBar getJJMenuBar() {
 		if (_jJMenuBar == null) {
@@ -226,9 +259,9 @@ public class App implements GUIConstants {
 	}
 
 	/**
-	 * This method initializes jMenu	
+	 * Getter for the File JMenu.
 	 * 	
-	 * @return javax.swing.JMenu	
+	 * @return JMenu	
 	 */
 	public JMenu getFileMenu() {
 		if (_fileMenu == null) {
@@ -245,9 +278,11 @@ public class App implements GUIConstants {
 	}
 	
 	/**
-	 * This method initializes jMenuItem	
+	 * Getter for the New Tournament JMenuItem.
+	 * 
+	 * Opens a new window for a new tournament.
 	 * 	
-	 * @return javax.swing.JMenuItem	
+	 * @return JMenuItem	
 	 */
 	public JMenuItem getNewTournamentMenuItem() {
 		if (_newTournamentMenuItem == null) {
@@ -265,9 +300,9 @@ public class App implements GUIConstants {
 	}
 	
 	/**
-	 * This method initializes jMenuItem	
+	 * Getter for the Open Tournament JMenuItem.
 	 * 	
-	 * @return javax.swing.JMenuItem	
+	 * @return JMenuItem	
 	 */
 	public JMenuItem getOpenTournamentMenuItem() {
 		if (_openTournamentMenuItem == null) {
@@ -295,9 +330,11 @@ public class App implements GUIConstants {
 	}
 	
 	/**
-	 * This method initializes jMenuItem	
+	 * Getter for the Save Tournament JMenuItem.	
+	 * 
+	 * Saves the current tournament.
 	 * 	
-	 * @return javax.swing.JMenuItem	
+	 * @return JMenuItem	
 	 */
 	public JMenuItem getSaveTournamentMenuItem() {
 		if (_saveTournamentMenuItem == null) {
@@ -326,9 +363,11 @@ public class App implements GUIConstants {
 	}
 	
 	/**
-	 * This method initializes jMenuItem	
+	 * Getter for the Import Category JMenuItem.	
+	 * 
+	 * Imports a category from a file.
 	 * 	
-	 * @return javax.swing.JMenuItem	
+	 * @return JMenuItem	
 	 */
 	public JMenuItem getImportCategoryMenuItem() {
 		if (_importCategoryMenuItem == null) {
@@ -344,7 +383,7 @@ public class App implements GUIConstants {
 					int returnval = chooser.showOpenDialog(getJFrame());
 					if (returnval == JFileChooser.APPROVE_OPTION) {
 						if (!getMiddleEnd().importCategory(chooser.getSelectedFile())) {
-							JOptionPane.showMessageDialog(_jFrame, "The name specified for the file was invalid.", "Error", JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(_jFrame, "The selected file was not a valid tournament file.", "Error", JOptionPane.ERROR_MESSAGE);
 						}
 						else {
 							_middleEnd.repaintAll();
@@ -357,9 +396,11 @@ public class App implements GUIConstants {
 	}
 	
 	/**
-	 * This method initializes jMenuItem	
+	 * Getter for the Export Category JMenuItem.	
+	 * 
+	 * Exports a category to a file.
 	 * 	
-	 * @return javax.swing.JMenuItem	
+	 * @return JMenuItem	
 	 */
 	public JMenuItem getExportCategoryMenuItem() {
 		if (_exportCategoryMenuItem == null) {
@@ -382,7 +423,7 @@ public class App implements GUIConstants {
 					int returnval = chooser.showSaveDialog(getJFrame());
 					if (returnval == JFileChooser.APPROVE_OPTION) {
 						if (!getMiddleEnd().exportCategory(toadd, chooser.getSelectedFile())) {
-							JOptionPane.showMessageDialog(_jFrame, "The selected file was not a valid tournament file.", "Error", JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(_jFrame, "The name specified for the file was invalid.", "Error", JOptionPane.ERROR_MESSAGE);
 						}
 						else {
 							_middleEnd.repaintAll();
@@ -395,9 +436,11 @@ public class App implements GUIConstants {
 	}
 	
 	/**
-	 * This method initializes jMenuItem	
+	 * Getter for the Exit JMenuItem.
+	 * 
+	 * Exits the program.
 	 * 	
-	 * @return javax.swing.JMenuItem	
+	 * @return JMenuItem	
 	 */
 	public JMenuItem getExitMenuItem() {
 		if (_exitMenuItem == null) {
@@ -416,9 +459,9 @@ public class App implements GUIConstants {
 	}
 	
 	/**
-	 * This method initializes jMenu	
+	 * Getter for the Options JMenu	
 	 * 	
-	 * @return javax.swing.JMenu	
+	 * @return JMenu	
 	 */
 	public JMenu getOptionsMenu() {
 		if (_optionsMenu == null) {
@@ -431,9 +474,11 @@ public class App implements GUIConstants {
 	}
 	
 	/**
-	 * This method initializes jMenuItem	
+	 * Getter for the Plugin Options JMenuItem.
+	 * 
+	 * Shows user-editable options of the plugin.
 	 * 	
-	 * @return javax.swing.JMenuItem	
+	 * @return JMenuItem	
 	 */
 	public JMenuItem getPluginOptionsMenuItem() {
 		if (_pluginOptionsMenuItem == null) {
@@ -455,9 +500,9 @@ public class App implements GUIConstants {
 	}
 	
 	/**
-	 * This method initializes _pluginOptionsPane	
+	 * Getter for the Plugin Options JDialog box.
 	 * 	
-	 * @return javax.swing.JDialog	
+	 * @return JDialog	
 	 */
 	private JDialog getPluginOptionsDialog() {
 		if (_pluginOptionsDialog == null) {
@@ -469,9 +514,9 @@ public class App implements GUIConstants {
 	}
 
 	/**
-	 * This method initializes _pluginOptionsContentPane	
+	 * Getter for the content panel of the Plugin Options Dialog box.
 	 * 	
-	 * @return javax.swing.JPanel	
+	 * @return JPanel	
 	 */
 	private JPanel getPluginOptionsContentPane() {
 		if (_pluginOptionsContentPane == null) {
@@ -486,9 +531,11 @@ public class App implements GUIConstants {
 	}
 	
 	/**
-	 * This method initializes jMenuItem	
+	 * Getter for the Program Options JMenuItem.
+	 * 
+	 * Shows user-editable of the program.
 	 * 	
-	 * @return javax.swing.JMenuItem	
+	 * @return JMenuItem	
 	 */
 	public JMenuItem getProgramOptionsMenuItem() {
 		if (_programOptionsMenuItem == null) {
@@ -510,9 +557,9 @@ public class App implements GUIConstants {
 	}
 	
 	/**
-	 * This method initializes _optionsDialog	
+	 * Getter for the Program Options Dialog box.
 	 * 	
-	 * @return javax.swing.JDialog	
+	 * @return JDialog	
 	 */
 	private JDialog getProgramOptionsDialog() {
 		if (_programOptionsDialog == null) {
@@ -524,9 +571,9 @@ public class App implements GUIConstants {
 	}
 
 	/**
-	 * This method initializes _optionsContentPane	
+	 * Getter for the content pane of the Program Options Dialog box.	
 	 * 	
-	 * @return javax.swing.JPanel	
+	 * @return JPanel	
 	 */
 	private JPanel getProgramOptionsContentPane() {
 		if (_programOptionsContentPane == null) {
@@ -541,9 +588,9 @@ public class App implements GUIConstants {
 	}
 	
 	/**
-	 * This method initializes jMenu	
+	 * Getter for the View JMenu	
 	 * 	
-	 * @return javax.swing.JMenu	
+	 * @return JMenu	
 	 */
 	public JMenu getViewMenu() {
 		if (_viewMenu == null) {
@@ -559,9 +606,11 @@ public class App implements GUIConstants {
 	}
 
 	/**
-	 * This method initializes jMenuItem	
+	 * Getter for the View Input Panel JMenuItem.
+	 * 
+	 * Switches the view to the input panel.
 	 * 	
-	 * @return javax.swing.JMenuItem	
+	 * @return JMenuItem	
 	 */
 	public JRadioButtonMenuItem getViewInputMenuItem() {
 		if (_viewInputMenuItem == null) {
@@ -582,9 +631,11 @@ public class App implements GUIConstants {
 	}
 	
 	/**
-	 * This method initializes jMenuItem	
+	 * Getter for the View Management Panel JMenuItem.	
+	 * 
+	 * Switches the view to the management panel.
 	 * 	
-	 * @return javax.swing.JMenuItem	
+	 * @return JMenuItem	
 	 */
 	public JRadioButtonMenuItem getViewManagementMenuItem() {
 		if (_viewManagementMenuItem == null) {
@@ -605,9 +656,9 @@ public class App implements GUIConstants {
 	}
 	
 	/**
-	 * This method initializes jMenu	
+	 * Getter for the Edit JMenu	
 	 * 	
-	 * @return javax.swing.JMenu	
+	 * @return JMenu	
 	 */
 	public JMenu getEditMenu() {
 		if (_editMenu == null) {
@@ -623,20 +674,21 @@ public class App implements GUIConstants {
 	}
 	
 	/**
-	 * This method initializes jMenuItem	
+	 * Getter for the Create Round JMenuItem.	
+	 * 
+	 * Creates a new round.
 	 * 	
-	 * @return javax.swing.JMenuItem	
+	 * @return JMenuItem	
 	 */
 	public JMenuItem getCreateRoundMenuItem() {
 		JMenuItem item = new JMenuItem();
 		item.setText("Create new round from existing units...");
 		item.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				try{
 					_middleEnd.getTournament().createNextRound(false);
 					getViewManagementMenuItem().doClick();
-				}catch(InvalidRoundException err){
+				}catch(InvalidRoundException err){ //Thrown if a valid tournament cannot be created with the current unit setup
 					int result = JOptionPane.showConfirmDialog(getJFrame(),
 							"You canot create a valid tournament with the current competitor setup. Would you like to continue and try to create a round anyway?",
 							"Invalid Round Creation", JOptionPane.ERROR_MESSAGE);
@@ -655,9 +707,12 @@ public class App implements GUIConstants {
 	}
 	
 	/**
-	 * This method initializes jMenuItem	
-	 * 	
-	 * @return javax.swing.JMenuItem	
+	 * Creates a JMenuItem to create a new unit of the given grouping.	
+	 * 
+	 * Allows the user to create a new unit of the given grouping.
+	 * 
+	 * @param Grouping	
+	 * @return JMenuItem	
 	 */
 	public JMenuItem createEditMenuItem(final Grouping<Unit> g) {
 		JMenuItem item = new JMenuItem();
@@ -672,9 +727,9 @@ public class App implements GUIConstants {
 	}
 	
 	/**
-	 * This method initializes jMenu	
+	 * Getter for the Help JMenu.	
 	 * 	
-	 * @return javax.swing.JMenu	
+	 * @return JMenu	
 	 */
 	public JMenu getHelpMenu() {
 		if (_helpMenu == null) {
@@ -686,9 +741,9 @@ public class App implements GUIConstants {
 	}
 	
 	/**
-	 * This method initializes jMenuItem	
+	 * Getter for the About JMenuItem.
 	 * 	
-	 * @return javax.swing.JMenuItem	
+	 * @return JMenuItem	
 	 */
 	public JMenuItem getAboutMenuItem() {
 		if (_aboutMenuItem == null) {
@@ -710,9 +765,9 @@ public class App implements GUIConstants {
 	}
 
 	/**
-	 * This method initializes aboutDialog	
+	 * Getter for the About Dialog box.
 	 * 	
-	 * @return javax.swing.JDialog
+	 * @return JDialog
 	 */
 	public JDialog getAboutDialog() {
 		if (_aboutDialog == null) {
@@ -724,9 +779,9 @@ public class App implements GUIConstants {
 	}
 
 	/**
-	 * This method initializes aboutContentPane
+	 * Getter for the content pane of the About Dialog box.
 	 * 
-	 * @return javax.swing.JPanel
+	 * @return JPanel
 	 */
 	public JPanel getAboutContentPane() {
 		if (_aboutContentPane == null) {
@@ -742,9 +797,9 @@ public class App implements GUIConstants {
 	}
 
 	/**
-	 * This method initializes aboutVersionLabel	
+	 * Getter for the about version label.
 	 * 	
-	 * @return javax.swing.JLabel	
+	 * @return JLabel	
 	 */
 	public JLabel getAboutVersionLabel() {
 		if (_aboutVersionLabel == null) {
@@ -757,24 +812,14 @@ public class App implements GUIConstants {
 	}
 	
 	/**
-	 * Repaints all the important components.
+	 * Repaints all the important components, calls repaintAll on each of them
+	 * so that they can recursively do the same, effectively repainting all components
+	 * of the GUI.
 	 */
 	public void repaintAll() {
 		getInputPanel().repaintAll();
 		getManagementPanel().repaintAll();
 		getMainContentAndToolbarPane().repaint();
 	}
-
-	/**
-	 * Launches this application
-	 *
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				App application = new App(new MiddleEnd());
-				application.getJFrame().setVisible(true);
-			}
-		});
-	}*/
 
 }

@@ -15,9 +15,10 @@ public interface GUIConstants {
 	Color FOREGROUND_COLOR = Color.black;
 	Color FG_TEXT_COLOR = Color.black;
 	Color BG_TEXT_COLOR = Color.black;
-	Color ERROR_COLOR = Color.red;
-	Color ERROR1_COLOR = Color.orange;
-	Color ERROR2_COLOR = Color.yellow;
+	Color STOP_PAIRINGSTATUS_COLOR = Color.red;
+	Color MEDIUM_PAIRINGSTATUS_COLOR = Color.orange;
+	Color WARNING_PAIRINGSTATUS_COLOR = Color.yellow;
+	Color GO_PAIRINGSTATUS_COLOR = Color.green;
 	
 	boolean IMAGESON = true;
 	//	If on laptop:
@@ -44,7 +45,7 @@ public interface GUIConstants {
 	String TOURNAMENT_EXTENSION = "tmnt";
 	String CATEGORY_EXTENSION = "csv";
 	
-	int DEFAULT_TABLE_BLANK_ROWS = 10;
+	int DEFAULT_TABLE_BLANK_ROWS = 15;
 	int ROW_HEIGHT = 25;
 	
 	int DEFAULT_WIDTH = 900;
