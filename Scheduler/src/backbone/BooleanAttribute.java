@@ -10,19 +10,10 @@ package backbone;
  */
 public class BooleanAttribute extends Attribute {
 
-	//Just the boolean that is wrapped
-	private boolean att;
-	
 	/**
-	 * @deprecated
-	 * 
-	 * @param title sets the title label
+	 * The boolean that is wrapped
 	 */
-	@Deprecated
-	public BooleanAttribute(String title) {
-		super(title);
-		this.att = false;
-	}
+	private boolean att;
 	
 	/**
 	 * Sets the title and attribute
@@ -46,7 +37,6 @@ public class BooleanAttribute extends Attribute {
 	}
 
 	/**
-	 * 
 	 * @return the boolean this Attribute holds
 	 */
 	public boolean getAttribute() {
@@ -61,6 +51,9 @@ public class BooleanAttribute extends Attribute {
 		att = a;
 	}
 	
+	/**
+	 * Returns a string version of the attribute's boolean
+	 */
 	@Override
 	public String toString() {
 		return Boolean.toString(att);

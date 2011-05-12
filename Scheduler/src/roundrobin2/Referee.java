@@ -65,7 +65,7 @@ public class Referee implements Unit {
 		
 	}
 	public Field getField() {
-		return this._associatedField.att;
+		return this._associatedField.getAttribute();
 	}
 
 }

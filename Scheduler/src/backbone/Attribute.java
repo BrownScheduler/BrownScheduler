@@ -25,7 +25,7 @@ public abstract class Attribute implements Serializable {
 	}
 
 	/**
-	 * Currently, all Attributes are editable
+	 * Attributes are editable by default
 	 * @return true
 	 */
 	public boolean isEditable() {

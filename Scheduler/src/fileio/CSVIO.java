@@ -187,7 +187,6 @@ public class CSVIO {
 							unit.setAttribute(new IntAttribute(att.getTitle(),
 									((IntAttribute) temp.getAttributes().get(nongroupAtts.get(i))).getAttribute()));
 
-						System.out.println(group.getMembers().toString());
 						break;
 
 					case STRING:
@@ -237,18 +236,18 @@ public class CSVIO {
 			for(Unit unit : unitsToAdd.keySet()) {
 				for(Entry<UnitAttribute, String> entry : unitsToAdd.get(unit).entrySet()) {
 					UnitAttribute uAtt = entry.getKey();
-					uAtt.att = null;
+					uAtt.setAttribute(null);
 					for(Object obj : uAtt.getMemberOf().getMembers()) {
 						Unit u = (Unit) obj;
 						if(u.getName().equals(entry.getValue())) {
-							uAtt.att = u;
+							uAtt.setAttribute(u);
 							break;
 						}
 					}
-					if(uAtt.att == null) {
-						uAtt.att = uAtt.getMemberOf().getBlank();
-						uAtt.getMemberOf().addMember(uAtt.att);
-						uAtt.att.setName(entry.getValue());
+					if(uAtt.getAttribute() == null) {
+						uAtt.setAttribute(uAtt.getMemberOf().getBlank());
+						uAtt.getMemberOf().addMember(uAtt.getAttribute());
+						uAtt.getAttribute().setName(entry.getValue());
 					}
 					unit.setAttribute(uAtt);
 				}
@@ -268,11 +267,10 @@ public class CSVIO {
 						}
 						if(unit == null) {
 							unit = gAtt.getGrouping().getBlank().getMemberOf().getBlank();
-							gAtt.getGrouping().getBlank().getMemberOf().addMember(unit);
 							unit.setName(unitName);
+							gAtt.getGrouping().getBlank().getMemberOf().addMember(unit);
 							gAtt.addMember(unit);
 							uni.setAttribute(gAtt);
-						} else if(gAtt.getGrouping().getDuplicate(unit) == null) {
 							gAtt.addMember(unit);
 							uni.setAttribute(gAtt);
 						}
@@ -289,8 +287,8 @@ public class CSVIO {
 						for(Attribute att : u.getAttributes())
 							switch(att.getType()) {
 							case UNIT:
-								if(((UnitAttribute) att).att.getName().equals(unit.getName()))
-									((UnitAttribute) att).att = null;
+								if(((UnitAttribute) att).getAttribute().getName().equals(unit.getName()))
+									((UnitAttribute) att).setAttribute(null);
 								break;
 							case GROUPING:
 								Unit un = null;

@@ -174,13 +174,13 @@ public class MyPairing implements backbone.Pairing{
 		atts.add(new UnitAttribute<Team>("Winner", _winner, posWinners));
 		
 		DebaterGrouping posGovDebaters = new DebaterGrouping(_t, "Pos Gov Units");
-		if(_gov != null && _gov.d1.att != null) posGovDebaters.addMember(_gov.d1.att);
-		if(_gov != null && _gov.d2.att != null) posGovDebaters.addMember(_gov.d2.att);
+		if(_gov != null && _gov.d1.getAttribute() != null) posGovDebaters.addMember(_gov.d1.getAttribute());
+		if(_gov != null && _gov.d2.getAttribute() != null) posGovDebaters.addMember(_gov.d2.getAttribute());
 		atts.add(new UnitAttribute<Debater>("PM", _pm, posGovDebaters));
 		atts.add(new UnitAttribute<Debater>("MG", _mg, posGovDebaters));
 		DebaterGrouping posOppDebaters = new DebaterGrouping(_t, "Pos Opp Units");
-		if(_opp != null && _opp.d1.att != null) posOppDebaters.addMember(_opp.d1.att);
-		if(_opp != null && _opp.d2.att != null) posOppDebaters.addMember(_opp.d2.att);
+		if(_opp != null && _opp.d1.getAttribute() != null) posOppDebaters.addMember(_opp.d1.getAttribute());
+		if(_opp != null && _opp.d2.getAttribute() != null) posOppDebaters.addMember(_opp.d2.getAttribute());
 		atts.add(new UnitAttribute<Debater>("LO", _lo, posOppDebaters));
 		atts.add(new UnitAttribute<Debater>("MO", _mo, posOppDebaters));
 		
@@ -200,21 +200,21 @@ public class MyPairing implements backbone.Pairing{
 	@Override
 	public void setAttribute(Attribute att) {
 		if(att.getTitle().equals("PM")){
-			_pm = ((UnitAttribute<Debater>)att).att;
+			_pm = ((UnitAttribute<Debater>)att).getAttribute();
 		}else if(att.getTitle().equals("MG")){
-			_mg = ((UnitAttribute<Debater>)att).att;
+			_mg = ((UnitAttribute<Debater>)att).getAttribute();
 		}else if(att.getTitle().equals("LO")){
-			_lo = ((UnitAttribute<Debater>)att).att;
+			_lo = ((UnitAttribute<Debater>)att).getAttribute();
 		}else if(att.getTitle().equals("MO")){
-			_mo = ((UnitAttribute<Debater>)att).att;
+			_mo = ((UnitAttribute<Debater>)att).getAttribute();
 		}else if(att.getTitle().equals("Gov")){
-			_gov = ((UnitAttribute<Team>)att).att;
+			_gov = ((UnitAttribute<Team>)att).getAttribute();
 		}else if(att.getTitle().equals("Opp")){
-			_opp = ((UnitAttribute<Team>)att).att;
+			_opp = ((UnitAttribute<Team>)att).getAttribute();
 		}else if(att.getTitle().equals("Judge")){
-			_judge = ((UnitAttribute<Judge>)att).att;
+			_judge = ((UnitAttribute<Judge>)att).getAttribute();
 		}else if(att.getTitle().equals("Winner")){
-			setWinner(((UnitAttribute<Team>)att).att);	
+			setWinner(((UnitAttribute<Team>)att).getAttribute());	
 		}else if(att.getTitle().equals("PM Points")){
 			_pmPoints = ((DoubleAttribute)att).getAttribute();
 			if(_pm != null) _pm.addSpeaks(((DoubleAttribute)att).getAttribute(), _roundNum);

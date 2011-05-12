@@ -68,5 +68,10 @@ public interface Grouping<T extends Unit> extends Serializable {
 	 */
 	public void clear();
 	
+	/**
+	 * Finds a different, but identically named unit of a given unit in the grouping
+	 * @param unit the given unit
+	 * @return the duplicate, or null if none exists
+	 */
 	public T getDuplicate(T unit);
 }

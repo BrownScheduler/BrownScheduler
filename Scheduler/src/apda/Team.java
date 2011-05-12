@@ -65,15 +65,15 @@ public class Team implements Unit {
 	
 	public double getSpeaks(){
 		double speaks = 0;
-		if(d1.att != null) speaks += d1.att.getSpeaks();
-		if(d2.att != null) speaks += d2.att.getSpeaks();
+		if(d1.getAttribute() != null) speaks += d1.getAttribute().getSpeaks();
+		if(d2.getAttribute() != null) speaks += d2.getAttribute().getSpeaks();
 		return speaks;
 	}
 	
 	public double getRanks(){
 		double ranks = 0;
-		if(d1.att != null) ranks += d1.att.getRanks();
-		if(d2.att != null) ranks += d2.att.getRanks();
+		if(d1.getAttribute() != null) ranks += d1.getAttribute().getRanks();
+		if(d2.getAttribute() != null) ranks += d2.getAttribute().getRanks();
 		return ranks;
 	}
 	public boolean isFullSeed(){
@@ -121,7 +121,8 @@ public class Team implements Unit {
 		atts.add(new BooleanAttribute("In Tourney", this.stillInTournament));
 		atts.add(new IntAttribute("Wins", wins));
 		atts.add(new IntAttribute("Losses", losses));
-		atts.add(new UnitAttribute<SeedUnit>("Seed", _seed, SeedUnit.getOnlyGrouping()));
+		//atts.add(new UnitAttribute<SeedUnit>("Seed", _seed, SeedUnit.getOnlyGrouping()));
+
 		return atts;
 	}
 
@@ -153,18 +154,23 @@ public class Team implements Unit {
 			UnitAttribute<School> schoolAtt = (UnitAttribute<School>)att;
 			System.out.println(schoolAtt);
 			if(school != null){
-				if(schoolAtt.att == null){
+				if(schoolAtt.getAttribute() == null){
 					school.removeTeam(this);
 					school = null;
 				}else{
-					if(!school.getName().equals(schoolAtt.att.getName())){
+					if(!school.getName().equals(schoolAtt.getAttribute().getName())){
 						school.removeTeam(this);
-						schoolAtt.att.addTeam(this);
-						school = schoolAtt.att;
+						schoolAtt.getAttribute().addTeam(this);
+						school = schoolAtt.getAttribute();
+					}
+					if(school.getName().equals(schoolAtt.getAttribute().getName())){
+						if(school._teams.getDuplicate(this) == null){
+							school.addTeam(this);
+						}
 					}
 				}
-			}else if(school == null && schoolAtt.att != null){
-				school = schoolAtt.att;
+			}else if(school == null && schoolAtt.getAttribute() != null){
+				school = schoolAtt.getAttribute();
 				school.addTeam(this);
 			}
 		}
@@ -172,7 +178,7 @@ public class Team implements Unit {
 			stillInTournament = ((BooleanAttribute)att).getAttribute();
 		}
 		else if(att.getTitle().equals("Seed")){
-			SeedUnit newSeed = ((UnitAttribute<SeedUnit>)att).att;
+			SeedUnit newSeed = ((UnitAttribute<SeedUnit>)att).getAttribute();
 			if(newSeed == null) _seed = null;
 			else if(newSeed.getName().equals("")) _seed = null;
 			else if(newSeed.getName().equals("Full") ||

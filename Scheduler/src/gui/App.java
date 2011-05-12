@@ -250,7 +250,7 @@ public class App implements GUIConstants {
 		if (_jJMenuBar == null) {
 			_jJMenuBar = new JMenuBar();
 			_jJMenuBar.add(getFileMenu());
-			_jJMenuBar.add(getOptionsMenu());
+//			_jJMenuBar.add(getOptionsMenu());
 			_jJMenuBar.add(getViewMenu());
 			_jJMenuBar.add(getEditMenu());
 			_jJMenuBar.add(getHelpMenu());

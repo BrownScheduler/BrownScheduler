@@ -38,12 +38,13 @@ public class UnitAttributeComboBox extends JComboBox implements GUIConstants {
 		for (int i = 0; i < _units.size(); i++) {
 			unitnames.add(_units.get(i).getName());
 			this.addItem(_units.get(i).getName());
-			if (_units.get(i) == attribute.att)
+			if (_units.get(i) == attribute.getAttribute())
 				toSelect = i+1;
 		}
 		_units.add(0, null);
-		if (attribute.att == null)
+		if (attribute.getAttribute() == null)
 			toSelect = 0;
+
 		// This combo box is editable
 		this.setEditable(true);
 		// Sets the value of getSelectedUnit() of this combobox to return the selected value

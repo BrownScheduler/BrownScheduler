@@ -79,7 +79,7 @@ public class School implements Unit {
 				t.school = this;
 			}
 		}else if(title.equals("Free Seed")){
-			Team toSet = ((UnitAttribute<Team>)att).att;
+			Team toSet = ((UnitAttribute<Team>)att).getAttribute();
 			if(toSet != _freeSeed){
 				toSet.setSeed("Free");
 				_freeSeed = toSet;

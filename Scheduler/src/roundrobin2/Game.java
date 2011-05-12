@@ -50,54 +50,54 @@ public class Game implements Pairing {
 	public void setHome(Team homeTeam){
 		
 		if(homeTeam == null){
-			if(_homeTeam.att != null && _awayTeam.att != null){
-				_awayTeam.att.removeFacedTeam(_homeTeam.att);
-				_awayTeam = new UnitAttribute<Team>("Away Team", _awayTeam.att, getPossibleOpposition(homeTeam));
+			if(_homeTeam.getAttribute() != null && _awayTeam.getAttribute() != null){
+				_awayTeam.getAttribute().removeFacedTeam(_homeTeam.getAttribute());
+				_awayTeam = new UnitAttribute<Team>("Away Team", _awayTeam.getAttribute(), getPossibleOpposition(homeTeam));
 			}
-			_homeTeam = new UnitAttribute<Team>("Home Team", homeTeam, getPossibleOpposition(_awayTeam.att));
+			_homeTeam = new UnitAttribute<Team>("Home Team", homeTeam, getPossibleOpposition(_awayTeam.getAttribute()));
 		}else{
-			if(_homeTeam.att != homeTeam){
-				if(_awayTeam.att != null){
-					_awayTeam.att.removeFacedTeam(_homeTeam.att);
-					if(_homeTeam.att != null)
-						_homeTeam.att.removeFacedTeam(_awayTeam.att);
-					_awayTeam = new UnitAttribute<Team>("Away Team", _awayTeam.att, getPossibleOpposition(homeTeam));
+			if(_homeTeam.getAttribute() != homeTeam){
+				if(_awayTeam.getAttribute() != null){
+					_awayTeam.getAttribute().removeFacedTeam(_homeTeam.getAttribute());
+					if(_homeTeam.getAttribute() != null)
+						_homeTeam.getAttribute().removeFacedTeam(_awayTeam.getAttribute());
+					_awayTeam = new UnitAttribute<Team>("Away Team", _awayTeam.getAttribute(), getPossibleOpposition(homeTeam));
 				}
-				_homeTeam = new UnitAttribute<Team>("Home Team", homeTeam, getPossibleOpposition(_awayTeam.att));
+				_homeTeam = new UnitAttribute<Team>("Home Team", homeTeam, getPossibleOpposition(_awayTeam.getAttribute()));
 			}
 		}
 	}
 	
 	public void setAway(Team awayTeam){
 		if(awayTeam == null){
-			if(_awayTeam.att != null && _homeTeam.att != null){
-				_homeTeam.att.removeFacedTeam(_awayTeam.att);
-				_homeTeam = new UnitAttribute<Team>("Home Team", _homeTeam.att, getPossibleOpposition(awayTeam));
+			if(_awayTeam.getAttribute() != null && _homeTeam.getAttribute() != null){
+				_homeTeam.getAttribute().removeFacedTeam(_awayTeam.getAttribute());
+				_homeTeam = new UnitAttribute<Team>("Home Team", _homeTeam.getAttribute(), getPossibleOpposition(awayTeam));
 			}
-			_awayTeam = new UnitAttribute<Team>("Away Team", awayTeam, getPossibleOpposition(_homeTeam.att));
+			_awayTeam = new UnitAttribute<Team>("Away Team", awayTeam, getPossibleOpposition(_homeTeam.getAttribute()));
 		}else{
-			if(_awayTeam.att != awayTeam){
-				if(_homeTeam.att != null){
-					_homeTeam.att.removeFacedTeam(_awayTeam.att);
-					if(_awayTeam.att != null)
-						_awayTeam.att.removeFacedTeam(_homeTeam.att);
-					_homeTeam = new UnitAttribute<Team>("Home Team", _homeTeam.att, getPossibleOpposition(awayTeam));
+			if(_awayTeam.getAttribute() != awayTeam){
+				if(_homeTeam.getAttribute() != null){
+					_homeTeam.getAttribute().removeFacedTeam(_awayTeam.getAttribute());
+					if(_awayTeam.getAttribute() != null)
+						_awayTeam.getAttribute().removeFacedTeam(_homeTeam.getAttribute());
+					_homeTeam = new UnitAttribute<Team>("Home Team", _homeTeam.getAttribute(), getPossibleOpposition(awayTeam));
 				}
-				_awayTeam = new UnitAttribute<Team>("Away Team", awayTeam, getPossibleOpposition(_homeTeam.att));
+				_awayTeam = new UnitAttribute<Team>("Away Team", awayTeam, getPossibleOpposition(_homeTeam.getAttribute()));
 			}
 		}
 	}
 	
 	public void setField(Field f){
 		UnitAttribute<Field> attr = new UnitAttribute<Field>("Location", f, _t.getFields());
-		if(attr == null && _location.att != null){
+		if(attr == null && _location.getAttribute() != null){
 			_headRef = new UnitAttribute<Referee>("Head Ref", null, _t.getRefs());
 			_assistantRef = new UnitAttribute<Referee>("Assistant Ref", null, _t.getRefs());
 		}else{
-			if(_headRef.att == null || _headRef.att.getField() != attr.att)
-				_headRef = new UnitAttribute<Referee>("Head Ref", null, getPossibleRefs(attr.att));
-			if(_assistantRef.att == null || _assistantRef.att.getField() != attr.att)
-				_assistantRef = new UnitAttribute<Referee>("Assistant Ref", null, getPossibleRefs(attr.att));
+			if(_headRef.getAttribute() == null || _headRef.getAttribute().getField() != attr.getAttribute())
+				_headRef = new UnitAttribute<Referee>("Head Ref", null, getPossibleRefs(attr.getAttribute()));
+			if(_assistantRef.getAttribute() == null || _assistantRef.getAttribute().getField() != attr.getAttribute())
+				_assistantRef = new UnitAttribute<Referee>("Assistant Ref", null, getPossibleRefs(attr.getAttribute()));
 		}
 		_location = attr;
 	}
@@ -105,31 +105,31 @@ public class Game implements Pairing {
 	
 	
 	public void setHeadReferee(Referee ref){
-		if(_location.att == null && ref != null){
+		if(_location.getAttribute() == null && ref != null){
 			_location = new UnitAttribute<Field>("Location", ref.getField(), _t.getFields());
 		}
-		if(_assistantRef.att == null){
-			_assistantRef = new UnitAttribute<Referee>("Assistant Ref", null, getPossibleRefs(_location.att));
+		if(_assistantRef.getAttribute() == null){
+			_assistantRef = new UnitAttribute<Referee>("Assistant Ref", null, getPossibleRefs(_location.getAttribute()));
 		}
-		_headRef = new UnitAttribute<Referee>("Head Ref", ref, getPossibleRefs(_location.att));
+		_headRef = new UnitAttribute<Referee>("Head Ref", ref, getPossibleRefs(_location.getAttribute()));
 	}
 	
 	public void setAssistantReferee(Referee ref){
-		if(_location.att == null){
+		if(_location.getAttribute() == null){
 			_location = new UnitAttribute<Field>("Location", ref.getField(), _t.getFields());
 		}
-		if(_headRef.att == null){
-			_headRef = new UnitAttribute<Referee>("Head Ref", null, getPossibleRefs(_location.att));
+		if(_headRef.getAttribute() == null){
+			_headRef = new UnitAttribute<Referee>("Head Ref", null, getPossibleRefs(_location.getAttribute()));
 		}
-		_assistantRef = new UnitAttribute<Referee>("Assistant Ref", ref, getPossibleRefs(_location.att));
+		_assistantRef = new UnitAttribute<Referee>("Assistant Ref", ref, getPossibleRefs(_location.getAttribute()));
 	}
 	@Override
 	public boolean deleteFromGrouping() {
 		if(_r == null) return false;
 		if(_winner != null) _winner.setGamesWon(_winner.getGamesWon() - 1);
 		if(_loser != null) _loser.setGamesLost(_loser.getGamesLost() - 1);
-		if(_homeTeam.att != null) _homeTeam.att.removeFacedTeam(_awayTeam.att);
-		if(_awayTeam.att != null) _awayTeam.att.removeFacedTeam(_homeTeam.att);
+		if(_homeTeam.getAttribute() != null) _homeTeam.getAttribute().removeFacedTeam(_awayTeam.getAttribute());
+		if(_awayTeam.getAttribute() != null) _awayTeam.getAttribute().removeFacedTeam(_homeTeam.getAttribute());
 		return _r.deleteMember(this);
 	}
 
@@ -142,14 +142,14 @@ public class Game implements Pairing {
 		atts.add(_awayTeam);
 		atts.add(_headRef);
 		atts.add(_assistantRef);
-		boolean isHome = _homeTeam.att == _winner && _winner != null;
-		boolean isAway = _awayTeam.att == _winner && _winner != null;
+		boolean isHome = _homeTeam.getAttribute() == _winner && _winner != null;
+		boolean isAway = _awayTeam.getAttribute() == _winner && _winner != null;
 		GovOppUnit toAdd = null;
 		GovOppGrouping possibles = new GovOppGrouping("Possible");
 		GovOppUnit home = new GovOppUnit("Home", true);
 		GovOppUnit away = new GovOppUnit("Away", false);
-		if(_homeTeam.att != null) home.setName(_homeTeam.att.getName());
-		if(_awayTeam.att != null) away.setName(_awayTeam.att.getName());
+		if(_homeTeam.getAttribute() != null) home.setName(_homeTeam.getAttribute().getName());
+		if(_awayTeam.getAttribute() != null) away.setName(_awayTeam.getAttribute().getName());
 		if(isHome) toAdd = home;
 		else if(isAway) toAdd = away;
 		possibles.addMember(home);
@@ -190,34 +190,34 @@ public class Game implements Pairing {
 			String title = att.getTitle();
 			if(title.equals("Location")){
 				UnitAttribute<Field> attr = att;
-				if(attr == null && _location.att != null){
+				if(attr == null && _location.getAttribute() != null){
 					_headRef = new UnitAttribute<Referee>("Head Ref", null, _t.getRefs());
 					_assistantRef = new UnitAttribute<Referee>("Assistant Ref", null, _t.getRefs());
 				}else{
-					if(_headRef.att == null || _headRef.att.getField() != attr.att)
-						_headRef = new UnitAttribute<Referee>("Head Ref", null, getPossibleRefs(attr.att));
-					if(_assistantRef.att == null || _assistantRef.att.getField() != attr.att)
-						_assistantRef = new UnitAttribute<Referee>("Assistant Ref", null, getPossibleRefs(attr.att));
+					if(_headRef.getAttribute() == null || _headRef.getAttribute().getField() != attr.getAttribute())
+						_headRef = new UnitAttribute<Referee>("Head Ref", null, getPossibleRefs(attr.getAttribute()));
+					if(_assistantRef.getAttribute() == null || _assistantRef.getAttribute().getField() != attr.getAttribute())
+						_assistantRef = new UnitAttribute<Referee>("Assistant Ref", null, getPossibleRefs(attr.getAttribute()));
 				}
 				_location = attr;
 			}
 			else if(title.equals("Home Team")){
-				setHome((Team)att.att);
+				setHome((Team)att.getAttribute());
 				
 			}
 			else if(title.equals("Away Team")){
-				setAway((Team)att.att);
+				setAway((Team)att.getAttribute());
 			}
 			else if(title.equals("Head Ref")){
-				Referee ref = (Referee)att.att;
+				Referee ref = (Referee)att.getAttribute();
 				setHeadReferee(ref);
 			}
 			else if(title.equals("Assistant Ref")){
-				Referee ref = (Referee)att.att;
+				Referee ref = (Referee)att.getAttribute();
 				setAssistantReferee(ref);
 			}
 			else{
-				GovOppUnit newWinner = (GovOppUnit)att.att;
+				GovOppUnit newWinner = (GovOppUnit)att.getAttribute();
 				if(newWinner == null){
 					if(_winner != null)
 						_winner.setGamesWon(_winner.getGamesWon() - 1);
@@ -227,26 +227,26 @@ public class Game implements Pairing {
 					_loser = null;
 				}
 				else if(newWinner.isGov){
-					if(_winner != _homeTeam.att){
+					if(_winner != _homeTeam.getAttribute()){
 						if(_winner != null) _winner.setGamesWon(_winner.getGamesWon() - 1);
-						_winner = _homeTeam.att;
+						_winner = _homeTeam.getAttribute();
 						_winner.setGamesWon(_winner.getGamesWon() + 1);
 					}
-					if(_loser != _awayTeam.att ){
+					if(_loser != _awayTeam.getAttribute() ){
 						if(_loser != null) _loser.setGamesLost(_loser.getGamesLost() - 1);
-						_loser = _awayTeam.att;
+						_loser = _awayTeam.getAttribute();
 						if(_winner != null) _loser.setGamesLost(_loser.getGamesLost() + 1);
 					}
 				}
 				else if(newWinner.isOpp){
-					if(_winner != _awayTeam.att){
+					if(_winner != _awayTeam.getAttribute()){
 						if(_winner != null) _winner.setGamesWon(_winner.getGamesWon() - 1);
-						_winner = _awayTeam.att;
+						_winner = _awayTeam.getAttribute();
 						_winner.setGamesWon(_winner.getGamesWon() + 1);
 					}
-					if(_loser != _homeTeam.att){
+					if(_loser != _homeTeam.getAttribute()){
 						if(_loser != null) _loser.setGamesLost(_loser.getGamesLost() - 1);
-						_loser = _homeTeam.att;
+						_loser = _homeTeam.getAttribute();
 						if(_winner != null) _loser.setGamesLost(_loser.getGamesLost() + 1);
 					}
 				}
@@ -266,11 +266,11 @@ public class Game implements Pairing {
 	}
 	
 	public Team getHomeTeam(){
-		return this._homeTeam.att;
+		return this._homeTeam.getAttribute();
 	}
 	
 	public Team getAwayTeam(){
-		return this._awayTeam.att;
+		return this._awayTeam.getAttribute();
 	}
 	
 	@Override

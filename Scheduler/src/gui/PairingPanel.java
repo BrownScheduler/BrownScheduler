@@ -49,6 +49,7 @@ public class PairingPanel extends JPanel implements GUIConstants {
 		return new Color(red, green, 0);
 		
 	}
+
 	/**
 	 * Resets this panel.
 	 */
@@ -131,9 +132,9 @@ public class PairingPanel extends JPanel implements GUIConstants {
 				attrpanel.setLayout(new BoxLayout(attrpanel, BoxLayout.Y_AXIS));
 				attrpanel.add(Utility.wrapLeft(Utility.getTitleLabel(attribute)));
 				attrpanel.add(Utility.wrapLeft(new UnitAttributeComboBox((UnitAttribute<?>) attribute, _pairing, this)));//Not header, needs to be editable
-				if (((UnitAttribute<?>) attribute).att != null) {
+				if (((UnitAttribute<?>) attribute).getAttribute() != null) {
 					// Add labels with all the values of the unit's attributes
-					for (Attribute attr : ((UnitAttribute<?>) attribute).att.getAttributes()) {
+					for (Attribute attr : ((UnitAttribute<?>) attribute).getAttribute().getAttributes()) {
 						toAddTo.add(Box.createRigidArea(SMALLSPACING_SIZE));
 						if (attr.getType() == Attribute.Type.GROUPING) {
 							JLabel label = Utility.getTitleLabel(attr);							
@@ -249,6 +250,7 @@ public class PairingPanel extends JPanel implements GUIConstants {
 			this.add(Utility.wrapLeft(tf));
 		}
 	}
+
 	/**
 	 * This class represents a UnitAttribute in a Pairing.
 	 */
@@ -281,7 +283,7 @@ public class PairingPanel extends JPanel implements GUIConstants {
 			int toSelect = 0;
 			for (int i = 1; i < units.size(); i++) {
 				unitnames.add(units.get(i).getName());
-				if (units.get(i) == _unitattribute.att)
+				if (units.get(i) == _unitattribute.getAttribute())
 					toSelect = i;
 			}
 			this.setModel(new DefaultComboBoxModel(unitnames.toArray(new String[0])));
