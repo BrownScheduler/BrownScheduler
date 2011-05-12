@@ -38,4 +38,14 @@ public class PairingTemplate extends UnitTemplate implements backbone.Pairing {
 	@Override
 	public void setMemberOf(Grouping<Unit> g) {}
 
+	@Override
+	public double getConflictScore() {
+		return 1.0;
+	}
+	
+	@Override
+	public String getConflictMessage() {
+		return "";
+	}
+
 }

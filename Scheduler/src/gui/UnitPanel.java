@@ -174,18 +174,22 @@ public class UnitPanel extends JPanel implements GUIConstants {
 									}
 									rowunit.setAttribute(new StringAttribute(rowattr.getTitle(), value));
 								}
-								else if (rowattr.getType() == Attribute.Type.UNIT) {
-									DefaultCellEditor editor = (DefaultCellEditor) table.getTable().getCellEditor(i, j);
-									UnitAttributeComboBox combobox = (UnitAttributeComboBox) editor.getComponent();
-									Grouping<Unit> g = combobox.getGrouping();
-									Unit value = null;
-									if (table.getTable().getValueAt(i, j) != null) {
-										value = combobox.getSelectedUnit();
-										if ((value != null) && (!g.getMembers().contains(value)))
-											g.addMember(value);
-									}
-									rowunit.setAttribute(new UnitAttribute<Unit>(rowattr.getTitle(), value, g));
+								else if ((rowattr.getType() == Attribute.Type.UNIT) || (rowattr.getType() == Attribute.Type.GROUPING)) {
+									j--;
 								}
+//								else if (rowattr.getType() == Attribute.Type.UNIT) {
+//									DefaultCellEditor editor = (DefaultCellEditor) table.getTable().getCellEditor(i, j);
+//									UnitAttributeComboBox combobox = (UnitAttributeComboBox) editor.getComponent();
+//									Grouping<Unit> g = combobox.getGrouping();
+//									Unit value = null;
+//									if (combobox.getSelectedUnit() != null) {
+//										value = combobox.getSelectedUnit();
+//										if ((value != null) && (!value.getName().trim().equals("")) && (!g.getMembers().contains(value)))
+//											g.addMember(value);
+//									}
+//									System.out.println(combobox.getSelectedIndex());
+//									rowunit.setAttribute(new UnitAttribute<Unit>(rowattr.getTitle(), value, g));
+//								}
 								j++;
 							}
 						}
@@ -214,9 +218,9 @@ public class UnitPanel extends JPanel implements GUIConstants {
 								boolean rowunitisnull = false;
 								if ((rowunit.getName() == null) || (rowunit.getName().equals("")))
 									rowunitisnull = true;
-								if (!rowunitisnull && !unitsintable.get(rowunit) && (duplicate == null)) {
+								if (!rowunitisnull && !unitsintable.get(rowunit)) {
 									groupattr.addMember(rowunit);
-									if (!groupattr.getBlankUnit().getMemberOf().getMembers().contains(rowunit))
+									if (duplicate == null)
 										groupattr.getBlankUnit().getMemberOf().addMember(rowunit);
 								}
 								else if (!rowunitisnull && !unitsintable.get(rowunit)) {
@@ -224,6 +228,9 @@ public class UnitPanel extends JPanel implements GUIConstants {
 										if (a.getType() != Attribute.Type.GROUPING)
 											duplicate.setAttribute(a);
 									}
+								}
+								else {
+									
 								}
 							}
 							unit.setAttribute(groupattr);

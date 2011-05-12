@@ -272,5 +272,14 @@ public class Game implements Pairing {
 	public Team getAwayTeam(){
 		return this._awayTeam.att;
 	}
+	
+	@Override
+	public double getConflictScore() {
+		return 0.0;
+	}
+	
+	public String getConflictMessage(){
+		return "";
+	}
 
 }

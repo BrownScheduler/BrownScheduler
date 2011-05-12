@@ -17,7 +17,7 @@ public class AddingPanel extends JPanel implements GUIConstants {
 	public static final long serialVersionUID = 1L;
 	private MiddleEnd _middleEnd;
 	private int _currView;
-	private Object _currViewObject;
+	private Object _currViewObject;  //  @jve:decl-index=0:
 
 	/**
 	 * This is the default constructor.

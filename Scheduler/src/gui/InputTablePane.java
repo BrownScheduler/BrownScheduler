@@ -12,6 +12,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.DefaultCellEditor;
@@ -24,6 +25,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableColumn;
 
 /**
@@ -53,15 +55,33 @@ public class InputTablePane extends JScrollPane implements GUIConstants {
 		return _table;
 	}
 	
-	private void initialize(List<Attribute> headers, GroupingAttribute<Unit> group) {
+	private void initialize(final List<Attribute> headers, GroupingAttribute<Unit> group) {
 		this.setPreferredSize(INPUTTABLE_SIZE);
 		this.setMaximumSize(new Dimension(Integer.MAX_VALUE, INPUTTABLE_HEIGHT));
 		this.setVisible(false);
 		this.setToolTipText("Right click and click \"Delete\" to delete a row and delete the unit from this table (not permanently). Use CTRL+V to paste in this table from an Excel spreadsheet.");
-		_table = new JTable();
+		_table = new JTable() {
+//			public TableCellEditor getCellEditor(int row, int column) {
+//					if (headers.get(column).getType() == Attribute.Type.UNIT) {
+//						UnitAttribute<Unit> header = (UnitAttribute) headers.get(column);
+//						UnitAttribute<Unit> uatt = new UnitAttribute<Unit>(header.getTitle(), header.getMemberOf());
+//						UnitAttributeComboBox combobox = new UnitAttributeComboBox(uatt);
+//						return new DefaultCellEditor(combobox);
+//					}
+//					else {
+//						return super.getCellEditor(row, column);
+//					}
+//				}
+		};
 		_table.setSize(INPUTTABLE_SIZE);
 		_table.setRowHeight(ROW_HEIGHT);
 		_table.getTableHeader().setReorderingAllowed(false);
+		Iterator<Attribute> iter = headers.iterator();
+		while (iter.hasNext()) {
+			Attribute a = iter.next();
+			if ((a.getType() == Attribute.Type.UNIT) || (a.getType() == Attribute.Type.GROUPING))
+				iter.remove();
+		}
 		List<List<Attribute>> data = new ArrayList<List<Attribute>>();
 		for (Unit u : group.getMembers()) {
 			data.add(u.getAttributes());
@@ -70,15 +90,15 @@ public class InputTablePane extends JScrollPane implements GUIConstants {
 		for (int i = 0; i < DEFAULT_TABLE_BLANK_ROWS; i++) {
 			((DefaultTableModel) _table.getModel()).insertRow(_table.getRowCount(), new Object[0]);
 		}
-		for (int i = 0; i < _table.getColumnModel().getColumnCount(); i++) {
-			if (headers.get(i).getType() == Attribute.Type.UNIT) {
-				TableColumn unitcolumn = _table.getColumnModel().getColumn(i);
-				UnitAttribute<Unit> header = (UnitAttribute) headers.get(i);
-				UnitAttribute<Unit> uatt = new UnitAttribute<Unit>(header.getTitle(), header.getMemberOf());
-				UnitAttributeComboBox combobox = new UnitAttributeComboBox(uatt);
-				unitcolumn.setCellEditor(new DefaultCellEditor(combobox));
-			}
-		}
+//		for (int i = 0; i < _table.getColumnModel().getColumnCount(); i++) {
+//			if (headers.get(i).getType() == Attribute.Type.UNIT) {
+//				TableColumn unitcolumn = _table.getColumnModel().getColumn(i);
+//				UnitAttribute<Unit> header = (UnitAttribute) headers.get(i);
+//				UnitAttribute<Unit> uatt = new UnitAttribute<Unit>(header.getTitle(), header.getMemberOf());
+//				UnitAttributeComboBox combobox = new UnitAttributeComboBox(uatt);
+//				unitcolumn.setCellEditor(new DefaultCellEditor(combobox));
+//			}
+//		}
 		final JPopupMenu popup = new JPopupMenu();
 		JMenuItem menuitem = new JMenuItem("Delete these rows");
 		popup.add(menuitem);
@@ -148,14 +168,14 @@ public class InputTablePane extends JScrollPane implements GUIConstants {
 					else if (attr.getType() == Attribute.Type.STRING) {
 						row.add(((StringAttribute) attr).getAttribute());
 					}
-					else if (attr.getType() == Attribute.Type.UNIT) {
-						if ((((UnitAttribute) attr).att) == null) {
-							row.add("");
-						}
-						else {
-							row.add(((UnitAttribute) attr).att.getName());
-						}
-					}
+//					else if (attr.getType() == Attribute.Type.UNIT) {
+//						if ((((UnitAttribute) attr).att) == null) {
+//							row.add("");
+//						}
+//						else {
+//							row.add(((UnitAttribute) attr).att.getName());
+//						}
+//					}
 				}
 				d.add(row.toArray(new Object[0]));
 			}
