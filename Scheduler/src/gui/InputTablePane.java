@@ -86,7 +86,7 @@ public class InputTablePane extends JScrollPane implements GUIConstants {
 			public void actionPerformed(ActionEvent e) {
 				ArrayList<Integer> rows = new ArrayList<Integer>();
 				for (int i : _table.getSelectedRows())
-					rows.add(_table.getSelectedRows()[i]);
+					rows.add(i);
 				Collections.sort(rows);
 				Collections.reverse(rows);
 				for (int i : rows) {
