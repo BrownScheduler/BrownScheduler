@@ -107,6 +107,7 @@ public class App implements GUIConstants {
 			_jFrame.setSize(DEFAULT_SIZE);
 			_jFrame.setMinimumSize(MIN_SIZE);
 			_jFrame.addWindowListener(new WindowAdapter() {
+				@Override
 				public void windowClosing(WindowEvent e) {
 					_middleEnd.closeThisMiddleEnd();
 				}

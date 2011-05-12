@@ -207,7 +207,7 @@ public class CSVIO {
 					}
 				}
 
-				//Loads this tables grouping atttributes into a hash map
+				//Loads this tables grouping attributes into a hash map
 				HashMap<GroupingAttribute, LinkedList<String>> groupAttsToAdd = new HashMap<GroupingAttribute, LinkedList<String>>();
 				for(int i = 0; i < groupAtts.size(); i++) {
 					line = in.readLine();
@@ -269,8 +269,6 @@ public class CSVIO {
 							unit = gAtt.getGrouping().getBlank().getMemberOf().getBlank();
 							unit.setName(unitName);
 							gAtt.getGrouping().getBlank().getMemberOf().addMember(unit);
-							gAtt.addMember(unit);
-							uni.setAttribute(gAtt);
 							gAtt.addMember(unit);
 							uni.setAttribute(gAtt);
 						}

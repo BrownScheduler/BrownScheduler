@@ -75,7 +75,6 @@ public class Team implements Unit {
 		if(attribute.getType() == Attribute.Type.STRING)
 			_name = (StringAttribute)attribute;
 		else if(attribute.getType() == Attribute.Type.GROUPING){
-			System.out.println(((GroupingAttribute<Player>)attribute).getMembers().toString());
 			_players = (GroupingAttribute<Player>)attribute;
 		}
 		else if(attribute.getType() == Attribute.Type.INT){
