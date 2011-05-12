@@ -52,4 +52,12 @@ public abstract class MyGrouping<T extends Unit> implements Grouping<T> {
 		this._members = units;
 	}
 
+
+	@Override
+	public T getDuplicate(T unit){
+		for(T u : _members)
+			if(u != unit && u.getName().equals(unit.getName()))
+				return u;
+		return null;
+	}
 }
