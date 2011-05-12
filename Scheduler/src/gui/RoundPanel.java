@@ -23,6 +23,11 @@ public class RoundPanel extends JPanel implements GUIConstants {
 	private Round _round;
 	private ArrayList<PairingPanel> _pairingpanels;
 	
+	/**
+	 * Constructor.
+	 * @param me
+	 * @param r
+	 */
 	public RoundPanel(MiddleEnd me, Round r) {
 		_middleEnd = me;
 		_round = r;
@@ -30,6 +35,9 @@ public class RoundPanel extends JPanel implements GUIConstants {
 		resetPanel();
 	}
 	
+	/**
+	 * This resets the panel.
+	 */
 	public void resetPanel() {
 		this.removeAll();
 		_pairingpanels.clear();
@@ -39,6 +47,7 @@ public class RoundPanel extends JPanel implements GUIConstants {
 		}
 		this.setSize(DEFAULT_SIZE);
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		// Allows the user to add new blank pairings
 		JButton addpairingbutton = new JButton("Add New Blank Pairing");
 		if (IMAGESON)
 			addpairingbutton.setIcon(ADDBUTTONIMAGE);
@@ -52,11 +61,13 @@ public class RoundPanel extends JPanel implements GUIConstants {
 				repaintAll();
 			}
 		});
-		addpairingbutton.setHorizontalAlignment(SwingConstants.LEFT);
+		this.add(Box.createHorizontalGlue());
+		addpairingbutton.setHorizontalAlignment(SwingConstants.CENTER);
 		this.add(addpairingbutton);
 		this.add(Box.createHorizontalGlue());
 		if (_round == null)
 			return;
+		// Display all the pairings in this round
 		for (Pairing pairing : _round.getPairings()) {
 			PairingPanel pp = new PairingPanel(_middleEnd, _round, pairing);
 			_pairingpanels.add(pp);
@@ -66,6 +77,9 @@ public class RoundPanel extends JPanel implements GUIConstants {
 		this.add(Box.createVerticalGlue());
 	}
 	
+	/**
+	 * Repaints this component and all the component contained in it.
+	 */
 	public void repaintAll() {
 		this.resetPanel();
 		for (PairingPanel pairingpanel : _pairingpanels)

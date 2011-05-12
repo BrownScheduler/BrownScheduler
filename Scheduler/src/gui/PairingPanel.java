@@ -25,6 +25,12 @@ public class PairingPanel extends JPanel implements GUIConstants {
 	private Round _round;
 	private Pairing _pairing;
 	
+	/**
+	 * Constructor.
+	 * @param me
+	 * @param r
+	 * @param p
+	 */
 	public PairingPanel(MiddleEnd me, Round r, Pairing p) {
 		_middleEnd = me;
 		_round = r;
@@ -32,6 +38,9 @@ public class PairingPanel extends JPanel implements GUIConstants {
 		resetPanel();
 	}
 	
+	/**
+	 * Resets this panel.
+	 */
 	public void resetPanel() {
 		this.removeAll();
 		if (COLORSON) {
@@ -47,6 +56,7 @@ public class PairingPanel extends JPanel implements GUIConstants {
 			deletepanel.setForeground(FOREGROUND_COLOR);
 		}
 		deletepanel.setLayout(new BoxLayout(deletepanel, BoxLayout.Y_AXIS));
+		// This button allows you to delete pairings.
 		final JButton deletebutton = new JButton("Delete this pairing");
 		if (IMAGESON)
 			deletebutton.setIcon(DELETEBUTTONIMAGE);
@@ -54,6 +64,8 @@ public class PairingPanel extends JPanel implements GUIConstants {
 			deletebutton.setBackground(BACKGROUND_COLOR);
 			deletebutton.setForeground(FOREGROUND_COLOR);
 		}
+		// The button needs to be clicked twice to actually delete,
+		// helps prevent accidental deletions
 		deletebutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (deletebutton.getText().equals("Delete this pairing"))
@@ -77,6 +89,7 @@ public class PairingPanel extends JPanel implements GUIConstants {
 		bigWrapper.setLayout(new BoxLayout(bigWrapper, BoxLayout.Y_AXIS));
 		JPanel toAddTo = new JPanel();
 		for (Attribute attribute : _pairing.getAttributes()) {
+			// Wrap attributes so that only 4 are in a row
 			if(attNum % 4 == 0){
 				if(attNum != 0){
 					bigWrapper.add(Utility.wrapLeft(toAddTo));
@@ -90,6 +103,7 @@ public class PairingPanel extends JPanel implements GUIConstants {
 				toAddTo.setLayout(new BoxLayout(toAddTo, BoxLayout.X_AXIS));
 			}
 			attNum++;
+			// Display all unit attributes and their info
 			if (attribute.getType() == Attribute.Type.UNIT) {
 				JPanel attrpanel = new JPanel();
 				if (COLORSON) {
@@ -100,6 +114,7 @@ public class PairingPanel extends JPanel implements GUIConstants {
 				attrpanel.add(Utility.wrapLeft(Utility.getTitleLabel(attribute)));
 				attrpanel.add(Utility.wrapLeft(new UnitAttributeComboBox((UnitAttribute<?>) attribute, _pairing, this)));//Not header, needs to be editable
 				if (((UnitAttribute<?>) attribute).att != null) {
+					// Add labels with all the values of the unit's attributes
 					for (Attribute attr : ((UnitAttribute<?>) attribute).att.getAttributes()) {
 						toAddTo.add(Box.createRigidArea(SMALLSPACING_SIZE));
 						if (attr.getType() == Attribute.Type.GROUPING) {
@@ -150,17 +165,29 @@ public class PairingPanel extends JPanel implements GUIConstants {
 		this.add(Box.createHorizontalGlue());
 	}
 	
+	/**
+	 * Repaints this panel.
+	 */
 	public void repaintAll() {
 		this.resetPanel();
 		this.repaint();
 	}
 	
+	/**
+	 * This class represents a UnitAttribute in a Pairing.
+	 */
 	private class UnitAttributeComboBox extends JComboBox {
 		
 		private UnitAttribute _unitattribute;
 		private PairingPanel _pairingpanel;
 		private Pairing _pairing;
 		
+		/**
+		 * Constructor.
+		 * @param ua
+		 * @param p
+		 * @param pp
+		 */
 		public UnitAttributeComboBox(UnitAttribute ua, Pairing p, PairingPanel pp) {
 			_unitattribute = ua;
 			_pairingpanel = pp;
@@ -169,6 +196,7 @@ public class PairingPanel extends JPanel implements GUIConstants {
 			this.setPreferredSize(JCOMBOBOX_SIZE);
 			this.setMaximumSize(JCOMBOBOX_SIZE);
 			
+			// Ensure that the combo box displays the actual names of the units
 			final ArrayList<Unit> units = new ArrayList<Unit>();
 			units.add(null);
 			units.addAll(_unitattribute.getListOfUnits());
@@ -182,8 +210,8 @@ public class PairingPanel extends JPanel implements GUIConstants {
 			}
 			this.setModel(new DefaultComboBoxModel(unitnames.toArray(new String[0])));
 			this.setSelectedIndex(toSelect);
+			// setAttribute() of the pairing when a selection is made
 			this.addActionListener(new ActionListener() {
-				@Override
 				public void actionPerformed(ActionEvent e) {
 					UnitAttributeComboBox cb = (UnitAttributeComboBox) e.getSource();
 					if (cb.getSelectedIndex() <= 0) {

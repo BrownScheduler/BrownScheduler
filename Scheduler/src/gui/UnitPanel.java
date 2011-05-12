@@ -29,6 +29,11 @@ public class UnitPanel extends JPanel implements GUIConstants {
 	private JPanel _mainPanel, _buttonPanel, _tablePanel;
 	private Grouping<Unit> _grouping;
 	
+	/**
+	 * Constructor when viewing an existing unit.
+	 * @param m
+	 * @param u
+	 */
 	public UnitPanel(MiddleEnd m, Unit u) {
 		_middleEnd = m;
 		_grouping = u.getMemberOf();
@@ -38,6 +43,12 @@ public class UnitPanel extends JPanel implements GUIConstants {
 		initialize(u, "Save Changes", "Delete this unit");
 	}
 	
+	/**
+	 * Constructor when adding a new unit.
+	 * @param m
+	 * @param u
+	 * @param g
+	 */
 	public UnitPanel(MiddleEnd m, Unit u, Grouping<Unit> g) {
 		_middleEnd = m;
 		_grouping = g;
@@ -47,6 +58,12 @@ public class UnitPanel extends JPanel implements GUIConstants {
 		initialize(u, "Save Changes and Add Another New Unit", "Clear values");
 	}
 	
+	/**
+	 * This initializes this.
+	 * @param unit
+	 * @param savestring
+	 * @param deletestring
+	 */
 	public void initialize(final Unit unit, String savestring, final String deletestring) {
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		if (COLORSON) {
@@ -63,6 +80,7 @@ public class UnitPanel extends JPanel implements GUIConstants {
 		_tablePanel.setLayout(new BoxLayout(_tablePanel, BoxLayout.Y_AXIS));
 		final HashMap<Attribute, JComponent> components = new HashMap<Attribute, JComponent>();
 		final ArrayList<Attribute> originalattributes = new ArrayList<Attribute>();
+		// Loops through every attribute in the Unit, adding the appropriate field
 		for (final Attribute attr : unit.getAttributes()) {
 			originalattributes.add(attr);
 			JLabel titleLabel = Utility.getTitleLabel(attr);
@@ -74,6 +92,7 @@ public class UnitPanel extends JPanel implements GUIConstants {
 				}
 			}
 			JComponent comp = Utility.getField(attr);
+			// If getField() returns a button, then an InputTablePane needs to be added to it.
 			if (comp instanceof JButton) {
 				((JButton) comp).addActionListener(new ActionListener() {
 					@Override
@@ -114,6 +133,9 @@ public class UnitPanel extends JPanel implements GUIConstants {
 			savebutton.setBackground(BACKGROUND_COLOR);
 			savebutton.setForeground(FOREGROUND_COLOR);
 		}
+		// When save is clicked, this loops through all the fields,
+		// saving the values of each field. A second loop is inside
+		// for GroupingAttributes
 		savebutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Collection<Attribute> attributes = components.keySet();
@@ -193,6 +215,7 @@ public class UnitPanel extends JPanel implements GUIConstants {
 								j++;
 							}
 						}
+						// Duplicate and null handling
 						for (Unit rowunit : unitsintable.keySet()) {
 							for (Unit rowunit2 : unitsintable.keySet()) {
 								if ((rowunit != rowunit2) && (rowunit.getName().equals(rowunit2.getName())) && (!rowunit.getName().equals(""))) {
@@ -256,6 +279,7 @@ public class UnitPanel extends JPanel implements GUIConstants {
 						unit.setAttribute(new UnitAttribute(attr.getTitle(), value, grouping));
 					}
 				}
+				// Error message showing and adding of the actual attribute to the unit
 				if (unit.getName().equals("")) {
 					for (Attribute attr : originalattributes) {
 						unit.setAttribute(attr);
@@ -295,6 +319,7 @@ public class UnitPanel extends JPanel implements GUIConstants {
 				}
 			}
 		});
+		// This button allows the user to delete this unit
 		final JButton deletebutton = new JButton(deletestring);
 		if (IMAGESON)
 			deletebutton.setIcon(DELETEBUTTONIMAGE);
@@ -302,6 +327,8 @@ public class UnitPanel extends JPanel implements GUIConstants {
 			deletebutton.setBackground(BACKGROUND_COLOR);
 			deletebutton.setForeground(FOREGROUND_COLOR);
 		}
+		// This button needs to be clicked twice, helps 
+		// prevent accidental deletions
 		deletebutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (deletebutton.getText().equals(deletestring))
