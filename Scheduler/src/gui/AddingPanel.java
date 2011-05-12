@@ -88,6 +88,10 @@ public class AddingPanel extends JPanel implements GUIConstants {
 	public void setViewPanel(Grouping<Unit> grouping) {
 		this.removeAll();
 		JPanel savepanel = new JPanel();
+		if (COLORSON) {
+			savepanel.setBackground(BACKGROUND_COLOR);
+			savepanel.setForeground(FOREGROUND_COLOR);
+		}
 		savepanel.setLayout(new BoxLayout(savepanel, BoxLayout.X_AXIS));
 		savepanel.add(Box.createHorizontalGlue());
 		JButton savebutton = new JButton("Save all changes");

@@ -258,6 +258,15 @@ public class UnitPanel extends JPanel implements GUIConstants {
 									groupattr.addMember(rowunit);
 									if (duplicate == null)
 										groupattr.getBlankUnit().getMemberOf().addMember(rowunit);
+									else {
+										for (Attribute a : rowunit.getAttributes()) {
+											if ((a.getType() != Attribute.Type.GROUPING) && (a.getType() != Attribute.Type.UNIT)) {
+												duplicate.setAttribute(a);
+											}
+										}
+										groupattr.deleteMember(rowunit);
+										groupattr.addMember(duplicate);
+									}
 								}
 								else if (!rowunitisnull && !unitsintable.get(rowunit)) {
 									for (Attribute a : rowunit.getAttributes()) {
