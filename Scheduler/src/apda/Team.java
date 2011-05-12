@@ -33,6 +33,7 @@ public class Team implements Unit {
 		stillInTournament = true;
 		d1 = new UnitAttribute<Debater>("Debater 1", null, new DebaterGrouping(_t, "Deb1"));
 		d2 = new UnitAttribute<Debater>("Debater 2", null, new DebaterGrouping(_t, "Deb2"));
+		facedBefore = new ArrayList<Team>();
 	}
 	
 	public Team(Tourney t, String string, School s) {
@@ -47,6 +48,7 @@ public class Team implements Unit {
 		
 		d1 = new UnitAttribute<Debater>("Debater 1", null, new DebaterGrouping(_t, "Deb1"));
 		d2 = new UnitAttribute<Debater>("Debater 2", null, new DebaterGrouping(_t, "Deb2"));
+		facedBefore = new ArrayList<Team>();
 	}
 
 	public static class TeamComparator implements Serializable, Comparator{
@@ -76,13 +78,16 @@ public class Team implements Unit {
 		return ranks;
 	}
 	public boolean isFullSeed(){
+		if(_seed == null) return false;
 		return _seed.getName().equals("Full");
 	}
 	public boolean isHalfSeed(){
+		if(_seed == null) return false;
 		return _seed.getName().equals("Half");
 	}
 	public boolean isFreeSeed(){
-		return _seed.getName().equals("Full");
+		if(_seed == null) return true;
+		return _seed.getName().equals("Free");
 	}
 	
 	public void setSeed(String seedName){
@@ -144,11 +149,20 @@ public class Team implements Unit {
 			d2 = debAtt;
 		}
 		else if(att.getTitle().equals("School")){
+			
 			UnitAttribute<School> schoolAtt = (UnitAttribute<School>)att;
-			if(school != null && school != schoolAtt.att){
-				school.removeTeam(this);
-				school = schoolAtt.att;
-				if(school != null) school.addTeam(this);
+			System.out.println(schoolAtt);
+			if(school != null){
+				if(schoolAtt.att == null){
+					school.removeTeam(this);
+					school = null;
+				}else{
+					if(!school.getName().equals(schoolAtt.att.getName())){
+						school.removeTeam(this);
+						schoolAtt.att.addTeam(this);
+						school = schoolAtt.att;
+					}
+				}
 			}else if(school == null && schoolAtt.att != null){
 				school = schoolAtt.att;
 				school.addTeam(this);
