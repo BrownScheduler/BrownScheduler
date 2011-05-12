@@ -23,6 +23,16 @@ public class Debater implements Unit {
 		_ranks = new double[t._totalRounds];
 	}
 	
+	public void addSpeaks(double speaks, int roundNum){
+		if(roundNum <= _speaks.length && roundNum >= 0)
+			_speaks[roundNum] = speaks;
+	}
+	
+	public void addRanks(double ranks, int roundNum){
+		if(roundNum <= _ranks.length && roundNum >= 0)
+			_ranks[roundNum] = ranks;
+	}
+	
 	public double getSpeaks(){
 		double speaks = 0.0;
 		int toAvg = 0;
