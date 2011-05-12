@@ -4,41 +4,29 @@ import java.util.List;
 
 import backbone.Grouping;
 
-public class DebaterGrouping implements Grouping<Debater> {
+public class DebaterGrouping extends MyCategory<Debater> {
 
-	@Override
-	public void addMember(Debater member) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void clear() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public boolean deleteMember(Debater member) {
-		// TODO Auto-generated method stub
-		return false;
+	private Tourney _t;
+	private School _s;
+	
+	public DebaterGrouping(Tourney tourney, String name) {
+		super(name);
+		_t = tourney;
+		_name = name;
+		//_s = s;
 	}
 
 	@Override
 	public Debater getBlank() {
-		// TODO Auto-generated method stub
-		return null;
+		return new Debater(_t, "");
 	}
 
 	@Override
-	public List<Debater> getMembers() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String getName() {
-		// TODO Auto-generated method stub
+	public Debater getDuplicate(Debater unit) {
+		for(Debater d : this._members){
+			if(d.getName().equals(unit.getName()) && unit != d)
+				return d;
+		}
 		return null;
 	}
 

@@ -3,11 +3,15 @@ package apda;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.List;
 
 import backbone.Attribute;
+import backbone.BooleanAttribute;
 import backbone.DoubleAttribute;
 import backbone.Grouping;
+import backbone.GroupingAttribute;
+import backbone.StringAttribute;
 import backbone.Unit;
 
 
@@ -23,16 +27,16 @@ public class Judge implements Unit{
 	
 	private String _name;
 	private DoubleAttribute _judgeScore;
-	private ArrayList<Team> _conflictedTeams;
-	private ArrayList<School> _conflictedSchools;
+	private TeamGrouping _conflictedTeams;
+	private SchoolGrouping _conflictedSchools;
 	private boolean[] _roundsAvailable;
 	private Tourney _t;
 	
 	public Judge(Tourney t, String name){
 		_name = name;
 		_t = t;
-		_conflictedTeams = new ArrayList<Team>();
-		_conflictedSchools = new ArrayList<School>();
+		_conflictedTeams = new TeamGrouping(_t, "Conflicted Teams");
+		_conflictedSchools = new SchoolGrouping(_t, "Conflicted Schools");
 		_roundsAvailable = new boolean[_t._totalRounds];
 		for(boolean b : _roundsAvailable)
 			b = true;
@@ -58,7 +62,8 @@ public class Judge implements Unit{
 		return this._judgeScore.getAttribute();
 	}
 	public boolean canJudge(Team t){
-		return false;
+		return (!_conflictedTeams.getMembers().contains(t) && 
+				!_conflictedSchools.getMembers().contains(t.school));
 	}
 	
 	public boolean isAvailable(int i){
@@ -69,44 +74,58 @@ public class Judge implements Unit{
 
 	@Override
 	public boolean deleteFromGrouping() {
-		// TODO Auto-generated method stub
-		return false;
+		return _t._judges.deleteMember(this);
 	}
 
 	@Override
 	public List<Attribute> getAttributes() {
-		// TODO Auto-generated method stub
-		return null;
+		LinkedList<Attribute> atts = new LinkedList<Attribute>();
+		atts.add(new StringAttribute("Name", _name));		
+		atts.add(new GroupingAttribute<Team>("Conflicted Teams", this._conflictedTeams));
+		atts.add(new GroupingAttribute<School>("Conflicted Schools", this._conflictedSchools));
+		for(int i = 0; i < _roundsAvailable.length; i++){
+			atts.add(new BooleanAttribute("R" + Integer.toString(i + 1), _roundsAvailable[i]));
+		}
+		
+		return atts;
 	}
 
 	@Override
-	public Grouping<Unit> getMemberOf() {
-		// TODO Auto-generated method stub
-		return null;
+	public Grouping getMemberOf() {
+		return _t._judges;
 	}
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		return _name;
 	}
 
 	@Override
 	public void setAttribute(Attribute attribute) {
-		// TODO Auto-generated method stub
+		if(attribute.getTitle().equals("Name")){
+			_name = ((StringAttribute)attribute).value;
+		}else if(attribute.getTitle().equals("Conflicted Teams")){
+			_conflictedTeams = (TeamGrouping) ((GroupingAttribute<Team>)attribute).getGrouping();
+		}else if(attribute.getTitle().equals("Conflicted Schools")){
+			_conflictedSchools = (SchoolGrouping) ((GroupingAttribute<School>)attribute).getGrouping();
+		}else if(attribute.getTitle().startsWith("R")){
+			String tit = ((BooleanAttribute)attribute).getTitle();
+			boolean b = ((BooleanAttribute)attribute).getAttribute();
+			tit = tit.substring(1);
+			if(tit.equals("")) return;
+			int titInt = Integer.parseInt(tit);
+			if(titInt < _roundsAvailable.length && titInt >= 0) _roundsAvailable[titInt] = b;
+		}
 		
 	}
 
 	@Override
-	public void setMemberOf(Grouping<Unit> g) {
-		// TODO Auto-generated method stub
-		
+	public void setMemberOf(Grouping<Unit> g) {		
 	}
 
 	@Override
 	public void setName(String name) {
-		// TODO Auto-generated method stub
-		
+		_name = name;
 	}
 	
 }

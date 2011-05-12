@@ -1,14 +1,28 @@
 package apda;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import backbone.Attribute;
 import backbone.Grouping;
+import backbone.StringAttribute;
 import backbone.Unit;
 
 public class SeedUnit implements Unit {
 
 	private String _name;
+	
+	public SeedUnit(String name){
+		_name = name;
+	}
+	
+	public static SeedGrouping getOnlyGrouping(){
+		SeedGrouping group = new SeedGrouping();
+		group.addMember(new SeedUnit("Full"));
+		group.addMember(new SeedUnit("Half"));
+		group.addMember(new SeedUnit("Free"));
+		return group;
+	}
 	public boolean isFull(){
 		return _name.equals("Full");
 	}
@@ -23,44 +37,43 @@ public class SeedUnit implements Unit {
 	}
 	@Override
 	public boolean deleteFromGrouping() {
-		// TODO Auto-generated method stub
+		// Can't do it
 		return false;
 	}
 
 	@Override
 	public List<Attribute> getAttributes() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Attribute> atts = new ArrayList<Attribute>();
+		atts.add(new StringAttribute("Name", _name));
+		return atts;
 	}
 
 	@Override
-	public Grouping<Unit> getMemberOf() {
-		// TODO Auto-generated method stub
-		return null;
+	public Grouping getMemberOf() {
+		SeedGrouping group = new SeedGrouping();
+		group.addMember(this);
+		return group;
 	}
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		return _name;
 	}
 
 	@Override
 	public void setAttribute(Attribute attribute) {
-		// TODO Auto-generated method stub
+		_name = ((StringAttribute)attribute).value;
 
 	}
 
 	@Override
 	public void setMemberOf(Grouping<Unit> g) {
-		// TODO Auto-generated method stub
-
+		//Does nothing
 	}
 
 	@Override
 	public void setName(String name) {
-		// TODO Auto-generated method stub
-
+		_name = name;
 	}
 
 }

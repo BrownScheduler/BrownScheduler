@@ -14,10 +14,12 @@ public class MyRound extends backbone.Round{
 	
 	private Tourney _t;
 	public final int roundNum;
-	public MyRound(Tourney t, String i, int roundNumber) {
-		super(i);
+	int nextPairing;
+	public MyRound(Tourney t, int roundNumber) {
+		super("Round " + Integer.toString(roundNumber + 1));
 		_t = t;
 		roundNum = roundNumber;
+		nextPairing = 0;
 	}
 	
 	public boolean isFinished(){
@@ -36,6 +38,7 @@ public class MyRound extends backbone.Round{
 	
 	public void addPairing(MyPairing p){
 		this.pairings.add(p);
+		nextPairing++;
 	}
 	
 	
@@ -52,7 +55,7 @@ public class MyRound extends backbone.Round{
 	
 	@Override
 	public Pairing getBlank(){
-		return new MyPairing(_t);
+		return new MyPairing(_t, roundNum, nextPairing++);
 		
 	}
 
