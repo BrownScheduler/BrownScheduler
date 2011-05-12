@@ -19,16 +19,16 @@ public class ExampleTournament extends TournamentTemplate {
 			throws InvalidRoundException {
 		ArrayList<ExampleUnit> competitors = new ArrayList(getCategories().get(0).getMembers());
 		Round round = new Round("Round " + Integer.toString(getRounds().size()));
-		for(int i = 0; i < (competitors.size() / 2) - 1; i++) {
-			round.addMember(new ExamplePairing(competitors.get(i), competitors.get(i + 1)));
+		for(int i = 0; i < competitors.size() / 2; i++) {
+			round.addMember(new ExamplePairing(i, round, competitors.get(2 * i), competitors.get((2 * i) + 1)));
 		}
+		addRound(round);
 		return round;
 	}
 
 	@Override
 	public Tournament getNew() {
-		// TODO Auto-generated method stub
-		return null;
+		return new ExampleTournament();
 	}
 
 }

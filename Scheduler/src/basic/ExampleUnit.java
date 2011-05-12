@@ -1,5 +1,6 @@
 package basic;
 
+import backbone.Attribute;
 import backbone.Grouping;
 import backbone.StringAttribute;
 import backbone.Unit;
@@ -10,13 +11,12 @@ public class ExampleUnit extends UnitTemplate {
 
 	public ExampleUnit(String name, Grouping grouping) {
 		super(name);
-		this.addAttribute(new StringAttribute("Name", name));
+		addAttribute(new StringAttribute("Name", name));
 		_grouping = grouping;
 	}
 
 	@Override
 	public void setName(String name){
-		super.setName(name);
 		setAttribute(new StringAttribute("Name", name));
 	}
 	
@@ -33,6 +33,13 @@ public class ExampleUnit extends UnitTemplate {
 	@Override
 	public void setMemberOf(Grouping<Unit> g) {
 		_grouping = g;
+	}
+	
+	@Override
+	public void setAttribute(Attribute attribute) {
+		super.setAttribute(attribute);
+		if(attribute.getType() == Attribute.Type.STRING && attribute.getTitle().equals("Name"))
+			super.setName(((StringAttribute) attribute).getAttribute());
 	}
 
 

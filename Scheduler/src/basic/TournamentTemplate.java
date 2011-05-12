@@ -12,31 +12,37 @@ import backbone.Tournament;
 
 public abstract class TournamentTemplate implements backbone.Tournament{
 	
-	private ArrayList<Round> rounds;
-	private ArrayList<Grouping> categories;
-	private int currentRound;
-	private int totalRounds;
+	private ArrayList<Round> _rounds;
+	private ArrayList<Grouping> _categories;
+	private int _currentRound;
+	private int _totalRounds;
 	
 	public TournamentTemplate(int totalRounds){
-		this.currentRound = 0;
-		this.totalRounds = totalRounds;
+		_currentRound = 0;
+		_totalRounds = totalRounds;
+		_categories = new ArrayList<Grouping>();
+		_rounds = new ArrayList<Round>();
 	}
 
 	@Override
 	public ArrayList<Grouping> getCategories() {
 		ArrayList<Grouping> cats = new ArrayList<Grouping>();
-		cats.addAll(categories);
+		cats.addAll(_categories);
 		return cats;
 	}
 	
 	@Override
 	public List<backbone.Round> getRounds() {
 		LinkedList<backbone.Round> rs = new LinkedList<backbone.Round>();
-		rs.addAll(rounds);
+		rs.addAll(_rounds);
 		return rs;
 	}
 	
 	protected void addGrouping(Grouping g) {
-		categories.add(g);
+		_categories.add(g);
+	}
+	
+	protected void addRound(Round r) {
+		_rounds.add(r);
 	}
 }
