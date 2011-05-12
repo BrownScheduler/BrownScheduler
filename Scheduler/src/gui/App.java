@@ -32,6 +32,8 @@ import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JToolBar;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import exception.InvalidRoundException;
+
 public class App implements GUIConstants {
 
 	private MiddleEnd _middleEnd;
@@ -632,8 +634,12 @@ public class App implements GUIConstants {
 		item.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				_middleEnd.getTournament().createNextRound();
-				getViewManagementMenuItem().doClick();
+				try{
+					_middleEnd.getTournament().createNextRound(false);
+					getViewManagementMenuItem().doClick();
+				}catch(InvalidRoundException err){
+					err.printStackTrace();
+				}
 			}
 		});
 		return item;

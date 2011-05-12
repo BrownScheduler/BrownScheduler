@@ -18,25 +18,25 @@ public interface GUIConstants {
 	
 	boolean IMAGESON = true;
 	//	If on laptop:
-//	ImageIcon INTROIMAGE = new ImageIcon("src/images/logo.png");
-//	ImageIcon TREEOPENIMAGE = new ImageIcon("src/images/openmanhole.png");
-//	ImageIcon TREECLOSEDIMAGE = new ImageIcon("src/images/closedmanhole.png");
-//	ImageIcon TREELEAFIMAGE = new ImageIcon("src/images/splinter.png");
-//	ImageIcon ADDBUTTONIMAGE = new ImageIcon("src/images/raphael.png");
-//	ImageIcon EDITBUTTONIMAGE = new ImageIcon("src/images/donatello.png");
-//	ImageIcon DELETEBUTTONIMAGE = new ImageIcon("src/images/michelangelo.png");
-//	ImageIcon SAVEBUTTONIMAGE = new ImageIcon("src/images/leonardo.png");
-//	ImageIcon FRAMEIMAGE = new ImageIcon("src/images/minilogo.png");
+	ImageIcon INTROIMAGE = new ImageIcon("src/images/logo.png");
+	ImageIcon TREEOPENIMAGE = new ImageIcon("src/images/openmanhole.png");
+	ImageIcon TREECLOSEDIMAGE = new ImageIcon("src/images/closedmanhole.png");
+	ImageIcon TREELEAFIMAGE = new ImageIcon("src/images/splinter.png");
+	ImageIcon ADDBUTTONIMAGE = new ImageIcon("src/images/raphael.png");
+	ImageIcon EDITBUTTONIMAGE = new ImageIcon("src/images/donatello.png");
+	ImageIcon DELETEBUTTONIMAGE = new ImageIcon("src/images/michelangelo.png");
+	ImageIcon SAVEBUTTONIMAGE = new ImageIcon("src/images/leonardo.png");
+	ImageIcon FRAMEIMAGE = new ImageIcon("src/images/minilogo.png");
 	//	If on filesystem:
-	ImageIcon INTROIMAGE = new ImageIcon("images/logo.png");
-	ImageIcon TREEOPENIMAGE = new ImageIcon("images/openmanhole.png");
-	ImageIcon TREECLOSEDIMAGE = new ImageIcon("images/closedmanhole.png");
-	ImageIcon TREELEAFIMAGE = new ImageIcon("images/splinter.png");
-	ImageIcon ADDBUTTONIMAGE = new ImageIcon("images/raphael.png");
-	ImageIcon EDITBUTTONIMAGE = new ImageIcon("images/donatello.png");
-	ImageIcon DELETEBUTTONIMAGE = new ImageIcon("images/michelangelo.png");
-	ImageIcon SAVEBUTTONIMAGE = new ImageIcon("images/leonardo.png");
-	ImageIcon FRAMEIMAGE = new ImageIcon("images/minilogo.png");
+//	ImageIcon INTROIMAGE = new ImageIcon("images/logo.png");
+//	ImageIcon TREEOPENIMAGE = new ImageIcon("images/openmanhole.png");
+//	ImageIcon TREECLOSEDIMAGE = new ImageIcon("images/closedmanhole.png");
+//	ImageIcon TREELEAFIMAGE = new ImageIcon("images/splinter.png");
+//	ImageIcon ADDBUTTONIMAGE = new ImageIcon("images/raphael.png");
+//	ImageIcon EDITBUTTONIMAGE = new ImageIcon("images/donatello.png");
+//	ImageIcon DELETEBUTTONIMAGE = new ImageIcon("images/michelangelo.png");
+//	ImageIcon SAVEBUTTONIMAGE = new ImageIcon("images/leonardo.png");
+//	ImageIcon FRAMEIMAGE = new ImageIcon("images/minilogo.png");
 	
 	String TOURNAMENT_EXTENSION = "tmnt";
 	String CATEGORY_EXTENSION = "csv";

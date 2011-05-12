@@ -9,11 +9,14 @@ import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
@@ -94,6 +97,30 @@ public class Utility implements GUIConstants {
 		field.setMaximumSize(TEXTFIELD_SIZE);
 		field.setEditable(isEditable);
 		return field;
+	}
+	
+	public static JPanel wrapLeft(JComponent toWrap){
+		JPanel lilWrapper = new JPanel();
+		lilWrapper.setLayout(new BoxLayout(lilWrapper, BoxLayout.X_AXIS));
+		if (COLORSON) {
+			lilWrapper.setBackground(BACKGROUND_COLOR);
+			lilWrapper.setForeground(FOREGROUND_COLOR);
+		}
+		lilWrapper.add(toWrap);
+		lilWrapper.add(Box.createHorizontalGlue());
+		return lilWrapper;
+	}
+	
+	public static JPanel wrapUp(JComponent toWrap){
+		JPanel lilWrapper = new JPanel();
+		lilWrapper.setLayout(new BoxLayout(lilWrapper, BoxLayout.Y_AXIS));
+		if (COLORSON) {
+			lilWrapper.setBackground(BACKGROUND_COLOR);
+			lilWrapper.setForeground(FOREGROUND_COLOR);
+		}
+		lilWrapper.add(toWrap);
+		lilWrapper.add(Box.createVerticalGlue());
+		return lilWrapper;
 	}
 	
 	public static JFormattedTextField getIntegerField(IntAttribute attribute, boolean isEditable) {

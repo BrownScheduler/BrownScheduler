@@ -1,0 +1,29 @@
+
+Round: holds it's round number
+
+Gov Opp Judge Winner
+PM MG LO MO
+PMSpeak PMRank MGSpeak MGRank
+LOSpeak LORank MOSpeak MORank
+
+School:
+List<Team> teams
+Judge schoolScratch
+
+Team:
+School memberOf
+Player1
+Player2
+SeedUnit
+public wins
+getRanks
+Judge teamScratch
+
+Player:
+Name
+List<Double> speaks
+List<Int> ranks
+
+Judge
+List<School> schoolScratches (as in, for reasons, can't judge anyone in that school)
+List<Team> personalScratches

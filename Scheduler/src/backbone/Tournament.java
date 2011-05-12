@@ -3,14 +3,18 @@ package backbone;
 import java.io.Serializable;
 import java.util.List;
 
+import exception.InvalidRoundException;
+
 public interface Tournament extends Serializable {
 
 	public List<Grouping> getCategories();
 	
-	public Round createNextRound();
+	//public Round createNextRound() throws InvalidRoundException;
 	
 	public List<Round> getRounds();
 
-	Tournament getNew();
+	public Tournament getNew();
+
+	public Round createNextRound(boolean suppressWarnings) throws InvalidRoundException;
 	
 }
