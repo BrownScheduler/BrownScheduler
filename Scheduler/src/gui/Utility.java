@@ -178,10 +178,11 @@ public class Utility implements GUIConstants {
 		df.setGroupingUsed(false);
 		JFormattedTextField field = new JFormattedTextField(df);
 		field.setPreferredSize(TEXTFIELD_SIZE);
-		field.setMaximumSize(TEXTFIELD_SIZE);
+		//field.setMinimumSize(new Dimension(TEXTFIELD_SIZE.width, TEXTFIELD_SIZE.height + 10));
+		//field.setMaximumSize(TEXTFIELD_SIZE);
 		field.setValue(attribute.getAttribute());
 		field.setEditable(isEditable);
-		field.setMaximumSize(new Dimension(100, 20));
+		field.setMaximumSize(new Dimension(100, 25));
 		return field;
 	}
 	

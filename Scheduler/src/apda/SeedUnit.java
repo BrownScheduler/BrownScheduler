@@ -50,9 +50,7 @@ public class SeedUnit implements Unit {
 
 	@Override
 	public Grouping getMemberOf() {
-		SeedGrouping group = new SeedGrouping();
-		group.addMember(this);
-		return group;
+		return getOnlyGrouping();
 	}
 
 	@Override
@@ -62,8 +60,6 @@ public class SeedUnit implements Unit {
 
 	@Override
 	public void setAttribute(Attribute attribute) {
-		_name = ((StringAttribute)attribute).value;
-
 	}
 
 	@Override

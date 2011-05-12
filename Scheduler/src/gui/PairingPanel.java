@@ -3,8 +3,12 @@ package gui;
 import middleend.*;
 import backbone.*;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -12,6 +16,8 @@ import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
+import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -38,6 +44,14 @@ public class PairingPanel extends JPanel implements GUIConstants {
 		resetPanel();
 	}
 	
+	public Color conflictColor(float conflictScore){
+		float red = 1;
+		float green = 1;
+		if(conflictScore < 0) green = (1 + conflictScore) * green;
+		else if(conflictScore > 0) red = (1 - conflictScore) * red;
+		return new Color(red, green, 0);
+		
+	}
 	/**
 	 * Resets this panel.
 	 */
@@ -47,8 +61,15 @@ public class PairingPanel extends JPanel implements GUIConstants {
 			this.setBackground(BACKGROUND_COLOR);
 			this.setForeground(FOREGROUND_COLOR);
 		}
-		this.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black));
-		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+		float conflictFloat = (float)_pairing.getConflictScore();
+		Color conflictColor = conflictColor(conflictFloat);
+		this.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
+		this.setToolTipText(_pairing.getConflictMessage());
+		JPanel almostthis = new JPanel();
+		almostthis.setBorder(BorderFactory.createMatteBorder(6, 6, 4, 4, conflictColor));
+		JPanel reallythis = new JPanel();
+		reallythis.setLayout(new BoxLayout(reallythis, BoxLayout.X_AXIS));
+		reallythis.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
 //		this.add(Box.createHorizontalGlue());
 		JPanel deletepanel = new JPanel();
 		if (COLORSON) {
@@ -78,8 +99,8 @@ public class PairingPanel extends JPanel implements GUIConstants {
 			}
 		});
 		deletepanel.add(deletebutton);
-		this.add(deletepanel);
-		this.add(Box.createRigidArea(SMALLSPACING_SIZE));
+		reallythis.add(deletepanel);
+		reallythis.add(Box.createRigidArea(SMALLSPACING_SIZE));
 		int attNum = 0;
 		JPanel bigWrapper = new JPanel();
 		if (COLORSON) {
@@ -144,6 +165,10 @@ public class PairingPanel extends JPanel implements GUIConstants {
 //				label.setToolTipText("Go to the input panel to edit/view this attribute of this unit.");
 //				toAddTo.add(label);
 //			}
+			else if(attribute.getType() == Attribute.Type.DOUBLE){
+				JPanel attrpanel = new DoubleAttributePanel((DoubleAttribute)attribute, _pairing, this);
+				toAddTo.add(attrpanel);
+			}
 			else {
 				JPanel attrpanel = new JPanel();
 				if (COLORSON) {
@@ -152,8 +177,12 @@ public class PairingPanel extends JPanel implements GUIConstants {
 				}
 				attrpanel.setLayout(new BoxLayout(attrpanel, BoxLayout.Y_AXIS));
 				attrpanel.add(Utility.wrapLeft(Utility.getTitleLabel(attribute)));
-				attrpanel.add(Utility.wrapLeft(Utility.getField(attribute)));
-				toAddTo.add(Utility.wrapUp(attrpanel));
+				JComponent wrap = Utility.getField(attribute);
+				//wrap.setPreferredSize(new Dimension(TEXTFIELD_SIZE.width, TEXTFIELD_SIZE.height + 40));
+				//wrap.setPreferredSize(new Dimension(TEXTFIELD_SIZE.width, TEXTFIELD_SIZE.height + 40));
+				attrpanel.add(Utility.wrapLeft(wrap));
+				//attrpanel.setPreferredSize(new Dimension(TEXTFIELD_SIZE.width, TEXTFIELD_SIZE.height*3));
+				toAddTo.add(attrpanel);
 			}
 			toAddTo.add(Box.createRigidArea(SMALLSPACING_SIZE));
 		}
@@ -161,8 +190,10 @@ public class PairingPanel extends JPanel implements GUIConstants {
 //		bigWrapper.add(Box.createVerticalGlue());
 		//bigWrapper.setPreferredSize(new Dimension(PAIRINGPANEL_SIZE.width, PAIRINGPANEL_SIZE.height * ((attNum / 4)+1) ));
 		//this.setSize(new Dimension(PAIRINGPANEL_SIZE.width, PAIRINGPANEL_SIZE.height * ((attNum / 4)+1) ));
-		this.add(bigWrapper);
-		this.add(Box.createHorizontalGlue());
+		reallythis.add(bigWrapper);
+		reallythis.add(Box.createHorizontalGlue());
+		almostthis.add(reallythis);
+		this.add(almostthis);
 	}
 	
 	/**
@@ -173,6 +204,54 @@ public class PairingPanel extends JPanel implements GUIConstants {
 		this.repaint();
 	}
 	
+	private class DoubleAttributePanel extends JPanel {
+		private DoubleAttribute _doubleattribute;
+		private PairingPanel _pairingpanel;
+		private Pairing _pairing;
+		
+		public DoubleAttributePanel(DoubleAttribute da, Pairing p, PairingPanel pp){
+			super();
+			this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+			_doubleattribute = da;
+			_pairingpanel = pp;
+			_pairing = p;
+			DecimalFormat df = new DecimalFormat();
+			df.setGroupingUsed(false);
+			JFormattedTextField tf = new JFormattedTextField(df);
+			
+			tf.setPreferredSize(TEXTFIELD_SIZE);
+			tf.setMaximumSize(TEXTFIELD_SIZE);
+			tf.setValue(da.getAttribute());
+			
+			tf.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					JFormattedTextField db = (JFormattedTextField) e.getSource();
+					double value = Double.parseDouble(db.getText());
+					System.out.println(value);
+					_pairing.setAttribute(new DoubleAttribute(_doubleattribute.getTitle(), value));
+					_pairingpanel.repaintAll();
+				}
+			});
+//			tf.addFocusListener(new FocusListener() {
+//
+//				@Override
+//				public void focusGained(FocusEvent e) {
+//				}
+//				@Override
+//				public void focusLost(FocusEvent e) {
+//					JFormattedTextField db = (JFormattedTextField) e.getSource();
+//					double value = Double.parseDouble(db.getText());
+//					System.out.println(value);
+//					_pairing.setAttribute(new DoubleAttribute(_doubleattribute.getTitle(), value));
+//					_pairingpanel.repaintAll();
+//				}
+//				
+//			});
+			this.add(Utility.wrapLeft(Utility.getTitleLabel(_doubleattribute)));
+			this.add(Utility.wrapLeft(tf));
+		}
+	}
 	/**
 	 * This class represents a UnitAttribute in a Pairing.
 	 */
