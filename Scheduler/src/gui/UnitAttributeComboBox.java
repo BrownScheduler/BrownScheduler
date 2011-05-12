@@ -39,7 +39,6 @@ public class UnitAttributeComboBox extends JComboBox implements GUIConstants {
 		_units.add(0, null);
 		if (attribute.att == null)
 			toSelect = 0;
-		this.setSelectedIndex(toSelect);
 		this.setEditable(true);
 		this.addActionListener(new ActionListener() {
 			@Override
@@ -54,6 +53,7 @@ public class UnitAttributeComboBox extends JComboBox implements GUIConstants {
 				}
 			}
 		});
+		this.setSelectedIndex(toSelect);
 	}
 	
 	public Unit getSelectedUnit() {

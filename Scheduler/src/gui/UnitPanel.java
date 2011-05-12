@@ -218,9 +218,9 @@ public class UnitPanel extends JPanel implements GUIConstants {
 								boolean rowunitisnull = false;
 								if ((rowunit.getName() == null) || (rowunit.getName().equals("")))
 									rowunitisnull = true;
-								if (!rowunitisnull && !unitsintable.get(rowunit) && (duplicate == null)) {
+								if (!rowunitisnull && !unitsintable.get(rowunit)) {
 									groupattr.addMember(rowunit);
-									if (!groupattr.getBlankUnit().getMemberOf().getMembers().contains(rowunit))
+									if (duplicate == null)
 										groupattr.getBlankUnit().getMemberOf().addMember(rowunit);
 								}
 								else if (!rowunitisnull && !unitsintable.get(rowunit)) {
