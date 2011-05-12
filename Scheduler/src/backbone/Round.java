@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Round implements Serializable, Grouping<Pairing> {
+import roundrobin2.Game;
+
+public abstract class Round implements Serializable, Grouping<Pairing> {
 
 	protected ArrayList<Pairing> pairings;
 	protected String name;
@@ -40,14 +42,6 @@ public class Round implements Serializable, Grouping<Pairing> {
 	@Override
 	public boolean deleteMember(Pairing member) {
 		return pairings.remove(member);
-	}
-
-	/**
-	 * Not applicable should never be called.
-	 */
-	@Override
-	public Pairing getBlank() {
-		return null;
 	}
 
 	@Override

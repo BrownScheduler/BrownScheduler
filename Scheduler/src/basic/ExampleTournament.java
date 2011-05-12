@@ -18,9 +18,9 @@ public class ExampleTournament extends TournamentTemplate {
 	public Round createNextRound(boolean suppressWarnings)
 			throws InvalidRoundException {
 		ArrayList<ExampleUnit> competitors = new ArrayList(getCategories().get(0).getMembers());
-		Round round = new Round("Round " + Integer.toString(getRounds().size()));
+		Round round = new ExampleRound(getRounds().size(), this);
 		for(int i = 0; i < competitors.size() / 2; i++) {
-			round.addMember(new ExamplePairing(i, round, competitors.get(2 * i), competitors.get((2 * i) + 1)));
+			round.addMember(new ExamplePairing(i, round, competitors.get(2 * i), competitors.get((2 * i) + 1), this));
 		}
 		addRound(round);
 		return round;
