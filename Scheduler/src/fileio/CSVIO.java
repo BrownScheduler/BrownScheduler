@@ -270,9 +270,11 @@ public class CSVIO {
 							unit.setName(unitName);
 							gAtt.getGrouping().getBlank().getMemberOf().addMember(unit);
 							gAtt.addMember(unit);
-							uni.setAttribute(gAtt);
-						}
+						} else if(gAtt.getGrouping().getDuplicate(unit) == null &&
+								!gAtt.getGrouping().getMembers().contains(unit))
+							gAtt.addMember(unit);
 					}
+					uni.setAttribute(gAtt);
 				}
 
 			}
