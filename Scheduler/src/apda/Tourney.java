@@ -156,7 +156,8 @@ public class Tourney implements Tournament{
 		for(int i = 0; i < unPaired1.size() / 2; i++){
 			Team t1 = almostPairings.get(i);
 			Team t2 = almostPairings.get(almostPairings.size() - 1 - i);
-			Judge j = judges.pop();
+			Judge j = null;
+			if(!judges.isEmpty()) j = judges.pop();
 			if(t1.numGovs > t2.numGovs)
 				pairings.add(new MyPairing(this, t2, t1, j, _rounds.size(), next++));
 			else if(t1.numOpps > t2.numOpps)

@@ -1,6 +1,6 @@
 package exception;
 
-public class InvalidRoundException extends InvalidStateException {
+public class InvalidRoundException extends SchedulerException {
 	
 	public InvalidRoundException() {
 		super();

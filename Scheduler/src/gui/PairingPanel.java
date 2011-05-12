@@ -130,7 +130,15 @@ public class PairingPanel extends JPanel implements GUIConstants {
 //				toAddTo.add(label);
 //			}
 			else {
-				toAddTo.add(Utility.wrapUp(Utility.getField(attribute)));
+				JPanel attrpanel = new JPanel();
+				if (COLORSON) {
+					attrpanel.setBackground(BACKGROUND_COLOR);
+					attrpanel.setForeground(FOREGROUND_COLOR);
+				}
+				attrpanel.setLayout(new BoxLayout(attrpanel, BoxLayout.Y_AXIS));
+				attrpanel.add(Utility.wrapLeft(Utility.getTitleLabel(attribute)));
+				attrpanel.add(Utility.wrapLeft(Utility.getField(attribute)));
+				toAddTo.add(Utility.wrapUp(attrpanel));
 			}
 			toAddTo.add(Box.createRigidArea(SMALLSPACING_SIZE));
 		}

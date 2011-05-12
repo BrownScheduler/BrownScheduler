@@ -59,6 +59,9 @@ public class Judge implements Unit{
 		
 	}
 	
+	public void addCantJudge(Team t){
+		this._conflictedTeams.addMember(t);
+	}
 	public double judgeScore(){
 		return this._judgeScore.getAttribute();
 	}
@@ -84,9 +87,9 @@ public class Judge implements Unit{
 		atts.add(new StringAttribute("Name", _name));		
 		atts.add(new GroupingAttribute<Team>("Conflicted Teams", this._conflictedTeams));
 		atts.add(new GroupingAttribute<School>("Conflicted Schools", this._conflictedSchools));
-		for(int i = 0; i < _roundsAvailable.length; i++){
-			atts.add(new BooleanAttribute("R" + Integer.toString(i + 1), _roundsAvailable[i]));
-		}
+//		for(int i = 0; i < _roundsAvailable.length; i++){
+//			atts.add(new BooleanAttribute("R" + Integer.toString(i + 1), _roundsAvailable[i]));
+//		}
 		
 		return atts;
 	}
