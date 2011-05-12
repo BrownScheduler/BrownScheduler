@@ -117,7 +117,7 @@ public class UnitPanel extends JPanel implements GUIConstants {
 		savebutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Collection<Attribute> attributes = components.keySet();
-				boolean repaint = true;
+				int repaint = 0;
 				for (Attribute attr : attributes) {
 					if (attr.getType() == Attribute.Type.BOOLEAN) {
 						boolean value = ((JCheckBox) components.get(attr)).isSelected();
@@ -131,10 +131,12 @@ public class UnitPanel extends JPanel implements GUIConstants {
 						InputTablePane table = (InputTablePane) components.get(attr);
 						GroupingAttribute<Unit> groupattr = (GroupingAttribute) attr;
 						HashMap<Unit, Boolean> unitsintable = new HashMap<Unit, Boolean>();
+						ArrayList<Unit> unitsinrowslist = new ArrayList<Unit>();
 						for (int i = 0; i < table.getTable().getRowCount(); i++) {
 							Unit rowunit;
 							if (i < table.getUnitsInRowsList().size()) {
 								rowunit = table.getUnitsInRowsList().get(i);
+								unitsinrowslist.add(rowunit);
 								unitsintable.put(rowunit, true);
 							}
 							else {
@@ -189,37 +191,45 @@ public class UnitPanel extends JPanel implements GUIConstants {
 						}
 						for (Unit rowunit : unitsintable.keySet()) {
 							for (Unit rowunit2 : unitsintable.keySet()) {
-								if ((rowunit != rowunit2) && (rowunit.getName() == rowunit2.getName()))
-									repaint = false;
+								if ((rowunit != rowunit2) && (rowunit.getName().equals(rowunit2.getName())) && (!rowunit.getName().equals(""))) {
+									repaint = 1;
+								}
 							}
 						}
-						if (repaint) {
-							for (Unit rowunit : unitsintable.keySet()) {
-								Unit duplicate = groupattr.getBlankUnit().getMemberOf().getDuplicate(rowunit);
-								if ((duplicate != null) || (rowunit.getName() == "")) {
-									for (Attribute rowattr : rowunit.getAttributes()) {
-										if (rowattr.getType() != Attribute.Type.GROUPING)
-											duplicate.setAttribute(rowattr);
-									}
-								}
-								else {
-									boolean rowunitisnull = false;
-									if ((rowunit.getName() == null) || (rowunit.getName() == ""))
-										rowunitisnull = true;
-									if (!rowunitisnull && !unitsintable.get(rowunit)) {
-										groupattr.addMember(rowunit);
-										if (!groupattr.getBlankUnit().getMemberOf().getMembers().contains(rowunit))
-											groupattr.getBlankUnit().getMemberOf().addMember(rowunit);
-									}
-									unit.setAttribute(groupattr);
+						for (Unit rowunit : unitsinrowslist) {
+							if (rowunit.getName().equals(""))
+								repaint = 2;
+						}
+						for (int i = 0; i < unitsinrowslist.size(); i++) {
+							if (unitsintable.get(unitsinrowslist.get(i))) {
+								Unit duplicate = groupattr.getBlankUnit().getMemberOf().getDuplicate(unitsinrowslist.get(i));
+								if ((unitsinrowslist.get(i) != duplicate) && (duplicate != null)) {
+									repaint = 3;
 								}
 							}
+						}
+						if (repaint == 0) {
+							for (Unit rowunit : unitsintable.keySet()) {
+								Unit duplicate = groupattr.getBlankUnit().getMemberOf().getDuplicate(rowunit);
+								boolean rowunitisnull = false;
+								if ((rowunit.getName() == null) || (rowunit.getName().equals("")))
+									rowunitisnull = true;
+								if (!rowunitisnull && !unitsintable.get(rowunit) && (duplicate == null)) {
+									groupattr.addMember(rowunit);
+									if (!groupattr.getBlankUnit().getMemberOf().getMembers().contains(rowunit))
+										groupattr.getBlankUnit().getMemberOf().addMember(rowunit);
+								}
+								else if (!rowunitisnull && !unitsintable.get(rowunit)) {
+									for (Attribute a : rowunit.getAttributes()) {
+										if (a.getType() != Attribute.Type.GROUPING)
+											duplicate.setAttribute(a);
+									}
+								}
+							}
+							unit.setAttribute(groupattr);
 							table = new InputTablePane(_middleEnd, groupattr.getBlankUnit().getAttributes(), groupattr);
 							components.put(attr, table);
 						}
-						else
-							JOptionPane.showMessageDialog(_mainPanel, "The name for a unit in the table is invalid. Either a unit with that name already exists, or the name field for a unit was left blank.",
-									"Duplicate Unit", JOptionPane.ERROR_MESSAGE);
 					}
 					else if (attr.getType() == Attribute.Type.INT) {
 						int value = Integer.parseInt(((JTextField) components.get(attr)).getText());
@@ -234,20 +244,47 @@ public class UnitPanel extends JPanel implements GUIConstants {
 						Grouping grouping = ((UnitAttributeComboBox) components.get(attr)).getGrouping();
 						if ((value != null) && (!grouping.getMembers().contains(value)))
 							grouping.addMember(value);
+						if (value != null)
+							System.out.println(value.getName());
 						unit.setAttribute(new UnitAttribute(attr.getTitle(), value, grouping));
 					}
 				}
-				if (_grouping.getDuplicate(unit) != null) {
+				if (unit.getName().equals("")) {
 					for (Attribute attr : originalattributes) {
 						unit.setAttribute(attr);
 					}
+					repaint = 4;
+					JOptionPane.showMessageDialog(_mainPanel, "The unit's name is blank! Change the name and try again.",
+							"Nameless Unit", JOptionPane.ERROR_MESSAGE);
+				}
+				else if (_grouping.getDuplicate(unit) != null) {
+					for (Attribute attr : originalattributes) {
+						unit.setAttribute(attr);
+					}
+					repaint = 4;
 					JOptionPane.showMessageDialog(_mainPanel, "A unit with the same name already exists. Change the name and try again.",
 							"Duplicate Unit", JOptionPane.ERROR_MESSAGE);
 				}
 				else if (!_grouping.getMembers().contains(unit)) {
 					_grouping.addMember(unit);
-					if (repaint)
-						_middleEnd.repaintAll();
+				}
+				switch (repaint) {
+				case 1:
+					JOptionPane.showMessageDialog(_mainPanel, "There are two units in the table with the same name! Change the name and try again.",
+							"Duplicate Units", JOptionPane.ERROR_MESSAGE);
+					break;
+				case 2:
+					JOptionPane.showMessageDialog(_mainPanel, "One of the units that was in the table now has a blank name! Change the name and try again.",
+							"Duplicate Units", JOptionPane.ERROR_MESSAGE);
+					break;
+				case 3:
+					JOptionPane.showMessageDialog(_mainPanel, "One of the units that was in the table is a duplicate of an already existing unit! Change the name and try again.",
+							"Duplicate Units", JOptionPane.ERROR_MESSAGE);
+					break;
+				case 4:
+					break;
+				default:
+					_middleEnd.repaintAll();
 				}
 			}
 		});

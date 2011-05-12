@@ -9,12 +9,23 @@ public class GovOppGrouping extends MyCategory<GovOppUnit>{
 	@Override
 	public GovOppUnit getBlank() {
 		// TODO Auto-generated method stub
-		return new GovOppUnit(null);
+		return new GovOppUnit();
 	}
 
 	@Override
 	public void clear() {
 		
+	}
+
+	@Override
+	public GovOppUnit getDuplicate(GovOppUnit unit) {
+		return null;
+	}
+	
+	@Override
+	public void addMember(GovOppUnit member){
+		if(!this._members.contains(member) && !member.getName().equals("")) 
+			_members.add(member);
 	}
 
 }

@@ -20,7 +20,6 @@ public abstract class GroupingTemplate<T extends Unit> implements Grouping<T> {
 	public void addMember(T member) {
 		_members.add(member);
 		member.setMemberOf((Grouping<Unit>) this);
-		
 	}
 	
 	public void addMemberDown(T member){

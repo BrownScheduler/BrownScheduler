@@ -15,9 +15,6 @@ public abstract class Attribute implements Serializable {
 	 */
 	private String title;
 
-	//NOT ACTUALLY USED
-	protected float conflictMagnitude;
-
 	/**
 	 * The default constructor. Called by sub-classes
 	 * 
@@ -25,7 +22,6 @@ public abstract class Attribute implements Serializable {
 	 */
 	public Attribute(String title) {
 		this.title = title;
-		conflictMagnitude = 0;
 	}
 
 	/**
@@ -62,13 +58,5 @@ public abstract class Attribute implements Serializable {
 	 */
 	public String getTitle() {
 		return title;
-	}
-
-	/**
-	 * @deprecated
-	 */
-	@Deprecated
-	public float getConflictMagnitude() {
-		return conflictMagnitude;
 	}
 }

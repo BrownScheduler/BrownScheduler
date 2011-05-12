@@ -39,4 +39,10 @@ public class SeedGrouping implements Grouping<SeedUnit> {
 		return "Possible Seeds";
 	}
 
+	@Override
+	public SeedUnit getDuplicate(SeedUnit unit) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
