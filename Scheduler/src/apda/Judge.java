@@ -3,15 +3,11 @@ package apda;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
 
 import backbone.Attribute;
 import backbone.DoubleAttribute;
 import backbone.Grouping;
-import backbone.GroupingAttribute;
-import backbone.StringAttribute;
 import backbone.Unit;
 
 

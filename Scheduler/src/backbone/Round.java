@@ -63,4 +63,9 @@ public class Round implements Serializable, Grouping<Pairing> {
 		
 	}
 
+	@Override
+	public Pairing hasDuplicate(Pairing unit) {
+		return null;
+	}
+
 }

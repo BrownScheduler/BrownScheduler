@@ -87,6 +87,7 @@ public class MiddleEnd extends Thread {
 		}
 	}
 	
+	@Override
 	public void run() {
 		while (_continue)
 		{}
