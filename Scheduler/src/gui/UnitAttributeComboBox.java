@@ -7,6 +7,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+/**
+ * This is the combobox that allows a user to edit a UnitAttribute
+ * of a unit.
+ */
 public class UnitAttributeComboBox extends JComboBox implements GUIConstants {
 	
 	private Unit _selectedunit;

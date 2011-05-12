@@ -15,6 +15,10 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/**
+ * This is the panel that displays a pairing attributes and allows
+ * the user to edit them.
+ */
 public class PairingPanel extends JPanel implements GUIConstants {
 
 	private MiddleEnd _middleEnd;
@@ -34,9 +38,9 @@ public class PairingPanel extends JPanel implements GUIConstants {
 			this.setBackground(BACKGROUND_COLOR);
 			this.setForeground(FOREGROUND_COLOR);
 		}
-		
 		this.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black));
 		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+		this.setBackground(Color.green);
 //		this.add(Box.createHorizontalGlue());
 		JPanel deletepanel = new JPanel();
 		if (COLORSON) {
@@ -144,7 +148,7 @@ public class PairingPanel extends JPanel implements GUIConstants {
 		this.repaint();
 	}
 	
-	public class UnitAttributeComboBox extends JComboBox {
+	private class UnitAttributeComboBox extends JComboBox {
 		
 		private UnitAttribute _unitattribute;
 		private PairingPanel _pairingpanel;

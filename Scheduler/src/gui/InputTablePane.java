@@ -2,18 +2,34 @@ package gui;
 
 import middleend.*;
 import backbone.*;
+
+import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import javax.swing.DefaultCellEditor;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.SwingUtilities;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
+/**
+ * This class is the table used to allow the editing of GroupingAttributes
+ * of a unit.
+ */
 public class InputTablePane extends JScrollPane implements GUIConstants {
 
 	private MiddleEnd _middleEnd;
@@ -41,6 +57,7 @@ public class InputTablePane extends JScrollPane implements GUIConstants {
 		this.setPreferredSize(INPUTTABLE_SIZE);
 		this.setMaximumSize(new Dimension(Integer.MAX_VALUE, INPUTTABLE_HEIGHT));
 		this.setVisible(false);
+		this.setToolTipText("Right click and click \"Delete\" to delete a row and delete the unit from this table (not permanently). Use CTRL+V to paste in this table from an Excel spreadsheet.");
 		_table = new JTable();
 		_table.setSize(INPUTTABLE_SIZE);
 		_table.setRowHeight(ROW_HEIGHT);
@@ -62,6 +79,44 @@ public class InputTablePane extends JScrollPane implements GUIConstants {
 				unitcolumn.setCellEditor(new DefaultCellEditor(combobox));
 			}
 		}
+		final JPopupMenu popup = new JPopupMenu();
+		JMenuItem menuitem = new JMenuItem("Delete these rows");
+		popup.add(menuitem);
+		menuitem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ArrayList<Integer> rows = new ArrayList<Integer>();
+				for (int i : _table.getSelectedRows())
+					rows.add(_table.getSelectedRows()[i]);
+				Collections.sort(rows);
+				Collections.reverse(rows);
+				for (int i : rows) {
+					if ( i < _unitsInRows.getMembers().size())
+						_unitsInRows.deleteMember(_unitsInRows.getMembers().get(i));
+					InputTableModel model = (InputTableModel) _table.getModel();
+					model.removeRow(i);
+				}
+			}
+		});
+		_table.addMouseListener(new MouseAdapter()	{
+			public void mouseClicked(MouseEvent e) {
+				if (SwingUtilities.isRightMouseButton(e))
+					showPopup(e);
+			}
+			public void mouseReleased(MouseEvent e) {
+				if (SwingUtilities.isRightMouseButton(e))
+					showPopup(e);
+			}
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isRightMouseButton(e))
+					showPopup(e);
+			}
+			
+			private void showPopup(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					popup.show(e.getComponent(), e.getX(), e.getY());
+				}
+			}
+		});
 		ExcelAdapter exceladapt = new ExcelAdapter(_table);
 		this.getViewport().add(_table);
 	}

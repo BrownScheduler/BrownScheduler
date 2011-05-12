@@ -68,5 +68,5 @@ public interface Grouping<T extends Unit> extends Serializable {
 	 */
 	public void clear();
 	
-	public T hasDuplicate(T unit);
+	public T getDuplicate(T unit);
 }

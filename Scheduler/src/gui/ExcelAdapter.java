@@ -87,13 +87,13 @@ sbf.append(jTable1.getValueAt(rowsselected[i],colsselected[j]));
       }
       if (e.getActionCommand().compareTo("Paste")==0)
       {
-          System.out.println("Trying to Paste");
+//          System.out.println("Trying to Paste");
           int startRow=(jTable1.getSelectedRows())[0];
           int startCol=(jTable1.getSelectedColumns())[0];
           try
           {
              String trstring= (String)(system.getContents(this).getTransferData(DataFlavor.stringFlavor));
-             System.out.println("String is:"+trstring);
+//             System.out.println("String is:"+trstring);
              StringTokenizer st1=new StringTokenizer(trstring,"\n");
              for(int i=0;st1.hasMoreTokens();i++)
              {

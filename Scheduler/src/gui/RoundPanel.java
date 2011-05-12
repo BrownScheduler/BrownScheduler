@@ -12,6 +12,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+/**
+ * This is the panel that allows the user to view all
+ * the pairings in a round. Each panel consists of
+ * multiple PairingPanels.
+ */
 public class RoundPanel extends JPanel implements GUIConstants {
 
 	private MiddleEnd _middleEnd;
@@ -42,10 +47,9 @@ public class RoundPanel extends JPanel implements GUIConstants {
 			addpairingbutton.setForeground(FOREGROUND_COLOR);
 		}
 		addpairingbutton.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				_round.addPairing(_round.getBlank());
-				_middleEnd.repaintAll();
+				repaintAll();
 			}
 		});
 		addpairingbutton.setHorizontalAlignment(SwingConstants.LEFT);

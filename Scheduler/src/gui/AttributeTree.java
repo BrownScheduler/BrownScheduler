@@ -12,6 +12,10 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreeSelectionModel;
 
+/**
+ * This class is the tree that allows users to see an overview of all
+ * the groupings and units in the tournament.
+ */
 public class AttributeTree extends JTree implements GUIConstants {
 
 	public static final long serialVersionUID = 1L;
@@ -20,6 +24,12 @@ public class AttributeTree extends JTree implements GUIConstants {
 	private MiddleEnd _middleEnd;
 	private AddingPanel _addingPanel;
 	
+	/**
+	 * Constructor.
+	 * 
+	 * @param me
+	 * @param ap
+	 */
 	public AttributeTree(MiddleEnd me, AddingPanel ap) {
 		super();
 		_middleEnd = me;
@@ -28,28 +38,29 @@ public class AttributeTree extends JTree implements GUIConstants {
 	}
 		
 	/**
-	 * This method initializes this
+	 * This method initializes this component.
 	 * 
 	 * @return void
 	 */
 	public void initialize() {
-			this.setSize(TREE_SIZE);
-			this.setMaximumSize(new Dimension(getWidth(), Integer.MAX_VALUE));
-			this.setPreferredSize(getSize());
-			if (IMAGESON) {
-				DefaultTreeCellRenderer renderer = new DefaultTreeCellRenderer();
-				renderer.setOpenIcon(TREEOPENIMAGE);
-				renderer.setClosedIcon(TREECLOSEDIMAGE);
-				renderer.setLeafIcon(TREELEAFIMAGE);
-				this.setCellRenderer(renderer);
-			}
-			if (COLORSON) {
-				this.setBackground(BACKGROUND_COLOR);
-				this.setForeground(FOREGROUND_COLOR);
-			}
-			this.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
-			this.setScrollsOnExpand(true);
-			this.resetTreeModel();
+		//Sets the size of the tree
+		this.setSize(TREE_SIZE);
+		this.setMaximumSize(new Dimension(getWidth(), Integer.MAX_VALUE));
+		this.setPreferredSize(getSize());
+		if (IMAGESON) {
+			DefaultTreeCellRenderer renderer = new DefaultTreeCellRenderer();
+			renderer.setOpenIcon(TREEOPENIMAGE);
+			renderer.setClosedIcon(TREECLOSEDIMAGE);
+			renderer.setLeafIcon(TREELEAFIMAGE);
+			this.setCellRenderer(renderer);
+		}
+		if (COLORSON) {
+			this.setBackground(BACKGROUND_COLOR);
+			this.setForeground(FOREGROUND_COLOR);
+		}
+		this.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
+		this.setScrollsOnExpand(true);
+		this.resetTreeModel();
 	}
 	
 	/**
