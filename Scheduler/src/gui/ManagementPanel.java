@@ -30,14 +30,13 @@ public class ManagementPanel extends JTabbedPane implements GUIConstants {
 	}
 
 	/**
-	 * This method initializes this
-	 * 
-	 * @return void
+	 * This method resets this panel.
 	 */
 	public void resetPanel() {
 		this.removeAll();
 		_roundpanels.clear();
 		this.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
+		// Add a new tab to this pane for every round.
 		for (Round round : _middleEnd.getTournament().getRounds()) {
 			if (round != null) {
 				RoundPanel rp = new RoundPanel(_middleEnd, round);
@@ -49,6 +48,7 @@ public class ManagementPanel extends JTabbedPane implements GUIConstants {
 				}
 				rpcontainer.setLayout(new java.awt.BorderLayout());
 				rpcontainer.add(rp, java.awt.BorderLayout.CENTER);
+				// Add every RoundPanel to a JScrollPane
 				JScrollPane rpscroller = new JScrollPane(rpcontainer);
 				rpscroller.getVerticalScrollBar().setBlockIncrement(90);
 				rpscroller.getVerticalScrollBar().setUnitIncrement(30);
@@ -58,6 +58,9 @@ public class ManagementPanel extends JTabbedPane implements GUIConstants {
 		}
 	}
 
+	/**
+	 * Repaints this component and all the components contained in it.
+	 */
 	public void repaintAll() {
 		this.resetPanel();
 		for (RoundPanel panel : _roundpanels)

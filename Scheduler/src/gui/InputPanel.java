@@ -29,9 +29,7 @@ public class InputPanel extends JPanel implements GUIConstants {
 	}
 
 	/**
-	 * This method initializes this
-	 * 
-	 * @return void
+	 * This method initializes this.
 	 */
 	public void initialize() {
 		if (COLORSON) {
@@ -45,9 +43,10 @@ public class InputPanel extends JPanel implements GUIConstants {
 	}
 
 	/**
-	 * This method initializes AddingPanel	
-	 * 	
-	 * @return javax.swing.JPanel	
+	 * Getter for the AddingPanel, initializes it
+	 * if necessary
+	 * 
+	 * @return AddingPanel
 	 */
 	public AddingPanel getAddingPanel() {
 		if (_addingPanel == null) {
@@ -57,9 +56,10 @@ public class InputPanel extends JPanel implements GUIConstants {
 	}
 
 	/**
-	 * This method initializes jTree	
-	 * 	
-	 * @return javax.swing.JTree	
+	 * Getter for the AttributeTree, initializes it
+	 * if necessary
+	 * 
+	 * @return AttributeTree
 	 */
 	public AttributeTree getAttributeTree() {
 		if (_attributeTree == null) {
@@ -69,9 +69,10 @@ public class InputPanel extends JPanel implements GUIConstants {
 	}
 
 	/**
-	 * This method initializes attributePane	
-	 * 	
-	 * @return javax.swing.JScrollPane	
+	 * Getter for the JScrollPane containing the AttributeTree,
+	 * initializes it if necessary.
+	 * 
+	 * @return JScrollPane
 	 */
 	public JScrollPane getAttributeScrollPane() {
 		if (_attributeScrollPane == null) {
@@ -85,9 +86,10 @@ public class InputPanel extends JPanel implements GUIConstants {
 	}
 	
 	/**
-	 * This method initializes attributePane	
-	 * 	
-	 * @return javax.swing.JScrollPane	
+	 * Getter for the JScrollPane containing the AddingPanel,
+	 * initializes it if necessary.
+	 * 
+	 * @return JScrollPane
 	 */
 	public JScrollPane getAddingScrollPane() {
 		if (_addingScrollPane == null) {
@@ -99,6 +101,9 @@ public class InputPanel extends JPanel implements GUIConstants {
 		return _addingScrollPane;
 	}
 	
+	/**
+	 * Repaints this component and all components in it.
+	 */
 	public void repaintAll() {
 		getAttributeScrollPane().repaint();
 		getAttributeTree().resetTreeModel();

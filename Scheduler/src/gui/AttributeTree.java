@@ -43,7 +43,6 @@ public class AttributeTree extends JTree implements GUIConstants {
 	 * @return void
 	 */
 	public void initialize() {
-		//Sets the size of the tree
 		this.setSize(TREE_SIZE);
 		this.setMaximumSize(new Dimension(getWidth(), Integer.MAX_VALUE));
 		this.setPreferredSize(getSize());
@@ -64,16 +63,17 @@ public class AttributeTree extends JTree implements GUIConstants {
 	}
 	
 	/**
-	 * This method initializes the actual tree.
-	 * 
-	 * @return
+	 * This method initializes the actual tree, refreshing
+	 * all of its values
 	 */
 	public void resetTreeModel() {
 		DefaultMutableTreeNode root;
 		root = new DefaultMutableTreeNode("Categories");
 		for (Grouping<Unit> g : _middleEnd.getTournament().getCategories()) {
+			// Add a node for each grouping
 			DefaultMutableTreeNode groupingroot = new DefaultMutableTreeNode(new GroupingNodeObject(g));
 			for (Unit u : g.getMembers()) {
+				// Add a leaf node to each of those nodes to represent the units in the grouping
 				DefaultMutableTreeNode unitroot = new DefaultMutableTreeNode(new UnitNodeObject(u));
 				groupingroot.add(unitroot);
 			}
@@ -82,8 +82,8 @@ public class AttributeTree extends JTree implements GUIConstants {
 		_treeModel = new DefaultTreeModel(root);
 		this.setModel(_treeModel);
 		this.addTreeSelectionListener(new TreeSelectionListener() {
-			@Override
 			public void valueChanged(TreeSelectionEvent e) {
+				// View a unit or grouping's information if clicked
 				DefaultMutableTreeNode node = (DefaultMutableTreeNode) getLastSelectedPathComponent();
 				if (node == null)
 					return;
@@ -96,11 +96,14 @@ public class AttributeTree extends JTree implements GUIConstants {
 				_middleEnd.repaintAll();
 			}
 		});
+		// Expand all rows
 		for (int i = 0; i < this.getRowCount(); i++)
 			this.expandRow(i);
 		this.repaint();
 	}
 	
+	// A wrapper for a Grouping so that the toString() of the
+	// GroupingNodeObject shows up as its getName() attribute
 	private class GroupingNodeObject {
 		public Grouping<Unit> group;
 		
@@ -114,6 +117,8 @@ public class AttributeTree extends JTree implements GUIConstants {
 		}
 	}
 	
+	// A wrapper for a Unit so that the toString() of the
+	// UnitNodeObject shows up as its getName() attribute
 	private class UnitNodeObject {
 		public Unit unit;
 		

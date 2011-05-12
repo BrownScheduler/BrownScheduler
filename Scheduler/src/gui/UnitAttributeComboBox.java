@@ -17,6 +17,10 @@ public class UnitAttributeComboBox extends JComboBox implements GUIConstants {
 	private Grouping<Unit> _grouping;
 	private ArrayList<Unit> _units;
 	
+	/**
+	 * Constructor.
+	 * @param attribute
+	 */
 	public UnitAttributeComboBox(final UnitAttribute<Unit> attribute) {
 		this.setPreferredSize(JCOMBOBOX_SIZE);
 		this.setMaximumSize(JCOMBOBOX_SIZE);
@@ -29,6 +33,7 @@ public class UnitAttributeComboBox extends JComboBox implements GUIConstants {
 		_units = new ArrayList<Unit>(attribute.getListOfUnits());
 		ArrayList<String> unitnames = new ArrayList<String>();
 		this.addItem("");
+		// Preselects the existing value of the UnitAttribute
 		int toSelect = -1;
 		for (int i = 0; i < _units.size(); i++) {
 			unitnames.add(_units.get(i).getName());
@@ -39,9 +44,10 @@ public class UnitAttributeComboBox extends JComboBox implements GUIConstants {
 		_units.add(0, null);
 		if (attribute.att == null)
 			toSelect = 0;
+		// This combo box is editable
 		this.setEditable(true);
+		// Sets the value of getSelectedUnit() of this combobox to return the selected value
 		this.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				if ((getSelectedIndex() < 0) && (getSelectedItem() != null) && (!((String) getSelectedItem()).trim().equals(""))) {
 					Unit toadd = attribute.getMemberOf().getBlank();
@@ -56,10 +62,21 @@ public class UnitAttributeComboBox extends JComboBox implements GUIConstants {
 		this.setSelectedIndex(toSelect);
 	}
 	
+	/**
+	 * Returns the selected unit in this combo box.
+	 * 
+	 * @return Unit
+	 */
 	public Unit getSelectedUnit() {
 		return _selectedunit;
 	}
 	
+	/**
+	 * Returns the grouping that this combo box contains
+	 * units of.
+	 * 
+	 * @return Grouping<Unit>
+	 */
 	public Grouping<Unit> getGrouping() {
 		return _grouping;
 	}
