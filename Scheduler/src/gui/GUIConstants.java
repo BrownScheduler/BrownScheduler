@@ -13,6 +13,7 @@ public interface GUIConstants {
 	boolean COLORSON = true;
 	Color BACKGROUND_COLOR = new Color(214, 223, 217);
 	Color FOREGROUND_COLOR = Color.black;
+	Color UNEDITABLE_COLOR = Color.lightGray;
 	Color FG_TEXT_COLOR = Color.black;
 	Color BG_TEXT_COLOR = Color.black;
 	Color STOP_PAIRINGSTATUS_COLOR = Color.red;

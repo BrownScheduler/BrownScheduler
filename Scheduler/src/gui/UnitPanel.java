@@ -27,15 +27,18 @@ public class UnitPanel extends JPanel implements GUIConstants {
 	private MiddleEnd _middleEnd;
 	private JPanel _mainPanel, _buttonPanel, _tablePanel;
 	private Grouping<Unit> _grouping;
+	private JButton _saveButton;
+	private boolean _isInGroupingPanel;
 	
 	/**
 	 * Constructor when viewing an existing unit.
 	 * @param m
 	 * @param u
 	 */
-	public UnitPanel(MiddleEnd m, Unit u) {
+	public UnitPanel(MiddleEnd m, Unit u, boolean isingroupingview) {
 		_middleEnd = m;
 		_grouping = u.getMemberOf();
+		_isInGroupingPanel = isingroupingview;
 		_mainPanel = new JPanel();
 		_buttonPanel = new JPanel();
 		_tablePanel = new JPanel();
@@ -51,10 +54,19 @@ public class UnitPanel extends JPanel implements GUIConstants {
 	public UnitPanel(MiddleEnd m, Unit u, Grouping<Unit> g) {
 		_middleEnd = m;
 		_grouping = g;
+		_isInGroupingPanel = false;
 		_mainPanel = new JPanel();
 		_buttonPanel = new JPanel();
 		_tablePanel = new JPanel();
 		initialize(u, "Save Changes and Add Another New Unit", "Clear values");
+	}
+	
+	/**
+	 * Returns the save button of this UnitPanel
+	 * @return
+	 */
+	public JButton getSaveButton() {
+		return _saveButton;
 	}
 	
 	/**
@@ -126,6 +138,7 @@ public class UnitPanel extends JPanel implements GUIConstants {
 			_mainPanel.add(toAdd);
 		}
 		JButton savebutton = new JButton(savestring);
+		_saveButton = savebutton;
 		if (IMAGESON)
 			savebutton.setIcon(SAVEBUTTONIMAGE);
 		if (COLORSON) {
@@ -228,7 +241,7 @@ public class UnitPanel extends JPanel implements GUIConstants {
 						}
 						for (int i = 0; i < unitsinrowslist.size(); i++) {
 							if (unitsintable.get(unitsinrowslist.get(i))) {
-								Unit duplicate = groupattr.getBlankUnit().getMemberOf().getDuplicate(unitsinrowslist.get(i));
+								Unit duplicate = groupattr.getGrouping().getDuplicate(unitsinrowslist.get(i));
 								if ((unitsinrowslist.get(i) != duplicate) && (duplicate != null)) {
 									repaint = 3;
 								}
@@ -244,6 +257,15 @@ public class UnitPanel extends JPanel implements GUIConstants {
 									groupattr.addMember(rowunit);
 									if (duplicate == null)
 										groupattr.getBlankUnit().getMemberOf().addMember(rowunit);
+									else {
+										for (Attribute a : rowunit.getAttributes()) {
+											if ((a.getType() != Attribute.Type.GROUPING) && (a.getType() != Attribute.Type.UNIT)) {
+												duplicate.setAttribute(a);
+											}
+										}
+										groupattr.deleteMember(rowunit);
+										groupattr.addMember(duplicate);
+									}
 								}
 								else if (!rowunitisnull && !unitsintable.get(rowunit)) {
 									for (Attribute a : rowunit.getAttributes()) {
@@ -314,7 +336,8 @@ public class UnitPanel extends JPanel implements GUIConstants {
 				case 4:
 					break;
 				default:
-					_middleEnd.repaintAll();
+					if (!_isInGroupingPanel)
+						_middleEnd.repaintAll();
 				}
 			}
 		});

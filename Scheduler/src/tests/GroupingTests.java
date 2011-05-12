@@ -2,11 +2,6 @@ package tests;
 
 import org.junit.*;
 
-import exception.InvalidRoundException;
-
-import backbone.Round;
-import backbone.Unit;
-import backbone.UnitAttribute;
 import basic.ExampleGrouping;
 import basic.ExampleTournament;
 import basic.ExampleUnit;

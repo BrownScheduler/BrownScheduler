@@ -145,6 +145,8 @@ public class Utility implements GUIConstants {
 		JTextField field = new JTextField(attribute.getAttribute());
 		field.setMaximumSize(TEXTFIELD_SIZE);
 		field.setEditable(isEditable);
+		if (!isEditable)
+			field.setBackground(UNEDITABLE_COLOR);
 		return field;
 	}
 	
@@ -163,6 +165,8 @@ public class Utility implements GUIConstants {
 		field.setPreferredSize(TEXTFIELD_SIZE);
 		field.setMaximumSize(TEXTFIELD_SIZE);
 		field.setEditable(isEditable);
+		if (!isEditable)
+			field.setBackground(UNEDITABLE_COLOR);
 		return field;
 	}
 	
@@ -182,6 +186,8 @@ public class Utility implements GUIConstants {
 		//field.setMaximumSize(TEXTFIELD_SIZE);
 		field.setValue(attribute.getAttribute());
 		field.setEditable(isEditable);
+		if (!isEditable)
+			field.setBackground(UNEDITABLE_COLOR);
 		field.setMaximumSize(new Dimension(100, 25));
 		return field;
 	}
@@ -205,6 +211,8 @@ public class Utility implements GUIConstants {
 				}
 			});
 		}
+		if (!isEditable)
+			field.setBackground(UNEDITABLE_COLOR);
 		return field;
 	}
 	
@@ -235,6 +243,8 @@ public class Utility implements GUIConstants {
 	 */
 	public static UnitAttributeComboBox getUnitField(UnitAttribute<Unit> attribute, boolean isEditable) {
 		final UnitAttributeComboBox combobox = new UnitAttributeComboBox(attribute);
+		if (!isEditable)
+			combobox.setBackground(UNEDITABLE_COLOR);
 		return combobox;
 	}
 	
