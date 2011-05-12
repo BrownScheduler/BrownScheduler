@@ -27,5 +27,11 @@ public class JudgeGrouping extends MyCategory<Judge> {
 		}
 		return null;
 	}
+	
+	@Override
+	public void addMember(Judge member){
+		if(!this._members.contains(member) && getDuplicate(member) == null && !member.getName().equals("")) 
+			_members.add(member);
+	}
 
 }

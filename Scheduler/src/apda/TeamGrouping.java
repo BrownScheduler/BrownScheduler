@@ -42,6 +42,7 @@ public class TeamGrouping extends MyCategory<Team>{
 	}
 	
 	public void addMember(Team member) {
-		if(!this._members.contains(member)) _members.add(member);		
+		if(!this._members.contains(member) && getDuplicate(member) == null && !member.getName().equals("")) 
+			_members.add(member);		
 	}
 }

@@ -79,13 +79,13 @@ public class MyPairing implements backbone.Pairing{
 		atts.add(new UnitAttribute<Team>("Winner", _winner, posWinners));
 		
 		DebaterGrouping posGovDebaters = new DebaterGrouping(_t, "Pos Gov Units");
-		if(_gov != null && _gov.d1 != null) posGovDebaters.addMember(_gov.d1);
-		if(_gov != null && _gov.d2 != null) posGovDebaters.addMember(_gov.d2);
+		if(_gov != null && _gov.d1.att != null) posGovDebaters.addMember(_gov.d1.att);
+		if(_gov != null && _gov.d2.att != null) posGovDebaters.addMember(_gov.d2.att);
 		atts.add(new UnitAttribute<Debater>("PM", _pm, posGovDebaters));
 		atts.add(new UnitAttribute<Debater>("MG", _mg, posGovDebaters));
 		DebaterGrouping posOppDebaters = new DebaterGrouping(_t, "Pos Opp Units");
-		if(_opp != null && _opp.d1 != null) posOppDebaters.addMember(_opp.d1);
-		if(_opp != null && _opp.d2 != null) posOppDebaters.addMember(_opp.d2);
+		if(_opp != null && _opp.d1.att != null) posOppDebaters.addMember(_opp.d1.att);
+		if(_opp != null && _opp.d2.att != null) posOppDebaters.addMember(_opp.d2.att);
 		atts.add(new UnitAttribute<Debater>("LO", _pm, posOppDebaters));
 		atts.add(new UnitAttribute<Debater>("MO", _mg, posOppDebaters));
 		

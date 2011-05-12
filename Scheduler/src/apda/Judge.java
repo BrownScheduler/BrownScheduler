@@ -38,8 +38,10 @@ public class Judge implements Unit{
 		_conflictedTeams = new TeamGrouping(_t, "Conflicted Teams");
 		_conflictedSchools = new SchoolGrouping(_t, "Conflicted Schools");
 		_roundsAvailable = new boolean[_t._totalRounds];
-		for(boolean b : _roundsAvailable)
-			b = true;
+		for(int i = 0; i < _t._totalRounds; i++){
+			_roundsAvailable[i] = true;
+		}
+			
 		
 	}
 	
@@ -114,7 +116,7 @@ public class Judge implements Unit{
 			tit = tit.substring(1);
 			if(tit.equals("")) return;
 			int titInt = Integer.parseInt(tit);
-			if(titInt < _roundsAvailable.length && titInt >= 0) _roundsAvailable[titInt] = b;
+			if(titInt <= _roundsAvailable.length && titInt > 0) _roundsAvailable[titInt - 1] = b;
 		}
 		
 	}

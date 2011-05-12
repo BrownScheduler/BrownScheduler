@@ -21,5 +21,11 @@ public class GovOppGrouping extends MyCategory<GovOppUnit>{
 	public GovOppUnit getDuplicate(GovOppUnit unit) {
 		return null;
 	}
+	
+	@Override
+	public void addMember(GovOppUnit member){
+		if(!this._members.contains(member) && !member.getName().equals("")) 
+			_members.add(member);
+	}
 
 }
