@@ -689,9 +689,7 @@ public class App implements GUIConstants {
 					_middleEnd.getTournament().createNextRound(false);
 					getViewManagementMenuItem().doClick();
 				}catch(InvalidRoundException err){ //Thrown if a valid tournament cannot be created with the current unit setup
-					int result = JOptionPane.showConfirmDialog(getJFrame(),
-							"You canot create a valid tournament with the current competitor setup. Would you like to continue and try to create a round anyway?",
-							"Invalid Round Creation", JOptionPane.ERROR_MESSAGE);
+					int result = JOptionPane.showConfirmDialog(getJFrame(), err.getMessage(), "Round Creation Error", JOptionPane.ERROR_MESSAGE);
 					if (result == JOptionPane.YES_OPTION) {
 						try {
 							_middleEnd.getTournament().createNextRound(true);

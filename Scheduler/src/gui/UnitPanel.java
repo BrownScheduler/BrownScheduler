@@ -131,10 +131,12 @@ public class UnitPanel extends JPanel implements GUIConstants {
 						InputTablePane table = (InputTablePane) components.get(attr);
 						GroupingAttribute<Unit> groupattr = (GroupingAttribute) attr;
 						HashMap<Unit, Boolean> unitsintable = new HashMap<Unit, Boolean>();
+						ArrayList<Unit> unitsinrowslist = new ArrayList<Unit>();
 						for (int i = 0; i < table.getTable().getRowCount(); i++) {
 							Unit rowunit;
 							if (i < table.getUnitsInRowsList().size()) {
 								rowunit = table.getUnitsInRowsList().get(i);
+								unitsinrowslist.add(rowunit);
 								unitsintable.put(rowunit, true);
 							}
 							else {
@@ -189,36 +191,43 @@ public class UnitPanel extends JPanel implements GUIConstants {
 						}
 						for (Unit rowunit : unitsintable.keySet()) {
 							for (Unit rowunit2 : unitsintable.keySet()) {
-								if ((rowunit != rowunit2) && (rowunit.getName() == rowunit2.getName()))
+								if ((rowunit != rowunit2) && (rowunit.getName().equals(rowunit2.getName())) && (!rowunit.getName().equals(""))) {
 									repaint = false;
+								}
+							}
+						}
+						for (int i = 0; i < unitsinrowslist.size(); i++) {
+							if (unitsintable.get(unitsinrowslist.get(i))) {
+								Unit duplicate = groupattr.getBlankUnit().getMemberOf().getDuplicate(unitsinrowslist.get(i));
+								if ((unitsinrowslist.get(i) != duplicate) && (duplicate != null)) {
+									repaint = false;
+								}
 							}
 						}
 						if (repaint) {
 							for (Unit rowunit : unitsintable.keySet()) {
 								Unit duplicate = groupattr.getBlankUnit().getMemberOf().getDuplicate(rowunit);
-								if ((duplicate != null) || (rowunit.getName() == "")) {
-									for (Attribute rowattr : rowunit.getAttributes()) {
-										if (rowattr.getType() != Attribute.Type.GROUPING)
-											duplicate.setAttribute(rowattr);
-									}
+								boolean rowunitisnull = false;
+								if ((rowunit.getName() == null) || (rowunit.getName().equals("")))
+									rowunitisnull = true;
+								if (!rowunitisnull && !unitsintable.get(rowunit) && (duplicate == null)) {
+									groupattr.addMember(rowunit);
+									if (!groupattr.getBlankUnit().getMemberOf().getMembers().contains(rowunit))
+										groupattr.getBlankUnit().getMemberOf().addMember(rowunit);
 								}
-								else {
-									boolean rowunitisnull = false;
-									if ((rowunit.getName() == null) || (rowunit.getName() == ""))
-										rowunitisnull = true;
-									if (!rowunitisnull && !unitsintable.get(rowunit)) {
-										groupattr.addMember(rowunit);
-										if (!groupattr.getBlankUnit().getMemberOf().getMembers().contains(rowunit))
-											groupattr.getBlankUnit().getMemberOf().addMember(rowunit);
+								else if (!rowunitisnull && !unitsintable.get(rowunit)) {
+									for (Attribute a : rowunit.getAttributes()) {
+										if (a.getType() != Attribute.Type.GROUPING)
+											duplicate.setAttribute(a);
 									}
-									unit.setAttribute(groupattr);
 								}
 							}
+							unit.setAttribute(groupattr);
 							table = new InputTablePane(_middleEnd, groupattr.getBlankUnit().getAttributes(), groupattr);
 							components.put(attr, table);
 						}
 						else
-							JOptionPane.showMessageDialog(_mainPanel, "The name for a unit in the table is invalid. Either a unit with that name already exists, or the name field for a unit was left blank.",
+							JOptionPane.showMessageDialog(_mainPanel, "The name for a unit in the table is invalid. Either a unit with that name already exists, two units with the same name have been entered, or the name field for a unit was left blank.",
 									"Duplicate Unit", JOptionPane.ERROR_MESSAGE);
 					}
 					else if (attr.getType() == Attribute.Type.INT) {
@@ -249,6 +258,8 @@ public class UnitPanel extends JPanel implements GUIConstants {
 					if (repaint)
 						_middleEnd.repaintAll();
 				}
+				else
+					_middleEnd.repaintAll();
 			}
 		});
 		final JButton deletebutton = new JButton(deletestring);
