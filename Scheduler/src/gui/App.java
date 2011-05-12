@@ -633,10 +633,20 @@ public class App implements GUIConstants {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try{
-					_middleEnd.getTournament().createNextRound();
+					_middleEnd.getTournament().createNextRound(false);
 					getViewManagementMenuItem().doClick();
 				}catch(InvalidRoundException err){
-					err.printStackTrace();
+					int result = JOptionPane.showConfirmDialog(getJFrame(),
+							"You canot create a valid tournament with the current competitor setup. Would you like to continue and try to create a round anyway?",
+							"Invalid Round Creation", JOptionPane.ERROR_MESSAGE);
+					if (result == JOptionPane.YES_OPTION) {
+						try {
+							_middleEnd.getTournament().createNextRound(true);
+							getViewManagementMenuItem().doClick();
+						} catch (InvalidRoundException e1) {
+							e1.printStackTrace();
+						}
+					}
 				}
 			}
 		});

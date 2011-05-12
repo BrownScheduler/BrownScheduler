@@ -5,6 +5,7 @@ import middleend.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import javax.swing.Box;
@@ -56,7 +57,9 @@ public class UnitPanel extends JPanel implements GUIConstants {
 		_mainPanel.setLayout(new BoxLayout(_mainPanel, BoxLayout.X_AXIS));
 		_tablePanel.setLayout(new BoxLayout(_tablePanel, BoxLayout.Y_AXIS));
 		final HashMap<Attribute, JComponent> components = new HashMap<Attribute, JComponent>();
+		ArrayList<Attribute> originalattributes = new ArrayList<Attribute>();
 		for (final Attribute attr : unit.getAttributes()) {
+			originalattributes.add(attr);
 			JLabel titleLabel = Utility.getTitleLabel(attr);
 			if (attr instanceof GroupingAttribute) {
 				GroupingAttribute<Unit> g = (GroupingAttribute<Unit>) attr;
