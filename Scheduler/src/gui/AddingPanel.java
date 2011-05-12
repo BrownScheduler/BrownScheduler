@@ -1,9 +1,14 @@
 package gui;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
 import middleend.*;
 import backbone.*;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.JLabel;
@@ -69,7 +74,7 @@ public class AddingPanel extends JPanel implements GUIConstants {
 	 */
 	public void setViewPanel(Unit unit) {
 		this.removeAll();
-		this.add(new UnitPanel(_middleEnd, unit));
+		this.add(new UnitPanel(_middleEnd, unit, false));
 		_currView = 1;
 		_currViewObject = unit;
 	}
@@ -82,11 +87,28 @@ public class AddingPanel extends JPanel implements GUIConstants {
 	 */
 	public void setViewPanel(Grouping<Unit> grouping) {
 		this.removeAll();
+		JPanel savepanel = new JPanel();
+		savepanel.setLayout(new BoxLayout(savepanel, BoxLayout.X_AXIS));
+		savepanel.add(Box.createHorizontalGlue());
+		JButton savebutton = new JButton("Save all changes");
+		savepanel.add(savebutton);
+		savepanel.add(Box.createHorizontalGlue());
+		final ArrayList<JButton> savebuttons = new ArrayList<JButton>();
+		this.add(savepanel);
 		for (Unit u : grouping.getMembers()) {
-			this.add(new UnitPanel(_middleEnd, u));
+			UnitPanel up = new UnitPanel(_middleEnd, u, true);
+			this.add(up);
 			this.add(Box.createRigidArea(SMALLSPACING_SIZE));
+			savebuttons.add(up.getSaveButton());
 		}
 		this.add(Box.createVerticalGlue());
+		savebutton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				for (JButton button : savebuttons)
+					button.doClick();
+				_middleEnd.repaintAll();
+			}
+		});
 		_currView = 2;
 		_currViewObject = grouping;
 	}
