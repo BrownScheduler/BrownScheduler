@@ -37,7 +37,7 @@ public class SchoolGrouping extends MyCategory<School> {
 
 
 	@Override
-	public School hasDuplicate(School unit) {
+	public School getDuplicate(School unit) {
 		for(School t : this.getMembers()){
 			if(t.getName().equals(unit.getName()) && t != unit){
 				return t;

@@ -22,7 +22,7 @@ public class DebaterGrouping extends MyCategory<Debater> {
 	}
 
 	@Override
-	public Debater hasDuplicate(Debater unit) {
+	public Debater getDuplicate(Debater unit) {
 		for(Debater d : this._members){
 			if(d.getName().equals(unit.getName()) && unit != d)
 				return d;

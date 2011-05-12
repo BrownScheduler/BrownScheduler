@@ -32,7 +32,7 @@ public class TeamGrouping extends MyCategory<Team>{
 	}
 
 	@Override
-	public Team hasDuplicate(Team unit) {
+	public Team getDuplicate(Team unit) {
 		for(Team t : this.getMembers()){
 			if(t.getName().equals(unit.getName()) && t != unit){
 				return t;
@@ -42,6 +42,6 @@ public class TeamGrouping extends MyCategory<Team>{
 	}
 	
 	public void addMember(Team member) {
-		_members.add(member);		
+		if(!this._members.contains(member)) _members.add(member);		
 	}
 }

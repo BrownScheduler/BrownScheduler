@@ -40,7 +40,7 @@ public class SeedGrouping implements Grouping<SeedUnit> {
 	}
 
 	@Override
-	public SeedUnit hasDuplicate(SeedUnit unit) {
+	public SeedUnit getDuplicate(SeedUnit unit) {
 		// TODO Auto-generated method stub
 		return null;
 	}

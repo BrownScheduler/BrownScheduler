@@ -15,9 +15,14 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+/**
+ * This displays the attributes of a unit and allows the user
+ * to edit them.
+ */
 public class UnitPanel extends JPanel implements GUIConstants {
 
 	private MiddleEnd _middleEnd;
@@ -57,7 +62,7 @@ public class UnitPanel extends JPanel implements GUIConstants {
 		_mainPanel.setLayout(new BoxLayout(_mainPanel, BoxLayout.X_AXIS));
 		_tablePanel.setLayout(new BoxLayout(_tablePanel, BoxLayout.Y_AXIS));
 		final HashMap<Attribute, JComponent> components = new HashMap<Attribute, JComponent>();
-		ArrayList<Attribute> originalattributes = new ArrayList<Attribute>();
+		final ArrayList<Attribute> originalattributes = new ArrayList<Attribute>();
 		for (final Attribute attr : unit.getAttributes()) {
 			originalattributes.add(attr);
 			JLabel titleLabel = Utility.getTitleLabel(attr);
@@ -110,9 +115,9 @@ public class UnitPanel extends JPanel implements GUIConstants {
 			savebutton.setForeground(FOREGROUND_COLOR);
 		}
 		savebutton.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				Collection<Attribute> attributes = components.keySet();
+				boolean repaint = true;
 				for (Attribute attr : attributes) {
 					if (attr.getType() == Attribute.Type.BOOLEAN) {
 						boolean value = ((JCheckBox) components.get(attr)).isSelected();
@@ -125,16 +130,18 @@ public class UnitPanel extends JPanel implements GUIConstants {
 					else if (attr.getType() == Attribute.Type.GROUPING) {
 						InputTablePane table = (InputTablePane) components.get(attr);
 						GroupingAttribute<Unit> groupattr = (GroupingAttribute) attr;
+						HashMap<Unit, Boolean> unitsintable = new HashMap<Unit, Boolean>();
 						for (int i = 0; i < table.getTable().getRowCount(); i++) {
 							Unit rowunit;
-							boolean alreadyadded = false;
 							if (i < table.getUnitsInRowsList().size()) {
 								rowunit = table.getUnitsInRowsList().get(i);
-								alreadyadded = true;
+								unitsintable.put(rowunit, true);
 							}
 							else {
 								rowunit = groupattr.getBlankUnit();
 							}
+							if (!unitsintable.containsKey(rowunit))
+								unitsintable.put(rowunit, false);
 							int j = 0;
 							for (Attribute rowattr : rowunit.getAttributes()) {
 								if (rowattr.getType() == Attribute.Type.BOOLEAN) {
@@ -179,20 +186,40 @@ public class UnitPanel extends JPanel implements GUIConstants {
 								}
 								j++;
 							}
-							boolean rowunitisnull = false;
-							if (rowunit.getName() == null)
-								rowunitisnull = true;
-							else if (rowunit.getName() == "")
-								rowunitisnull = true;
-							if (!rowunitisnull && !alreadyadded) {
-								groupattr.addMember(rowunit);
-								if (!groupattr.getBlankUnit().getMemberOf().getMembers().contains(rowunit))
-									groupattr.getBlankUnit().getMemberOf().addMember(rowunit);
-							}
-							unit.setAttribute(groupattr);
 						}
-						table = new InputTablePane(_middleEnd, groupattr.getBlankUnit().getAttributes(), groupattr);
-						components.put(attr, table);
+						for (Unit rowunit : unitsintable.keySet()) {
+							for (Unit rowunit2 : unitsintable.keySet()) {
+								if ((rowunit != rowunit2) && (rowunit.getName() == rowunit2.getName()))
+									repaint = false;
+							}
+						}
+						if (repaint) {
+							for (Unit rowunit : unitsintable.keySet()) {
+								Unit duplicate = groupattr.getBlankUnit().getMemberOf().getDuplicate(rowunit);
+								if ((duplicate != null) || (rowunit.getName() == "")) {
+									for (Attribute rowattr : rowunit.getAttributes()) {
+										if (rowattr.getType() != Attribute.Type.GROUPING)
+											duplicate.setAttribute(rowattr);
+									}
+								}
+								else {
+									boolean rowunitisnull = false;
+									if ((rowunit.getName() == null) || (rowunit.getName() == ""))
+										rowunitisnull = true;
+									if (!rowunitisnull && !unitsintable.get(rowunit)) {
+										groupattr.addMember(rowunit);
+										if (!groupattr.getBlankUnit().getMemberOf().getMembers().contains(rowunit))
+											groupattr.getBlankUnit().getMemberOf().addMember(rowunit);
+									}
+									unit.setAttribute(groupattr);
+								}
+							}
+							table = new InputTablePane(_middleEnd, groupattr.getBlankUnit().getAttributes(), groupattr);
+							components.put(attr, table);
+						}
+						else
+							JOptionPane.showMessageDialog(_mainPanel, "The name for a unit in the table is invalid. Either a unit with that name already exists, or the name field for a unit was left blank.",
+									"Duplicate Unit", JOptionPane.ERROR_MESSAGE);
 					}
 					else if (attr.getType() == Attribute.Type.INT) {
 						int value = Integer.parseInt(((JTextField) components.get(attr)).getText());
@@ -210,11 +237,18 @@ public class UnitPanel extends JPanel implements GUIConstants {
 						unit.setAttribute(new UnitAttribute(attr.getTitle(), value, grouping));
 					}
 				}
-				
-				if (!_grouping.getMembers().contains(unit)) {
-					_grouping.addMember(unit);
+				if (_grouping.getDuplicate(unit) != null) {
+					for (Attribute attr : originalattributes) {
+						unit.setAttribute(attr);
+					}
+					JOptionPane.showMessageDialog(_mainPanel, "A unit with the same name already exists. Change the name and try again.",
+							"Duplicate Unit", JOptionPane.ERROR_MESSAGE);
 				}
-				_middleEnd.repaintAll();
+				else if (!_grouping.getMembers().contains(unit)) {
+					_grouping.addMember(unit);
+					if (repaint)
+						_middleEnd.repaintAll();
+				}
 			}
 		});
 		final JButton deletebutton = new JButton(deletestring);

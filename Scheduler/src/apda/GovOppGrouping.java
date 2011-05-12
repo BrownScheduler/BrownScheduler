@@ -18,7 +18,7 @@ public class GovOppGrouping extends MyCategory<GovOppUnit>{
 	}
 
 	@Override
-	public GovOppUnit hasDuplicate(GovOppUnit unit) {
+	public GovOppUnit getDuplicate(GovOppUnit unit) {
 		return null;
 	}
 

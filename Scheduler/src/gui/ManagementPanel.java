@@ -8,6 +8,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
 
+/**
+ * This is the tabbed pane that allows users to view the different rounds.
+ * Each tab is a different RoundPanel.
+ */
 public class ManagementPanel extends JTabbedPane implements GUIConstants {
 
 	public static final long serialVersionUID = 1L;

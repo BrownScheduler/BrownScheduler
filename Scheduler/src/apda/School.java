@@ -18,7 +18,7 @@ public class School implements Unit {
 	public Team _freeSeed;
 	public TeamGrouping _teams;
 	
-	School(Tourney t, String name){
+	public School(Tourney t, String name){
 		_name = name;
 		_t = t;
 		_teams = new TeamGrouping(_t, "Teams", this);
@@ -32,7 +32,7 @@ public class School implements Unit {
 		return _teams.deleteMember(t);
 	}
 	public void addTeam(Team t){
-		_teams.addMember(t);
+		if(!_teams._members.contains(t)) _teams.addMember(t);
 		t.school = this;
 	}
 	

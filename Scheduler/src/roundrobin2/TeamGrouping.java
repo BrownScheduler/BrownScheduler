@@ -2,9 +2,10 @@ package roundrobin2;
 
 import java.util.List;
 
-import plugin1.MyCategory;
+import basic.GroupingTemplate;
 
-public class TeamGrouping extends MyCategory<Team> {
+
+public class TeamGrouping extends GroupingTemplate<Team> {
 
 	private Turn _t;
 	

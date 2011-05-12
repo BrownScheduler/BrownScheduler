@@ -15,7 +15,7 @@ public class Team implements Unit {
 	public int wins;
 	public int losses;
 	public School school;
-	public boolean stillInTournament;
+	public boolean stillInTournament = true;
 	public int numGovs;
 	public int numOpps;
 	private SeedUnit _seed;
@@ -29,12 +29,19 @@ public class Team implements Unit {
 	public Team(Tourney t, String name){
 		_name = name;
 		_t = t;
+		_t._teams.addMember(this);
+		stillInTournament = true;
 	}
 	
 	public Team(Tourney t, String string, School s) {
 		_name = string;
 		_t = t;
 		school = s;
+		if(school != null){
+			school.addTeam(this);
+		}
+		_t._teams.addMember(this);
+		stillInTournament = true;
 	}
 
 	public static class TeamComparator implements Serializable, Comparator{
@@ -101,6 +108,9 @@ public class Team implements Unit {
 		if(d2 != null) deb2.addMember(d2);
 		atts.add(new UnitAttribute<Debater>("Debater 1", d1, deb1));
 		atts.add(new UnitAttribute<Debater>("Debater 2", d2, deb2));
+		atts.add(new BooleanAttribute("In Tourney", this.stillInTournament));
+		atts.add(new IntAttribute("Wins", wins));
+		atts.add(new IntAttribute("Losses", losses));
 		return atts;
 	}
 
@@ -129,11 +139,13 @@ public class Team implements Unit {
 		}
 		else if(att.getTitle().equals("School")){
 			UnitAttribute<School> schoolAtt = (UnitAttribute<School>)att;
-			if(school != null) school.removeTeam(this);
-			school = schoolAtt.att;
-			if(school != null) school.addTeam(this);
+			if(school != null && school != schoolAtt.att){
+				school.removeTeam(this);
+				school = schoolAtt.att;
+				if(school != null) school.addTeam(this);
+			}
 		}
-		else if(att.getTitle().equals("In Tournament")){
+		else if(att.getTitle().equals("In Tourney")){
 			stillInTournament = ((BooleanAttribute)att).getAttribute();
 		}
 		else if(att.getTitle().equals("Seed")){

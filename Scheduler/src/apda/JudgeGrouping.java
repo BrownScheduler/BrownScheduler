@@ -19,7 +19,7 @@ public class JudgeGrouping extends MyCategory<Judge> {
 		return new Judge(_t, "");
 	}
 	@Override
-	public Judge hasDuplicate(Judge unit) {
+	public Judge getDuplicate(Judge unit) {
 		for(Judge j : this.getMembers()){
 			if(j.getName().equals(unit.getName()) && j != unit){
 				return j;
